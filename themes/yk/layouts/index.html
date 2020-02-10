@@ -1,0 +1,40 @@
+{{ define "main"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yours, Kewbish</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <header>
+        <h1>Yours, Kewbish</h1>
+        <p>A collection of correspondence, letters, and musings.</p>
+    </header>
+    <div class="custom-div"></div>
+    <div class="main-list">
+        <div class="main-list-choice">
+            <p>My most recent notions.<br><a href="/posts/index.html">See all posts.</a></p>
+            <div>
+                {{ range (where .Site.Pages "Params.series" "post").Reverse }}
+                        <h1><a href="{{ .Permalink }}/index.html">{{ .Title }}</a></h1>
+                        <p>{{ .Description }} - {{ .PublishDate.Format "2 January 2006" }}</p>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+    <div class="custom-div"></div>
+    <footer>
+        <h2>About <em>Yours, Kewbish</em></h2>
+        <p>Made with &lt;3 by <a href="https://kewbish.github.io">Kewbish</a> with <a href="https://gohugo.io">Hugo</a>.</p>
+        <p>I'll be collecting my thoughts about my projects and experiences here, in the form of devlogs and notes.</p>
+        <br><br>
+        <small>Copyright &copy; {{ now.Format "2006" }} // end of time</small>
+    </footer>
+</body>
+
+</html>
+{{ end }}

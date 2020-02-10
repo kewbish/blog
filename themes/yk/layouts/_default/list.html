@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YK - All Posts</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <header>
+        <h1>All posts - YK</h1>
+        <p>A list of all my thoughts, sorted by most recent.</p>
+        <p><a href="/index.html">&lt; Back to main</a></p>
+        <div class="custom-div"></div>
+    </header>
+    <div class="list-main">
+        {{ range (where .Site.Pages "Params.series" "post").Reverse }}
+                <h1><a href="{{ .Permalink }}/index.html">{{ .Title }}</a></h1>
+                <p>{{ .Description }}</p>
+        {{ end }}
+    </div>
+</body>
+</html>

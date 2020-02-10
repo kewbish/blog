@@ -1,0 +1,12 @@
+baseURL: /
+title: "Yours, Kewbish"
+defaultContentLanguage: en
+languages:
+  en:
+    lang: en
+    languageName: English
+    weight: 1
+MetaDataFormat: "yaml"
+theme: "yk"
+relativeURLs: true
+disableKinds: ["taxonomy", "taxonomyTerm"]
