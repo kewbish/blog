@@ -23,4 +23,4 @@ echo "Updating gh-pages branch"
 cd public && git add --all && git commit -m %1
 
 echo "Pushing to GitHub."
-git push --all
+git push origin --all

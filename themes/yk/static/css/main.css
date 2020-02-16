@@ -1,9 +1,15 @@
+html{
+    scroll-behavior: smooth;
+}
+
 body{
     background-color: #1e1e1e;
 }
 
 header{
     text-align: center;
+    width: 70%;
+    margin: 0 auto;
 }
 
 header>h1{
@@ -40,7 +46,12 @@ img{
 }
 
 .body{
-    width: 50%;
+    width: 70%;
+}
+
+.signature{
+    font-family: 'Great Vibes', monospace;
+    font-size: 30px;
 }
 
 .custom-div{
@@ -74,4 +85,33 @@ img{
 .single-main{
     width: 70%;
     margin: 0 auto;
+}
+
+.single-main-split{
+    display: grid;
+    grid-template-columns: 10% 90%;
+    column-gap: 2%;
+    height: 100%;
+}
+
+.single-main-sticky{
+    text-align: center;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 25%;
+    height: 80px;
+}
+
+.single-main-sticky>p{
+    font-size: 14px;
+}
+
+@media screen and (min-width: 300px) and (max-width: 1024px){
+    .main-list-choice{
+        display: block;
+    }
+    .main-list-choice>div{
+        border-left: none;
+        padding-left: 0px;
+    }
 }
