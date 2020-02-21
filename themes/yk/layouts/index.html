@@ -19,7 +19,7 @@
         <div class="main-list-choice">
             <p>My most recent notions.<br><a href="/posts/index.html">See all posts.</a></p>
             <div>
-                {{ range (where .Site.Pages "Params.series" "post").Reverse }}
+                {{ range first 5 (where (where .Site.Pages "Params.series" "post").ByDate.Reverse  ".PublishDate" "le" now) }}
                         <h1><a href="{{ .Permalink }}/index.html">{{ .Title }}</a></h1>
                         <p>{{ .Description }} - {{ .PublishDate.Format "2 January 2006" }}</p>
                 {{ end }}

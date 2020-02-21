@@ -37,12 +37,13 @@ small{
 }
 
 a{
-    color: #3391ff;
+    color: #51a2ff;
 }
 
 img{
     display: block;
     margin: 10px auto;
+    width: 100%;
 }
 
 .body{
@@ -107,11 +108,25 @@ img{
 }
 
 @media screen and (min-width: 300px) and (max-width: 1024px){
+    header>h1{
+        font-size: 50px;
+    }
+
     .main-list-choice{
         display: block;
     }
+
     .main-list-choice>div{
         border-left: none;
         padding-left: 0px;
     }
+
+    .single-main-split{
+        display: block;
+    }
+
+    .single-main-sticky{
+        display: none;
+    }
+
 }
