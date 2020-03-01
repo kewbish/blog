@@ -16,9 +16,9 @@
         <div class="custom-div"></div>
     </header>
     <div class="list-main">
-        {{ range first 5 (where (where .Site.Pages "Params.series" "post").ByDate.Reverse  ".PublishDate" "le" now) }}
+        {{ range first 5 (where (where .Site.Pages "Params.series" "post").ByDate.Reverse  ".Date" "le" now) }}
             <h1><a href="{{ .Permalink }}/index.html">{{ .Title }}</a></h1>
-            <p>{{ .Description }} - {{ .PublishDate.Format "2 January 2006" }}</p>
+            <p>{{ .Description }} - {{ .PublishDate.Format "02 January 2006" }}</p>
         {{ end }}
     </div>
 </body>
