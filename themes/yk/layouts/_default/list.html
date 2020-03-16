@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="top">
 
 <head>
     <meta charset="UTF-8">
@@ -16,11 +16,18 @@
     </header>
     <div class="custom-div"></div>
     <div class="list-main">
-        {{ range where (where .Site.Pages "Params.series" "post").ByDate.Reverse  ".Date" "le" now }}
-            <h1><a href="{{ .Permalink }}/index.html">{{ .Title }}</a></h1>
-            <p>{{ .Description }} - {{ .PublishDate.Format "02 January 2006" }}</p>
-        {{ end }}
-        <p><a href="/index.html">&lt; Back to main</a></p>
+        <div class="single-main-split">
+            <div class="single-main-sticky">
+                <p style="margin-top: 25px;"><a href="#top">^ Back to top</a></p>
+            </div>
+            <div style="margin: 0; padding: 0;">
+                {{ range where (where .Site.Pages "Params.series" "post").ByDate.Reverse  ".Date" "le" now }}
+                <h1><a href="{{ .Permalink }}/index.html">{{ .Title }}</a></h1>
+                <p>{{ .Description }} - {{ .PublishDate.Format "02 January 2006" }}</p>
+                {{ end }}
+                <p><a href="/index.html">&lt; Back to main</a></p>
+            </div>
+        </div>
     </div>
     <div class="custom-div"></div>
     <footer>
