@@ -19,7 +19,7 @@
         <div class="main-list-choice">
             <p>My most recent notions.<br><a href="/posts/index.html">See all posts.</a></p>
             <div>
-                {{ range first 3 (where (where .Site.Pages "Params.series" "post").ByDate.Reverse  ".Date" "le" now) }}
+                {{ range first 5 (where (where .Site.Pages "Params.series" "post").ByDate.Reverse  ".Date" "le" now) }}
                         <h1><a href="{{ .Permalink }}/index.html">{{ .Title }}</a></h1>
                         <p>{{ .Description }} - {{ .PublishDate.Format "02 January 2006" }}</p>
                 {{ end }}
@@ -30,7 +30,7 @@
     <footer>
         <h2>About <em>Yours, Kewbish</em></h2>
         <p>Made with &lt;3 by <a href="https://kewbish.github.io">Kewbish</a> with <a href="https://gohugo.io">Hugo</a>.</p>
-        <p>I'll be collecting my thoughts about my projects and experiences here, in the form of devlogs and notes.</p>
+        <p>Yours, Kewbish was intended to be a collection of epistolary essays, but that certainly changed. It's just a collection of infrequent musings now. I'll be collecting my thoughts about my projects and experiences here, in the form of devlogs and notes.</p>
         <br><br>
         <small>Copyleft &copy; {{ now.Format "2006" }} // end of time</small>
     </footer>
