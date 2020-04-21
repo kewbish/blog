@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap');
 html{
     scroll-behavior: smooth;
 }
@@ -8,23 +9,28 @@ body{
 
 header{
     text-align: center;
-    width: 70%;
+    width: 80%;
     margin: 0 auto;
 }
 
 header>h1{
-    font-size: 70px;
+    font-size: 50px;
     margin-bottom: 10px;
 }
 
 footer{
     margin: 0 auto;
-    width: 70%;
+    width: 80%;
 }
 
-h1, h2, p, small{
+h2, p, small{
     color: white;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Consolas', Courier, monospace;
+}
+
+h1{
+    font-family: 'Source Sans Pro', monospace;
+    color: white;
 }
 
 p{
@@ -47,7 +53,7 @@ img{
 }
 
 .body{
-    width: 70%;
+    width: 80%;
 }
 
 .signature{
@@ -57,13 +63,13 @@ img{
 
 .custom-div{
     border-bottom: 1px solid white;
-    width: 70%;
+    width: 80%;
     margin: 0 auto;
 }
 
 .main-list{
     margin: 0 auto;
-    width: 70%;
+    width: 80%;
 }
 
 .main-list-choice{
@@ -79,13 +85,22 @@ img{
 }
 
 .list-main{
-    width: 70%;
+    width: 80%;
     margin: 0 auto;
 }
 
 .single-main{
-    width: 70%;
+    width: 80%;
     margin: 0 auto;
+}
+
+.single-links{
+    text-indent: 0;
+}
+
+.single-main p{
+    text-align: justify;
+    text-indent: 10px;
 }
 
 .single-main-split{
@@ -105,6 +120,8 @@ img{
 
 .single-main-sticky>p{
     font-size: 14px;
+    text-align: left;
+    text-indent: 0;
 }
 
 @media screen and (min-width: 300px) and (max-width: 1024px){
