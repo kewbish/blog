@@ -17,7 +17,7 @@
     <div class="custom-div"></div>
     <div class="main-list">
         <div class="main-list-choice">
-            <p>My most recent notions.<br><a href="/posts/index.html">See all posts.</a></p>
+            <p>My most recent notions.<br><a href="/posts/index.html">See all posts.</a><br><a href="https://kewbish.github.io">&lt; Back to main</a></p>
             <div>
                 {{ range first 5 (where (where .Site.Pages "Params.series" "post").ByDate.Reverse  ".Date" "le" now) }}
                         <h1><a href="{{ .Permalink }}/index.html">{{ .Title }}</a></h1>
