@@ -10,3 +10,4 @@ MetaDataFormat: "yaml"
 theme: "yk"
 relativeURLs: true
 disableKinds: ["taxonomy", "taxonomyTerm"]
+publishDir: "docs"

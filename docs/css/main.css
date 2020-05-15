@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap');
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    background-color: #1e1e1e;
+}
+
+header{
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+}
+
+header>h1{
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+footer{
+    margin: 0 auto;
+    width: 80%;
+}
+
+h2, p, small{
+    color: white;
+    font-family: 'Consolas', Courier, monospace;
+}
+
+h1{
+    font-family: 'Source Sans Pro', monospace;
+    color: white;
+}
+
+p{
+    font-size: 18px;
+}
+
+small{
+    display: block;
+    text-align: center;
+}
+
+a{
+    color: #51a2ff;
+}
+
+img{
+    display: block;
+    margin: 10px auto;
+    width: 100%;
+}
+
+.body{
+    width: 80%;
+}
+
+.signature{
+    font-family: 'Great Vibes', monospace;
+    font-size: 30px;
+}
+
+.custom-div{
+    border-bottom: 1px solid white;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.main-list{
+    margin: 0 auto;
+    width: 80%;
+}
+
+.main-list-choice{
+    display: grid;
+    grid-template-columns: 15% 85%;
+    grid-template-rows: 1fr;
+}
+
+.main-list-choice>div{
+    border-left: 1px solid white;
+    padding-left: 15px;
+    margin: 10px 0;
+}
+
+.list-main{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.single-main{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.single-links{
+    text-indent: 0;
+}
+
+.single-main p{
+    text-align: justify;
+    text-indent: 10px;
+}
+
+.single-main-split{
+    display: grid;
+    grid-template-columns: 10% 90%;
+    column-gap: 2%;
+    height: 100%;
+}
+
+.single-main-sticky{
+    text-align: center;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 25%;
+    height: 80px;
+}
+
+.single-main-sticky>p{
+    font-size: 14px;
+    text-align: left;
+    text-indent: 0;
+}
+
+@media screen and (min-width: 300px) and (max-width: 1024px){
+    header>h1{
+        font-size: 50px;
+    }
+
+    .main-list-choice{
+        display: block;
+    }
+
+    .main-list-choice>div{
+        border-left: none;
+        padding-left: 0px;
+    }
+
+    .single-main-split{
+        display: block;
+    }
+
+    .single-main-sticky{
+        display: none;
+    }
+
+}

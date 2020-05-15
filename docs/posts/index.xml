@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Yours, Kewbish</title>
+    <link>/posts/</link>
+    <description>Recent content in Posts on Yours, Kewbish</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 29 Apr 2020 16:05:34 -0700</lastBuildDate>
+    
+	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>I&#39;ll be back, eventually</title>
+      <link>/posts/200429/</link>
+      <pubDate>Wed, 29 Apr 2020 16:05:34 -0700</pubDate>
+      
+      <guid>/posts/200429/</guid>
+      <description>Introduction If you&amp;rsquo;re reading this, you&amp;rsquo;re either a) genuinely here to get the best of Kewbish content, b) someone I met through GCI and is here to stalk me, or c) a classmate, probably here to fish for blackmail. To all of you - I say hello. And goodbye, just for a bit.
+I&amp;rsquo;ve decided to move my current website over to Hugo, and with doing that, I can also integrate this blog directly into that repo instead.</description>
+    </item>
+    
+    <item>
+      <title>Why I haven&#39;t gone to Linux</title>
+      <link>/posts/200411/</link>
+      <pubDate>Sat, 11 Apr 2020 16:53:35 -0700</pubDate>
+      
+      <guid>/posts/200411/</guid>
+      <description>Introduction I&amp;rsquo;ve been chatting with some of my GCI friends, and many (GCI is supposed to be an open source based competition, after all) seem to use some form of Linux as their daily driver.
+Disclaimer: this article isn&amp;rsquo;t intended to spark up the quintessential &amp;lsquo;which distro is best&amp;rsquo; question. Just my opinions and naïve questions.
+We had a very engaging discussion about Arch Linux, along with all the prettifying DEs or whatever.</description>
+    </item>
+    
+    <item>
+      <title>Remote Teamwork</title>
+      <link>/posts/200401/</link>
+      <pubDate>Wed, 01 Apr 2020 09:14:56 -0700</pubDate>
+      
+      <guid>/posts/200401/</guid>
+      <description>Introduction With all that&amp;rsquo;s going on in the world (US has now claimed the #1 position - go States go!), remote work posts are clawing for notice on all my feeds. Productivity tips, horror stories, and tutorials for a successful call.
+Recently, I had a bit of a remote work scenario myself - with a game project. No, I didn&amp;rsquo;t take part in a game jam; it was a school project.</description>
+    </item>
+    
+    <item>
+      <title>Exponential Growth</title>
+      <link>/posts/200323/</link>
+      <pubDate>Sun, 22 Mar 2020 17:05:16 -0700</pubDate>
+      
+      <guid>/posts/200323/</guid>
+      <description>Introduction It being Spring Break: the Extra Cut, many friends (most of them being on Instagram, the primary focus of this post) have been tagging each other in #StayHome stories and playing story games where we tag a bunch of our friends in order to &amp;lsquo;spread positivity&amp;rsquo;.
+Being the cynic I am, I couldn&amp;rsquo;t help but snark on these stories, and somehow bring an analogy to the current COVID-19 situation in.</description>
+    </item>
+    
+    <item>
+      <title>Apple&#39;s Proprietary Holds</title>
+      <link>/posts/200321/</link>
+      <pubDate>Fri, 20 Mar 2020 19:55:40 -0700</pubDate>
+      
+      <guid>/posts/200321/</guid>
+      <description>Introduction Disclaimer: I don&amp;rsquo;t use a Mac. I do have an iPhone as my daily driver phone, but that&amp;rsquo;ll change soon - I think.
+Recently, I was working on Opus, which was supposed to be an elegant, minimal book-tracker for personal usage. It was my first foray into Kivy - but it was cut short quite quickly. I could debug and test features and sizing on my laptop development environment, but the end use case was meant to be on my phone.</description>
+    </item>
+    
+    <item>
+      <title>COVID-19&#39;s Impacts</title>
+      <link>/posts/200314/</link>
+      <pubDate>Sat, 14 Mar 2020 19:48:37 -0700</pubDate>
+      
+      <guid>/posts/200314/</guid>
+      <description>Introduction The past three months have been hectic - from starting this blog, to winning Google Code-in, and subsequently finding out it&amp;rsquo;s cancelled, to, of course, what everyone&amp;rsquo;s talking about: COVID-19.
+Many countries around the world have been hit far harder than Canada, but in this post, I&amp;rsquo;d like to talk about some of the impacts, both personal and on a larger scale, that this novel coronavirus has brought.
+NOTE: I apologize if this post reads as a little alarmist and sad, but it reflects what I&amp;rsquo;m thinking of right now, and I can&amp;rsquo;t help but express that here.</description>
+    </item>
+    
+    <item>
+      <title>#shecoded &#43; IWF</title>
+      <link>/posts/200308/</link>
+      <pubDate>Wed, 04 Mar 2020 17:14:25 -0800</pubDate>
+      
+      <guid>/posts/200308/</guid>
+      <description>Introduction The #shecoded movement, as far as I can see, started on popular developer blogging site Dev.to. Women&amp;rsquo;s Day is on March 8th, and female- and non-binary identifying individuals are encouraged to share their developer stories. See some of the other stories on their landing page, and check them out!
+Nevertheless, Kewbish Coded Online, I go by Kewbish, so I&amp;rsquo;ll continue that here, I guess. I&amp;rsquo;m from the PNW, Canada, and it&amp;rsquo;s been a great developer journey for me.</description>
+    </item>
+    
+    <item>
+      <title>VDSF Experience (and beyond!)</title>
+      <link>/posts/200301/</link>
+      <pubDate>Sat, 29 Feb 2020 09:23:10 -0800</pubDate>
+      
+      <guid>/posts/200301/</guid>
+      <description>Introduction After a good few days of questioning my sanity, I finally attended the Vancouver District Science Fair.
+There, I presented my Audio Visual Random Number Generation project - more about that later.
+Taken from VDSF blog
+Project A full writeup can be found here.
+My AVRNG innovates off past video TRNGS, incorporating an additional audio entropy layer. Using security video footage, I&amp;rsquo;ve created a true random number generator to generate encryption keys cheaply and easily.</description>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>/posts/200221/</link>
+      <pubDate>Fri, 21 Feb 2020 14:02:09 -0800</pubDate>
+      
+      <guid>/posts/200221/</guid>
+      <description>Introduction Recently, I began a new blog, hosted on GitHub Pages over here. In the past, I&amp;rsquo;ve tried (and eventually failed) to set up a devlog section on my site, and one of the main pain points was the repetitiveness of creating and pushing content. I had a template with very bare-bones HTML and CSS that I copied and pasted my work into, but this was annoying to constantly try to move my plaintext into rich HTML content.</description>
+    </item>
+    
+    <item>
+      <title>Google Code-in &#39;19 Experience</title>
+      <link>/posts/200214/</link>
+      <pubDate>Sat, 08 Feb 2020 13:56:00 -0800</pubDate>
+      
+      <guid>/posts/200214/</guid>
+      <description>Introduction Wonderful, I thought, as I woke up. More homework.
+But to my surprise, when I checked my email, I found out that:
+Thank you to all the Google Code-in team for making this opportunity possible, to the mentors for volunteering their time to help us grow as developers, and to the awesome Liquid Galaxy community for being super welcoming and supportive!
+What is Google Code-in? Google Code-in is a great first stop for pre-university students interested in technology to begin contributing to something called open source.</description>
+    </item>
+    
+  </channel>
+</rss>

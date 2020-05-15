@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exponential Growth</title>
+    <link rel="stylesheet" href="../../../css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>Exponential Growth</h1>
+        <p>Published 22 March 2020 - <a href="../../../index.html">Yours, Kewbish</a></p>
+    </header>
+    <div class="custom-div"></div>
+    <div class="single-main">
+        <p class="single-links"><a class="single-links" href="../../index.html">&lt; Moonwalk Back - More Posts</a></p>
+        <div class="single-main-split">
+            <div class="single-main-sticky">
+                <p style="margin-top: 20px;">Yours, Kewbish</p>
+<p>Created by Kewbish as a companion blog.</p>
+<p><a href="https://kewbish.github.io/blog">&lt; Back to home</a><br>
+    <a href="https://kewbish.github.io">&gt; Visit main site</a><br>
+    <a href="#top">^ Back to top</a>
+</p>
+            </div>
+            <div>
+                <h2 id="introduction">Introduction</h2>
+<p>It being Spring Break: the <strong>Extra Cut</strong>, many friends (most of them being on Instagram, the primary focus of this post) have been tagging each other in #StayHome stories and playing story games where we tag a bunch of our friends in order to &lsquo;spread positivity&rsquo;.</p>
+<p>Being the cynic I am, I couldn&rsquo;t help but snark on these stories, and somehow bring an analogy to the current COVID-19 situation in.</p>
+<p>This blog post will involve some basic math - I tried to ensure that it was as simple as possible. Without further ado: an investigation into social media, and how it encourages exponential growth.</p>
+<h2 id="basic-math">Basic Math</h2>
+<p>Let&rsquo;s start with a quick question:</p>
+<p>Say you have a pond, and a bunch of invasive tadpoles. These tadpoles double in number every day. Today, you have two tadpoles. On day 60, the tadpoles will have completely taken over the pond. On what day were the tadpoles 1/2way covering the pond?<br>
+
+  
+<br>
+Answer: day 59.
+<br> 
+</p>
+<p>If you thought the answer was 30, you&rsquo;re not alone. This problem was adapted from <a href="https://www.youtube.com/watch?v=fgBla7RepXU">this video by It&rsquo;s Okay to Be Smart</a>, and highlights the mental challenges of comprehending viral / exponential growth.</p>
+<p>Exponential growth is quite a simple topic in basic math.<br>
+Essentially, the formula goes like this.<br>
+<code>P = Po * 1-(r^t) / 1-r</code>, where:<br>
+- P = final population<br>
+- Po = initial population<br>
+- r = rate of growth<br>
+- t = time</p>
+<p>In the rest of this article, I&rsquo;ll case-study three examples of popular Instagram story games I&rsquo;ve seen (and have attempted to be roped into):<br>
+- #challengeaccepted stories<br>
+- Black story with black text, or Who I care About stories<br>
+- Drawing stories</p>
+<h2 id="challengeaccepted">challengeaccepted</h2>
+<p>You&rsquo;ve seen these ones, or maybe been tagged in them: stories where (usually girls) post photos of themselves (and only themselves) in some way to &lsquo;spread positivity&rsquo;. Ignoring the iffy balance of whether or not you agree that these posts are effective in spreading positivity, they&rsquo;re a key example of social media&rsquo;s viral properties.</p>
+<p>One subset of these stories asks girls to tag 10 people who they&rsquo;d think would benefit from it. So with one initiator, each &lsquo;generation&rsquo; of stories creates 10 more.</p>
+<p>The numbers look like this:
+1 initiator -&gt; 10 sub-stories -&gt; 100 sub-sub-stories -&gt; 1000 sub-sub-sub-stories.<br>
+In 3 generations, the story has directly reached 1000 + 100 + 10 + 1 -&gt; 1111 people.<br>
+Say that there&rsquo;s a generation every hour and half. In two days -&gt; 48h / 1.5h = 32 generations. This would be a geometric series, where the rate is 10, and the math would look like:
+<code>P = 1 * 1-10^32 / 1-10 = 1.1E31</code> which is an incredible number of people reached.</p>
+<h2 id="who-i-care-about">Who I Care About</h2>
+<p>According to <a href="https://psychcentral.com/lib/how-many-friends-do-you-need/">this study</a>, people have 3-5 close friends, and I assume that&rsquo;s who people would tag when they see one of these.</p>
+<p>Assume that you have 1 initiator, each with 4 close friends that they&rsquo;d tag. (There are undoubtedly many people who will tag infinitely more, but let&rsquo;s keep the numbers small, and see how people with such small circles still get a wide reach through exponential growth). I&rsquo;ll model 2 generations.</p>
+<p><code>P = 1 * 1-4^3 / 1-4 = 21</code><br>
+A more straightforward rewrite below:<br>
+<code>1 + 4 + 16 = 21</code><br>
+Twenty one people directly reached, from <em>one</em> initiator. In two generations. If that doesn&rsquo;t look like a lot of people: add another generation, and we have 85. Add another? 341.</p>
+<p>It doesn&rsquo;t seem like much at first, and the rate of growth seems &lsquo;reasonable&rsquo;. Everything looks fine and dandy. However, that&rsquo;s the bane of humans - we think linearly. We simply can&rsquo;t usually comprehend how these systems work. Here&rsquo;s a graph (thanks Desmos) that shows just how steep growth is with this example.<br>
+
+ 
+<iframe src="https://www.desmos.com/calculator/zzijlfghvu?embed" width="500px" height="250px" style="border: 1px solid #ccc;margin-top: 15px" frameborder=0></iframe>
+</p>
+<h2 id="drawing-posts">Drawing Posts</h2>
+<p>One last example - drawing posts. In this format, a screenshare of each story is put in the upper left of each subsequent sub-story, along with a rendition of whatever the story&rsquo;s theme is, and then usually around three tags.</p>
+<p>The growth here is less drastic, but from what I&rsquo;ve personally experienced, those who are directly involved or tagged tend to follow through with the drawing more often than those who are roped into #challengeaccepted or people-you-care-about stories.<br>
+Let&rsquo;s model it mathematically:
+<code>P = 1 * 1-3^3 / 1-3 = 13</code> or 1 + 3 + 9 -&gt; 13.
+As with the people-one-cares-about stories, the growth here seems normal and &lsquo;organic&rsquo;. However, if I keep extending the model:<br>
+<code>P = 1 * 1-3^5 / 1-3 = 121</code>, and <code>P = 1 * 1-3^6 / 1-3 = 364</code>. Crazy growth, especially when you visualize it.<br>
+
+  
+<iframe src="https://www.desmos.com/calculator/b9gfve4kl1?embed" width="500px" height="250px" style="border: 1px solid #ccc;margin-top: 15px" frameborder=0></iframe>
+</p>
+<h2 id="modifications-to-the-model">Modifications to the Model</h2>
+<p>For simplicity&rsquo;s sake, I spun up some easier numbers, but there&rsquo;s always more to consider.<br>
+- no. of people who are &lsquo;primed&rsquo; for the story. Let&rsquo;s say your acquaintances participate in one of these story chains, which eventually reaches your closer friends and your inner circle. Every time you see a story following this format, you&rsquo;re priming yourself to respond, when you, too, are inevitably chained into the story. The more members of your inner circle participate, the more likely you will too - no matter how hard you resist.<br>
+- no. of initiators. People are quirky, and some will eventually go off to start their own chains, without being chained in themselves. This would add even more growth and complexity, as chains overlap and repeat themselves.<br>
+- no. of unresponsive people. Like myself, I proudly add. Even more quirkily, some who were tagged into the games won&rsquo;t add others to their story, and a chain of growth is stopped there. This would definitely affect the numbers I put up: I simulated the growth with a perfect, ideal scenario and a geometric series.<br>
+- no. of story games circulating. Maybe someone&rsquo;s been tagged one too many times, and feels tired that day. They won&rsquo;t participate, and similar to the complication above, that’s a chain of possible growth that&rsquo;s cut off.<br>
+- And tons more. Socialization is complicated, and humans are too. Covering every little aspect of <em>oRgAnIc</em> Instagram growth models would be way too complicated, and out of the scope of both my knowledge and this blog post.</p>
+<h2 id="similarities-to-covid-19">Similarities to COVID-19</h2>
+<p>I couldn&rsquo;t help but draw a connection from all these story chains propagating during Spring Break ++ and to the other thing currently virulently spreading across the world: COVID-19.</p>
+<p>You see, COVID-19 (in its ideal environment) spreads kind of like stories and information on social media. With every reshare, retweet, and copy-paste, the &lsquo;virus&rsquo;, story, or meme gets blasted out to more people than initially started it.<br>
+This has serious ramifications for the spread of misinformation in this day of &lsquo;fake news&rsquo;, and for the health of our world population, right now. All this talk of &lsquo;flattening the curve&rsquo; is for good reason. You&rsquo;ve seen how exponential growth can seem like nothing for a good while, then spike suddenly. At all cost, we want to reduce the growth factor and the spread, so that it doesn&rsquo;t spike. Or if it spikes, that healthcare systems can stabilize and continue to function.</p>
+<p>No, I&rsquo;m not going to spin this into some wishy-washy message about how social media bad, no one talks face-to-face anymore haha <em>minion</em>, but just consider it, the next time you post a story and tag another few people.</p>
+<h2 id="related-ccc-problem">Related: CCC Problem</h2>
+<p>I recently participated in the Canadian Computing Competition, hosted by Waterloo. I didn&rsquo;t do that well - just because I&rsquo;m not really an algorithm-type developer, that&rsquo;s all. I haven&rsquo;t practised those skills in a while, but I thought I&rsquo;d share something relevant, especially as CCC is now over worldwide.</p>
+<p>One of the Junior questions was to create an epidemiology mockup, and the problem set I was working off of is available <a href="https://cemc.uwaterloo.ca/contests/computing/2020/stage%201/juniorEF.pdf">here</a>. Though it was written before the start of COVID-19&rsquo;s massive handle on the world, I appreciate the little nod to the severity of the situation and usability of computing.<br>
+Here&rsquo;s my solution (ugly, I know):<br>
+<script type="application/javascript" src="https://gist.github.com/kewbish/4f7e5fa997bb52a830f883489d4a15b1.js"></script>
+</p>
+<h2 id="videos-and-further-resources">Videos and Further Resources</h2>
+<p>I tried to develop a couple basic models here, but the following videos have gone above and beyond in explaining. I highly recommend checking them out as well!<br>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/fgBla7RepXU" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+<br>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/Kas0tIxDvrg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+<br>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/mCa0JXEwDEk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/NKMHhm2Zbkw" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+</p>
+
+                <p class="signature">Yours, Kewbish</p>
+            </div>
+        </div>
+        <p class="single-links"><a class="single-links" href="../../index.html">&lt; Moonwalk Back - More Posts</a></p>
+    </div>
+    <footer>
+        <small>Copyleft &copy; 2020 // end of time</small>
+        <br>
+    </footer>
+</body>
+
+</html>

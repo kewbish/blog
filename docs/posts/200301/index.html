@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VDSF Experience (and beyond!)</title>
+    <link rel="stylesheet" href="../../../css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>VDSF Experience (and beyond!)</h1>
+        <p>Published 01 March 2020 - <a href="../../../index.html">Yours, Kewbish</a></p>
+    </header>
+    <div class="custom-div"></div>
+    <div class="single-main">
+        <p class="single-links"><a class="single-links" href="../../index.html">&lt; Moonwalk Back - More Posts</a></p>
+        <div class="single-main-split">
+            <div class="single-main-sticky">
+                <p style="margin-top: 20px;">Yours, Kewbish</p>
+<p>Created by Kewbish as a companion blog.</p>
+<p><a href="https://kewbish.github.io/blog">&lt; Back to home</a><br>
+    <a href="https://kewbish.github.io">&gt; Visit main site</a><br>
+    <a href="#top">^ Back to top</a>
+</p>
+            </div>
+            <div>
+                <h2 id="introduction">Introduction</h2>
+<p>After a good few days of questioning my sanity, I finally attended the <a href="https://blogs.vsb.bc.ca/vdsf/">Vancouver District Science Fair</a>.</p>
+<p>There, I presented my Audio Visual Random Number Generation project - more about that later.</p>
+<p><img src="https://blogs.vsb.bc.ca/vdsf/files/2019/06/cropped-VDSF2018.floor3_.jpg" alt="Vancouver District Science Fair">
+<em>Taken from <a href="https://blogs.vsb.bc.ca/vdsf/">VDSF blog</a></em></p>
+<h2 id="project">Project</h2>
+<p>A full writeup can be found <a href="https://kewbish.github.io/AVRNG">here</a>.</p>
+<p>My AVRNG innovates off past video TRNGS, incorporating an additional audio entropy layer. Using security video footage, I&rsquo;ve created a true random number generator to generate encryption keys cheaply and easily. Repurposing scene detection technology, I detect movement / unique scenes in the video, and split the visuals apart from the sound files. The separate data streams are passed through a <a href="https://en.wikipedia.org/wiki/Hash_function">hash function</a>, specifically the <a href="https://en.wikipedia.org/wiki/Skein_(hash_function)">Skein</a> function. The resulting &lsquo;signatures&rsquo; are intertwined together, along with the least-significant-bits (or nanoseconds) of the computer clock at runtime. Due to inherent entropy in the camera, microphone, and clock sensors, the resulting algorithm is a <a href="https://en.wikipedia.org/wiki/Hardware_random_number_generator">True Random Number Generator</a>.</p>
+<p>By reusing what many individuals, families, and businesses already have, more people can benefit from an additional layer of data security.</p>
+<p>In the future, I&rsquo;m looking into creating a one-click interface for companies to constantly pipe video from security footage into the AVRNG using Webhooks, and continuously generate cryptographically secure keys for use in encryption of data.</p>
+<h2 id="preparation">Preparation</h2>
+<p>I&rsquo;d been working since October 2019 on the AVRNG (there was a minor <a href="https://kewbish.github.io/blog/posts/200214//index.html">GCI break</a>) and because I had so much time, the project was pretty well prepared.</p>
+<p>I&rsquo;ll admit, the entire week leading up to science fair was an <em>experience</em>, to say the least. We&rsquo;d gone up to <a href="https://whistlerblackcomb.com">Whistler</a> for the days before, so I&rsquo;d warrant that I wasn&rsquo;t the only <a href="https://universitytransition.ca">Transitionite</a> speedrunning their backboard at 1000 the day of.</p>
+<p>My public speaking skills have never been the best, but I guess talking about something you&rsquo;re passionate about does help. I wrote a quick set of cue cards, but I didn&rsquo;t end up having to reference them often, surprisingly.</p>
+<p>A couple tips:</p>
+<ul>
+<li>Actually start your project early. It takes a lot longer to create something coherent than you&rsquo;d think.</li>
+<li>The backboard takes a while too. Sure, it doesn&rsquo;t seem like it&rsquo;ll take ages to do, but when you over-analyze the layout, secondary colours, and composition / juxtaposition, it does take time. Same with the header.</li>
+<li>Make an outline, not a speech. For me, at least, creating an outline covering the overall topics, like what randomness is, and the algorithm, rather than writing out sentences that I&rsquo;d try to weave in. Perhaps add a couple keywords as well; the judges might be looking for a couple.</li>
+</ul>
+<h2 id="design">Design</h2>
+<p>I don&rsquo;t like my header. I&rsquo;m going to start off with that, because I had an existential crisis about the contrast between the dark blue and the cutout letters. (I don&rsquo;t have photos but you can imagine it- it&rsquo;s bad-)</p>
+<p>Otherwise, my <a href="https://canva.com">Canva</a> skills came in handy, and if I do say so myself, it was a rather <em>aesthetic display</em>. In the future, I&rsquo;m going to add some randomness symbols, perhaps a dice or other graphics. Compared to other boards, mine was rather bland and text-heavy, and I think that design is something I can definitely improve on. (Besides, another excuse to use Canva and flex my attempts at graphic design)</p>
+<p>Disregarding the physical design, the experiment / innovation&rsquo;s design is crucial as well. From what I&rsquo;ve read, the scientific logic behind the project doesn&rsquo;t matter as much in lower grades, but as a Senior, the scientific method does play a part. This is something I&rsquo;ve got to work on in the future: creating a layman&rsquo;s lab report to condense and present. Personally, I don&rsquo;t think I did a good enough job addressing possible questions and confusing points during my oral presentation, though they were covered in the backboard.</p>
+<h2 id="judging">Judging</h2>
+<p>Each display is judged by four judges, and in my case, they came in two groups of two.</p>
+<p>I&rsquo;m not going to expand on this a lot (<em>imbadatsocialskillsandyallcantconvincemeotherwise</em>) but the first set wasn&rsquo;t very good - I was missing a couple speaking points that I addressed in questions later. The second set went a lot better (I <em>innovated</em> on my speech haha), and was an opportunity for me to quickly revise and adapt my speech. With more preparation (<del>I didn&rsquo;t speedrun my speech in 10 minutes alright</del>), I think I&rsquo;d have presented more effectively, but I&rsquo;ll see when I get my feedback slips from the judges. Maybe I did alright. ¯_(ツ)_/¯</p>
+<h2 id="activities">Activities</h2>
+<p>With a couple other Transitionites, I headed to the Gamifying Global Warming workshop, where we explored the concept of gamifying and how we could apply this to global warming. My fellow Transitionites and I came up with an app revolving around the idea of taking shorter showers to reduce water consumption. (The app was called <code>lim 5.3 + x as x-&gt;0+</code>, if anyone&rsquo;s wondering) The main idea was that the app would run in the background, detecting water noises and starting timers as it went. If a shower / toilet flush / dishes situation took longer than whatever goal was currently set (up to 5.3 min, hence the name), we&rsquo;d guilt the user with sad statistics to the tune of &lsquo;You used enough water to feed X families for Y weeks in Z country&rsquo;. As well, we toyed with the idea of statistic graphs a la <a href="https://www.reddit.com/r/fitbit/comments/a3fi51/should_i_take_these_statistics_from_my_fitbit/">FitBit&rsquo;s activity trackers</a>. We came up with tonnes of ridiculous ideas, and it was a pretty e🅱️ic workshop.</p>
+<p>Walking around to see what others had created was interesting to see - some teams had <em>actual proper games / ideas</em> - whereas we just made a time bomb. Gaming has always been a passion of mine, so learning about techniques for good gamification experiences was intriguing.</p>
+<h2 id="awards-ceremony">Awards Ceremony</h2>
+<p><em>this entire section is a flex and there&rsquo;s nothing you can do about it</em></p>
+<p>After our activities, we headed down to the awards ceremony. They announced student choice and handed out Rubik&rsquo;s Cubes, holding an impromptu competition to solve the <em>terrible</em> cubes in the meantime while they compiled scores.</p>
+<p>Transition did amazing, with lots of projects going through to the <a href="http://gvrsf.ca/">GVRSF</a>, and I&rsquo;m excited to say I&rsquo;m one of them. (Somehow, even the students that spedran their backboard <em>in the hallway 5 minutes before the fair</em> got into GVRSF. We live in a society.) For the next bit, I&rsquo;ll be working on improving my project, and all the associated cool things - time for more abstract writing!</p>
+<p>Thank you VDSF and Langara for hosting the event - and thanks for the pin and cube (of which I will never use and instead hoard somewhere in my cabinets)</p>
+<p>VDSF was an amazing experience, and I&rsquo;m nervous but thrilled for the GVRSF (which will be at <a href="https://ubc.ca">UBC</a> - home territory). I look forward to seeing all the projects, and congrats to everyone who participated!<br>
+(Also what the heck, VDSF, where&rsquo;s the Kahoot I was promised on the schedule? Years of Reach training, wasted!)</p>
+<h2 id="currently">Currently</h2>
+<p>I&rsquo;ve been neglecting <a href="https://github.com/kewbish/opus">Opus</a> for a while to work on the AVRNG, but I&rsquo;m going to begin working on it seriously after GVRSF (and perhaps in between now and then). I&rsquo;ve decided to stick with <a href="https://kivy.org">Kivy</a>, but that now entails learning the Kivy language and how the framework works. Can&rsquo;t wait to get some time to fully devote to the project, but I guess we&rsquo;re back to the science fair grind for now. Besides, the additional reflection time will allow me to do some more research on methods and app design principles, as well as look into other features and designs I&rsquo;d like to implement.</p>
+
+                <p class="signature">Yours, Kewbish</p>
+            </div>
+        </div>
+        <p class="single-links"><a class="single-links" href="../../index.html">&lt; Moonwalk Back - More Posts</a></p>
+    </div>
+    <footer>
+        <small>Copyleft &copy; 2020 // end of time</small>
+        <br>
+    </footer>
+</body>
+
+</html>
