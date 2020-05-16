@@ -21,7 +21,7 @@
             <div>
                 {{ range first 5 (where (where .Site.Pages "Params.series" "post").ByDate.Reverse  ".Date" "le" now) }}
                         <h1><a href="{{ .Permalink }}/index.html">{{ .Title }}</a></h1>
-                        <p>{{ .Description }} - {{ .PublishDate.Format "02 January 2006" }}</p>
+                        <p>{{ .PublishDate.Format "02 January 2006" }} - {{ .Description }}</p>
                 {{ end }}
             </div>
         </div>

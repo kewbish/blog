@@ -17,7 +17,7 @@
     <div class="custom-div"></div>
     <div class="main-list">
         <div class="main-list-choice">
-            <p style="margin-top: 25px;">A full list of all my posts.</p>
+            <p>A full list of all my posts.<br><a href="../">&lt; go back</a></p>
             <div>
                 {{ range ((where .Site.Pages "Params.series" "post").GroupByDate "2006") }}
                     <h2>{{ .Key }}</h2>

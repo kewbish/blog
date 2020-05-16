@@ -57,8 +57,9 @@ img{
 }
 .signature{
     font-family: monospace;
-    font-size: 24px;
+    font-size: 20px;
     text-indent: 0px;
+    margin: 10px 0;
 }   
 .main-list{
     margin: 0 auto;
@@ -69,6 +70,7 @@ img{
     grid-template-columns: 15% 85%;
     grid-template-rows: 1fr;
     margin: 20px 0;
+    column-gap: 1.5%;
 }
 .main-list-choice>div{
     padding-left: 15px;
