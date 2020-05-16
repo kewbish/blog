@@ -19,9 +19,12 @@
         <div class="main-list-choice">
             <p style="margin-top: 25px;">A full list of all my posts.</p>
             <div>
-                {{ range where (where .Site.Pages "Params.series" "post").ByDate.Reverse  ".Date" "le" now }}
-                <h1><a href="{{ .Permalink }}/index.html">{{ .Title }}</a></h1>
-                <p>{{ .Description }} - {{ .PublishDate.Format "02 January 2006" }}</p>
+                {{ range ((where .Site.Pages "Params.series" "post").GroupByDate "2006") }}
+                    <h2>{{ .Key }}</h2>
+                    {{ range .Pages.ByDate.Reverse }}
+                    <h1><a href="{{ .Permalink }}/index.html">{{ .Title }}</a></h1>
+                    <p>{{ .Description }} - {{ .PublishDate.Format "02 January 2006" }}</p>
+                    {{ end }}
                 {{ end }}
                 <p><a href="/index.html">&lt; Back to main</a></p>
             </div>
