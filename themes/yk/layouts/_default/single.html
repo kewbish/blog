@@ -9,13 +9,13 @@
 </head>
 
 <body>
-    <header>
+    <section>
+        <p><a href="../../">&lt; Moonwalk Back - More Posts</a></p>
         <h1>{{ .Title }}</h1>
-        <p>Published {{ .PublishDate.Format "02 January 2006" }} - <a href="../../../index.html">Yours, Kewbish</a></p>
-    </header>
-    <div class="custom-div"></div>
-    <div class="single-main">
-        <p id="single-links"><a href="../../index.html">&lt; Moonwalk Back - More Posts</a></p>
+        <p>Published {{ .PublishDate.Format "02 January 2006" }} at <a href="{{ .Permalink }}">Yours, Kewbish</a>.</p>
+        {{ if isset .Params "Dev" }}
+            <p>Also published on <a href="{{ .Dev }}">Dev.to</a>.</p>
+        {{ end }}
         <div class="single-main-split">
             <div class="single-main-sticky">
                 {{ partial "sidebar.html" . }}
@@ -25,12 +25,10 @@
                 <p class="signature">- Yours, Kewbish</p>
             </div>
         </div>
-        <p id="single-links"><a href="../../index.html">&lt; Moonwalk Back - More Posts</a></p>
-    </div>
-    <footer>
-        <small>Copyleft &copy; {{ now.Format "2006" }} // end of time</small>
-        <br>
-    </footer>
+        <br><p><a href="../../">&lt; Moonwalk Back - More Posts</a></p>
+        <br><br>
+    </section>
+    
 </body>
 
 </html>

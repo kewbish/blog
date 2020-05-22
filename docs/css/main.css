@@ -1,59 +1,99 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap');
-html{
+*{
+    margin: 0;
+    padding: 0;
+}
+:root{
+    --background-color: #1e1e1e;
+    --header-color: #000000;
+    --text-color: #ffffff;
+    --accent-color: #ffb451;
+    --accent-two: #323232;
+    --grid-three-columns: repeat(3, minmax(100px, 1fr));
+    --font-one: "Consolas", "Courier New", monospace;
+    --font-two: "Source Sans Pro", sans-serif;
     scroll-behavior: smooth;
+    text-decoration: none;
 }
 body{
-    background-color: #1e1e1e;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: var(--font-one);
+    font-size: 1.2em;
 }
-header{
-    text-align: center;
-    width: 70%;
-    margin: 2% auto 1%;
+section{
+    padding: 6% 8% 2%;
 }
-header>h1{
-    font-size: 50px;
-    margin-bottom: 10px;
-}
-footer{
-    margin: 0 auto;
-    width: 70%;
-}
-h2, p, small{
-    color: white;
-    font-family: 'Consolas', Courier, monospace;
+h1, h2{
+    font-family: var(--font-two);
+    font-size: 3.5em;
+    padding-bottom: 2%;
 }
 h2{
-    color: #ffb451;
+    font-size: 2em;
+    padding: 1% 0 2.5%;
 }
-h1{
-    font-family: 'Source Sans Pro', monospace;
-    color: white;
-    margin: 10px 0;
+h3{
+    font-family: var(--font-two);
+    font-size: 1.3em;
 }
 p{
-    font-size: 18px;
-    margin: 5px 0;
-    line-height: 1.3;
-}
-small{
-    display: block;
-    text-align: center;
+    margin: 0.2% 0;
+    padding: 0.2% 0;
 }
 a{
-    text-decoration: underline #ffb451;
-    color: #ffffff;
+    color: var(--text-color);
+    text-decoration: underline var(--accent-color);
+    -webkit-text-decoration: underline var(--accent-color)
 }
 a:hover{
-    color: #ffb451;
-    transition: ease 0.3s;
+    color: var(--accent-color);
+    transition: 0.3s;
+}
+strong{
+    color: var(--accent-color)
 }
 img{
     display: block;
-    margin: 10px auto;
     width: 100%;
 }
-.body{
-    width: 70%;
+.hero{
+    text-align: center;
+    margin: 0 auto;
+    height: 90vh;
+    width: 80vw;
+}
+.hero-heading{
+    font-size: 10vw;
+    margin: -1vw 0;
+    padding: 0;
+}
+.hero-left{
+    text-align: left;
+}
+.single-main-split{
+    display: grid;
+    grid-template-columns: 10% 90%;
+    grid-column-gap: 10px;
+}
+.single-main-sticky{
+    position: sticky;
+    top: 20%;
+    height: 100px;
+}
+.grid-three-element{
+    background-color: var(--accent-two);
+    padding: 2.5% 3.5%;
+}
+.grid-three{
+    display: grid;
+    grid-template-columns: var(--grid-three-columns);
+    grid-column-gap: 2%;
+    margin: 2% 0;
+}
+.year{
+    font-family: var(--font-one);
+    padding: 0.5% 0;
 }
 .signature{
     font-family: monospace;
@@ -61,73 +101,23 @@ img{
     text-indent: 0px;
     margin: 10px 0;
 }   
-.main-list{
-    margin: 0 auto;
-    width: 70%;
-}
-.main-list-choice{
-    display: grid;
-    grid-template-columns: 15% 85%;
-    grid-template-rows: 1fr;
-    margin: 20px 0;
-    column-gap: 1.5%;
-}
-.main-list-choice>div{
-    padding-left: 15px;
-    border-left: 1px solid #ffffff;
-}
-.single-main{
-    width: 80%;
-    margin: 0 auto;
-}
-#single-links{
-    text-indent: 0;
-}
-.single-main p{
-    text-indent: 3%;
-}
-.single-main-split{
-    display: grid;
-    grid-template-columns: 10% 90%;
-    column-gap: 2%;
-    height: 100%;
-}
-.single-main-sticky{
-    text-align: center;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 25%;
-    height: 80px;
-}
-.single-main-sticky>p{
-    font-size: 14px;
-    text-align: left;
-    text-indent: 0;
-}
-@media screen and (min-width: 300px) and (max-width: 1024px){
-    header>h1{
-        font-size: 50px;
+@media all and (max-width: 768px){
+    :root{
+        --grid-three-columns: 1fr;
     }
-    .main-list-choice{
-        display: block;
+    h1, h2{
+        margin: 1% 0;
     }
-    .main-list-choice>div{
-        border-left: none;
-        padding-left: 0px;
+    .grid-three{
+        grid-row-gap: 0.7em;
     }
-    .body{
-        width: 80%;
-    }
-    .single-main{
-        width: 80%;
-    }
+    .grid-three-element{
+        padding: 4% 5%;
+    }  
     .single-main-split{
-        display: block;
+        grid-template-columns: 1fr;
     }
     .single-main-sticky{
         display: none;
-    }
-    .single-main p{
-        text-indent: 5%;
     }
 }

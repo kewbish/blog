@@ -1,4 +1,4 @@
-baseURL: /
+baseURL: 
 title: "Yours, Kewbish"
 defaultContentLanguage: en
 languages:
@@ -8,6 +8,6 @@ languages:
     weight: 1
 MetaDataFormat: "yaml"
 theme: "yk"
-relativeURLs: true
+relativeUrls: true
 disableKinds: ["taxonomy", "taxonomyTerm"]
 publishDir: "docs"
