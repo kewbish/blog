@@ -79,6 +79,9 @@ img{
     top: 20%;
     height: 100px;
 }
+.single-main-split * p:not(.signature){
+    text-indent: 3.5%;
+}
 .grid{
     display: grid;
     grid-template-columns: var(--grid-columns);
@@ -127,5 +130,8 @@ img{
     }
     .single-main-sticky{
         display: none;
+    }
+    .single-main-split * p:not(.signature){
+        text-indent: 5%;
     }
 }
