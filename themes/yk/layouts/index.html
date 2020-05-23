@@ -14,20 +14,19 @@
         <div>
             <h1 class="hero-heading">Yours, Kewbish</h1>
             <p>A collection of correspondence, letters, and musings. <a href="/posts">See all posts</a>.</p>
-            <div class="grid-three">
-                {{ range first 3 (where (where .Site.Pages "Params.series" "post").ByDate.Reverse  ".Date" "le" now) }}
-                    <div class="grid-three-element" style="text-align: left;">    
+            <div class="grid">
+                {{ range first 4 (where (where .Site.Pages "Params.series" "post").ByDate.Reverse  ".Date" "le" now) }}
+                    <div class="grid-element" style="text-align: left;">    
                         <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
                         <p>{{ .Description }}</p>
                         <small><em>{{ .PublishDate.Format "02 January 2006" }}</em></small>
                     </div>
                 {{ end }}
             </div>
-            <div class="hero-left">
-                <h3>Made with &lt;3 by <a href="https://kewbish.github.io">Kewbish</a> with <a href="https://gohugo.io">Hugo</a>.</h3>
+            <div>
                 <p>Yours, Kewbish was intended to be a collection of epistolary essays, but that certainly changed. It's just a collection of infrequent musings now. I'll be collecting my thoughts about my projects and experiences here, in the form of devlogs and notes.</p>
             </div><br>
-            <small>Copyleft &copy; {{ now.Format "2006" }} // end of time</small><br><br>
+            <small>Copyleft &copy; {{ now.Format "2006" }} // end of time</small><br><br><br>
         </div>
     </section>
 </body>

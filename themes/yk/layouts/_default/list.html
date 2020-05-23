@@ -13,13 +13,12 @@
         <p><a href="../">&lt; Back to main</a></p>
         <h1>All posts - YK</h1>
         <p>A list of all my thoughts, sorted by most recent.</p>
-        <div class="single-main-split">
-            <p class="single-main-sticky">A full list of all my posts.<br><a href="../">&lt; go back</a></p>
+        <div>
             <div>
                 {{ range ((where .Site.Pages "Params.series" "post").GroupByDate "2006") }}
-                    <h1 class="year"><strong>{{ .Key }}</strong></h1>
+                    <h2 class="year"><strong>{{ .Key }}</strong></h2>
                     {{ range .Pages.ByDate.Reverse }}
-                    <h2 style="padding-bottom: 1%;"><a href="{{ .Permalink }}/index.html">{{ .Title }}</a></h2>
+                    <h3 style="padding-bottom: 1%;"><a href="{{ .Permalink }}/index.html">{{ .Title }}</a></h3>
                     <p>{{ .Description }} - {{ .PublishDate.Format "02 January 2006" }}</p>
                     {{ end }}
                 {{ end }}

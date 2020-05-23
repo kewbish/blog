@@ -9,7 +9,7 @@
     --text-color: #ffffff;
     --accent-color: #ffb451;
     --accent-two: #323232;
-    --grid-three-columns: repeat(3, minmax(100px, 1fr));
+    --grid-columns: minmax(100px, 6fr) minmax(100px, 1fr) minmax(100px, 6fr);
     --font-one: "Consolas", "Courier New", monospace;
     --font-two: "Source Sans Pro", sans-serif;
     scroll-behavior: smooth;
@@ -35,7 +35,7 @@ h2{
 }
 h3{
     font-family: var(--font-two);
-    font-size: 1.3em;
+    font-size: 1.5em;
 }
 p{
     margin: 0.2% 0;
@@ -60,16 +60,14 @@ img{
 .hero{
     text-align: center;
     margin: 0 auto;
-    height: 90vh;
+    height: 100vh;
     width: 80vw;
+    padding: 3% 0 2%;
 }
 .hero-heading{
     font-size: 10vw;
     margin: -1vw 0;
     padding: 0;
-}
-.hero-left{
-    text-align: left;
 }
 .single-main-split{
     display: grid;
@@ -81,15 +79,25 @@ img{
     top: 20%;
     height: 100px;
 }
-.grid-three-element{
-    background-color: var(--accent-two);
-    padding: 2.5% 3.5%;
-}
-.grid-three{
+.grid{
     display: grid;
-    grid-template-columns: var(--grid-three-columns);
-    grid-column-gap: 2%;
-    margin: 2% 0;
+    grid-template-columns: var(--grid-columns);
+    grid-row-gap: 1.5em;
+    grid-column-gap: 1em;
+    padding: 2% 0;
+}
+.grid-element{
+    background-color: var(--accent-two);
+    padding: 2% 3.5%;
+}
+.grid-element:nth-child(4n+2){
+    grid-column: 2 / span 2;
+}
+.grid-element:nth-child(4n+3){
+    grid-column: 1 / span 2;
+}
+.grid-element:nth-last-child(1):nth-child(odd){
+    grid-column: 1 / span 3;
 }
 .year{
     font-family: var(--font-one);
@@ -103,17 +111,11 @@ img{
 }   
 @media all and (max-width: 768px){
     :root{
-        --grid-three-columns: 1fr;
+        --grid-columns: 1fr;
     }
     h1, h2{
         margin: 1% 0;
     }
-    .grid-three{
-        grid-row-gap: 0.7em;
-    }
-    .grid-three-element{
-        padding: 4% 5%;
-    }  
     .single-main-split{
         grid-template-columns: 1fr;
     }
