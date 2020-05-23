@@ -82,7 +82,7 @@ img{
 .grid{
     display: grid;
     grid-template-columns: var(--grid-columns);
-    grid-row-gap: 1.5em;
+    grid-row-gap: 1em;
     grid-column-gap: 1em;
     padding: 2% 0;
 }
@@ -101,6 +101,7 @@ img{
 }
 .year{
     font-family: var(--font-one);
+    font-size: 2.2em;
     padding: 0.5% 0;
 }
 .signature{
@@ -112,6 +113,11 @@ img{
 @media all and (max-width: 768px){
     :root{
         --grid-columns: 1fr;
+    }
+    .grid-element:nth-child(4n+2),
+    .grid-element:nth-child(4n+3),
+    .grid-element:nth-last-child(1):nth-child(odd){
+        grid-column: auto;
     }
     h1, h2{
         margin: 1% 0;
