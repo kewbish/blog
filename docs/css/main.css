@@ -21,7 +21,7 @@ body{
     font-family: var(--font-one);
     font-size: 1.2em;
 }
-section{
+section:not(.footnotes){
     padding: 6% 8% 2%;
 }
 h1, h2{
@@ -36,6 +36,9 @@ h2{
 h3{
     font-family: var(--font-two);
     font-size: 1.5em;
+}
+hr{
+    margin: 10px 0;
 }
 p{
     margin: 0.2% 0;
@@ -56,6 +59,9 @@ strong{
 img{
     display: block;
     width: 100%;
+}
+ol{
+    list-style-type: none;
 }
 .hero{
     text-align: center;
@@ -79,7 +85,7 @@ img{
     top: 20%;
     height: 100px;
 }
-.single-main-split * p:not(.signature){
+.single-main-split>div>p:not(.signature){
     text-indent: 3.5%;
 }
 .grid{

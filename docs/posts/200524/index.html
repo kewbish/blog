@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Yearly Rebrand</title>
+    <link rel="stylesheet" href="../../../css/main.css">
+</head>
+
+<body>
+    <section>
+        <p><a href="../../">&lt; Moonwalk Back - More Posts</a></p>
+        <h1>The Yearly Rebrand</h1>
+        <p>Published 24 May 2020 at <a href="../../posts/200524/">Yours, Kewbish</a>.</p>
+        
+        <div class="single-main-split">
+            <div class="single-main-sticky">
+                <p style="margin-top: 20px;">Yours, Kewbish</p>
+<p><a href="https://kewbish.github.io/blog">&lt; Back to home</a><br>
+    <a href="https://kewbish.github.io">&gt; Visit main site</a><br>
+    <a href="#top">^ Back to top</a>
+</p>
+            </div>
+            <div>
+                <h2 id="introduction">Introduction</h2>
+<p>Well, hello. It&rsquo;s been a while - almost a month since I last posted, and more than a month since my last actual post.<br>
+Some interesting things happened between then and now, the most noticeable of which is my shiny new website design. To be completely honest, I&rsquo;m not sure how I feel about it. It&rsquo;s slightly better than the old site, but it&rsquo;s still not very <em>poppy</em>, is it?</p>
+<p>For some reason, I find that I happen to go through a redesign every year or so (though I&rsquo;ve only been &lsquo;online&rsquo; for a couple of years). This time, it was prompted by boredom during quarantine and me having way too much time to overthink my website. (Also, everyone deciding to meme me for &lsquo;Yours, Kewbish&rsquo; and the cringe I have here kind of helped. Hey, if people are going to be reading my site, even just to tease me, this blog might as well be consistent with my main site and snazzy nonetheless! I&rsquo;m looking at you, the entirety of the set of my classmates and half my <a href="https://kewbish.github.io/blog/posts/200214/">Google Code-in colleagues</a>.)</p>
+<p>I went through the redesign in three stages: porting my <a href="https://kewbish.github.io">main site</a> to Hugo, replacing hard-coded content with Hugo&rsquo;s data-driven content, and restyling my blog, which was already on Hugo.</p>
+<h2 id="phase-1---porting-to-hugo">Phase 1 - Porting to Hugo</h2>
+<p>I&rsquo;m pretty sure you&rsquo;re already aware what Hugo is. If not, <a href="https://kewbish.github.io/blog/posts/200221/">have a look at how I started my blog.</a>. I prefer Hugo to Jekyll or Gatsby. Sue me.</p>
+<p>My website was pretty simple in the first place:<br>
+index.html, which was just a centered div with a bunch of buttons and links<br>
+me.html, which was me attempting to stuff as many resume buzzwords as I could into a page<br>
+folio.html, which was me trying to pretend that I had lots of proper projects</p>
+<p>Recreating this sitemap was super easy in Hugo: mostly done in the theme and a couple HTML pages in the <code>content</code> folder. I was surprised to see that I could add HTML pages to the <code>content</code> folder - I&rsquo;d always thought that I could only use Markdown files. (Then again, I&rsquo;ve only been using Hugo for what, three months? <em>imposter syndrome sets in</em>)</p>
+<p>Now, the sitemap puts the <code>me.html</code> and <code>folio.html</code> into folders, and the URLs are a little prettier. For example, <code>https://kewbish.github.io/me/</code> instead of <code>https://kewbish.github.io/me.html</code>.</p>
+<p>It was a little confusing to restructure the git repository to a two-repository publish structure. I&rsquo;m still rather new to the fancy <code>git reset</code> and whathaveyou - I just use what I have to. This part was a great learning experience - I had a long, long research session to figure out the best way to structure the repo.<br>
+In hindsight, I could have put the published Hugo directory into the master branch, and had a separate branch for the Hugo site source, but I still don&rsquo;t really trust myself to remember not to pull something, and then have to spend another day figuring out how I <code>redo git commit local</code>. (After which I would then pull from GitHub and have to redo all my changes haha-)</p>
+<p>As well, I had initially decided to move the blog posts to the main repository, but I decided to keep it in its own repo. For one, it&rsquo;s a little easier to maintain personally. If I mess up one part of the site, hey - at least the other part is still alive. As well, I had a grand total of <em>five stars</em> on my blog repo - why waste them? It&rsquo;s also frustrating to have to archive repos and have that ugly yellow banner and all that.<br>
+TL;DR blog is still at <a href="https://kewbish.github.io/blog">kewbish/blog</a>.</p>
+<h2 id="phase-2---hugo-ifying-my-content">Phase 2 - Hugo-ifying my content</h2>
+<p>Once I had the majority of the content copy-pasted over, and the copy re-written, I decided to make the best of Hugo&rsquo;s great data-drive capabilities.</p>
+<p>If you don&rsquo;t know what these are, it&rsquo;s essentially the capability to put data into <code>.json</code>, <code>.yaml</code>, or <code>.toml</code> files, and pull that content directly into your pages at build. I find it a lot easier to work with. I don&rsquo;t have to remember to change the actual text of the <code>.html</code> file; instead, I can just add a new object in a JSON array.</p>
+<p>It&rsquo;s also more scalable, in my opinion. I&rsquo;m starting to amass a lot of projects, and while they&rsquo;re all <em>kinda bad and smol and probably useless haha</em>, it&rsquo;s easier to edit the site when I&rsquo;ve already accounted for it in my styles, and can just update the <code>data</code> folder.</p>
+<p>And I might as well make use of the features! I&rsquo;ve started to love the Hugo templating syntax (yes, I know it&rsquo;s technically the <em>Go templating syntax</em>, but the two don&rsquo;t line up in my head for some reason). Instead of manually adding things, I can just <code>beep-boop</code> <em>add a field</em>! I really like this workflow, especially, as I said, with maintaining content, and having the whole site become more of a <em>living document</em>. (Wow, more buzzwords! I&rsquo;m so cool and relatable!)</p>
+<h2 id="phase-3---restyling-my-blog">Phase 3 - Restyling my blog</h2>
+<p>My blog (yes, this one you&rsquo;re reading, yes, I call this a blog, yes, it&rsquo;s not just me blathering on <em>okay it probably is</em>) was already created with Hugo, and the only reason I redesigned it was because it didn&rsquo;t really fit with my main site.</p>
+<p>For example, the main site initially used a bunch of Montserrat and open borders, along with my old logo (do I even have  a logo now?), whereas this blog was designed in a more console-like style, which I feel matches my personality and personal brand more (?). Now, they use roughly the same stylesheet, and the same brand colours, variables, and layout structures.</p>
+<p>I started out with the main site&rsquo;s stylesheet, and then erased a bunch of the styles I didn&rsquo;t use. Coming up with a new structure layout wasn&rsquo;t too difficult. The way I designed the main site was based around reusable components (like the different types of grids and heading elements), so I could reuse them on this blog. Efficient design! (Also, I just didn&rsquo;t want to redesign a bunch of other things and then have the two sites look completely different. <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>)</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>So here it is. The new Kewbish™️ look. (Yes, I know I&rsquo;m going to be memed for this already.) What do you think? Oh wait, there are no comments here. (By intention - I don&rsquo;t need 50 people explaining why I&rsquo;m bad. I already know.)</p>
+<p>Hugo gives me the capability to remove most of the boilerplate that I previously relied on, and gives me the tools I need to quickly add new content with little to no maintenance work. I really like the new workflow. (I&rsquo;m pretty sure I already said that. Hmm.)</p>
+<p>I&rsquo;m still not sure how I feel about it. It&rsquo;s probably worse off than the old site, but hey - I put my time to a decent use.</p>
+<h2 id="currently">Currently</h2>
+<p>I&rsquo;ve been working on my <a href="https://github.com/kewbish/revshare">Grant for the Web Hackathon entry</a>. (The GFTW Hackathon is run by Dev.to - read about it <a href="https://dev.to/t/gftwhackathon">here</a>.) It&rsquo;s supposed to be a library to integrate a Web Monetization revenue sharing component into your site. It&rsquo;s pretty easy to use, so please do check it out! It was a learning <em>experience and a half</em> in learning the more exotic areas of Web Components and Javascript. (Also, my first actual project and first NPM publish. No scronch please.)</p>
+<p>After I finish that, I plan on working with more Flask and MongoDB stuff. Because apparently backend stuff is cool! I might also work on a Discord bot, perhaps. Or an API. Not sure.</p>
+<p>Also - I&rsquo;m officially committed to completing CS50 over the summer. (Yes, it&rsquo;s a 12wk course that a bunch of classmates and I are going to speedrun in 8. Yes, it&rsquo;s Harvard. Yes, we&rsquo;re sane.) Can&rsquo;t wait to go through that - their web programming section looks mighty fascinating. I&rsquo;ll probably write about that quite frequently. (Oh no, I&rsquo;m becoming a writing vlogger ohno-) Can&rsquo;t wait to see what shenanigans I get up to in the summer.</p>
+<p>(Smol note: blog posts might be smoller from here on out. I&rsquo;m not sure how long they&rsquo;ll be, but I don&rsquo;t really feel like writing a 1100word masterpiece every week. We&rsquo;ll see.)</p>
+<h2 id="footnotes">Footnotes</h2>
+<p>Oh wait - there&rsquo;s a footnotes section now! Just trying a new Hugo feature out.<br>
+Please append the phrase &lsquo;unrelated, but&rsquo; to the beginning of each footnote.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>[1]. I&rsquo;ve recently been reading the book <a href="https://www.goodreads.com/en/book/show/28820444-the-elephant-in-the-brain">The Elephant in the Brain</a> by Kevin Simler and Robin Hanson. The book essentially describes how the human mind likes to shroud its rather sketchy motives in noble notions. So here, I&rsquo;m telling myself that this was an example of my excellent efficient design pattern thinking, but really, I&rsquo;m probably just lazy and was tired of CSS for the time being. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+                <p class="signature">- Yours, Kewbish</p>
+            </div>
+        </div>
+        <br><p><a href="../../">&lt; Moonwalk Back - More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>
