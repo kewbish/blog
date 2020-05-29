@@ -17,7 +17,7 @@
             <div class="grid">
                 {{ range first 4 (where (where .Site.Pages "Params.series" "post").ByDate.Reverse  ".Date" "le" now) }}
                     <div class="grid-element" style="text-align: left;">    
-                        <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+                        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
                         <p>{{ .Description }}</p>
                         <small><em>{{ .PublishDate.Format "02 January 2006" }}</em></small>
                     </div>
