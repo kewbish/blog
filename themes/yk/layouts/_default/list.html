@@ -24,7 +24,7 @@
                 {{ range ((where .Site.Pages "Params.series" "post").GroupByDate "2006").Reverse }}
                     <h1 class="year" id="{{ .Key }}"><strong>{{ .Key }}</strong></h1>
                     {{ range .Pages.ByDate.Reverse }}
-                    <h3 style="padding-bottom: 1%;"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                    <h3 style="padding-bottom: 1%;"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
                     <p>{{ .Description }} - <small><em>{{ .PublishDate.Format "02 January 2006" }}</em></small></p>
                     {{ end }}
                 {{ end }}
