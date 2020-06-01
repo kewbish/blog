@@ -60,9 +60,6 @@ img{
     display: block;
     width: 100%;
 }
-ol{
-    list-style-type: none;
-}
 .hero{
     text-align: center;
     margin: 0 auto;

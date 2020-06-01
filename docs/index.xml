@@ -5,10 +5,20 @@
     <link>https://kewbish.github.io/blog/</link>
     <description>Recent content on Yours, Kewbish</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 24 May 2020 13:35:27 -0700</lastBuildDate>
+    <lastBuildDate>Sat, 30 May 2020 19:21:44 -0700</lastBuildDate>
     
 	<atom:link href="https://kewbish.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>The GFTW Hackathon</title>
+      <link>https://kewbish.github.io/blog/posts/200531/</link>
+      <pubDate>Sat, 30 May 2020 19:21:44 -0700</pubDate>
+      
+      <guid>https://kewbish.github.io/blog/posts/200531/</guid>
+      <description>Introduction For the last bit, I&amp;rsquo;ve been working on a #gftwhackathon (Grant for the Web) submission. I&amp;rsquo;ve documented my progress in two Dev.to posts, which I&amp;rsquo;ll put below. This post format will be a little different, but here we go:
+But wait&amp;hellip; what is Web Monetization? Web Monetization is a proposed browser API (proposed, mind you. It&amp;rsquo;s not an actual thing. Yet.) that supports creators through the use of micropayments. Basically, with a browser extension (right now, only available through Coil.</description>
+    </item>
     
     <item>
       <title>The Yearly Rebrand</title>

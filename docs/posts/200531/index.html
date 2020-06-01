@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The GFTW Hackathon</title>
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+
+<body>
+    <section>
+        <p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
+        <h1>The GFTW Hackathon</h1>
+        <p>Published 31 May 2020 at <a href="https://kewbish.github.io/blog/posts/200531/">Yours, Kewbish</a>.</p>
+        
+        <div class="single-main-split">
+            <div class="single-main-sticky">
+                <p style="margin-top: 20px;">Yours, Kewbish</p>
+<p><a href="https://kewbish.github.io/blog">&lt; Back to home</a><br>
+    <a href="https://kewbish.github.io">&gt; Visit main site</a><br>
+    <a href="#top">^ Back to top</a>
+</p>
+            </div>
+            <div>
+                <h2 id="introduction">Introduction</h2>
+<p>For the last bit, I&rsquo;ve been working on a #gftwhackathon (Grant for the Web) submission. I&rsquo;ve documented my progress in two <a href="https://dev.to">Dev.to</a> posts, which I&rsquo;ll put below. This post format will be a little different, but here we go:</p>
+<h2 id="but-wait-what-is-web-monetization">But wait&hellip; what is Web Monetization?</h2>
+<p><a href="https://webmonetization.org">Web Monetization</a> is a proposed browser API (proposed, mind you. It&rsquo;s not an actual thing. Yet.) that supports creators through the use of micropayments. Basically, with a browser extension (right now, only available through <a href="https://coil.com">Coil.com</a>, but sure to change soon), consumers can stream micropayments to content creators. Right now, it supports YouTube and Twitch natively, and web developers can simply include a <code>&lt;meta&gt;</code> tag in their head.</p>
+<p>If you&rsquo;re interested in knowing more: check out the <a href="https://webmonetization.org">Web Monetization website</a>.</p>
+<p>But what&rsquo;s this <em>#gftwhackathon</em> thing I keep blathering on about?<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>The <a href="https://dev.to/devteam/announcing-the-grant-for-the-web-hackathon-on-dev-3kd1">GFTW Hackathon</a> is an initiative partnership between Dev and the GFTW team (which is then made up of Mozilla, Coil, and Creative Commons). They&rsquo;re looking for ideas and proposals for their larger grant (but I&rsquo;m too smol oops-).</p>
+<p>I participated in this hackathon <del>because I&rsquo;d get some merch and exposure</del> because I&rsquo;d like to get more involved in the Dev.to community! As well, learning is always cool. Also - web components!</p>
+<h2 id="read-the-full-devto-articles">Read the full Dev.to articles</h2>
+<p><a href="https://dev.to/kewbish/halfway-through-gftw-200i">Original article available here</a>, <a href="https://dev.to/kewbish/revshare-js-a-revshare-web-component-1c1p">and my project submission here.</a></p>
+<h2 id="the-journey">The Journey</h2>
+<p>I went through a bunch of ideas - a Vue component library, implementing this in another site, or adding it to my existing sites.<br>
+Eventually, I settled on this idea, and for the entire month of May (minus an OS reinstall [aside below] and plus tonnes of Google searching), I spent some time exploring Web Components and Javascript!</p>
+<p>I&rsquo;ve built <a href="https://github.com/kewbish/revshare">Revshare.js</a>, a small Javascript library to make revsharing with Web Monetization easier. It provides an interface for a <code>&lt;rev-share&gt;</code> element with a pointers attribute to make probabilistic revsharing easier.</p>
+<p>[In-text aside]: I might write an entire post about this, to be honest. It would be a <em>great</em> story.</p>
+<p>Anyhow, my hard drive somehow got corrupted, and my HP BIOS got scronched. I tried refreshing Windows, reinstalling the BIOS to reset my partitions, everything. And then I realized that my hard drive was just killed. Of course, it being <em>Spring Break™: Extended Outtakes</em>, almost no store were open. Long story short, I frantically bought something off Memory Express and somehow cobbled Watson back together.</p>
+<p>Really made me seriously consider finally just switching 100% to Manjaro. But then I realized that I didn&rsquo;t want to figure out Teams on Linux quite yet, and I just reinstalled Windows. [end aside]</p>
+<p>Revshare.js is my attempt at contributing to micropayments and the Web Monetization ecosystem, especially the rev-sharing elements. Just looking at the examples on their website - it&rsquo;s pretty complicated to do just for one or two elements. Revshare.js tries to take some of that hassle away, but I&rsquo;m not entirely sure how well it works.</p>
+<h2 id="demo">Demo</h2>
+<p>Add a <code>&lt;script src=&quot;http://unpkg.com/@kewbish/revshare&quot;/&gt;</code> tag to your head, and that&rsquo;s all you need to get started.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">...
+&lt;<span style="color:#f92672">rev-share</span> <span style="color:#a6e22e">pointers</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;[&#34;$jackie.wallet&#34;: 60, &#34;$charlie.wallet&#34;: 40]&#39;</span>&gt;
+    &lt;<span style="color:#f92672">p</span>&gt;This is your revshared content!&lt;/<span style="color:#f92672">p</span>&gt;
+&lt;/<span style="color:#f92672">rev-share</span>&gt;
+...
+</code></pre></div><p>If you&rsquo;d also like to make your <code>&lt;rev-share&gt;</code> element exclusive, just add the <code>exclusive</code> attribute as well. (This will hide the element when Web Monetization is not enabled.)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">...
+&lt;<span style="color:#f92672">rev-share</span> <span style="color:#a6e22e">pointers</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;[&#34;$jackie.wallet&#34;: 60, &#34;$charlie.wallet&#34;: 40]&#39;</span> <span style="color:#a6e22e">exclusive</span>&gt;
+    &lt;<span style="color:#f92672">p</span>&gt;This is your revshared, exclusive content!&lt;/<span style="color:#f92672">p</span>&gt;
+&lt;/<span style="color:#f92672">rev-share</span>&gt;
+...
+</code></pre></div><p>It works using probabilistic revsharing, and the <a href="https://webmonetization.org/docs/probabilistic-rev-sharing">docs I used as a guideline are available here</a>.</p>
+<p>The project is available <a href="https://github.com/kewbish/revshare">on GitHub</a>, <a href="https://www.npmjs.com/package/@kewbish/revshare">on NPM</a>, and <a href="http://unpkg.com/@kewbish/revshare">on UnPkg</a>.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>This is built with the basic Web Components API. This was also my first proper Javascript project, and a great learning experience.</p>
+<p>I was a bit confused with all the callbacks available, and when exactly they fired. The Mozilla Docs were super useful in this case, as apparently Google&rsquo;s docs were a bit out of date.</p>
+<p>Technically, this isn&rsquo;t 100% accurate either. I&rsquo;ve yet to see an example where everything is perfectly split up, but the more views a page has, the more accurate the revshare splits are. Think of it as a <em>feature</em>, not a bug - you&rsquo;re incentivized to get more views for a better, more accurate split.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I&rsquo;m not sure how this post even reads. I guess it&rsquo;s a lot shorter than my proper posts (do I even have proper posts?) but hey, free content. I was too tired and too overwhelmed with homework to do proper research and rant for a 1300word post this week.</p>
+<p>Anyway, I&rsquo;m trying to get more <em>involved</em>, as I&rsquo;ve said before, and start becoming the epic social media influencer I wish to become. (That was a joke. I promise.) I&rsquo;ve heard from <em>so many people</em> that I&rsquo;m supposed to build a blog and make technical blog posts for more reach and to build a platform<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>.</p>
+<h2 id="currently">Currently</h2>
+<p>I&rsquo;m working on rewriting Opus in Flask and Vue (private repo, I don&rsquo;t need more people scronching me because I&rsquo;m bad at Flask) right now. Soon, I, too, will be able to call myself a &lsquo;full-stack developer&rsquo;! (&lsquo;Soon&rsquo; is relative. It&rsquo;s probably going to be a long long time.) I&rsquo;ve been using PyMongo and MongoDB, which I&rsquo;m not sure is the best choice given my data structure, but is a lot easier for my JSONified brain to understand. (I&rsquo;ve built too much stuff with Hugo&rsquo;s data-driven features.)</p>
+<p>For the month of June, I&rsquo;m planning to explore more <a href="https://www.khanacademy.org/computing/computer-science/algorithms">algorithms</a> (yes, with Khan Academy. Don&rsquo;t @ me.) in preparation for my <em>interesting</em> summer plans. (More about this soon. Hopefully, I&rsquo;ll remember to write a post.) I don&rsquo;t really end up using <em>Djikstra&rsquo;s</em> or <em>BFS</em> in my projects, but I guess that&rsquo;s because I haven&rsquo;t done many complicated things yet. I don&rsquo;t know why, but algorithms and competitive programming don&rsquo;t really stick. Probably just because I grew up with projects, and algorithms are a bit abstracted.</p>
+<p>I&rsquo;ve also tried to build some sort of month-based focus system in an attempt to organize my programming efforts. Right now, I have it set up so I have an overall task list for a month, and a couple focuses to throw all my work behind. In June, this will be algorithms and also content. (I might pre-commit some posts but not publish them with Hugo for a while, so you <em>could</em> theoretically preread a lot of my content. You might not want to do that though-) We&rsquo;ll see how this system pans out. If it works alright, I might make a <em>blog post</em>. (Wow, more content!)</p>
+<p>I also plan on doing a series on productivity <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> and notetaking. Will also tie into <em>epic summer plans</em>.</p>
+<p>Alright, going to go refresh my Dev.to dashboard in an attempt to see if I&rsquo;ve finally gotten more reactions and views [go read my articles kthxbye]-</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>[1]. I feel like I&rsquo;ve been sounding more and more British. Do I sound British? I have no clue anymore. Someone British please tell me- <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>[2]. Don&rsquo;t think that quite worked; the entirety of readership of this blog is currently only reading through for things to meme me about. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>[3]. TL;DR: I have no clue what I&rsquo;m doing but apparently crossposting blog posts is supposed to boost SEO and reach and apparently that&rsquo;s a cool thing to do so here I am- <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>[4]. I&rsquo;m probably not qualified to properly explain these things, but I think it might help to just explain things. <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+                <p class="signature">- Yours, Kewbish</p>
+            </div>
+        </div>
+        <br><p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>
