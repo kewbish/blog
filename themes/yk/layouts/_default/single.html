@@ -13,8 +13,8 @@
         <p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
         <h1>{{ .Title }}</h1>
         <p>Published {{ .PublishDate.Format "02 January 2006" }} at <a href="{{ .Permalink }}">Yours, Kewbish</a>.</p>
-        {{ if isset .Params "Dev" }}
-            <p>Also published on <a href="{{ .Dev }}">Dev.to</a>.</p>
+        {{ if .Params.Dev }}
+            <p>Also published on <a href="{{ .Params.Dev }}">Dev.to</a>.</p>
         {{ end }}
         <div class="single-main-split">
             <div class="single-main-sticky">
