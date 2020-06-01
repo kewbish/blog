@@ -60,6 +60,10 @@ img{
     display: block;
     width: 100%;
 }
+pre{
+    padding: 2%;
+    margin: 1% 0;
+}
 .hero{
     text-align: center;
     margin: 0 auto;
