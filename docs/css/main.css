@@ -60,6 +60,9 @@ img{
     display: block;
     width: 100%;
 }
+ol{
+    list-style: none;
+}
 pre{
     padding: 2%;
     margin: 1% 0;
