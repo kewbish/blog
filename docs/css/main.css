@@ -63,6 +63,9 @@ img{
 ol{
     list-style: none;
 }
+ul{
+    padding-left: 2%;
+}
 pre{
     padding: 2%;
     margin: 1% 0;

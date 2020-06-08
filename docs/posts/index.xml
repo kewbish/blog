@@ -5,10 +5,20 @@
     <link>https://kewbish.github.io/blog/posts/</link>
     <description>Recent content in Posts on Yours, Kewbish</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 30 May 2020 19:21:44 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jun 2020 19:10:53 -0700</lastBuildDate>
     
 	<atom:link href="https://kewbish.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Conversational Notetaking</title>
+      <link>https://kewbish.github.io/blog/posts/200607/</link>
+      <pubDate>Sun, 07 Jun 2020 19:10:53 -0700</pubDate>
+      
+      <guid>https://kewbish.github.io/blog/posts/200607/</guid>
+      <description>Introduction I&amp;rsquo;ve started seeing a whole trend around Zettelkasten with a lot of developers online, especially those who are into plaintext notetaking. I was interested in how I&amp;rsquo;d tweak the system, so I decided to try it out for a while. (It&amp;rsquo;s been like 2mo, nothing extreme).
+Going to school online has allowed me to begin porting a lot of my normally physical notes to a digital platform, especially as I predict my senior (damn, I&amp;rsquo;m really about to become a senior in a couple months) year will be mostly online as well.</description>
+    </item>
     
     <item>
       <title>The GFTW Hackathon</title>
