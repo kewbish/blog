@@ -5,10 +5,20 @@
     <link>https://kewbish.github.io/blog/</link>
     <description>Recent content on Yours, Kewbish</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 07 Jun 2020 19:10:53 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jun 2020 19:58:43 -0700</lastBuildDate>
     
 	<atom:link href="https://kewbish.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Reinstalling Windows</title>
+      <link>https://kewbish.github.io/blog/posts/200614/</link>
+      <pubDate>Sun, 14 Jun 2020 19:58:43 -0700</pubDate>
+      
+      <guid>https://kewbish.github.io/blog/posts/200614/</guid>
+      <description>Introduction A couple weeks ago, my computer went through one of its phases again. Once every year or so, my computer decides to brick up, constantly freeze, and whenever I try to access Chrome to debug my problems, it&amp;rsquo;d decide to display the dreaded waiting for cache error. Usually, a simple Windows 1 restore while keeping my files works fine, but this time, it didn&amp;rsquo;t.
+For the past few months, as everyone knows, COVID-19 has forced schools online, so I&amp;rsquo;ve been attending classes over Zoom every day.</description>
+    </item>
     
     <item>
       <title>Conversational Notetaking</title>
