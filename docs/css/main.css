@@ -86,7 +86,7 @@ pre{
 .single-main-split{
     display: grid;
     grid-template-columns: 10% 90%;
-    grid-column-gap: 10px;
+    grid-column-gap: max(1%, 25px);
 }
 .single-main-sticky{
     position: sticky;

@@ -12,25 +12,26 @@
     <section>
         <p><a href="../">&lt; Back to main</a></p>
         <h1>All posts - YK</h1>
-        <p>A list of all my thoughts, sorted by most recent.</p>
+        <p>A list of all my thoughts, sorted by most recent.</p><br>
         <div class="single-main-split">
             <p class="single-main-sticky">
                 <a href="../">&lt; Back to main</a><br>-----<br>
                 {{ range ((where .Site.Pages "Params.series" "post").GroupByDate "2006").Reverse }}
-                    <a href="#{{ .Key }}">Y{{ .Key }}</a><br>
+                <a href="#{{ .Key }}">Y{{ .Key }}</a><br>
                 {{ end }}
             </p>
             <div>
                 {{ range ((where .Site.Pages "Params.series" "post").GroupByDate "2006").Reverse }}
-                    <h1 class="year" id="{{ .Key }}"><strong>{{ .Key }}</strong></h1>
-                    {{ range .Pages.ByDate.Reverse }}
-                    <h3 style="padding-bottom: 1%;"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-                    <p>{{ .Description }} - <small><em>{{ .PublishDate.Format "02 January 2006" }}</em></small></p>
-                    {{ end }}
+                <h1 class="year" id="{{ .Key }}"><strong>{{ .Key }}</strong></h1>
+                {{ range .Pages.ByDate.Reverse }}
+                <h3 style="padding-bottom: 1%;"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+                <p>{{ .Description }} - <small><em>{{ .PublishDate.Format "02 January 2006" }}</em></small></p>
+                {{ end }}
                 {{ end }}
             </div>
         </div>
-        <br><p><a href="../">&lt; Back to main</a></p><br>
+        <br>
+        <p><a href="../">&lt; Back to main</a></p><br>
         <small>Copyleft &copy; {{ now.Format "2006" }} // end of time</small>
         <br><br>
     </section>
