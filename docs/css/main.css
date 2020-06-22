@@ -62,7 +62,10 @@ img{
     width: 100%;
 }
 ol{
-    list-style: none;
+    list-style-position: inside;
+}
+ol p{
+    display: inline;
 }
 ul{
     padding-left: 2%;
