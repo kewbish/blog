@@ -5,10 +5,19 @@
     <link>https://kewbish.github.io/blog/</link>
     <description>Recent content on Yours, Kewbish</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 14 Jun 2020 19:58:43 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 21 Jun 2020 19:20:08 -0700</lastBuildDate>
     
 	<atom:link href="https://kewbish.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CS50: Week -1</title>
+      <link>https://kewbish.github.io/blog/posts/200621/</link>
+      <pubDate>Sun, 21 Jun 2020 19:20:08 -0700</pubDate>
+      
+      <guid>https://kewbish.github.io/blog/posts/200621/</guid>
+      <description>Introduction What&amp;rsquo;s this secret thing you keep mentioning in your blog posts, you ask. Well&amp;hellip; I&amp;rsquo;m doing CS50x. Yes, the infamous course that every &amp;lsquo;phul istack&amp;rsquo; developer and their friends have done. I&amp;rsquo;m not entirely sure why I decided that doing this course was a good idea, especially trying to speedrun it in 10 weeks instead of 12. But hey, I&amp;rsquo;d like to get more acquainted with the mysterious things known as algorithms, and I found some esteemed classmates to speedrun with me.</description>
+    </item>
     
     <item>
       <title>Reinstalling Windows</title>
