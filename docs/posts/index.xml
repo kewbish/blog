@@ -5,10 +5,20 @@
     <link>https://kewbish.github.io/blog/posts/</link>
     <description>Recent content in Posts on Yours, Kewbish</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 21 Jun 2020 19:20:08 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jun 2020 19:05:23 -0700</lastBuildDate>
     
 	<atom:link href="https://kewbish.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CS50: Week 0</title>
+      <link>https://kewbish.github.io/blog/posts/200629/</link>
+      <pubDate>Sun, 28 Jun 2020 19:05:23 -0700</pubDate>
+      
+      <guid>https://kewbish.github.io/blog/posts/200629/</guid>
+      <description>Introduction For the past couple days, I&amp;rsquo;ve been attempting to relearn Scratch, and getting familiar with the CS50 development environment and submission routines. I really like David Malan&amp;rsquo;s teaching style, and the following will be an attempt to categorize all my learnings this first week.
+And by the way, I don&amp;rsquo;t think there&amp;rsquo;ll be notes this week. I&amp;rsquo;m not planning on becoming a Scratch guru anytime soon, so I didn&amp;rsquo;t really see the point of making notes.</description>
+    </item>
     
     <item>
       <title>CS50: Week -1</title>
