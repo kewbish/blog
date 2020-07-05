@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS50: Week 1</title>
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+
+<body>
+    <section>
+        <p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
+        <h1>CS50: Week 1</h1>
+        <p>Published 04 July 2020 at <a href="https://kewbish.github.io/blog/posts/200705/">Yours, Kewbish</a>.</p>
+        
+        <div class="single-main-split">
+            <div class="single-main-sticky">
+                <p style="margin-top: 20px;">Yours, Kewbish</p>
+<p><a href="https://kewbish.github.io/blog">&lt; Back to home</a><br>
+    <a href="https://kewbish.github.io">&gt; Visit main site</a><br>
+    <a href="#top">^ Back to top</a>
+</p>
+            </div>
+            <div>
+                <h1 id="introduction">Introduction</h1>
+<p>Well, it&rsquo;s been a week since I <a href="https://kewbish.github.io/blog/posts/200629">muddled my way through Scratch and the first week of CS50</a>, and I&rsquo;ve just about finished Week 1&rsquo;s problem set. This week, I was introduced to the scary world of <em>C</em>, and the basics of how to use it. As well, we went over how to translate common Scratch recipes to C, and some basic information regarding memory and imprecision, as well as some C examples.</p>
+<p>This was where I actually started paying attention to things - while the first couple weeks seem pretty easy, I know they&rsquo;re going to become the most useful for laying a proper foundation for the more difficult weeks ahead. So, I sat through the hour and forty-six minutes, and delved into the world of C.</p>
+<h1 id="notes">Notes</h1>
+<p>Below are my notes<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> :</p>
+<ul>
+<li>So what - we&rsquo;ve established that C is extremely verbose compared to my beloved Python, but now what?
+<ul>
+<li>There are brackets everywhere</li>
+<li>Don&rsquo;t forget semicolons</li>
+<li>style50 demands this <em>terrible</em> bracket style where the bracket is on its own line<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></li>
+</ul>
+</li>
+<li>You initialize variables with a specific type
+<ul>
+<li>C is <em>statically-typed</em>, unlike Python</li>
+<li>can&rsquo;t randomly change types midway through the program</li>
+<li>causes a lot of &lsquo;filler&rsquo; variables to be made, as well as loops to convert between types, like ints to strings</li>
+</ul>
+</li>
+<li>C doesn&rsquo;t have list comprehension, use for-loops</li>
+<li>By the way, their for-loops are like &lsquo;normal&rsquo; for-loops
+<ul>
+<li>Completely different from Python for-loops</li>
+<li>less intuitive for looping over objects, but easier for array elements</li>
+</ul>
+</li>
+<li>Can&rsquo;t dynamically append to an array
+<ul>
+<li>need to make a counter of some type to find the length of things</li>
+<li>alternatively, for strings, use <code>strlen()</code></li>
+<li>arrays need to be initialized with a certain size, memory allocation things</li>
+</ul>
+</li>
+<li>We input things with <code>get_string()</code>, which is part of the CS50 header library
+<ul>
+<li>lots of functionality and sanitization in the CS50 library</li>
+</ul>
+</li>
+<li>And also, headers are included, not imported
+<ul>
+<li><code>#include something</code></li>
+<li>if it&rsquo;s in &quot;&rdquo; quotes, it&rsquo;s a relative import</li>
+<li>if in &lt;&gt; brackets, it&rsquo;s somewhere in the depths of the C library compiler</li>
+</ul>
+</li>
+<li>Scratch did come in handy, liked the translation examples</li>
+<li>String formatting is extremely weird
+<ul>
+<li>Need to specify the type, and use % formatting</li>
+<li>remember what type the variable is before formatting it</li>
+</ul>
+</li>
+<li>Imprecision is one of those things that I always forget
+<ul>
+<li>In cash, remember that float imprecision exists</li>
+</ul>
+</li>
+<li>Make is pretty awesome, complete with commands and all those cool things
+<ul>
+<li>I set a custom <code>cs50make</code> command in my bashrc instead, because WSL and I&rsquo;m too tired to figure how to set a makefile</li>
+</ul>
+</li>
+<li>For problem sets - do your own research
+<ul>
+<li>I get starting blocks, but after, I&rsquo;m kind of on my own</li>
+</ul>
+</li>
+</ul>
+<h1 id="problem-sets">Problem Sets</h1>
+<p>In PSET1, you have the option of doing Mario Less or More, and Cash or Credit, based on your experience and comfort with C and programming. I, personally, found the &lsquo;more challenging&rsquo; problems more fun to complete, and found that they taught me more of C&rsquo;s language features, like arrays (even tho we haven&rsquo;t even been introduced to those).</p>
+<p>I would recommend doing both the less and more versions of the problem sets. Usually, (like Mario) the &lsquo;more&rsquo; problem sets build off the &lsquo;less&rsquo; sets, so they were more or less required to do anyhow. As well, you get more practise, and I find that practise extremely useful, especially when learning such a new language.</p>
+<p>As I mentioned in my notes, I guess the differences between lecture and problem sets gets bridged by the shorts and notes, as well as a good amount of Stack Overflowing.</p>
+<h1 id="cs50-ide">CS50 IDE</h1>
+<p>I absolutely hate the IDE. Maybe it&rsquo;s just because I&rsquo;m used to Intellisense and whatever cool things that VSCode provides. One example? VSCode allows you to surround things in brackets and quickly use a bunch of keyboard shortcuts, whereas in the CS50 IDE, doing the same commands just delete and do nothing, respectively.</p>
+<p>Setting CS50&rsquo;s CLIs and header files up on WSL were pretty simple, and they&rsquo;re useful for running check50 and other things up on my own. Also, can we talk about check50? <em>Why do they feel the need to UPLOAD to GitHub first?</em> It&rsquo;s extremely annoying to mess up my Git commit graphs. But anyhow.</p>
+<p>So anyway: VSCode, WSL, and Git for the win, CS50 IDE is bad. I like how they make getting started easy for less technically-focused people, and saves a lot of time regarding getting set up. Without it, I know it would have taken a lot longer for my cadre to get started. I really appreciate how it gets everyone up and started quickly.</p>
+<h1 id="teaching-style--misc">Teaching Style + Misc.</h1>
+<p>To be honest, I&rsquo;d kind of skipped over the shorts for Week 0, but for Week 1, they really came in handy. Going through those as well as rereading notes was probably how I managed to figure out a bunch of things regarding the problem sets.</p>
+<p>They never mention it, but checking out some of the source behind the CS50 libraries and doing a couple Google searches was equally useful. Of course, this probably wouldn&rsquo;t help for people who don&rsquo;t know where to find it, but stalking various GitHub repos was a fun waste of time / help.</p>
+<p>And finally, it&rsquo;s time to extol Malan again. Extremely clear, though there&rsquo;s a bit of fluff and relatively &lsquo;unuseful&rsquo; information. I wish they&rsquo;d split up the videos, wait no. They already do that. With chapters. And transcripts. And <em>snacks</em>. I love how CS50&rsquo;s staff take their time to make the online CS50x just as wholesome and inclusive as the IRL CS50, even taking the next step to build in a snack chooser in their viewer. (Which, by the way, has a bunch of amazing screenview / normal view, shortcuts, and tonnes of other features. I love it. Perhaps I&rsquo;ll go look at the source somewhere.)</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>It&rsquo;ll be a fun couple weeks - it takes longer than I thought to properly write up notes, listen to lectures, do problem sets, and write the words you are reading right now. It&rsquo;s a little repetitive, so maybe I&rsquo;ll take a week to speedrun some problem sets, and then write a batch of blog posts at once. Anyway, I&rsquo;ll find a more efficient way to do things.</p>
+<p>In terms of life, I&rsquo;ve been doing some maintenance on <a href="https://diveintoht.ml">diveintoht.ml</a>, adding a new HTML id&rsquo;s section and working on a forms section. I have tonnes of ideas for future content, but I&rsquo;m thinking that it might be a bit much for this introduction. They&rsquo;ll probably become other projects - maybe an ebook or another guide site. (I have ideas for <em>monetization</em>, but then again, no one will pay for my work :pensive:). We&rsquo;ll see what I have time to develop.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>See <a href="https://kewbish.github.io/blog/posts/200607/">this blog post about notetaking</a>. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p><em>Why</em> would you decide that wasting an entire line on a <em>bracket</em> is worth it? Then again, VSCode has decided that bracket-on-own-line is a valid formatting style, and style50 does point it out. I just don&rsquo;t like it. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+                <p class="signature">- Yours, Kewbish</p>
+            </div>
+        </div>
+        <br><p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>

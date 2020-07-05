@@ -5,10 +5,19 @@
     <link>https://kewbish.github.io/blog/posts/</link>
     <description>Recent content in Posts on Yours, Kewbish</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 28 Jun 2020 19:05:23 -0700</lastBuildDate>
+    <lastBuildDate>Sat, 04 Jul 2020 17:01:18 -0700</lastBuildDate>
     
 	<atom:link href="https://kewbish.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CS50: Week 1</title>
+      <link>https://kewbish.github.io/blog/posts/200705/</link>
+      <pubDate>Sat, 04 Jul 2020 17:01:18 -0700</pubDate>
+      
+      <guid>https://kewbish.github.io/blog/posts/200705/</guid>
+      <description>Introduction Well, it&amp;rsquo;s been a week since I muddled my way through Scratch and the first week of CS50, and I&amp;rsquo;ve just about finished Week 1&amp;rsquo;s problem set. This week, I was introduced to the scary world of C, and the basics of how to use it. As well, we went over how to translate common Scratch recipes to C, and some basic information regarding memory and imprecision, as well as some C examples.</description>
+    </item>
     
     <item>
       <title>CS50: Week 0</title>
