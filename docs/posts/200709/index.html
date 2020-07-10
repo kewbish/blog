@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS50: Week 2</title>
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+
+<body>
+    <section>
+        <p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
+        <h1>CS50: Week 2</h1>
+        <p>Published 09 July 2020 at <a href="https://kewbish.github.io/blog/posts/200709/">Yours, Kewbish</a>.</p>
+        
+        <div class="single-main-split">
+            <div class="single-main-sticky">
+                <p style="margin-top: 20px;">Yours, Kewbish</p>
+<p><a href="https://kewbish.github.io/blog">&lt; Back to home</a><br>
+    <a href="https://kewbish.github.io">&gt; Visit main site</a><br>
+    <a href="#top">^ Back to top</a>
+</p>
+            </div>
+            <div>
+                <h2 id="introduction">Introduction</h2>
+<p>And now, our <em>third</em> week of CS50![] This week, we went over arrays, but also spent a lot of time on CLI / terminal things, and debugging tools used by CS50. I&rsquo;m starting to get more familiar with the CS50 system, and how I can do problem sets and debug on my <em>local</em> system, instead of <em>the cloud IDE</em>. (Again, remember how I hate it?) This was our introduction to proper command line arguments, and how to use function arguments in <code>main</code> too.</p>
+<h2 id="notes">Notes</h2>
+<p>Some of this references the video and the problem set, so you might want to check out the <a href="https://cs50.harvard.edu/x/2020/notes/2/">notes here</a>.</p>
+<ul>
+<li>The lecture itself spends a bunch of time going through CLI information
+<ul>
+<li>check50, debug50, style50 - the whole CS50 family</li>
+<li>set up check50 and style50 on my local system already through pip, easy install</li>
+<li>oh, and help50 exists, don&rsquo;t think I&rsquo;ve ever used it. Stack Overflow is more useful, I find.</li>
+</ul>
+</li>
+<li>How does C work?
+<ul>
+<li>first, preprocessed to pull in headers</li>
+<li>compiled to assembly code</li>
+<li>then assembly to binary</li>
+<li>linked to final executable file</li>
+<li>all happens when you run clang or the processor</li>
+</ul>
+</li>
+<li>data fits into types
+<ul>
+<li>each has a finite set amount of memory (except strings but shhh)</li>
+<li>bool -&gt; 1 byte</li>
+<li>char -&gt; 1</li>
+<li>int or float -&gt; 4</li>
+<li>double or long -&gt; 8</li>
+<li>string -&gt; ?, because the number of chars in the string varies, and therefore can change the amount of memory assigned</li>
+<li>each variable is labelled in memory with an address</li>
+</ul>
+</li>
+<li>when you define with a const, its value never changes</li>
+<li>string -&gt; represented as an array of characters
+<ul>
+<li>ends with a null term byte -&gt; <code>\0</code></li>
+<li>escaped with the <code>\</code></li>
+<li>this is why you use <code>&lt; strlen</code> instead of <code>&lt;= strlen</code>, so you don&rsquo;t catch the ending byte</li>
+<li>string memory used is # of char * 1 byte + 1 byte for ntb</li>
+</ul>
+</li>
+<li>ASCII chars can be subtracted and added from each other
+<ul>
+<li>their # code and their character equivalent can be used interchangeably</li>
+<li>kind of unintuitive to subtract chars, I prefer numbers</li>
+</ul>
+</li>
+<li>The <code>ctype.h</code> has useful functions
+<ul>
+<li>checks for alphabetic, digits, and all the other type things</li>
+<li>equivalent of <code>typeof</code> in Python</li>
+</ul>
+</li>
+<li>Use <code>*argv</code> when using <code>strlen</code> to make the actual &lsquo;string&rsquo; array
+<ul>
+<li>Otherwise, can&rsquo;t use strlen, and other things</li>
+</ul>
+</li>
+<li>For encryption psets, I prefer using # codes
+<ul>
+<li>unfamiliar but more intuitive to do distance-from and mod-math</li>
+<li>most of the psets involve finding a distance, adding a key in some way, and looping back at times</li>
+<li>to loop back from an alphabet, use modmath!</li>
+<li>try to use pseudocode values in subtraction equation</li>
+</ul>
+</li>
+<li>Return codes exist, why they have <code>int main</code>
+<ul>
+<li>returns either 0, 1, etc.</li>
+<li>1 -&gt; indicate error</li>
+<li>0 -&gt; everything&rsquo;s fine</li>
+</ul>
+</li>
+<li>argc -&gt; make sure that the array count is greater than a certain amount
+<ul>
+<li>if you try to access something that doesn&rsquo;t exist in memory yet, it will throw a dreaded <em>Segmentation Fault</em></li>
+</ul>
+</li>
+<li>generally, structure validation tests above the main function
+<ul>
+<li>otherwise, define the prototype function, and put it below the main function</li>
+</ul>
+</li>
+</ul>
+<h2 id="problem-sets">Problem Sets</h2>
+<p>Last week, I mentioned how I prefer doing both of the &lsquo;more and less&rsquo; problems in the problem set for a week, noting that the &lsquo;more&rsquo; usually builds off the &lsquo;less&rsquo;. This week was a great example of that.</p>
+<p>Readability doesn&rsquo;t really count, that was more an introduction to looping (? I didn&rsquo;t use an array at all so I&rsquo;m not sure what they&rsquo;re on about), but Caesar and Substitution were super fun. Caesar is, what you might think, a caesar cipher implementation. Substitution implements a simple substitution cipher. While working through Caesar, I found a bunch of information about character codes and validating command line arguments, as well as working with aforementioned character codes and CLI arguments. For example, I was super confused about a Segmentation Fault that was thrown while attempting Caesar because I&rsquo;d forgotten to check that the argument actually existed. As well, I learned that you could :gasp: subtract characters, instead of just using the character code. These two morsels of information were super helpful in solving Substitution. Both ciphers deal with some sort of &lsquo;distance from something else and then add key&rsquo; algorithm, and I found that figuring Caesar out let me speedrun through Substitution so much more quickly.</p>
+<h2 id="setting-up-cs50-locally">Setting up CS50 locally</h2>
+<p>I&rsquo;ve finally finished setting up CS50&rsquo;s development tools on my own system - since last week, I&rsquo;ve been trying to tweak a couple commands and things to make everything <em>just work</em>.</p>
+<p>Here&rsquo;s a small checklist of things that I&rsquo;d recommend setting up, and some caveats.</p>
+<ul>
+<li>install CS50.h from <a href="https://cs50.readthedocs.io/libraries/cs50/c/">their site</a>. I wouldn&rsquo;t recommend trying to curl things, just install from source. It&rsquo;s easier, especially if you&rsquo;re on WSL.
+<ul>
+<li>No need to set up environment variables - more on that later in the bash bit.</li>
+<li>if you don&rsquo;t want to bother adding it to your C source folder, you can just put it somewhere convenient to relative path, and use <code>#include &quot;../cs50.h&quot;</code>, for example</li>
+</ul>
+</li>
+<li>set up check50 through pip
+<ul>
+<li>It&rsquo;s literally just <code>pip install check50</code>.</li>
+</ul>
+</li>
+<li>do the same with submit50 and style50.
+<ul>
+<li>their installations are equally simple - <code>pip install submit50</code> and <code>pip install style50</code>.</li>
+<li>As they remind, do this through WSL. Having to switch between WSL and non-WSL command prompts is annoying, even in VSCode.</li>
+</ul>
+</li>
+<li>in the WSL <code>.bashrc</code>, add a function that has the following command:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cs50make<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> clang -ggdb3 -O0 -std<span style="color:#f92672">=</span>c11 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow  <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>.c  -lcrypt -lcs50 -lm -o <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
+<span style="color:#f92672">}</span> 
+export -f cs50make
+</code></pre></div><pre><code>- which will let you run `cs50make` in terminal and run the equivalent `make` command
+</code></pre>
+<p>See - it&rsquo;s not <em>that</em> hard. Even easier on Linux, probably. And now, you can CS50 in VSCode, and have beautiful syntax highlighting and snippets. <del>God, I hate that IDE.</del></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Apologized for the extremely strange blogging schedule - expect another post on Sunday as well. I&rsquo;d finished a couple of problem sets and weeks in one week, while my writing schedule was supposed to run at one post per week. I&rsquo;ve had to spend a bunch of time writing, so please appreciate me-</p>
+<p>I&rsquo;ve been working on some random scripts - nothing on GitHub, just little automation things. Been doing a little maintenance on <a href="https://diveintoht.ml">diveintoht.ml</a> as well. Hopefully I&rsquo;ll start a bigger project soon, looking forward to the final project of CS50!</p>
+
+                <p class="signature">- Yours, Kewbish</p>
+            </div>
+        </div>
+        <br><p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>
