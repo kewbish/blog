@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS50: Weeks 3 / 4</title>
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+
+<body>
+    <section>
+        <p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
+        <h1>CS50: Weeks 3 / 4</h1>
+        <p>Published 12 July 2020 at <a href="https://kewbish.github.io/blog/posts/200712/">Yours, Kewbish</a>.</p>
+        
+        <div class="single-main-split">
+            <div class="single-main-sticky">
+                <p style="margin-top: 20px;">Yours, Kewbish</p>
+<p><a href="https://kewbish.github.io/blog">&lt; Back to home</a><br>
+    <a href="https://kewbish.github.io">&gt; Visit main site</a><br>
+    <a href="#top">^ Back to top</a>
+</p>
+            </div>
+            <div>
+                <h2 id="introduction">Introduction</h2>
+<p>I severely underestimated how long these posts took to write, and I miscalculated my schedule a little in trying to keep up with my classmates, so here we are with a <em>second</em> post this week. Truly becoming an <em>online content creator</em>, with a <em>release schedule</em>. This post&rsquo;ll go through weeks 3 and 4 of CS50, and include my notes and comments for both, because I couldn&rsquo;t be bothered to write up two separate posts. I&rsquo;ll go back to one a (CS50)week when we hit Week 5.</p>
+<p>Week 3 goes through several common sorting algorithms and Big-O notation, and week 4 goes through memory and files. Both problem sets are slightly unrelated, but that&rsquo;s fine - I learned a ton this week as well. We&rsquo;re in the thick of it now - weeks 3 - 5 are apparently the most difficult in CS50<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+<h2 id="week-3">Week 3</h2>
+<p>Let&rsquo;s start with the usual notes:</p>
+<ul>
+<li>there are many types of search and sort
+<ul>
+<li>some are more efficient than others</li>
+</ul>
+</li>
+<li>for example, linear and binary search
+<ul>
+<li>linear goes through all the elements</li>
+<li>binary effectively cuts the number of comparisons in half</li>
+</ul>
+</li>
+<li>linear search
+<ul>
+<li>go through all elements one by one</li>
+<li>if it matches target, congrats!</li>
+</ul>
+</li>
+<li>binary search
+<ul>
+<li>choose a midpoint</li>
+<li>if midpoint is the target, return index</li>
+<li>otherwise, search the left and right halves, depending on the target and the current midpoint</li>
+</ul>
+</li>
+<li>these two have different O times
+<ul>
+<li>simple mathematical expressions to return the worst case</li>
+</ul>
+</li>
+<li>there are also lots of ways to do sorting
+<ul>
+<li>insertion, bubble, and merge are among a few</li>
+<li>actually, I coded a bunch of these <a href="https://github.com/kewbish/ka-algorithms">already on GitHub</a></li>
+</ul>
+</li>
+<li>merge sort introduces us to recursion
+<ul>
+<li>a function calling itself with some arguments</li>
+<li>make sure there&rsquo;s a base case set, or else it&rsquo;ll infinitely run</li>
+<li>in merge sort, we check for the size of the array to check</li>
+<li>more efficient than selection sort, O-wise</li>
+</ul>
+</li>
+<li>C also allows us to declare custom structs
+<ul>
+<li>a form of class / object is how I understand it</li>
+<li>used a lot in problem sets to simplify</li>
+</ul>
+</li>
+</ul>
+<p>Personally, I found the lecture pretty unrelated to the problem set, which was all about voting. This was one week where I kind of regretted my idea to do both less/more comfortable versions of a problem - Runoff and Tideman were both super difficult. This was also the first week we got &lsquo;distribution code&rsquo;, or a template that takes care of most of the functions for us.</p>
+<p>One thing that was a significant obstacle was the various structs and variables, and how we got the distribution code. I didn&rsquo;t spend much time poring over the given code, and as a result, it was a little difficult to remember the types and purposes of each variable. I kept having to refer to the Walkthrough video to remember what each function was supposed to do. Runoff was clearer in this case, providing actual hints. I guess Tideman was supposed to be more difficult, but it would have been nice to have more hints along the way.</p>
+<p>Tideman also involves a decent amount of graph theory, or at least knowledge of recursion. Nowhere in the lecture was the graph theory really covered, so I had to do a lot of figuring and drawing algorithms out on my own. :sigh: It was helpful to draw dummy tables out and go through the algorithm step by step, at least.</p>
+<h2 id="week-4">Week 4</h2>
+<p>Here are my notes:</p>
+<ul>
+<li>we learn about a new counting system of hexadecimal
+<ul>
+<li>what&rsquo;s used in colour codes</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>denote hexadecimal with <code>0x</code></li>
+</ul>
+</li>
+<li>what even is the point of pointers?
+<ul>
+<li>given a variable stored somewhere in memory, it has a <em>pointer</em></li>
+<li>pointers give us the address of a variable</li>
+<li>denoted with *</li>
+</ul>
+</li>
+<li>the actual address can be found with &amp;
+<ul>
+<li>represented in hexadecimal as well</li>
+<li>&amp;var gets the address</li>
+</ul>
+</li>
+<li>combine with *&amp;var, which goes to the address and gets the value there</li>
+<li>points at first character -&gt; strings
+<ul>
+<li>CS50 library had abstracted this away, but now we have to use <em>pointers</em></li>
+<li><code>char * s</code></li>
+<li>can also access individual characters, which map to the pointer + x</li>
+</ul>
+</li>
+<li>week 4 also teaches us how to allocate memory
+<ul>
+<li><code>malloc</code> -&gt; allocates a space in memory</li>
+<li>need to define a size that it needs to be allocated</li>
+<li>can&rsquo;t be changed</li>
+</ul>
+</li>
+<li>to copy a string, we can use <code>strcpy</code> or malloc and copy it with a loop
+<ul>
+<li>remember to copy the <code>\0</code> byte as well, or else things will crash</li>
+<li>doesn&rsquo;t know where the string ends</li>
+</ul>
+</li>
+<li>after we allocate memory, we need to remember to free it
+<ul>
+<li>use the <code>free</code> function to free memory</li>
+</ul>
+</li>
+<li>if we don&rsquo;t, we&rsquo;re going to end up with a memory leak
+<ul>
+<li>use valgrind to check for possible leaks</li>
+</ul>
+</li>
+<li>computer memory is split into several sections
+<ul>
+<li>one is the code itself</li>
+<li>another is the global variables</li>
+<li>the heap is empty, where free memory gets pulled in</li>
+<li>the stack is used by functions that are currently being called</li>
+</ul>
+</li>
+<li>once a function is returned
+<ul>
+<li>is freed from the stack</li>
+<li>any arguments get lost</li>
+</ul>
+</li>
+<li>this is also where pointers and addresses come into play
+<ul>
+<li>by passing addresses into pointer arguments, you can actually change the variable itself</li>
+</ul>
+</li>
+<li>overflows (like the website)
+<ul>
+<li>when there isn&rsquo;t enough memory in the heap to satisfy malloc, we get a heap overflow</li>
+<li>too many functions loaded? stack overflow!</li>
+<li>called buffer overflows -&gt; might crash system, extremely fun</li>
+</ul>
+</li>
+<li>can assign a variable just to NULL
+<ul>
+<li>doesn&rsquo;t point to anything</li>
+</ul>
+</li>
+<li>with pointers, we can start to manipulate files
+<ul>
+<li><code>fopen</code> opens a file with a character pointer (string), and a mode
+<ul>
+<li>like Python</li>
+</ul>
+</li>
+<li><code>fwrite</code> and <code>fread</code>, well, write and read</li>
+<li>fread is interesting, it takes the variable, block size, number of blocks to read, and finally the filepath</li>
+<li>remember to close all files with <code>fclose</code></li>
+</ul>
+</li>
+</ul>
+<p>This week&rsquo;s problem set was a lot less painful. I guess it&rsquo;s just because week 3 was more focused on algorithms and abstract programs, whereas this week was more hands-on and practical. The distribution code this week was also less related to what we actually had to implement, so was much easier to just skim through.</p>
+<p>Having experience with Python&rsquo;s file operations definitely helped a lot, and made the entire file open/read/close flow easier to understand. I think the most annoying part of this week was definitely just learning that fwrite != fprintf (one is bytes and the other is strings). Besides that, the photo filtering and recover algorithms were really well explained in the problem brief, and didn&rsquo;t require too much mental gymnastics to figure out.</p>
+<p>(Also, brief note that Filter Less and Filter More are basically the same program. More just replaces Sepia with Edges, but Edges builds off Blur, anyhow. Again, <em>do both parts of the problem, I promise it&rsquo;s fun!</em>)</p>
+<p>In general, I think that I prefer practical projects rather than more abstract problems, which also explains my difficulties with algorithms. Well, I guess that was why I took this course - more <del>pain</del> algorithms!</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>In my predictions, I&rsquo;d thought that weeks three through five were going to be the most painful, and I guess now that I&rsquo;m here I kind of agree. Week 4 was tolerable, but Week 3 was absolute torture, and I&rsquo;m not looking forward to Week 5 either. (On the bright side, Week 6 means the glory of Python once again.)</p>
+<p>I&rsquo;ve been working on a little Vue and Firebase thing, trying to properly understand how authentication and Vue Router work. It&rsquo;s actually been a lot less painless than I thought, despite my initial reservations with <a href="https://diveintoht.ml">diveintoht.ml</a>. I might make DIH my final project, actually. I&rsquo;d like to move to a different markdown parser, add Vue Router, adjust authentication, and fix some performance issues. I&rsquo;m looking forward to it actually - not having to come up with a project idea and just doing some maintenance can be pretty fun. Alright, I&rsquo;d better get back to calculus now-</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>According to <a href="http://reddit.com/r/cs50">r/cs50</a>, which is a highly reliable source. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+                <p class="signature">- Yours, Kewbish</p>
+            </div>
+        </div>
+        <br><p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>
