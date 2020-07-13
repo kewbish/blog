@@ -24,7 +24,7 @@
             </div>
             <div>
                 <h2 id="introduction">Introduction</h2>
-<p>And now, our <em>third</em> week of CS50![] This week, we went over arrays, but also spent a lot of time on CLI / terminal things, and debugging tools used by CS50. I&rsquo;m starting to get more familiar with the CS50 system, and how I can do problem sets and debug on my <em>local</em> system, instead of <em>the cloud IDE</em>. (Again, remember how I hate it?) This was our introduction to proper command line arguments, and how to use function arguments in <code>main</code> too.</p>
+<p>And now, our <em>third</em> week of CS50<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> This week, we went over arrays, but also spent a lot of time on CLI / terminal things, and debugging tools used by CS50. I&rsquo;m starting to get more familiar with the CS50 system, and how I can do problem sets and debug on my <em>local</em> system, instead of <em>the cloud IDE</em>. (Again, remember how I hate it?) This was our introduction to proper command line arguments, and how to use function arguments in <code>main</code> too.</p>
 <h2 id="notes">Notes</h2>
 <p>Some of this references the video and the problem set, so you might want to check out the <a href="https://cs50.harvard.edu/x/2020/notes/2/">notes here</a>.</p>
 <ul>
@@ -133,7 +133,9 @@
 </li>
 <li>in the WSL <code>.bashrc</code>, add a function that has the following command:</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cs50make<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> clang -ggdb3 -O0 -std<span style="color:#f92672">=</span>c11 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow  <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>.c  -lcrypt -lcs50 -lm -o <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cs50make<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> 
+    <span style="color:#75715e"># command copied from running make in ide.cs50.io</span>
+    <span style="color:#75715e"># replace the [whatever].c with &#34;$1&#34;.c, and same for the output</span>
 <span style="color:#f92672">}</span> 
 export -f cs50make
 </code></pre></div><pre><code>- which will let you run `cs50make` in terminal and run the equivalent `make` command
@@ -142,6 +144,14 @@ export -f cs50make
 <h2 id="conclusion">Conclusion</h2>
 <p>Apologized for the extremely strange blogging schedule - expect another post on Sunday as well. I&rsquo;d finished a couple of problem sets and weeks in one week, while my writing schedule was supposed to run at one post per week. I&rsquo;ve had to spend a bunch of time writing, so please appreciate me-</p>
 <p>I&rsquo;ve been working on some random scripts - nothing on GitHub, just little automation things. Been doing a little maintenance on <a href="https://diveintoht.ml">diveintoht.ml</a> as well. Hopefully I&rsquo;ll start a bigger project soon, looking forward to the final project of CS50!</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Undoubtedly one of the more difficult weeks. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
 
                 <p class="signature">- Yours, Kewbish</p>
             </div>
