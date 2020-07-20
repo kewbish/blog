@@ -5,10 +5,19 @@
     <link>https://kewbish.github.io/blog/</link>
     <description>Recent content on Yours, Kewbish</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 12 Jul 2020 19:10:35 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 19 Jul 2020 19:06:12 -0700</lastBuildDate>
     
 	<atom:link href="https://kewbish.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CS50: Week 5</title>
+      <link>https://kewbish.github.io/blog/posts/200719/</link>
+      <pubDate>Sun, 19 Jul 2020 19:06:12 -0700</pubDate>
+      
+      <guid>https://kewbish.github.io/blog/posts/200719/</guid>
+      <description>Introduction Finally, we&amp;rsquo;re over the worst of CS50 (in my opinion, at least). Week 5 was a bit of a difficult lesson and problem set, but in the end, it actually wasn&amp;rsquo;t as hard as I thought it&amp;rsquo;d be.1 Week 5 covers data structures - detailing hash tables, linked lists, and tries, which are a combination of both! Speller was a decent challenge, and for once, I really felt that I was applying what I learned in lecture to the problem.</description>
+    </item>
     
     <item>
       <title>CS50: Weeks 3 / 4</title>
