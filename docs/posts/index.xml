@@ -3,8 +3,8 @@
   <channel>
     <title>Posts on Yours, Kewbish</title>
     <link>https://kewbish.github.io/blog/posts/</link>
-    <description>Recent content in Posts on Yours, Kewbish</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <description>Latest Yours, Kewbish posts</description>
+    <generator>Hugo + Yours, Kewbish</generator>
     <lastBuildDate>Sun, 19 Jul 2020 19:06:12 -0700</lastBuildDate>
     
 	<atom:link href="https://kewbish.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
@@ -16,7 +16,7 @@
       <pubDate>Sun, 19 Jul 2020 19:06:12 -0700</pubDate>
       
       <guid>https://kewbish.github.io/blog/posts/200719/</guid>
-      <description>Introduction Finally, we&amp;rsquo;re over the worst of CS50 (in my opinion, at least). Week 5 was a bit of a difficult lesson and problem set, but in the end, it actually wasn&amp;rsquo;t as hard as I thought it&amp;rsquo;d be.1 Week 5 covers data structures - detailing hash tables, linked lists, and tries, which are a combination of both! Speller was a decent challenge, and for once, I really felt that I was applying what I learned in lecture to the problem.</description>
+      <description>On my final encounters with C.</description>
     </item>
     
     <item>
@@ -25,7 +25,7 @@
       <pubDate>Sun, 12 Jul 2020 19:10:35 -0700</pubDate>
       
       <guid>https://kewbish.github.io/blog/posts/200712/</guid>
-      <description>Introduction I severely underestimated how long these posts took to write, and I miscalculated my schedule a little in trying to keep up with my classmates, so here we are with a second post this week. Truly becoming an online content creator, with a release schedule. This post&amp;rsquo;ll go through weeks 3 and 4 of CS50, and include my notes and comments for both, because I couldn&amp;rsquo;t be bothered to write up two separate posts.</description>
+      <description>On my attempts at the infamous Tideman.</description>
     </item>
     
     <item>
@@ -34,7 +34,7 @@
       <pubDate>Thu, 09 Jul 2020 19:08:24 -0700</pubDate>
       
       <guid>https://kewbish.github.io/blog/posts/200709/</guid>
-      <description>Introduction And now, our third week of CS501 This week, we went over arrays, but also spent a lot of time on CLI / terminal things, and debugging tools used by CS50. I&amp;rsquo;m starting to get more familiar with the CS50 system, and how I can do problem sets and debug on my local system, instead of the cloud IDE. (Again, remember how I hate it?) This was our introduction to proper command line arguments, and how to use function arguments in main too.</description>
+      <description>On my cryptographic attempts in C.</description>
     </item>
     
     <item>
@@ -43,7 +43,7 @@
       <pubDate>Sat, 04 Jul 2020 17:01:18 -0700</pubDate>
       
       <guid>https://kewbish.github.io/blog/posts/200705/</guid>
-      <description>Introduction Well, it&amp;rsquo;s been a week since I muddled my way through Scratch and the first week of CS50, and I&amp;rsquo;ve just about finished Week 1&amp;rsquo;s problem set. This week, I was introduced to the scary world of C, and the basics of how to use it. As well, we went over how to translate common Scratch recipes to C, and some basic information regarding memory and imprecision, as well as some C examples.</description>
+      <description>On my further forays into C.</description>
     </item>
     
     <item>
@@ -52,8 +52,7 @@
       <pubDate>Sun, 28 Jun 2020 19:05:23 -0700</pubDate>
       
       <guid>https://kewbish.github.io/blog/posts/200629/</guid>
-      <description>Introduction For the past couple days, I&amp;rsquo;ve been attempting to relearn Scratch, and getting familiar with the CS50 development environment and submission routines. I really like David Malan&amp;rsquo;s teaching style, and the following will be an attempt to categorize all my learnings this first week.
-And by the way, I don&amp;rsquo;t think there&amp;rsquo;ll be notes this week. I&amp;rsquo;m not planning on becoming a Scratch guru anytime soon, so I didn&amp;rsquo;t really see the point of making notes.</description>
+      <description>On my attempts at relearning Scratch.</description>
     </item>
     
     <item>
@@ -62,7 +61,7 @@ And by the way, I don&amp;rsquo;t think there&amp;rsquo;ll be notes this week. I
       <pubDate>Sun, 21 Jun 2020 19:20:08 -0700</pubDate>
       
       <guid>https://kewbish.github.io/blog/posts/200621/</guid>
-      <description>Introduction What&amp;rsquo;s this secret thing you keep mentioning in your blog posts, you ask. Well&amp;hellip; I&amp;rsquo;m doing CS50x. Yes, the infamous course that every &amp;lsquo;phul istack&amp;rsquo; developer and their friends have done. I&amp;rsquo;m not entirely sure why I decided that doing this course was a good idea, especially trying to speedrun it in 10 weeks instead of 12. But hey, I&amp;rsquo;d like to get more acquainted with the mysterious things known as algorithms, and I found some esteemed classmates to speedrun with me.</description>
+      <description>On my summer learning plans.</description>
     </item>
     
     <item>
@@ -71,8 +70,7 @@ And by the way, I don&amp;rsquo;t think there&amp;rsquo;ll be notes this week. I
       <pubDate>Sun, 14 Jun 2020 19:58:43 -0700</pubDate>
       
       <guid>https://kewbish.github.io/blog/posts/200614/</guid>
-      <description>Introduction A couple weeks ago, my computer went through one of its phases again. Once every year or so, my computer decides to brick up, constantly freeze, and whenever I try to access Chrome to debug my problems, it&amp;rsquo;d decide to display the dreaded waiting for cache error. Usually, a simple Windows 1 restore while keeping my files works fine, but this time, it didn&amp;rsquo;t.
-For the past few months, as everyone knows, COVID-19 has forced schools online, so I&amp;rsquo;ve been attending classes over Zoom every day.</description>
+      <description>On my experience fixing my blankscreen errors.</description>
     </item>
     
     <item>
@@ -81,8 +79,7 @@ For the past few months, as everyone knows, COVID-19 has forced schools online, 
       <pubDate>Sun, 07 Jun 2020 19:10:53 -0700</pubDate>
       
       <guid>https://kewbish.github.io/blog/posts/200607/</guid>
-      <description>Introduction I&amp;rsquo;ve started seeing a whole trend around Zettelkasten with a lot of developers online, especially those who are into plaintext notetaking. I was interested in how I&amp;rsquo;d tweak the system, so I decided to try it out for a while. (It&amp;rsquo;s been like 2mo, nothing extreme).
-Going to school online has allowed me to begin porting a lot of my normally physical notes to a digital platform, especially as I predict my senior (damn, I&amp;rsquo;m really about to become a senior in a couple months) year will be mostly online as well.</description>
+      <description>On my Zettelkasten derivative system.</description>
     </item>
     
     <item>
@@ -91,8 +88,7 @@ Going to school online has allowed me to begin porting a lot of my normally phys
       <pubDate>Sat, 30 May 2020 19:21:44 -0700</pubDate>
       
       <guid>https://kewbish.github.io/blog/posts/200531/</guid>
-      <description>Introduction For the last bit, I&amp;rsquo;ve been working on a #gftwhackathon (Grant for the Web) submission. I&amp;rsquo;ve documented my progress in two Dev.to posts, which I&amp;rsquo;ll put below. This post format will be a little different, but here we go:
-But wait&amp;hellip; what is Web Monetization? Web Monetization is a proposed browser API (proposed, mind you. It&amp;rsquo;s not an actual thing. Yet.) that supports creators through the use of micropayments. Basically, with a browser extension (right now, only available through Coil.</description>
+      <description>On my attempts at contributing to capitalism.</description>
     </item>
     
     <item>
@@ -101,8 +97,7 @@ But wait&amp;hellip; what is Web Monetization? Web Monetization is a proposed br
       <pubDate>Sun, 24 May 2020 13:35:27 -0700</pubDate>
       
       <guid>https://kewbish.github.io/blog/posts/200524/</guid>
-      <description>Introduction Well, hello. It&amp;rsquo;s been a while - almost a month since I last posted, and more than a month since my last actual post.
-Some interesting things happened between then and now, the most noticeable of which is my shiny new website design. To be completely honest, I&amp;rsquo;m not sure how I feel about it. It&amp;rsquo;s slightly better than the old site, but it&amp;rsquo;s still not very poppy, is it?</description>
+      <description>On my recent website and blog redesign.</description>
     </item>
     
     <item>
@@ -111,8 +106,7 @@ Some interesting things happened between then and now, the most noticeable of wh
       <pubDate>Wed, 29 Apr 2020 16:05:34 -0700</pubDate>
       
       <guid>https://kewbish.github.io/blog/posts/200429/</guid>
-      <description>Introduction If you&amp;rsquo;re reading this, you&amp;rsquo;re either a) genuinely here to get the best of Kewbish content, b) someone I met through GCI and is here to stalk me, or c) a classmate, probably here to fish for blackmail. To all of you - I say hello. And goodbye, just for a bit.
-I&amp;rsquo;ve decided to move my current website over to Hugo, and with doing that, I can also integrate this blog directly into that repo instead.</description>
+      <description>On my impending absence, and this blog.</description>
     </item>
     
     <item>
@@ -121,9 +115,7 @@ I&amp;rsquo;ve decided to move my current website over to Hugo, and with doing t
       <pubDate>Sat, 11 Apr 2020 16:53:35 -0700</pubDate>
       
       <guid>https://kewbish.github.io/blog/posts/200411/</guid>
-      <description>Introduction I&amp;rsquo;ve been chatting with some of my GCI friends, and many (GCI is supposed to be an open source based competition, after all) seem to use some form of Linux as their daily driver.
-Disclaimer: this article isn&amp;rsquo;t intended to spark up the quintessential &amp;lsquo;which distro is best&amp;rsquo; question. Just my opinions and naïve questions.
-We had a very engaging discussion about Arch Linux, along with all the prettifying DEs or whatever.</description>
+      <description>On why I&#39;m still with Windows (for now)</description>
     </item>
     
     <item>
@@ -132,8 +124,7 @@ We had a very engaging discussion about Arch Linux, along with all the prettifyi
       <pubDate>Wed, 01 Apr 2020 09:14:56 -0700</pubDate>
       
       <guid>https://kewbish.github.io/blog/posts/200401/</guid>
-      <description>Introduction With all that&amp;rsquo;s going on in the world (US has now claimed the #1 position - go States go!), remote work posts are clawing for notice on all my feeds. Productivity tips, horror stories, and tutorials for a successful call.
-Recently, I had a bit of a remote work scenario myself - with a game project. No, I didn&amp;rsquo;t take part in a game jam; it was a school project.</description>
+      <description>On what I&#39;ve learned collaborating remotely.</description>
     </item>
     
     <item>
@@ -142,8 +133,7 @@ Recently, I had a bit of a remote work scenario myself - with a game project. No
       <pubDate>Sun, 22 Mar 2020 17:05:16 -0700</pubDate>
       
       <guid>https://kewbish.github.io/blog/posts/200323/</guid>
-      <description>Introduction It being Spring Break: the Extra Cut, many friends (most of them being on Instagram, the primary focus of this post) have been tagging each other in #StayHome stories and playing story games where we tag a bunch of our friends in order to &amp;lsquo;spread positivity&amp;rsquo;.
-Being the cynic I am, I couldn&amp;rsquo;t help but snark on these stories, and somehow bring an analogy to the current COVID-19 situation in.</description>
+      <description>On the difficulties of comprehending growth.</description>
     </item>
     
     <item>
@@ -152,9 +142,7 @@ Being the cynic I am, I couldn&amp;rsquo;t help but snark on these stories, and 
       <pubDate>Sat, 14 Mar 2020 19:48:37 -0700</pubDate>
       
       <guid>https://kewbish.github.io/blog/posts/200314/</guid>
-      <description>Introduction The past three months have been hectic - from starting this blog, to winning Google Code-in, and subsequently finding out it&amp;rsquo;s cancelled, to, of course, what everyone&amp;rsquo;s talking about: COVID-19.
-Many countries around the world have been hit far harder than Canada, but in this post, I&amp;rsquo;d like to talk about some of the impacts, both personal and on a larger scale, that this novel coronavirus has brought.
-NOTE: I apologize if this post reads as a little alarmist and sad, but it reflects what I&amp;rsquo;m thinking of right now, and I can&amp;rsquo;t help but express that here.</description>
+      <description>On the strange state of the world.</description>
     </item>
     
     <item>
@@ -163,8 +151,7 @@ NOTE: I apologize if this post reads as a little alarmist and sad, but it reflec
       <pubDate>Wed, 04 Mar 2020 17:14:25 -0800</pubDate>
       
       <guid>https://kewbish.github.io/blog/posts/200308/</guid>
-      <description>Introduction The #shecoded movement, as far as I can see, started on popular developer blogging site Dev.to. Women&amp;rsquo;s Day is on March 8th, and female- and non-binary identifying individuals are encouraged to share their developer stories. See some of the other stories on their landing page, and check them out!
-Nevertheless, Kewbish Coded Online, I go by Kewbish, so I&amp;rsquo;ll continue that here, I guess. I&amp;rsquo;m from the PNW, Canada, and it&amp;rsquo;s been a great developer journey for me.</description>
+      <description>On equality, equity, and #shecoded.</description>
     </item>
     
     <item>
@@ -173,11 +160,7 @@ Nevertheless, Kewbish Coded Online, I go by Kewbish, so I&amp;rsquo;ll continue 
       <pubDate>Sat, 29 Feb 2020 09:23:10 -0800</pubDate>
       
       <guid>https://kewbish.github.io/blog/posts/200301/</guid>
-      <description>Introduction After a good few days of questioning my sanity, I finally attended the Vancouver District Science Fair.
-There, I presented my Audio Visual Random Number Generation project - more about that later.
-Taken from VDSF blog
-Project A full writeup can be found here.
-My AVRNG innovates off past video TRNGS, incorporating an additional audio entropy layer. Using security video footage, I&amp;rsquo;ve created a true random number generator to generate encryption keys cheaply and easily.</description>
+      <description>On the vibes at the Vancouver District Science Fair.</description>
     </item>
     
     <item>
@@ -186,7 +169,7 @@ My AVRNG innovates off past video TRNGS, incorporating an additional audio entro
       <pubDate>Fri, 21 Feb 2020 14:02:09 -0800</pubDate>
       
       <guid>https://kewbish.github.io/blog/posts/200221/</guid>
-      <description>Introduction Recently, I began a new blog, hosted on GitHub Pages over here. In the past, I&amp;rsquo;ve tried (and eventually failed) to set up a devlog section on my site, and one of the main pain points was the repetitiveness of creating and pushing content. I had a template with very bare-bones HTML and CSS that I copied and pasted my work into, but this was annoying to constantly try to move my plaintext into rich HTML content.</description>
+      <description>On migrating to a static site generator.</description>
     </item>
     
     <item>
@@ -195,10 +178,7 @@ My AVRNG innovates off past video TRNGS, incorporating an additional audio entro
       <pubDate>Sat, 08 Feb 2020 13:56:00 -0800</pubDate>
       
       <guid>https://kewbish.github.io/blog/posts/200214/</guid>
-      <description>Introduction Wonderful, I thought, as I woke up. More homework.
-But to my surprise, when I checked my email, I found out that:
-Thank you to all the Google Code-in team for making this opportunity possible, to the mentors for volunteering their time to help us grow as developers, and to the awesome Liquid Galaxy community for being super welcoming and supportive!
-What is Google Code-in? Google Code-in is a great first stop for pre-university students interested in technology to begin contributing to something called open source.</description>
+      <description>On my experience during Google&#39;s 2019 Code-in.</description>
     </item>
     
   </channel>
