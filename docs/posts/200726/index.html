@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS50: Weeks 6 / 7</title>
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+
+<body>
+    <section>
+        <p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
+        <h1>CS50: Weeks 6 / 7</h1>
+        <p>Published 26 July 2020 at <a href="https://kewbish.github.io/blog/posts/200726/">Yours, Kewbish</a>.</p>
+        
+        <div class="single-main-split">
+            <div class="single-main-sticky">
+                <p style="margin-top: 20px;">Yours, Kewbish</p>
+<p><a href="https://kewbish.github.io/blog">&lt; Back to home</a><br>
+    <a href="https://kewbish.github.io">&gt; Visit main site</a><br>
+    <a href="#top">^ Back to top</a>
+</p>
+            </div>
+            <div>
+                <h2 id="introduction">Introduction</h2>
+<p>Finally, we&rsquo;re getting into the more &lsquo;application&rsquo; side on things - also known as the part where I&rsquo;m more comfortable with. With my <a href="https://kewbish.github.io/blog/posts/200621/">initial predictions</a>, I&rsquo;d predicted that Week 6 (where we are now) was where it&rsquo;d get slightly easier. And I was right - Week 6 was a welcome week, an introduction to Python. I&rsquo;m already somewhat decent at Python, so this week wasn&rsquo;t such a struggle, and Week 7 was a great mix of new tech / familiar tech.</p>
+<p>I was actually pretty surprised how &lsquo;natural&rsquo; C already felt, and I caught myself trying to <code>printf(&quot;&quot;)</code> instead of <code>print(&quot;&quot;)</code>. I guess I haven&rsquo;t been writing as much Python in the past few weeks - mainly focusing on C and soem Javascript side things. Hopefully, this&rsquo;ll change - I have plans for some CLI projects that I might pursue after the final project.</p>
+<p>I was also pleasantly surprised how intuitive SQL was to write - nearly like plain English<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. SQL was one of those &lsquo;I&rsquo;ll learn it later eventually&rsquo; things that I used to keep putting off, but I&rsquo;m happy I finally took the time to learn it. For database-y things in my projects that have required a backend, I&rsquo;ve mostly used Firebase (and Mongo once, but that didn&rsquo;t pan out very well), so <em>relational</em> databases were a refreshing new experience.</p>
+<h2 id="week-6">Week 6</h2>
+<p><strong>Notes:</strong>
+To be honest, 90% of the lecture was the basics of Python, which I&rsquo;d already known, so have some Python regex notes instead!</p>
+<ul>
+<li>denote a regex string with r&rsquo;&rsquo;
+<ul>
+<li>also can use formatted string inside it with rf&rsquo;&rsquo;</li>
+</ul>
+</li>
+<li><code>.</code> denotes any character</li>
+<li><code>.*</code> denotes 0 or more characters</li>
+<li><code>.+</code> denotes 1 or more characters or matches</li>
+<li><code>?</code> denotes optionality</li>
+<li><code>^</code> denotes a start</li>
+<li><code>$</code> denotes the end of input</li>
+<li>to use regex, usually have to import <code>re</code>
+<ul>
+<li>comes with a couple useful functions</li>
+<li><code>.search</code> takes two+ arguments
+<ul>
+<li>pattern, searching string, and options</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>to search for <code>y</code> or <code>yes</code>, you could do something like &lsquo;^y(es)?$&rsquo;
+<ul>
+<li>^ denotes the start of the string</li>
+<li>immediately after, there should be a y</li>
+<li>the brackets with the ? denotes the optional &lsquo;es&rsquo;</li>
+<li>then, the string should end</li>
+</ul>
+</li>
+<li>to search for <code>n</code> or <code>no</code>:
+<ul>
+<li>similar - &lsquo;^n(o)?$&rsquo;</li>
+</ul>
+</li>
+<li>re.IGNORECASE ignores the case of the input</li>
+<li>used this in the DNA problem set
+<ul>
+<li>used .findall, which returns all matches for a particular STR</li>
+</ul>
+</li>
+</ul>
+<p><strong>Problems:</strong>
+Finally being able to write implementations of the C problems in Python (which is what I was mentally doing the problems in anyhow) was extremely refreshing. I could actually use <em>list comprehensions</em> and not the clunky 3+ line for loop syntax, and my ternary expressions actually worked! (Probably due to the fact I misordered something or other in C, but anyhow, I greatly prefer Python.) Python&rsquo;s just a lot more concise and as someone once put it, it reads like pseudocode. That makes it a lot easier to translate my brainwaves into proper, functioning programs, unlike C, where I generally had to wrestle with pointers and such.</p>
+<p>As a comparison, here are some of the line counts of the problems in problem set 6.</p>
+<ul>
+<li>Hello: in C, 10 loc. In Python, 2 loc.</li>
+<li>Mario Less: in C, 24 loc. In Python, 12 loc.</li>
+<li>Mario More: in C, 29 loc. In Python, 15 loc.</li>
+<li>Cash: in C, 21 loc. In Python, 15 loc.</li>
+<li>Credit: in C, 65 loc. In Python, 21 loc.</li>
+<li>Readability: in C, 41 loc. In Python, 15 loc.
+There&rsquo;s no correlation between lines of code and personal opinon, of course, but I personally prefer Python for its multipurpose and no-boilerplate existence, among other things.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></li>
+</ul>
+<h2 id="week-7">Week 7</h2>
+<p><strong>Notes:</strong></p>
+<ul>
+<li>SQLite3 is the management system, SQL is the language standard
+<ul>
+<li>basically a system to query and select cells from Google Sheets or similar</li>
+<li>like more complicated CSV</li>
+</ul>
+</li>
+<li>use <code>.schema</code> to access the schema, or layout of the database</li>
+<li>use <code>.import [file] [name]</code> to import a CSV or similar file
+<ul>
+<li>need to set <code>.mode csv</code> first</li>
+</ul>
+</li>
+<li>once inside the database
+<ul>
+<li>run SQL queries, usually involving <code>select</code></li>
+</ul>
+</li>
+<li><code>*</code> is a wildcard -&gt; select all
+<ul>
+<li><code>%</code> -&gt; some characters</li>
+<li>usually used with <code>like</code></li>
+</ul>
+</li>
+<li>to select a count, use the <code>count()</code> function</li>
+<li>to group, use <code>group by x</code>
+<ul>
+<li>also can order by x</li>
+</ul>
+</li>
+<li>orders can be ascending or descending</li>
+<li>to limit the number of results, use <code>limit x</code></li>
+<li>SQL queries can span multiple lines
+<ul>
+<li>written in all caps by convention, but lowercase works too</li>
+<li>ends with a ;</li>
+</ul>
+</li>
+<li>All database operations fall under create, read, update, or delete
+<ul>
+<li>in SQL, insert, select, update, delete</li>
+</ul>
+</li>
+<li>To initialize a table, need to use a create statement
+<ul>
+<li>has x number of columns</li>
+<li>each column has a specific data type</li>
+</ul>
+</li>
+<li>These types can be:
+<ul>
+<li>blob -&gt; binary files</li>
+<li>integer -&gt; several types</li>
+<li>numeric</li>
+<li>real -&gt; real numbers</li>
+<li>text</li>
+<li>can also specify not null, to make sure it exists</li>
+</ul>
+</li>
+<li><code>where</code> matches a specific condition
+<ul>
+<li>can use and and or in conditions</li>
+<li><code>like</code> matches substrings of text</li>
+</ul>
+</li>
+<li><code>join</code> joins a second table to the first
+<ul>
+<li>use an <code>on</code> bit to compare two pieces of data</li>
+<li>ex. stars.movie_id = movies.id</li>
+</ul>
+</li>
+<li>while using the CS50 library, use &lsquo;SQL&rsquo;
+<ul>
+<li>initialize a connection with <code>db = SQL('path')</code></li>
+<li>run commands with <code>db.execute('x')</code></li>
+<li>use wildcards with ? marks, specify in option arguments</li>
+</ul>
+</li>
+<li>multiple types of keys
+<ul>
+<li>primary -&gt; primary identifier</li>
+<li>foreign key -&gt; another row in another table</li>
+<li>unique -&gt; unique value in table</li>
+<li>index -&gt; creates an index structure to make queries quicker</li>
+</ul>
+</li>
+<li>race conditions, where timing matters
+<ul>
+<li>solve with transaction types</li>
+</ul>
+</li>
+<li>SQL injection attacks
+<ul>
+<li>when special characters are put in and not escaped</li>
+</ul>
+</li>
+</ul>
+<p>The two problems were pretty intuitive to solve, and only minor Googling was needed. Definitely around as challenging as the Python bit.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>We&rsquo;re almost done with the main chunk of CS50. I&rsquo;m pretty surprised how fast these first 7 weeks went by - only the track (which I&rsquo;m greatly looking forward to) and the final project (which I have a good idea for) to go! These&rsquo;ll probably take a while to complete as well, but I&rsquo;m committed to writing a blog post a week describing my experiences.</p>
+<p>Speaking of tracks, I&rsquo;m planning on doing the Web track. I have experience with web technologies already, so this seemed like a logical choice. In past posts, people have commented that the Web track was a little outdated, so we&rsquo;ll see about that. I&rsquo;m excited to get more acquainted with Flask, as well. Like SQL, getting more experince with Python in the web has been a &lsquo;one of those days&rsquo; things, and hopefully, this will be a good reintroduction.<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> If I have time, I&rsquo;m planning on working through parts of CS50 Web Programming as well - though I might skip the React bit, or take time to learn more Vue in place of it.</p>
+<p>Haven&rsquo;t been working on much in terms of side projects recently, which is unfortunate, but I have too much to do. Scree - if only we had more time. We all wish, hmm?</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Which also, in a way, is technically true. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>At this point, I realized that this post was still really short, and I still had time in the week to work on SQL, so I guess here&rsquo;s another combination post! <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>I wrote exactly one Flask app in the past. Was a little confusing. Also the only time I tryed Mongo, but then again, this was only a couple months ago. <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+                <p class="signature">- Yours, Kewbish</p>
+            </div>
+        </div>
+        <br><p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>

@@ -5,10 +5,19 @@
     <link>https://kewbish.github.io/blog/</link>
     <description>Latest Yours, Kewbish posts</description>
     <generator>Hugo + Yours, Kewbish</generator>
-    <lastBuildDate>Sun, 19 Jul 2020 19:06:12 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 26 Jul 2020 16:58:13 -0700</lastBuildDate>
     
 	<atom:link href="https://kewbish.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CS50: Weeks 6 / 7</title>
+      <link>https://kewbish.github.io/blog/posts/200726/</link>
+      <pubDate>26 Jul 2020</pubDate>
+      
+      <guid>https://kewbish.github.io/blog/posts/200726/</guid>
+      <description>On Python and selects, inserts, and wheres.</description>
+    </item>
     
     <item>
       <title>CS50: Week 5</title>
