@@ -11,7 +11,7 @@
     --accent-color: #ffb451;
     --accent-two: #323232;
     --grid-columns: minmax(100px, 6fr) minmax(100px, 1fr) minmax(100px, 6fr);
-    --font-one: "Consolas", "Courier New", "Inconsolata", monospace;
+    --font-one: "Consolas", "Inconsolata", "Courier New", monospace;
     --font-two: "Source Sans Pro", sans-serif;
     scroll-behavior: smooth;
     text-decoration: none;
