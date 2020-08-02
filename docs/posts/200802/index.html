@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automating READMEs</title>
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+
+<body>
+    <section>
+        <p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
+        <h1>Automating READMEs</h1>
+        <p>Published 02 August 2020 at <a href="https://kewbish.github.io/blog/posts/200802/">Yours, Kewbish</a>.</p>
+        
+        <div class="single-main-split">
+            <div class="single-main-sticky">
+                <p style="margin-top: 20px;">Yours, Kewbish</p>
+<p><a href="https://kewbish.github.io/blog">&lt; Back to home</a><br>
+    <a href="https://kewbish.github.io">&gt; Visit main site</a><br>
+    <a href="#top">^ Back to top</a>
+</p>
+            </div>
+            <div>
+                <h2 id="introduction">Introduction</h2>
+<p>I&rsquo;m working on the web track of CS50 at the moment, and I&rsquo;m having a lot of fun, actually. I&rsquo;ve been thinking of redesigning this website (<a href="https://kewbish.github.io/blog/posts/200429/">hmm, where have I heard that before?</a>) again - probably not for the last time in the next couple years either. Right now, I feel that it&rsquo;s a little bland and colourless, and the landing page especially isn&rsquo;t that eye-catching and poppy. People&rsquo;ve also told me that the monospace is a little hard to read in large chunks, so I&rsquo;m rethinking my design system<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> again.</p>
+<p>That said, it&rsquo;s taking quite a bit of thinking and work, so it&rsquo;s definitely going to take more than a week to redesign this and work on the Finance problem set. In the meantime, I thought I&rsquo;d take some time to investigate GitHub&rsquo;s new profile feature, and take a dive into GitHub Actions.</p>
+<h2 id="yes-we-have-readmes-now">Yes, we have READMEs now.</h2>
+<p>For a couple days, my <a href="https://dev.to/kewbish">Dev.to</a>, Reddit, <em>and</em> dev Discord feeds were inundated with <em>the shiny new GitHub profile README feature</em>. If you were blessed with a README-flex-free feed, all you need to know is that if you create a repo named your GitHub username (i.e. <code>kewbish/kewbish</code>) and make a README, it&rsquo;ll show on your profile, like so:</p>
+<p><img src="https://i.imgur.com/13Rd9gJ.png" alt="Hey, a cool README. Yes, it&rsquo;s mine."><br>
+<em>Hey, a cool README. <del>Yes, it&rsquo;s mine</del>.</em></p>
+<p>I&rsquo;m not going to go through writing the copy / main text of the README much. Personally, I just rewrote some of the key points on my LinkedIn and resume, just in a less formal, more chill tone. (I hope that&rsquo;s how it reads anyhow.) If you trawl through the Git history, you can see that I used to have a version with a lot more bullet points - that was my resume copy-paste. I tried to keep it as short as I could, and tried not to repeat the same links too many times.</p>
+<p>After writing the first version, I started seeing lots of cool READMEs on Dev.to. Apparently, there&rsquo;s even an <a href="https://github.com/abhisheknaiidu/awesome-github-profile-readme">awesome list</a> now. Why am I not surprised?</p>
+<p>Anyhow, after reading through <em>too many</em> &lsquo;top 8 GitHub README&rsquo; lists, I found <a href="https://github.com/simonw">SimonW&rsquo;s</a> featured quite often, and I really liked the self-updating blog posts / TIL sections. So, I decided to implement a similar, albeit simpler version on my own README.</p>
+<h2 id="rss-with-hugo">RSS with Hugo</h2>
+<p>Skip over this bit if you&rsquo;re not using Hugo - I&rsquo;m just going over some changes to Hugo&rsquo;s default RSS that you can definitely ignore.</p>
+<p>Hugo comes with a RSS template built in, so I had an RSS feed before I even knew I had one. However, you can also <a href="https://gohugo.io/templates/rss/">customize it</a> just like all the other default layouts. <a href="https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_default/rss.xml">This</a> is the default template Hugo ships with - here are the changes I made.</p>
+<ul>
+<li>Changing the description (line 18):</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;description</span><span style="color:#f92672">&gt;</span>Recent content {{ if ne  .Title  .Site.Title }}{{ with .Title }}in {{.}} {{ end }}{{ end }}on {{ .Site.Title }}<span style="color:#f92672">&lt;/description&gt;</span>
+</code></pre></div><p>This is pretty self-explanatory, just changed it to:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;description</span><span style="color:#f92672">&gt;</span>Latest Yours, Kewbish posts<span style="color:#f92672">&lt;/description&gt;</span>
+</code></pre></div><ul>
+<li>Changing the date format (line 32):</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;pubDate</span><span style="color:#f92672">&gt;</span>{{ .Date.Format &#34;Mon, 02 Jan 2006 15:04:05 -0700&#34; | safeHTML }}<span style="color:#f92672">&lt;/pubDate&gt;</span>
+</code></pre></div><p>I prefer a cleaner date format (02 Jan 2006) instead of <em>all</em> this time info, so I changed this to:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;pubDate</span><span style="color:#f92672">&gt;</span>{{ .Date.Format &#34;02 Jan 2006&#34; | safeHTML }}<span style="color:#f92672">&lt;/pubDate&gt;</span>
+</code></pre></div><ul>
+<li>Move from summary to description (line 35):</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;description</span><span style="color:#f92672">&gt;</span>{{ .Summary | html }}<span style="color:#f92672">&lt;/description&gt;</span>
+</code></pre></div><p>I wanted to use my descriptions instead of the first couple lines, so I used this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;description</span><span style="color:#f92672">&gt;</span>{{ .Description | html }}<span style="color:#f92672">&lt;/description&gt;</span>
+</code></pre></div><p>These are all just personal preference, but it makes the README bit a little more consistent with the actual blog.</p>
+<h2 id="scripting-with-python">Scripting with Python</h2>
+<p>The README update script is only 18 lines of Python, and uses the <a href="https://github.com/kurtmckee/feedparser">feedparser</a> library to, well, parse the RSS feed.</p>
+<p>Of course, let&rsquo;s start with installing and importing the library with <code>pip install feedparser</code> and:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#f92672">from</span> feedparser <span style="color:#f92672">import</span> parse
+</code></pre></div><p>Next, we&rsquo;re going to get all our feed entries.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">feed <span style="color:#f92672">=</span> parse(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">https://kewbish.github.io/blog/index.xml</span><span style="color:#e6db74">&#34;</span>)<span style="color:#f92672">.</span>entries
+latest <span style="color:#f92672">=</span> [
+    f<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">- [{feed[i].title}]({feed[i].link})  </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{feed[i].description} - {feed[i].published}</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">3</span>)]
+</code></pre></div><p><code>feed</code> contains all the entries of your RSS feed (you&rsquo;re going to want to change the URL to something other than my blog URL, obviously). Then, we create a new list to store the first three entries, formatted as a two-line bullet point. The first line will have a link to the post and the title, and the second a description and publishing date. You can definitely play around with this, it&rsquo;s just plain markdown, and this is just how I decided to format my README.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">farr <span style="color:#f92672">=</span> []
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">README.md</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">utf8</span><span style="color:#e6db74">&#39;</span>) <span style="color:#66d9ef">as</span> x:
+    <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> x:
+        <span style="color:#66d9ef">if</span> line<span style="color:#f92672">.</span>strip() <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&lt;!--bp--&gt;</span><span style="color:#e6db74">&#34;</span>:
+            <span style="color:#66d9ef">break</span>
+        farr<span style="color:#f92672">.</span>append(line)
+</code></pre></div><p>We then open the README file and read each line into an array if it isn&rsquo;t this specific HTML comment. At this point, you might want to go back to your README and add the <code>&lt;!--bp--&gt;</code> comment at the end. (If you want it somewhere in the middle, you&rsquo;re going to have to modify the code by adding a new array and reading into that array after the comment is encountered, probably by setting a boolean value somewhere.)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">README.md</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">w</span><span style="color:#e6db74">&#34;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">utf8</span><span style="color:#e6db74">&#39;</span>) <span style="color:#66d9ef">as</span> x:
+    x<span style="color:#f92672">.</span>writelines(farr)
+    x<span style="color:#f92672">.</span>write(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&lt;!--bp--&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+    li <span style="color:#f92672">=</span> [x<span style="color:#f92672">.</span>write(i <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> latest]
+</code></pre></div><p>And finally, we open the README, this time in write mode, and write all the lines back. Then, we rewrite our comment line, and then our <code>latest</code> list, which will be the list of formatted blog posts. (Again, if you want your widget somewhere in the middle of your README, you&rsquo;re going to have to write the new array you created after the blog post lines.)</p>
+<p>The full script can be found <a href="https://github.com/kewbish/kewbish/blob/master/get_post.py">on my GitHub</a>.</p>
+<p>You&rsquo;re also going to want to create a <code>requirements.txt</code> file with <code>feedparser</code> in it, so go ahead and do that.</p>
+<h2 id="creating-a-github-action">Creating a GitHub Action</h2>
+<blockquote>
+<p>Note: <a href="https://simonwillison.net/2020/Jul/10/self-updating-profile-readme/">SimonW&rsquo;s blog post</a> was super helpful in figuring this out - much of my code was created after looking through theirs!</p>
+</blockquote>
+<p>Now that we have our script and requirements, let&rsquo;s make our Action. There&rsquo;s a little Actions button on the main page of your repository, so click that and create a new workflow. Choose the &lsquo;by yourself&rsquo; option, which will spit out a long YAML file. We&rsquo;re going to rewrite the file, so go ahead and delete it.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#66d9ef">name</span>: Add newest YK
+
+on:
+  workflow_dispatch:
+  schedule:
+    - <span style="color:#66d9ef">cron</span>: <span style="color:#e6db74">&#39;0 */6 * * *&#39;</span>
+</code></pre></div><p>First, we start with our Action name. Pretty self explanatory, call it whatever you want. Next, we have our <code>on</code> triggers. These define when our Action will run. <code>workflow_dispatch</code> lets me trigger one manually, and <code>schedule</code> uses familiar cron syntax. (In case you&rsquo;re wondering, this runs the Action every 6 hours. I highly recommend <a href="https://crontab.guru/">crontab.guru</a> for figuring this out. GitHub does have a built-in tooltip though, so that can be helpful.)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">jobs:
+  build:
+    <span style="color:#66d9ef">runs-on</span>: ubuntu-latest
+    steps:
+    - <span style="color:#66d9ef">name</span>: Check out repo
+      <span style="color:#66d9ef">uses</span>: actions/checkout@v2
+</code></pre></div><p>Every Action also has a set of jobs that you can run on it. The <code>build</code> and <code>runs-on</code> line are pretty standard, just defining your Action to be run on the latest version of Ubuntu. Then, we have a set of steps, which are each individual tasks that can then run commands for us. Our first step will be checking out the repo. This is also pretty standard, as we just use one of GitHub&rsquo;s premade Actions.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">- <span style="color:#66d9ef">name</span>: Set up Python
+    <span style="color:#66d9ef">uses</span>: actions/setup-python@v2
+    with:
+    <span style="color:#66d9ef">python-version</span>: <span style="color:#ae81ff">3.8</span>
+- <span style="color:#66d9ef">name</span>: pip caches
+    <span style="color:#66d9ef">uses</span>: actions/cache@v2
+    with:
+    <span style="color:#66d9ef">path</span>: ~/.cache/pip
+    <span style="color:#66d9ef">key</span>: ${{ runner.os }}-pip-${{ hashFiles(<span style="color:#e6db74">&#39;**/requirements.txt&#39;</span>) }}
+    <span style="color:#66d9ef">restore-keys</span>: <span style="color:#e6db74">|
+</span><span style="color:#e6db74">       </span><span style="color:#e6db74"> </span><span style="color:#e6db74">${{ runner.os }}-pip-</span>
+</code></pre></div><p>This part sets up Python, using another premade Action, and sets the default Python version. Next, we set up the pip cache so we won&rsquo;t have to download the dependencies each time. More information about this part can be found <a href="https://docs.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions">on the GitHub site</a>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">- <span style="color:#66d9ef">name</span>: Install Python dependencies
+    <span style="color:#66d9ef">run</span>: <span style="color:#e6db74">|
+</span><span style="color:#e6db74">   </span><span style="color:#e6db74"> </span><span style="color:#e6db74">python -m pip install -r requirements.txt</span>
+</code></pre></div><p>Here, we run one command to install the requirements from the <code>requirements.txt</code> file - here, just feedparser.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">- <span style="color:#66d9ef">name</span>: Update README
+    env:
+        <span style="color:#66d9ef">GITHUB_TOKEN</span>: ${{ secrets.GITHUB_TOKEN }}
+    <span style="color:#66d9ef">run</span>: |<span style="color:#e6db74">-
+</span><span style="color:#e6db74">   </span><span style="color:#e6db74"> </span><span style="color:#e6db74">python get_post.py</span>
+    cat README.md
+</code></pre></div><p>With this, we get the GitHub secret that auto-generated when using GitHub Actions, and then run the script we created earlier. Then, we <code>cat</code> this to README.md. Now, in our Action, our README will have updated (or not - more on that with the next block.)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">- <span style="color:#66d9ef">name</span>: Commit and push if changed
+    <span style="color:#66d9ef">run</span>: |<span style="color:#e6db74">-
+</span><span style="color:#e6db74">       </span><span style="color:#e6db74"> </span><span style="color:#e6db74">git diff</span>
+        git config --global user.email <span style="color:#e6db74">&#34;yourskewbot@notarealdomain.com&#34;</span>
+        git config --global user.name <span style="color:#e6db74">&#34;YoursKewbot&#34;</span>
+        git add -A
+        git commit -m <span style="color:#e6db74">&#34;Update blog posts&#34;</span> || exit <span style="color:#ae81ff">0</span>
+        git push
+</code></pre></div><p>We <code>diff</code> the two files. If they&rsquo;ve changed, then we set a configuration for our committer bot. Here, I&rsquo;ve just set it to some random information - this is what&rsquo;ll end up in Git history and in GitHub&rsquo;s contribution bar at the top of your repo. Then, as we normally do when committing code, we add all the files, commit them, and push them back to the repository. At this point, our README will have changed live.</p>
+<p>See the full Action <a href="https://github.com/kewbish/kewbish/blob/master/.github/workflows/rss.yml">on my GitHub</a>.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Now, every 6 hours, our Action will run and update our profile README. Hopefully, this was a good introduction to GitHub Actions, and now, you have a shiny new updating README! This was a really fun learning experience for me as well - now, I can be part of the cool GitHub Actions-powered README squad!</p>
+<p>I&rsquo;m still working through the Web track for CS50 - finished Finance in a weekend, and am planning on doing the Webpage bit this weekend if I can find the time. Finance, I figure, requires less brainpower and bikeshedding, so I&rsquo;ll be procrastinating and fiddling with Webpage a bit later. Been also working a little on <a href="https://diveintoht.ml">diveintoht.ml</a> by implementing Vue Router and some code splitting bits. Learning!</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>I think that&rsquo;s what the cool design kids call it anyhow. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+                <p class="signature">- Yours, Kewbish</p>
+            </div>
+        </div>
+        <br><p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>
