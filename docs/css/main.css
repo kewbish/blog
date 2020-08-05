@@ -17,29 +17,23 @@
     text-decoration: none;
 }
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 10px;
+  height: 10px;
 }
 ::-webkit-scrollbar-button {
   width: 0px;
   height: 0px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #696969;
+  background: #8c8c8c;
   border-radius: 50px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #8c8c8c;
-}
-::-webkit-scrollbar-thumb:active {
-  background: #ffb451;
-}
 ::-webkit-scrollbar-track {
-  background: #1e1e1e;
+  background: var(--accent-two);
   border-radius: 0px;
 }
 ::-webkit-scrollbar-track:hover ::-webkit-scrollbar-track:active {
-  background: #333333;
+    background: var(--accent-two);
 }
 ::-webkit-scrollbar-corner {
   background: transparent;
@@ -101,7 +95,7 @@ ul{
 pre{
     padding: 3.5%;
     margin: 2% 0;
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 .hero{
     text-align: center;
