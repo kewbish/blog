@@ -71,8 +71,9 @@ ul{
     padding-left: 2%;
 }
 pre{
-    padding: 2%;
-    margin: 1% 0;
+    padding: 3.5%;
+    margin: 2% 0;
+    overflow-x: scroll;
 }
 .hero{
     text-align: center;
@@ -146,7 +147,7 @@ pre{
         margin: 1% 0;
     }
     .single-main-split{
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
     .single-main-sticky{
         display: none;
