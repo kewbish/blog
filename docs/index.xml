@@ -5,10 +5,19 @@
     <link>https://kewbish.github.io/blog/</link>
     <description>Latest Yours, Kewbish posts</description>
     <generator>Hugo + Yours, Kewbish</generator>
-    <lastBuildDate>Sun, 02 Aug 2020 16:14:31 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 09 Aug 2020 19:39:00 -0700</lastBuildDate>
     
 	<atom:link href="https://kewbish.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CS50: Web Track</title>
+      <link>https://kewbish.github.io/blog/posts/200809/</link>
+      <pubDate>09 Aug 2020</pubDate>
+      
+      <guid>https://kewbish.github.io/blog/posts/200809/</guid>
+      <description>On my travels on the Web Track.</description>
+    </item>
     
     <item>
       <title>Automating READMEs</title>

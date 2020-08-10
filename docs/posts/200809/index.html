@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS50: Web Track</title>
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+
+<body>
+    <section>
+        <p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
+        <h1>CS50: Web Track</h1>
+        <p>Published 09 August 2020 at <a href="https://kewbish.github.io/blog/posts/200809/">Yours, Kewbish</a>.</p>
+        
+        <div class="single-main-split">
+            <div class="single-main-sticky">
+                <p style="margin-top: 20px;">Yours, Kewbish</p>
+<p><a href="https://kewbish.github.io/blog">&lt; Back to home</a><br>
+    <a href="https://kewbish.github.io">&gt; Visit main site</a><br>
+    <a href="#top">^ Back to top</a>
+</p>
+            </div>
+            <div>
+                <h2 id="introduction">Introduction</h2>
+<p><em>This post is going to be shorter than normal. I may or may not have forgotten to take proper notes for most of this track except Flask.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></em></p>
+<p>Web track, check. Homepage and Finance were pretty fun, and now, we have the final project ahead. This week (or track, I suppose) went through web technologies, going through HTML / CSS / JS and Flask. I&rsquo;ve been planning on learning Flask for a while<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, and this was a great opportunity to try to use it! I know I said that Week 5 was the week I&rsquo;d been looking forward to the most, but it was genuinely really nice this week to finally work on something I have experience with.</p>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>Each machine has an IP
+<ul>
+<li>used to use IPv4 -&gt; 32 bit addresses</li>
+<li>now IPv6 -&gt; 128 bit addresses</li>
+<li>IPv4 overflowed (too many devices)</li>
+</ul>
+</li>
+<li>HTTP -&gt; protocol to transfer information
+<ul>
+<li>HyperText Transfer Protocol</li>
+</ul>
+</li>
+<li>DNS -&gt; maps domain numbers to servers that can resolve that domain</li>
+<li>Response codes -&gt; return of request</li>
+<li>Flask -&gt; microframework to make web apps w/ Python</li>
+<li>Flask templates -&gt; <code>render_template()</code>
+<ul>
+<li>allows us to interpolate variables, extend layouts</li>
+</ul>
+</li>
+<li>Flask templating uses Jinja syntax
+<ul>
+<li>Like Vue mustache syntax, but with % signs</li>
+<li>specific end blocks for for and if</li>
+</ul>
+</li>
+<li><code>request.args.get()</code> is useful for getting form inputs
+<ul>
+<li>remember to sanitize input and make sure that inputs exist
+<ul>
+<li>otherwise, return error</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>In Finance, we make separate conditions to return different templates if post/get</li>
+<li>use Flask sessions to maintain data like user cookies, etc.
+<ul>
+<li>otherwise, use the sqlite database
+<ul>
+<li>run queries with db.execute</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="problems">Problems</h2>
+<p>I did Finance first, because I thought that I wanted to redesign my own site for Homepage (more about that later). I found their todo-list structure of teaching / explaining what to do. This was actually one of the reasons I quit Under the GUI (coding extracurricular I was doing when I was a smol child) - too much spoon feeding and not enough self-research.</p>
+<p>Giving freedom to implement however we liked was a good idea in terms of implementation and research, but this comes at the cost of testing. (Or maybe this just wasn&rsquo;t in the CS50 check50 library and they didn&rsquo;t want to add a bunch of overhead for one problem set check) This might have been an interesting opportunity to explain TDD (hmm, another thing that I <em>should</em> learn) or even just explaining what automated testing was.</p>
+<p>When I decided it was finally time to try to attempt redesigning my website, I quickly realized that it&rsquo;d take ages, especially since I don&rsquo;t have any ideas right now. The requirements were a 4-page website, so I just slapped an extra page (that looks nothing like the rest of my site because it&rsquo;s entirely built with Bootstrap) onto my <a href="https://kewbish.github.io">current site</a>. For the JS requirement, I worked in one of those console header things; y&rsquo;know, <code>console.log()</code>s in most big sites that remind you to apply for their jobs.</p>
+<p>It&rsquo;s pretty simple, but I was feeling tired. Which is another discussion point - I think Homepage was probably the only big problem in CS50 where I didn&rsquo;t really feel challenged, besides the Python ones. Even with the Python ones I was trying to time myself in a self-run programming contest, whereas here I was just trying to speedrun. Despite this week&rsquo;s relative apathy, I have a scheme for the final project. (Which will also probably take a while, so we&rsquo;ll have some filler content in between.)</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I can&rsquo;t believe I&rsquo;m already almost through with CS50 - as of writing this, I think it&rsquo;s only been a month and a couple days. I&rsquo;m surprised how much I managed to speedrun, and how much I managed to learn in the meantime. It&rsquo;s been an great time<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>, and I might consider doing the Web Programming course as well. (Or maybe not. We&rsquo;ll see.) Time to start brainstorming for a final project (I have too many ideas and I have a feeling I&rsquo;m going to go with none of the above) - hopefully it&rsquo;ll turn out interesting.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Is it extremely Canadian of me to want to apologize? <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Why do I always feel the need to go with the quirkiest framework possible? <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>And other phrases I&rsquo;ve directly copied from my GCI experience post. <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+                <p class="signature">- Yours, Kewbish</p>
+            </div>
+        </div>
+        <br><p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>
