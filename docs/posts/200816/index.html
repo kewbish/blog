@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS50: The End</title>
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+
+<body>
+    <section>
+        <p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
+        <h1>CS50: The End</h1>
+        <p>Published 16 August 2020 at <a href="https://kewbish.github.io/blog/posts/200816/">Yours, Kewbish</a>.</p>
+        
+        <div class="single-main-split">
+            <div class="single-main-sticky">
+                <p style="margin-top: 20px;">Yours, Kewbish</p>
+<p><a href="https://kewbish.github.io/blog">&lt; Back to home</a><br>
+    <a href="https://kewbish.github.io">&gt; Visit main site</a><br>
+    <a href="#top">^ Back to top</a>
+</p>
+            </div>
+            <div>
+                <h2 id="introduction">Introduction</h2>
+<p>And finally, after one and a half-ish months, I&rsquo;m done CS50! From the <a href="https://kewbish.github.io/blog/posts/200621/">very first blog post</a> til now, I&rsquo;ve been enjoying documenting my progress and learning, and it&rsquo;ll be a fun read to reference back to in a couple of years to see how I&rsquo;ve built off this knowledge.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> This last week, I&rsquo;ve been working on my final project, and here, I&rsquo;ll be going through that, along with my thoughts and reflections on the course and experience as a whole.</p>
+<h2 id="final-project">Final Project</h2>
+<p>My final project was a Chrome extension that added Web Monetization capabilities to GitHub. For context, Web Monetization is a proposed browser API that&rsquo;ll make it easy for developers and content creators to monetize their browser work. It works by streaming small micropayments over time to a payment pointer, specified by the creator. This pointer is located in a meta tag with the name <code>monetization</code>, and while this API hasn&rsquo;t officially been implemented in any major browsers, you can read more about it <a href="https://webmonetization.org/">here</a>.</p>
+<p>Recently, there was also a <a href="https://dev.to/devteam/announcing-the-grant-for-the-web-hackathon-on-dev-3kd1">Dev.to hackathon</a> where Coil, Creative Commons, and Mozilla were calling for project proposals for their grants. I participated in this hackathon, and my project was an implementation of revenue sharing with payment pointers. Essentially, this implemented a custom HTML tag that had an attribute of an array of payment pointers, and my library, <a href="https://github.com/kewbish/revshare">revshare.js</a> made it easy for devs to add a probabilistic pointer choice for the payments to be streamed to.</p>
+<p>Fast forward a couple months - to this week, in fact. I was looking for a CS50 project, and after brainstorming a couple random projects, a colleague suggested &lsquo;Revshare.js for GitHub&rsquo;. I immediately liked the idea - it was relatively simple to implement, would teach me more about GitHub&rsquo;s GraphQL API and Chrome extensions, and I saw it as a logical extension of the earlier hackathon project. So with that - I jumped into creating the extension.</p>
+<h2 id="features">Features</h2>
+<p>The extension&rsquo;s pretty simple, but has three-ish main features.</p>
+<p>One, it goes through the repository (through a check to see if you&rsquo;re on a github.com/*/* domain) and looks for a Sponsor button through some questionably implemented DOM checks. If found, it looks for the link to the fragment HTML, which I then scrape and select all the links, through more sketchy queries. Once I&rsquo;ve retrieved all the links, I check if each link begins with a dollar sign, which is the syntax for a payment pointer. If that pointer&rsquo;s found, or if there are multiples, it chooses one randomly to add to the head of the page itself. With Coil, the extension then begins streaming payments to the payment pointer.</p>
+<p>Two, it adds a <code>starsOnly</code> flag to Chrome&rsquo;s storage. If selected, it&rsquo;ll check that the repository is starred before inserting the monetization tag. If it&rsquo;s selected, and the repo isn&rsquo;t starred, then too bad - the repo owner won&rsquo;t be able to get any monetization. This is accomplished through some quite questionable queries to the GitHub links at the top of each repo.</p>
+<p>Three, it adds a bunch of checks through each repository&rsquo;s dependencies, looking for the same funding links and $-indicated wallet pointers. If they&rsquo;re found, the extension performs another random selection between the existing repository funding pointer and these new links. It&rsquo;s a roughly 50/50 split between repository creator / owner (i.e. original funding pointer from repository itself) and a random dependency chosen from the list of valid wallet pointers found in each dependency&rsquo;s links. This is pretty cool, because a lot of repositories and dependencies are built for dev-only use, and they don&rsquo;t get a lot of love from supporters. We can even look at stars between a popular Python web microframework Flask and its dependency Jinja. Flask has 51.7k stars, and Jinja a meagre 7.2k in comparison. Given a similar percentage of starwatchers / sponsors, Jinja would get a lot less funding - though both libraries are equally important<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>I found it really fun to learn a bit more JS (it&rsquo;s not <em>as</em> painful as it&rsquo;s made out to be, used in the appropriate contexts) and do a bit of DOM engineering. I was very intrigued at the little performance things that GitHub added, like only loading funding links when the button is hovered over, and loading both starred/unstarred versions of the top bar and switching between them client side (I believe). These little tricks were definitely annoying, but in the end, they probably make the GitHub website a ton faster, and hey, I eventually found ways around them. (And in the future, I&rsquo;ll be sure to use the same bypassing techniques I used, like getting fragment URLs instead of trying to force a button click, when I&rsquo;m trying to manipulate something else.)</p>
+<h2 id="cs50-experience">CS50 Experience</h2>
+<p>I found the first few weeks of CS50 extremely informative. Going from someone who&rsquo;d basically only touched Python, it was sometimes difficult to understand lower-level details like pointers and such, but (while I&rsquo;m still an extreme beginner and probably can&rsquo;t do much more complicated than Problem Set 5) it was great for what I was taking the course for: data structures, algorithms, and more low level knowledge.</p>
+<p>However, I found the latter half of CS50 kind of glossed over a bunch of technologies instead of really diving deep into one for the entire time. I wouldn&rsquo;t have minded as much if it was just C / Python and we went equally (or not) deep into both. The way they have it now, we&rsquo;re just speedrunning a bunch of things that are slightly related but not entirely, and slapping them all together. I would have loved to spend more time with SQL and Flask - but then again, CS50 is an <em>intro</em> to programming, not a deep dive into whatever.</p>
+<p>I guess there wasn&rsquo;t that much of an overlap between my initial purpose for taking CS50 and what it ended up being. It might have been due to the fact that I&rsquo;ve already done Python and Web, really, but I ended up just speedrunning most of the latter half of the course. I would have enjoyed going into more DSA in C, for example, but that wouldn&rsquo;t have really helped newbie programmers, I suppose.</p>
+<p>In the end, if you gave me a magic time machine, I would still have taken CS50, but maybe dropped after the first few weeks. I found it a great experience, and nothing&rsquo;s perfect. Taking a Python DSA (or even just C DSA) course, and then taking a few weeks to do a proper web project and learn SQL / Flask might have been a more beneficial route for me, but CS50 also gave me a lot of motivation. Look, a shiny <em>Harvard</em> certificate. Maybe the feeling of actually taking a class and getting that Harvard clickbait helped me through it. I don&rsquo;t know - but I&rsquo;ll be doing more research and more carefully considering any MOOCs / courses I take in the future.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>As I write this, I realize that I only have two (three? four? depends on when the school system decides to start, but so far I think it&rsquo;s three?) weeks of summer left. CS50 + summer courses + random projects made the time pass a lot quicker than I thought it did, and as I look back, I don&rsquo;t think I took that much time for &lsquo;relaxation&rsquo; really. Then again, coding is kind of my &lsquo;relaxation&rsquo; thing, so maybe in a way I&rsquo;ve done a lot more relaxation than it looks like I have.</p>
+<p>I&rsquo;m looking forward to <a href="https://hackthe6ix.com/">Hack the 6ix</a> in a week, and then writing and finishing up some summer work for school for the rest of summer. Maybe I&rsquo;ll release Revshare for GitHub on the Extension store if I feel like it, and maybe I&rsquo;ll work on starting a bigger project. One thing at a time though - time to add CS50 to my list of Licenses and Certifications on LinkedIn!</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Which hopefully, I have. But then again, who knows what I&rsquo;ll be into in a few years. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Points nearly directly ripped from VC discussions by aforementioned colleague who provided idea, who will not be named for privacy (yes, I&rsquo;m looking at all you classmates who I <em>know</em> will stalk anyone I so much as mention in passing on this blog.) reasons. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+                <p class="signature">- Yours, Kewbish</p>
+            </div>
+        </div>
+        <br><p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>
