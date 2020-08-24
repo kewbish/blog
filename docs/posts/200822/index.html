@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Experience at HT6</title>
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+
+<body>
+    <section>
+        <p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
+        <h1>My Experience at HT6</h1>
+        <p>Published 23 August 2020 at <a href="https://kewbish.github.io/blog/posts/200822/">Yours, Kewbish</a>.</p>
+        
+        <div class="single-main-split">
+            <div class="single-main-sticky">
+                <p style="margin-top: 20px;">Yours, Kewbish</p>
+<p><a href="https://kewbish.github.io/blog">&lt; Back to home</a><br>
+    <a href="https://kewbish.github.io">&gt; Visit main site</a><br>
+    <a href="#top">^ Back to top</a>
+</p>
+            </div>
+            <div>
+                <h2 id="introduction">Introduction</h2>
+<p>A couple hours ago, Hack The 6ix had their closing ceremony, and finished 36 (and a bit-ish) hours of hacking away. Hack The 6ix markets itself as Toronto&rsquo;s biggest summer hackathon (evidently, it wasn&rsquo;t in person), and it was an amazing experience! I learned a lot of things regarding JavaScript and OAuth, and did a lot of classic Kewbish speedrunning in the meantime. HT6 is supposed to be 36 hours long, but I happened to be asleep for roundabout 20 hours of the entire thing, so I didn&rsquo;t have time to complete an elaborate project. That&rsquo;s the spirit of most hackathons anyhow - short and sweet. I had a lot of fun<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, and this blog post&rsquo;ll be a story of the 16 remaining hours of HT6.</p>
+<h2 id="the-project">The Project</h2>
+<p>Before I launch into my chronicle of HT6, I may as well describe my project briefly. In the beginning, it was supposed to be a one-click (but customizable) solution to get Hugo pages on GitHub and published on Netlify as well. The template&rsquo;d include NetlifyCMS, a bunch of variables that can be tweaked (like all the colours, fonts, base images), and a script to automate deploys. I was supposed to get a login page up with Netlify and GitHub tokens, and then automatically create a repo and OAuth app in GitHub to pass into Netlify for automatic CMS and site generation.</p>
+<p>However, it ended up being more on the GitHub side: didn&rsquo;t have time to integrate the Netlify. In the end, I created a GitHub action to replace all the variables and just have it set up for publication on Netlify without actually creating the site on Netlify for them. The app<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> forks a template from my GitHub and runs a Python script to replace the variables. Very hacky, not very stable and probably doesn&rsquo;t work properly, given that you have to initiate workflows from forked repos manually. But then again: <em>it&rsquo;s a hackathon project</em> and <em>it&rsquo;s a feature not a bug</em>.</p>
+<h2 id="day-one">Day One</h2>
+<p>HT6 started at 6PM for me (I was eating dinner so I already missed out on like thirty minutes oops), and for the first night, I just spent time reading through GitHub and Netlify docs to obtain various OAuth tokens. I ran into a bunch of issues because I didn&rsquo;t know how to properly use fetch (if you&rsquo;re the MLH recruiter reading through my blog, I can assure you I actually <em>do</em> know how to use fetch, I just blanked a bunch of times during the hackathon; I was very tired, please still consider me). First, I messed up the Authorization headers, and then I had a bit of an issue exchanging tokens on the Netlify side. In this respect, I actually think that Netlify&rsquo;s docs (and forums) were a bit more useful - the GitHub OAuth issue took ages and ages to figure out, while the Netlify one at least showed up on the first page of Google search results.</p>
+<h2 id="day-two">Day Two</h2>
+<p>I woke up normally early, but didn&rsquo;t start working until quite late - 800. (I&rsquo;d gone to sleep at a reasonable (read: 2130) hour - more time lost!) In the morning, I worked on setting up the customization form, which was challenging but still docs- and Google-able. Then, I started trying to get all the data into a bunch of API requests to start generating the template and hooking it up to GitHub&rsquo;s and Netlify&rsquo;s APIs.</p>
+<p>The OAuth issue I was talking about earlier was that GitHub&rsquo;s <a href="https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow">OAuth web flow</a> doesn&rsquo;t actually support client-only exchanging for tokens. I&rsquo;m not sure if this is actually somewhere in the fine print or the OAuth docs that I just missed, but I ended up wasting a lot of time trying to debug a request that wouldn&rsquo;t work.</p>
+<p>Luckily, the power of open source came in clutch: there was a repo for that! <a href="https://github.com/prose/gatekeeper">prose/gatekeeper</a> provides an easily Heroku-deployable pre-configured app that I could use to exchange for tokens instead! If not for this, I would have wasted infinitely more time trying to set a server up and debugging that instead of properly working with my app (which got scope-chopped as is). I really don&rsquo;t understand why GitHub won&rsquo;t let client side apps call the API, and not even making it extremely clear in docs. Very annoying.</p>
+<p>Then, after setting that gatekeeper instance up and managing to finally get a token, I started trying to pass the data to GitHub to copy in. The way I approached making a copy of a template was forking the repo from my GitHub, then trying to edit all the variables. By noon, I&rsquo;d gotten the customization form to properly work, with nicely configured defaults, and I was planning to get the repos variable changing implemented right after lunch.</p>
+<p>But then - I didn&rsquo;t. After lunch, I spent two hours trying to get a file&rsquo;s contents, replace a variable with the form data, and then POSTing a new page. I managed to get the contents fine, and managed to replace the variables fine. However, I had a lot of issues with trying to POST the new file contents back into the repository. It was returning a 404 not-found error - funny, because I&rsquo;d already authorized my OAuth app with the scopes needed, according to the docs. After maybe an hour retrying the same request over and over again, I took my token from my app&rsquo;s storage, and tried making a request with <del>Postman</del> <a href="https://hoppscotch.io/">Hoppscotch</a>. The weird thing? It worked fine.</p>
+<p>Now, long story short (it was a very long story, mind you), I ended up finally just trying to copy the generated fetch request out of Hoppscotch itself, and there was my issue. (Again, MLH recruiter, I promise I normally remember these things.) I&rsquo;d forgotten to wrap my body in <code>JSON.stringify</code>. (Feel free to facepalm on my behalf.) With that, it worked, but by then, I&rsquo;d already moved onto approach #2.</p>
+<p>Approach #2 was, instead of getting, replacing, and posting the correct content (variable replaced) back to the GitHub repo, I&rsquo;d just make a Python script to quickly activate with an Action. I have some experience with this (<a href="https://kewbish.github.io/blog/posts/200802/">from my profile README</a>, perhaps), and it was decently easy to implement. By then, I&rsquo;d already cut the Netlify automation (generating the site, adding the OAuth client ID and secret, and setting build parameters) out from the project scope. Hopefully, I&rsquo;ll end up being able to work on that in the future.</p>
+<p>By then, it was pretty late in the day. I ended up just writing a simple landing page, and cleaning up some of the UI. I removed the Netlify token and authentication logic, and just did some polishing. I wrote a simple README, took a couple screenshots, recorded a demo video, uploaded all my submission data, and sent it off. (By now, it was maybe 2100. Yeah, it was early. Could I have done more? Probably. Did I have the energy to? Probably, but I didn&rsquo;t really feel like staying up late for a hackathon).</p>
+<h2 id="reflections">Reflections</h2>
+<p>You might notice that I didn&rsquo;t attend any meetups. That was true (I did spend some time in the networking level of the event) - and I probably should have taken more time to explore and network, actually. Hackathons are probably the best way to meet like-minded people outside of proper jobs and conferences. However, if I <em>did</em> go out to a bunch of events, I wouldn&rsquo;t have any time to work on the hack. That&rsquo;s an aspect of hackathons that I&rsquo;m not sure if I like: the balance between networking, events, fun time, and work. I&rsquo;m not sure whether I&rsquo;d value a proper project more, or a couple workshops.</p>
+<p>And as well, this was the first short-term hackathon that I&rsquo;ve done. (Does the Dev.to hackathon count?) Anyhow, this was the first very-short-term-panic-speedrun session that I attended, and I&rsquo;d say it was a pretty good experience. Learning to get a project from 0 to somewhere in a very limited amount of time (which is even more limited when you value sleep instead of projects) is valuable, especially learning how to prioritize features and come up with a plan to work. For me, I&rsquo;d written down a list of things I needed to do and attached them to time chunks I&rsquo;d work. Managing that, as well as learning new things, was pretty fun. However, I don&rsquo;t think I want to constantly do a bunch of hackathons - they promote a very short-term, quick churn, small project mindset that I&rsquo;d like to turn away from. I&rsquo;ve done a lot of small projects in the past, and I&rsquo;d like to get into a bigger, longer-term, more impressive project to dedicate myself to in the future.</p>
+<p>Anyhow, here are my three biggest takeaways and things I&rsquo;d like to do next hackathon:</p>
+<ul>
+<li>network more! Set aside some time to go around sponsor booths and really connect.</li>
+<li>limit scope - be realistic with what I can do, and then be more realistic and cut some things.</li>
+<li>stringify my request bodies. I&rsquo;m only half joking.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>HT6 was a tiring, but engaging hackathon. In the end, I had fun - that&rsquo;s all that matters.<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> Hackathons are really fun, but I think I&rsquo;m too tired right now to do another 36 / 48 / 72 hour hackathon anytime in the near future. (At least a week, please.)</p>
+<p>Right now, I&rsquo;m going to finally finish up Revshare.js for GitHub, maybe release it, and then actually solidify a project I&rsquo;d like to work on during school. Oh, and maybe play a little Among Us. Solid game, and I need to recharge from speedrunning a project in effectively 16 hours. Might spend more time working on private repos, so don&rsquo;t expect to see much activity. We&rsquo;ll see.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>That was a joke; JavaScript and OAuth APIs are very painful to write, debug, and interact with. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>By the way, the app&rsquo;s called Obviate (why? I was doing Wordly Wise and had lesson review words stuck in my head.), and if you&rsquo;ve taken the time to actually read through all these footnotes, you get a <a href="https://devpost.com/software/obviate-src">special link to my submission</a>. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>Shoutout to that guy who gave me career advice, the people who gave me resume help, the mentors who jumped in to help debug the OAuth, and the people in Pwnzorz that provided me with quality background noise and entertainment. <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+                <p class="signature">- Yours, Kewbish</p>
+            </div>
+        </div>
+        <br><p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>

@@ -5,10 +5,19 @@
     <link>https://kewbish.github.io/blog/posts/</link>
     <description>Latest Yours, Kewbish posts</description>
     <generator>Hugo + Yours, Kewbish</generator>
-    <lastBuildDate>Sun, 16 Aug 2020 19:51:39 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 23 Aug 2020 19:50:33 -0700</lastBuildDate>
     
 	<atom:link href="https://kewbish.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>My Experience at HT6</title>
+      <link>https://kewbish.github.io/blog/posts/200822/</link>
+      <pubDate>23 Aug 2020</pubDate>
+      
+      <guid>https://kewbish.github.io/blog/posts/200822/</guid>
+      <description>On my battles with JSON.stringify().</description>
+    </item>
     
     <item>
       <title>CS50: The End</title>
