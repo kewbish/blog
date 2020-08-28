@@ -7,7 +7,7 @@ I've been looking into static site generators for a while, and I've seen Jekyll 
 This blog also features:
 - An RSS feed
 - The beginnings of a CD loop
-- A custom Hugo theme, created with Go's templating libraries
+- A custom Hugo theme
 
 ## Theme Usage
 This website operates on a custom handwritten Hugo theme.  
