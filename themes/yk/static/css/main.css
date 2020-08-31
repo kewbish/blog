@@ -81,7 +81,8 @@ strong{
 }
 img{
     display: block;
-    width: 100%;
+    width: auto;
+    max-width: 100%;
 }
 ol{
     list-style-position: inside;
