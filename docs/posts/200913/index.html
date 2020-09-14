@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vim Colourschemes</title>
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+
+<body>
+    <section>
+        <p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
+        <h1>Vim Colourschemes</h1>
+        <p>Published 13 September 2020 at <a href="https://kewbish.github.io/blog/posts/200913/">Yours, Kewbish</a>.</p>
+        
+        <div class="single-main-split">
+            <div class="single-main-sticky">
+                <p style="margin-top: 20px;">Yours, Kewbish</p>
+<p><a href="https://kewbish.github.io/blog">&lt; Back to home</a><br>
+    <a href="https://kewbish.github.io">&gt; Visit main site</a><br>
+    <a href="#top">^ Back to top</a>
+</p>
+            </div>
+            <div>
+                <h2 id="introduction">Introduction</h2>
+<p>In the middle of getting back to school and trying to redesign my website<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, I&rsquo;ve also been spending quite a bit of time in Vim. Since installing Manjaro a couple weeks ago (has it really been that long?), I&rsquo;ve decided to experiment with only programming and doing homework in Vim, instead of VSCode, which was my main text editor before.</p>
+<p>Despite me having to forego several of the nice, housekeeping features of VSCode like linting and autoformat<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, I actually kind of like having such a minimalist environment. I didn&rsquo;t have autocomplete until yesterday (as of time of writing), so that forced me to actually type out every single snippet, instead of just scrolling through VSCode autocomplete popups. I&rsquo;d used Vim before, but not as a main editor. It&rsquo;s been a fun experiment, really.</p>
+<p>With spending 100% of my writing and editing time in Vim also came a slight obsession<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> with customizing things. Looking up random settings to put into my <code>.vimrc</code> was quite fun - I&rsquo;ve managed to do most of what I usually rely on in VSCode anyhow. The Vim wiki really does happen to have everything.</p>
+<p>One of these tweaking points was the colourscheme. (Or <code>colorscheme</code>, according to my vimrc. I use both terms interchangeably out of habit from American / Canadian English, so please make sure you&rsquo;ve spelled things correctly.) I <em>could</em> have just spent two minutes scrolling through default colourschemes, but I didn&rsquo;t like any of the inbuilt ones. Coming from VSCode, I thought it&rsquo;d be nice to have the same colourscheme, so I popped <a href="https://github.com/tomasiser/vim-code-dark">vim-code-dark</a> into my plugins and went about my merry day.</p>
+<p>However, I wasn&rsquo;t quite happy with the colours - it was a bit too colourful for my taste, since the rest of my setup was relatively monochrome anyway. So - I spent some time researching how to change colourschemes. There are a bunch of internet tutorials for building a basic colourscheme, and even a generator for that™️, but I didn&rsquo;t find much about how to tweak an existing one.</p>
+<h2 id="finding-a-colourscheme">Finding a colourscheme</h2>
+<p>After watching several people flip through the endless catelog of <a href="https://vimcolors.com/">vimcolors</a>, I&rsquo;d probably suggest finding a colourscheme that you like ≥90% and tweaking that last 10% yourself. Or if you&rsquo;re planning on just monochroming something, a scheme that has your preferred range of saturation and colour. It&rsquo;ll save you time in customizing and also in finding schemes.</p>
+<h2 id="how-colourschemes-work">How colourschemes work</h2>
+<p>Note: most of this is from reverse engineering vim-code-dark, so probably take this with a grain of salt or two.</p>
+<p>From my trawling of several Vim colourscheme repos, I&rsquo;ve kind of figured out that Vim takes colorschemes from whatever <code>colors/</code> folder your plugin or colourscheme is installed in. I&rsquo;m not entirely sure how Vim-Plug works, but whatever I edited inside <code>.vim/plugged/vim-code-dark/colors</code> happened to show up in my colourscheme, so I <em>assume</em> this is controlled via Vim-Plug and whatever you reference inside your <code>.vimrc</code>.</p>
+<p>Vim also has a bunch of terms regarding the colours that are used for highlighting and styling.</p>
+<ul>
+<li>guifg and guibg: the foreground (text) and background (background of interface) colours for gVim (the GUI version of Vim).</li>
+<li>gui: the text style, which obviously isn&rsquo;t a colour, but it fits in here.</li>
+<li>ctermfg, ctermbg, cterm: the same as the gui equivalents, but for the terminal.</li>
+<li>cterm256: which seems to be cterm but for 256 colour terminals.</li>
+</ul>
+<p>Vim does highlighting and colours with highlighting groups, which are all in <code>:help syntax.txt:</code>, under naming conventions. Here, the syntax is something like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">highlight</span> <span style="color:#a6e22e">groupname</span> <span style="color:#a6e22e">key</span>=<span style="color:#a6e22e">value</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>However, most of this is usually already filled in with whatever colourscheme, so you don&rsquo;t have to worry too much about this.</p>
+<p>Another interesting note is that these <code>ctermfg</code> and <code>cterm256fg</code> (and the others as well) can be aliased, and the entire process made a lot easier with function aliases and things. While going through vim-code-dark, I noticed they were using a custom function, which provides shorthand for assigning fore and background colours. If you&rsquo;re interested, it might look a little like <a href="https://github.com/tomasiser/vim-code-dark/blob/master/colors/codedark.vim#L14">this implementation</a>.</p>
+<h2 id="editing-colours">Editing colours</h2>
+<p>Most colourschemes usually have a bunch of colour definitions, with a long list of <code>let</code> statements somewhere, so go look for those. In vim-code-dark, I had to edit the cterm256 definitions. The guifg parts get set with hexadecimal codes, it seems, but the rest of the colours seem to be from the 256 terminal colour chart. You can see the list <a href="https://jonasjacek.github.io/colors/">on this cheat sheet</a>.</p>
+<p>What I did here was essentially look up each colour, copy-paste its hex code into Google&rsquo;s colour picker, then choose an appropriately saturated grey. (And yes, the whole colourscheme is grey. I might want to add some colour pastels but for now it works fine. Not on dotfiles yet - I need to set those up properly as well.)</p>
+<p>The default color definition bit looked something like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">s</span>:<span style="color:#a6e22e">cdLeftDark</span> = {<span style="color:#e6db74">&#39;gui&#39;</span>: <span style="color:#e6db74">&#39;#252526&#39;</span>, <span style="color:#e6db74">&#39;cterm&#39;</span>: <span style="color:#a6e22e">s</span>:<span style="color:#a6e22e">cterm01</span>, <span style="color:#e6db74">&#39;cterm256&#39;</span>: <span style="color:#e6db74">&#39;235&#39;</span>}<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>and I just edited the cterm256 mapping. (Don&rsquo;t use gVim, but if you&rsquo;re using gVim it&rsquo;s the same, only editing the hex code.)</p>
+<p>Some other schemes I looked at while trying to figure things out just used a bunch of definitions without variables - here, you can probably just do a <code>:%s/whatever/whatever2/g</code>.</p>
+<p>Right now, it looks something like:</p>
+<p><img src="https://i.imgur.com/9F4v0ns.png" alt="My Vim at the moment">
+<em>My Vim at the moment</em>.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I&rsquo;m still going to tweak some of the colours later, but for now, I think that this grey theme&rsquo;s pretty nice. For markdown and writing there aren&rsquo;t a lot of random colours jostling for attention, and when editing proper code it&rsquo;s half decent too. I really don&rsquo;t know why I&rsquo;ve decided to go full greyscale, but I&rsquo;ve also decided to redo my site in greyscale (that&rsquo;ll change soon hopefully once I decide on a nice accent).</p>
+<p>Anyhow, back to tweaking my <code>.vimrc</code> (and definitely not spending too much time doing that).</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Which kind of ended up the same anyway, but I think the fonts and rounded-border elements look slightly more modern and less bland. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>I figured out <a href="https://github.com/neoclide/coc.nvim">Coc</a> recently, which was a rollercoaster ride in and of itself. A blog post to come soon - I&rsquo;ve decided to milk all my Vim learning experiences for blog content anyhow. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>I promise it wasn&rsquo;t that much time. <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+                <p class="signature">- Yours, Kewbish</p>
+            </div>
+        </div>
+        <br><p><a href="../">&lt; Moonwalk Back - More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>
