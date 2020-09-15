@@ -1,18 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
-*{
+/* general */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz');*{
     margin: 0;
     padding: 0;
 }
 :root{
-    --background-color: #1e1e1e;
-    --header-color: #000000;
-    --text-color: #ffffff;
-    --accent-color: #ffb451;
-    --accent-two: #323232;
-    --grid-columns: minmax(100px, 6fr) minmax(100px, 1fr) minmax(100px, 6fr);
-    --font-one: "Consolas", "Inconsolata", "Courier New", monospace;
-    --font-two: "Source Sans Pro", sans-serif;
+    --main-colour: #1E1E1E;
+    --sub-colour: #323232;
+    --accent-colour: #888888;
+    --grid-columns: 5fr 1fr 5fr;
     scroll-behavior: smooth;
     text-decoration: none;
 }
@@ -29,36 +25,20 @@
   border-radius: 50px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--accent-two);
+  background: var(--sub-colour);
   border-radius: 0px;
 }
 ::-webkit-scrollbar-track:hover ::-webkit-scrollbar-track:active {
-    background: var(--accent-two);
+    background: var(--sub-colour);
 }
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
 body{
-    background-color: var(--background-color);
-    color: var(--text-color);
-    font-family: var(--font-one);
+    background-color: var(--main-color);
+    color: white;
+    font-family: Montserrat, sans-serif;
     font-size: 1.2em;
-}
-section:not(.footnotes):not(.hero){
-    padding: 6% 8% 2%;
-}
-h1, h2{
-    font-family: var(--font-two);
-    font-size: 3em;
-    padding-bottom: 2%;
-}
-h2{
-    font-size: 2em;
-    padding: 1% 0 1.5%;
-}
-h3{
-    font-family: var(--font-two);
-    font-size: 1.3em;
 }
 hr{
     margin: 10px 0;
@@ -69,15 +49,15 @@ p{
 }
 a{
     color: var(--text-color);
-    text-decoration: underline var(--accent-color);
-    -webkit-text-decoration: underline var(--accent-color)
+    text-decoration: underline var(--accent-colour);
+    -webkit-text-decoration: underline var(--accent-colour)
 }
 a:hover{
-    color: var(--accent-color);
+    color: var(--accent-colour);
     transition: 0.3s;
 }
 strong{
-    color: var(--accent-color)
+    color: var(--accent-colour)
 }
 img{
     display: block;
@@ -98,31 +78,35 @@ pre{
     margin: 2% 0;
     overflow-x: auto;
 }
-.hero{
-    text-align: center;
-    margin: 0 auto;
-    height: 100vh;
-    width: 80vw;
-    padding: 3% 0 0%;
+/* titles */
+.title {
+    font-size: 7.5em;
+    font-weight: 700;
+    margin-left: -1%;
 }
-.hero-heading{
-    font-size: 10vw;
-    margin: -1vw 0;
-    padding: 0;
+.subtitle {
+    font-size: 5em;
+    margin: 1% 0 1% -1%;
 }
-.single-main-split{
-    display: grid;
-    grid-template-columns: 10% 90%;
-    grid-column-gap: max(1%, 25px);
+.sub-2 {
+    font-size: 3em;
+    margin: 2% 0;
 }
-.single-main-sticky{
-    position: sticky;
-    top: 20%;
-    height: 100px;
+/* containers */
+.cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.single-main-split>div>p:not(.signature){
-    text-indent: 3.5%;
+.page {
+    padding: 4.5% 0;
+    background: linear-gradient(#1E1E1E55, #1E1E1E55), url("../Back.svg") repeat-y;
+    background-size: 100% auto;
 }
+.main {
+    width: 75%;
+}
+/* grid */
 .grid{
     display: grid;
     grid-template-columns: var(--grid-columns);
@@ -133,6 +117,7 @@ pre{
 .grid-element{
     background-color: var(--accent-two);
     padding: 2% 3.5%;
+    border-radius: 7px;
 }
 .grid-element:nth-child(4n+2){
     grid-column: 2 / span 2;
@@ -143,39 +128,20 @@ pre{
 .grid-element:nth-last-child(1):nth-child(odd){
     grid-column: 1 / span 3;
 }
-.year{
-    font-family: var(--font-one);
-    font-size: 2.2em;
-    padding: 0.5% 0;
-}
+/* type */
 .signature{
     font-family: monospace;
     font-size: 20px;
-    text-indent: 0px;
     margin: 10px 0;
 }   
+/* media */
 @media all and (max-width: 768px){
     :root{
         --grid-columns: 1fr;
-    }
-    .hero{
-        padding-top: 5%;
     }
     .grid-element:nth-child(4n+2),
     .grid-element:nth-child(4n+3),
     .grid-element:nth-last-child(1):nth-child(odd){
         grid-column: auto;
-    }
-    h1, h2{
-        margin: 1% 0;
-    }
-    .single-main-split{
-        grid-template-columns: minmax(0, 1fr);
-    }
-    .single-main-sticky{
-        display: none;
-    }
-    .single-main-split * p:not(.signature){
-        text-indent: 5%;
     }
 }
