@@ -95,13 +95,15 @@ pre{
     background-position: 0% 47%;
     height: 100vh;
     width: 100vw;
-    display: flex; // make us of Flexbox
+    display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
 }
 .index-main {
     width: 60%;
     margin: auto;
+    text-align: center;
+    padding: 5% 0;
 }
 .writing p {
     text-indent: 3%;
@@ -112,12 +114,15 @@ pre{
     justify-content: center;
 }
 .page {
-    padding: 4.5% 0;
+    padding: 4.5% 0 2.5%;
     background: linear-gradient(#1E1E1E55, #1E1E1E55), url("../Back.svg") repeat-y;
     background-size: 100% auto;
 }
 .main {
     width: 75%;
+}
+.main-2 {
+    width: 70%;
 }
 /* grid */
 .grid{
@@ -132,6 +137,9 @@ pre{
     padding: 2% 3.5%;
     border-radius: 7px;
 }
+.grid-element p {
+    font-size: 0.8em;
+}
 .grid-element:nth-child(4n+2){
     grid-column: 2 / span 2;
 }
@@ -141,10 +149,16 @@ pre{
 .grid-element:nth-last-child(1):nth-child(odd){
     grid-column: 1 / span 3;
 }
-/* media */
+/* mobile */
 @media all and (max-width: 768px){
     :root{
         --grid-columns: 1fr;
+    }
+    .subtitle {
+        font-size: 3.5em;
+    }
+    .sub-2 {
+        font-size: 2.3em;
     }
     .grid-element:nth-child(4n+2),
     .grid-element:nth-child(4n+3),
