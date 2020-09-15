@@ -34,8 +34,8 @@
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
-body{
-    background-color: var(--main-color);
+html{
+    background-color: var(--main-colour);
     color: white;
     font-family: Montserrat, sans-serif;
     font-size: 1.2em;
@@ -79,11 +79,6 @@ pre{
     overflow-x: auto;
 }
 /* titles */
-.title {
-    font-size: 7.5em;
-    font-weight: 700;
-    margin-left: -1%;
-}
 .subtitle {
     font-size: 5em;
     margin: 1% 0 1% -1%;
@@ -93,6 +88,20 @@ pre{
     margin: 2% 0;
 }
 /* containers */
+.index {
+    background: url("../Back.svg") center no-repeat;
+    background-size: cover;
+    background-position: 0% 47%;
+    height: 100vh;
+    width: 100vw;
+    display: flex; // make us of Flexbox
+    align-items: center;
+    justify-content: center; 
+}
+.index-main {
+    width: 60%;
+    margin: auto;
+}
 .cont {
     display: flex;
     align-items: center;
@@ -115,7 +124,7 @@ pre{
     padding: 2% 0;
 }
 .grid-element{
-    background-color: var(--accent-two);
+    background-color: var(--sub-colour);
     padding: 2% 3.5%;
     border-radius: 7px;
 }
