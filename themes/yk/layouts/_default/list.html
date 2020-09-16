@@ -16,7 +16,14 @@
             <p>A list of all my thoughts, sorted by most recent.</p>
             <div>
                 {{ range ((where .Site.Pages "Params.series" "post").GroupByDate "2006").Reverse }}
+                {{ $artCount := 0 }}
+                {{ $wordCount := 0 }}
+                {{ range .Pages.ByDate.Reverse }}
+                    {{ $artCount = add $artCount 1 }}
+                    {{ $wordCount = add $wordCount .WordCount }}
+                {{ end }}
                 <h1 class="sub-2" id="{{ .Key }}"><strong>{{ .Key }}</strong></h1>
+                <p>{{ $wordCount }} words - {{ $artCount }} posts. </p>
                 <div class="grid">
                     {{ range .Pages.ByDate.Reverse }}
                     <div class="grid-element">
