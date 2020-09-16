@@ -24,7 +24,14 @@
                 {{ end }}
             </div>
             <div>
-                <p>Yours, Kewbish was intended to be a collection of epistolary essays, but that certainly changed. It's just a collection of infrequent musings now. I'll be collecting my thoughts about my projects and experiences here.</p>
+                {{ $wordCount := 0 }}
+                {{ $articleCount := 0 }}
+                {{ range (where .Site.Pages "Params.series" "post") }}
+                    {{ $words := .WordCount }}
+                    {{ $wordCount = add $wordCount $words }}
+                    {{ $articleCount = add $articleCount 1 }}
+                {{ end }}
+                <p>Yours, Kewbish was intended to be a collection of epistolary essays, but that certainly changed. So far, I've written {{ $wordCount }} words here over {{ $articleCount }} posts - mostly in the form of tech articles, personal stories, and other content.</p>
             </div><br>
         </div>
     </section>
