@@ -5,10 +5,19 @@
     <link>https://kewbish.github.io/blog/</link>
     <description>Latest Yours, Kewbish posts</description>
     <generator>Hugo + Yours, Kewbish</generator>
-    <lastBuildDate>Sun, 20 Sep 2020 19:05:52 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 27 Sep 2020 18:58:30 -0700</lastBuildDate>
     
 	<atom:link href="https://kewbish.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Creating a Vim plugin</title>
+      <link>https://kewbish.github.io/blog/posts/200927/</link>
+      <pubDate>27 Sep 2020</pubDate>
+      
+      <guid>https://kewbish.github.io/blog/posts/200927/</guid>
+      <description>On playing with a little Vimscript.</description>
+    </item>
     
     <item>
       <title>Webdev in Vim</title>

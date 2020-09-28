@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creating a Vim plugin</title>
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+
+<body class="cont page">
+    <section class="main-2">
+        <p><a href="../">&lt; More Posts</a></p>
+        <h1 class="subtitle">Creating a Vim plugin</h1>
+        <p>Published 27 September 2020 at <a href="https://kewbish.github.io/blog/posts/200927/">Yours, Kewbish</a>. 1330 words.</p>
+        
+        <div class="writing">
+            <h2 id="introduction">Introduction</h2>
+<p>This week, we had our first proper English class, and our teacher happened to [re]introduce a series of issues and common phrases that should be replaced for better, more concise writing. This checklist is called <a href="http://web.uvic.ca/~gkblank/Blank's%20Writing%20Quirk%20List.pdf">Dr. Blank&rsquo;s Quirk List</a>, apparently. If you go through the PDF, it&rsquo;s a huge list of things like &lsquo;delete aforementioned&rsquo; and &lsquo;change economically deprived to poor&rsquo;. The thing is, we&rsquo;re going to be <em>graded</em> on how well we conform and utilize this list, so I&quot;m going to have to pay a lot of attention to this list.</p>
+<p>But with all my problems, I decided to overengineer and automate a solution to a problem that didn&rsquo;t really exist.</p>
+<p>Usually, I write my assignments in Markdown in Vim, and later use Pandoc to convert to a Word file if needed for the assignment. Therefore, I thought it&rsquo;d be nice to have a Vim plugin that could highlight and remind me of all the rules, so I wouldn&rsquo;t have to remember each of them. I also kind of just wanted to learn a bit of VimScript (or VimL. I still haven&rsquo;t figured out what it&rsquo;s supposed to be named.), and I thought that a simple highlighting plugin might be a nice, relatively easy introduction to the language<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+<p>Eventually, it expanded to a linting function as well, which essentially copies the original file, replaces any Blank quirks found, and saves the file again. In the interest of making it easier to compare files, I also implemented a Blank diffing command, which lints files and then opens them in Vim&rsquo;s vimdiff mode.</p>
+<h2 id="learning">Learning</h2>
+<p>By the way, if you&rsquo;d like to go through the source of the plugin at any point (it&rsquo;s maybe only 20 lines or so, and it&rsquo;s pretty self-explanatory), it&rsquo;s up on my GitHub at <a href="https://github.com/kewbish/blank.vim">kewbish/blank.vim</a>. Maybe go take a look - or don&rsquo;t (it&rsquo;s quite messy).</p>
+<p>I wrote the plugin in pure VimScript: I didn&rsquo;t feel like attempting to figure out Lua or trying to use a wrapper in some other language. I found the syntax pretty fun - it kind of reminded me of Hugo&rsquo;s templating syntax, which I&rsquo;ve always kind of liked. I found two resources that were extremely helpful throughout this attempt - <a href="https://learnvimscriptthehardway.stevelosh.com/">Steve Losh&rsquo;s tutorial on learning Vimscrip the hard way</a> and, surprisingly, the <a href="https://vim.fandom.com/wiki/Vim_Tips_Wiki">VimTips Wiki</a>. Once I realized that the VimScript I wrote was essentially just the commands I&rsquo;d normally run in the editor, I mostly trawled through the Vim Wiki for any new features or challenges that I faced.</p>
+<h2 id="getting-started">Getting Started</h2>
+<p>I started by just putting a huge list (all on one line, by the way. Vim&rsquo;s highlighting stopped halfway, which speaks to the amount of quirks I would have had to manually go through.) in my vimrc. I figured out that I was supposed to <code>let</code> it to something, and from there, figured out how to run custom commands.</p>
+<p>At first, these commands just printed to the screen, but I needed them to properly do something, so I attached function calls to them. These functions were also empty, so it was time to properly learn VimScript.</p>
+<p>With my past <a href="https://kewbi.sh/blog/posts/200913/">attempts at making a Vim colourscheme</a>, I was somewhat familiar with making a highlight group, so I decided to start figuring out how to highlight all the quirks. The syntax goes something like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">highlight</span> <span style="color:#a6e22e">Blank</span> <span style="color:#a6e22e">ctermfg</span>=<span style="color:#ae81ff">95</span> <span style="color:#a6e22e">cterm</span>=underline<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">syntax</span> <span style="color:#a6e22e">match</span> <span style="color:#a6e22e">Blank</span> <span style="color:#e6db74">/find this/</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">syntax</span> <span style="color:#a6e22e">match</span> <span style="color:#a6e22e">Blank</span> <span style="color:#e6db74">/also this/</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">syntax</span> <span style="color:#a6e22e">match</span> <span style="color:#a6e22e">Blank</span> <span style="color:#e6db74">/this too/</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>Obviously, I wasn&rsquo;t going to type out each of the matches, so I looked into Vim&rsquo;s for loops. I managed to come up with something like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">for</span> <span style="color:#a6e22e">quirk</span> <span style="color:#a6e22e">in</span> <span style="color:#a6e22e">s</span>:<span style="color:#a6e22e">quirks</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">quirkLen</span> = <span style="color:#a6e22e">len</span>(<span style="color:#a6e22e">split</span>(<span style="color:#a6e22e">quirk</span>, <span style="color:#e6db74">&#34; &#34;</span>))<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">quirkLen</span> &gt; <span style="color:#ae81ff">1</span> || <span style="color:#a6e22e">quirk</span> == <span style="color:#e6db74">&#34;ing&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>        <span style="color:#a6e22e">execute</span> <span style="color:#e6db74">&#34;syntax match Blank /&#34;</span>. <span style="color:#a6e22e">quirk</span>. <span style="color:#e6db74">&#34;/&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">else</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>        <span style="color:#a6e22e">execute</span> <span style="color:#e6db74">&#34;syntax keyword Blank &#34;</span>. <span style="color:#a6e22e">quirk</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">endif</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">endfor</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>to check if the quirk was supposed to be highlighted as a keyword or just with regex matching.</p>
+<p>With that, syntax highlighting was pretty much done, but I&rsquo;d realized it&rsquo;d be pretty nice to have a mode that could automatically remove and show the difference between quirks and a quirk-free file (even if that file wouldn&rsquo;t be grammatically correct with lots of missing words, for example). So, I decided to write another function that would copy the file, open it in a split, and then use global find and replace to remove them all.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">for</span> <span style="color:#a6e22e">quirk</span> <span style="color:#a6e22e">in</span> <span style="color:#a6e22e">s</span>:<span style="color:#a6e22e">quirks</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">if</span> !(<span style="color:#a6e22e">quirk</span> == <span style="color:#e6db74">&#34;ing&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>        <span style="color:#a6e22e">execute</span> <span style="color:#e6db74">&#34;%s/\&lt;&#34;</span>. <span style="color:#a6e22e">quirk</span>. <span style="color:#e6db74">&#34;\&gt;//ge&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">endif</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">endfor</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>This above for loop replaces all the quirks, and coupled with statements to construct an unique filename, copy the file to that filename, and splitting it, I managed to get a file that had all the quirks out. I could then open the two in a split view to see where they differed.</p>
+<p>But then I realized - I could probably also automate that splitting, and after some digging, I found <code>diffthis</code>, which was absolutely great. With another function that called the first replacing function, I got a view where every section that had quirks taken out were shown. This definitely helped for me personally, because I was pretty concerned that one day I&rsquo;d miss a spot.</p>
+<p>With these three functions, I figured I may as well try my hand at packaging this into a Vim plugin - maybe it&rsquo;ll be a little useful for someone out there.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<h2 id="plugin-structure">Plugin Structure</h2>
+<p>The first thing I had to figure out after deciding to make the plugin a proper plugin was how to structure the project files, and where Vim-Plug and Vim would be expecting what. Eventually, I realized it had to go something like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">├── autoload
+│   └── blank.vim
+├── doc
+│   ├── blank.txt
+│   └── tags
+├── ftplugin
+│   └── markdown.vim
+├── LICENSE
+└── README.md
+</code></pre></div><p>I&rsquo;m going to go in reverse order:</p>
+<ul>
+<li>README and LICENSE are pretty self explanatory.</li>
+<li>the <code>ftplugin</code> folder contains a <code>markdown.vim</code> file, which will be loaded upon any markdown file being opened in Vim. Because I only write markdown in Vim, that&rsquo;s all I need, though I suppose you could rename this to <code>text.vim</code>.<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> This contains three commands that call the main logic functions. More on that later.</li>
+<li>the <code>doc</code> folder (not docs, as I had initially thought - another five minutes of Googling gone) contains the help file, <code>blank.txt</code>, which has some help tags, which are in <code>tags</code>.</li>
+<li>And finally, the <code>autoload</code> folder. That&rsquo;s the slightly more complicated folder - it contains the main chunk of Blank-quirk-finding logic™. Those functions aren&rsquo;t autoloaded, like the ftplugin folder is, and I have to call them from the commands in <code>markdown.vim</code>.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Usually, I don&rsquo;t like short projects, but this was merely a low-pressure weekend fling, and hopefully, it&rsquo;ll keep my grades up. Also, an opportunity to pretend that I&rsquo;m not procrastinating on work with more work / programming, so that was fun. VimScript is also pretty intuitive, I find - I like the <code>endif</code> and <code>endfor</code> syntax, and the scoping with colons is also fun.</p>
+<p>I find that I&rsquo;ve been writing a lot about Vim recently. Funny - I was just about to say that it&rsquo;d be back to regularly scheduled programming, but I really don&rsquo;t have any specific topics that I even write about. I might post a bit about some other school/tech related things that I&rsquo;ve been doing, or maybe I won&rsquo;t post at all. We&rsquo;ll have to see how busy school gets.</p>
+<p>If I <em>can</em> find time, I&rsquo;ll be doing some cool things with <a href="https://diveintoht.ml">diveintoht.ml</a>, so maybe check that in a couple months or so. We&rsquo;ll see.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Most of my open-ended projects and assignments end up being programming and learning a new framework or scripting language and passing that off as academic work. It&rsquo;s a good system. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Though I highly doubt that anyone whose grade semi-depends on the Blank list also uses Vim. I&rsquo;m pretty sure those are two very small sections that do not have an overlap larger than 1 (myself). <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>Also, as an aside, it&rsquo;s not <code>md.vim</code>, it&rsquo;s <code>markdown.vim</code>. Save yourself the hour it took me to realize. <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+            <p>- Yours, Kewbish</p>
+        </div>
+        <br><p><a href="../">&lt; More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>
