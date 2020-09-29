@@ -5,6 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ .Title }}</title>
+    <meta name="description" content="{{ .Description }}">
+    <meta property="og:title" content="{{ .Title }}">
+    <meta property="og:description" content="{{ .Description }}">
+    <meta property="og:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <meta property="og:url" content="{{ .Permalink }}">
+    <meta property="twitter:title" content="{{ .Title }}">
+    <meta property="twitter:description" content="{{ .Description }}">
+    <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
     <link rel="stylesheet" href="../../css/main.css">
 </head>
 
