@@ -79,6 +79,13 @@ pre{
     margin: 2% 0;
     overflow-x: auto;
 }
+figcaption {
+    text-align: center;
+}
+figure img {
+    margin: auto;
+    border-radius: 7px;
+}
 /* titles */
 .subtitle {
     font-size: 4.3em;
@@ -90,9 +97,8 @@ pre{
 }
 /* containers */
 .index {
-    background: linear-gradient(#1E1E1E88, #1E1E1E88), url("../Back.svg") center no-repeat;
-    background-size: cover;
-    background-position: 0% 47%;
+    background: linear-gradient(#1E1E1E88, #1E1E1E88), url("../Back2.svg") left no-repeat, url("../Back1.svg") right no-repeat;
+    background-size: 15%, 15%;
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -105,7 +111,7 @@ pre{
     text-align: center;
     padding: 5% 0;
 }
-.writing p {
+.writing > p {
     text-indent: 3%;
 }
 .cont {
@@ -115,8 +121,9 @@ pre{
 }
 .page {
     padding: 4.5% 0 2.5%;
-    background: linear-gradient(#1E1E1E88, #1E1E1E88), url("../Back.svg") repeat-y;
-    background-size: 100% auto;
+    background: linear-gradient(#1E1E1E88, #1E1E1E88), url("../Back2.svg") left, url("../Back1.svg") right;
+    background-size: 15%, 15%;
+    background-repeat: repeat-y, repeat-y;
 }
 .main {
     width: 75%;
@@ -132,7 +139,7 @@ pre{
     grid-column-gap: 1em;
     padding: 2% 0;
 }
-.grid-element{
+.grid-element, blockquote{
     background-color: var(--sub-colour);
     padding: 2% 3.5%;
     border-radius: 7px;
