@@ -2,290 +2,290 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Yours, Kewbish</title>
-    <link>https://kewbish.github.io/blog/posts/</link>
+    <link>https://kewbi.sh/blog/posts/</link>
     <description>Latest Yours, Kewbish posts</description>
     <generator>Hugo + Yours, Kewbish</generator>
     <lastBuildDate>Sun, 11 Oct 2020 18:52:59 -0700</lastBuildDate>
     
-	<atom:link href="https://kewbish.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://kewbi.sh/blog/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>A metawrite</title>
-      <link>https://kewbish.github.io/blog/posts/201011/</link>
+      <link>https://kewbi.sh/blog/posts/201011/</link>
       <pubDate>11 Oct 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/201011/</guid>
+      <guid>https://kewbi.sh/blog/posts/201011/</guid>
       <description>On writing about writing (about writing).</description>
     </item>
     
     <item>
       <title>The story of &#39;Kewbish&#39;</title>
-      <link>https://kewbish.github.io/blog/posts/201004/</link>
+      <link>https://kewbi.sh/blog/posts/201004/</link>
       <pubDate>04 Oct 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/201004/</guid>
+      <guid>https://kewbi.sh/blog/posts/201004/</guid>
       <description>On the true meaning of Kewbish.</description>
     </item>
     
     <item>
       <title>Creating a Vim plugin</title>
-      <link>https://kewbish.github.io/blog/posts/200927/</link>
+      <link>https://kewbi.sh/blog/posts/200927/</link>
       <pubDate>27 Sep 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200927/</guid>
+      <guid>https://kewbi.sh/blog/posts/200927/</guid>
       <description>On playing with a little Vimscript.</description>
     </item>
     
     <item>
       <title>Webdev in Vim</title>
-      <link>https://kewbish.github.io/blog/posts/200920/</link>
+      <link>https://kewbi.sh/blog/posts/200920/</link>
       <pubDate>20 Sep 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200920/</guid>
+      <guid>https://kewbi.sh/blog/posts/200920/</guid>
       <description>On Vim for web development.</description>
     </item>
     
     <item>
       <title>Vim Colourschemes</title>
-      <link>https://kewbish.github.io/blog/posts/200913/</link>
+      <link>https://kewbi.sh/blog/posts/200913/</link>
       <pubDate>13 Sep 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200913/</guid>
+      <guid>https://kewbi.sh/blog/posts/200913/</guid>
       <description>On my decision to go monochrome.</description>
     </item>
     
     <item>
       <title>A Manjaro Installation</title>
-      <link>https://kewbish.github.io/blog/posts/200906/</link>
+      <link>https://kewbi.sh/blog/posts/200906/</link>
       <pubDate>06 Sep 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200906/</guid>
+      <guid>https://kewbi.sh/blog/posts/200906/</guid>
       <description>On my shiny new dual-boot system.</description>
     </item>
     
     <item>
       <title>Internet Naming</title>
-      <link>https://kewbish.github.io/blog/posts/200830/</link>
+      <link>https://kewbi.sh/blog/posts/200830/</link>
       <pubDate>30 Aug 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200830/</guid>
+      <guid>https://kewbi.sh/blog/posts/200830/</guid>
       <description>On my week&#39;s musings on names.</description>
     </item>
     
     <item>
       <title>My Experience at HT6</title>
-      <link>https://kewbish.github.io/blog/posts/200822/</link>
+      <link>https://kewbi.sh/blog/posts/200822/</link>
       <pubDate>23 Aug 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200822/</guid>
+      <guid>https://kewbi.sh/blog/posts/200822/</guid>
       <description>On my battles with JSON.stringify().</description>
     </item>
     
     <item>
       <title>CS50: The End</title>
-      <link>https://kewbish.github.io/blog/posts/200816/</link>
+      <link>https://kewbi.sh/blog/posts/200816/</link>
       <pubDate>16 Aug 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200816/</guid>
+      <guid>https://kewbi.sh/blog/posts/200816/</guid>
       <description>On my final thoughts about CS50.</description>
     </item>
     
     <item>
       <title>CS50: Web Track</title>
-      <link>https://kewbish.github.io/blog/posts/200809/</link>
+      <link>https://kewbi.sh/blog/posts/200809/</link>
       <pubDate>09 Aug 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200809/</guid>
+      <guid>https://kewbi.sh/blog/posts/200809/</guid>
       <description>On my travels on the Web Track.</description>
     </item>
     
     <item>
       <title>Automating READMEs</title>
-      <link>https://kewbish.github.io/blog/posts/200802/</link>
+      <link>https://kewbi.sh/blog/posts/200802/</link>
       <pubDate>02 Aug 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200802/</guid>
+      <guid>https://kewbi.sh/blog/posts/200802/</guid>
       <description>On my tinkering with automation.</description>
     </item>
     
     <item>
       <title>CS50: Weeks 6 / 7</title>
-      <link>https://kewbish.github.io/blog/posts/200726/</link>
+      <link>https://kewbi.sh/blog/posts/200726/</link>
       <pubDate>26 Jul 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200726/</guid>
+      <guid>https://kewbi.sh/blog/posts/200726/</guid>
       <description>On Python and selects, inserts, and wheres.</description>
     </item>
     
     <item>
       <title>CS50: Week 5</title>
-      <link>https://kewbish.github.io/blog/posts/200719/</link>
+      <link>https://kewbi.sh/blog/posts/200719/</link>
       <pubDate>19 Jul 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200719/</guid>
+      <guid>https://kewbi.sh/blog/posts/200719/</guid>
       <description>On my final encounters with C.</description>
     </item>
     
     <item>
       <title>CS50: Weeks 3 / 4</title>
-      <link>https://kewbish.github.io/blog/posts/200712/</link>
+      <link>https://kewbi.sh/blog/posts/200712/</link>
       <pubDate>12 Jul 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200712/</guid>
+      <guid>https://kewbi.sh/blog/posts/200712/</guid>
       <description>On my attempts at the infamous Tideman.</description>
     </item>
     
     <item>
       <title>CS50: Week 2</title>
-      <link>https://kewbish.github.io/blog/posts/200709/</link>
+      <link>https://kewbi.sh/blog/posts/200709/</link>
       <pubDate>09 Jul 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200709/</guid>
+      <guid>https://kewbi.sh/blog/posts/200709/</guid>
       <description>On my cryptographic attempts in C.</description>
     </item>
     
     <item>
       <title>CS50: Week 1</title>
-      <link>https://kewbish.github.io/blog/posts/200705/</link>
+      <link>https://kewbi.sh/blog/posts/200705/</link>
       <pubDate>04 Jul 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200705/</guid>
+      <guid>https://kewbi.sh/blog/posts/200705/</guid>
       <description>On my further forays into C.</description>
     </item>
     
     <item>
       <title>CS50: Week 0</title>
-      <link>https://kewbish.github.io/blog/posts/200629/</link>
+      <link>https://kewbi.sh/blog/posts/200629/</link>
       <pubDate>28 Jun 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200629/</guid>
+      <guid>https://kewbi.sh/blog/posts/200629/</guid>
       <description>On my attempts at relearning Scratch.</description>
     </item>
     
     <item>
       <title>CS50: Week -1</title>
-      <link>https://kewbish.github.io/blog/posts/200621/</link>
+      <link>https://kewbi.sh/blog/posts/200621/</link>
       <pubDate>21 Jun 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200621/</guid>
+      <guid>https://kewbi.sh/blog/posts/200621/</guid>
       <description>On my summer learning plans.</description>
     </item>
     
     <item>
       <title>Reinstalling Windows</title>
-      <link>https://kewbish.github.io/blog/posts/200614/</link>
+      <link>https://kewbi.sh/blog/posts/200614/</link>
       <pubDate>14 Jun 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200614/</guid>
+      <guid>https://kewbi.sh/blog/posts/200614/</guid>
       <description>On my experience fixing my blankscreen errors.</description>
     </item>
     
     <item>
       <title>Conversational Notetaking</title>
-      <link>https://kewbish.github.io/blog/posts/200607/</link>
+      <link>https://kewbi.sh/blog/posts/200607/</link>
       <pubDate>07 Jun 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200607/</guid>
+      <guid>https://kewbi.sh/blog/posts/200607/</guid>
       <description>On my Zettelkasten derivative system.</description>
     </item>
     
     <item>
       <title>The GFTW Hackathon</title>
-      <link>https://kewbish.github.io/blog/posts/200531/</link>
+      <link>https://kewbi.sh/blog/posts/200531/</link>
       <pubDate>30 May 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200531/</guid>
+      <guid>https://kewbi.sh/blog/posts/200531/</guid>
       <description>On my attempts at contributing to capitalism.</description>
     </item>
     
     <item>
       <title>The Yearly Rebrand</title>
-      <link>https://kewbish.github.io/blog/posts/200524/</link>
+      <link>https://kewbi.sh/blog/posts/200524/</link>
       <pubDate>24 May 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200524/</guid>
+      <guid>https://kewbi.sh/blog/posts/200524/</guid>
       <description>On my recent website and blog redesign.</description>
     </item>
     
     <item>
       <title>I&#39;ll be back, eventually</title>
-      <link>https://kewbish.github.io/blog/posts/200429/</link>
+      <link>https://kewbi.sh/blog/posts/200429/</link>
       <pubDate>29 Apr 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200429/</guid>
+      <guid>https://kewbi.sh/blog/posts/200429/</guid>
       <description>On my impending absence, and this blog.</description>
     </item>
     
     <item>
       <title>Why I haven&#39;t gone to Linux</title>
-      <link>https://kewbish.github.io/blog/posts/200411/</link>
+      <link>https://kewbi.sh/blog/posts/200411/</link>
       <pubDate>11 Apr 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200411/</guid>
+      <guid>https://kewbi.sh/blog/posts/200411/</guid>
       <description>On why I&#39;m still with Windows (for now)</description>
     </item>
     
     <item>
       <title>Remote Teamwork</title>
-      <link>https://kewbish.github.io/blog/posts/200401/</link>
+      <link>https://kewbi.sh/blog/posts/200401/</link>
       <pubDate>01 Apr 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200401/</guid>
+      <guid>https://kewbi.sh/blog/posts/200401/</guid>
       <description>On what I&#39;ve learned collaborating remotely.</description>
     </item>
     
     <item>
       <title>Exponential Growth</title>
-      <link>https://kewbish.github.io/blog/posts/200323/</link>
+      <link>https://kewbi.sh/blog/posts/200323/</link>
       <pubDate>22 Mar 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200323/</guid>
+      <guid>https://kewbi.sh/blog/posts/200323/</guid>
       <description>On the difficulties of comprehending growth.</description>
     </item>
     
     <item>
       <title>COVID-19&#39;s Impacts</title>
-      <link>https://kewbish.github.io/blog/posts/200314/</link>
+      <link>https://kewbi.sh/blog/posts/200314/</link>
       <pubDate>14 Mar 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200314/</guid>
+      <guid>https://kewbi.sh/blog/posts/200314/</guid>
       <description>On the strange state of the world.</description>
     </item>
     
     <item>
       <title>#shecoded &#43; IWF</title>
-      <link>https://kewbish.github.io/blog/posts/200308/</link>
+      <link>https://kewbi.sh/blog/posts/200308/</link>
       <pubDate>04 Mar 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200308/</guid>
+      <guid>https://kewbi.sh/blog/posts/200308/</guid>
       <description>On equality, equity, and #shecoded.</description>
     </item>
     
     <item>
       <title>VDSF Experience (and beyond!)</title>
-      <link>https://kewbish.github.io/blog/posts/200301/</link>
+      <link>https://kewbi.sh/blog/posts/200301/</link>
       <pubDate>29 Feb 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200301/</guid>
+      <guid>https://kewbi.sh/blog/posts/200301/</guid>
       <description>On the vibes at the Vancouver District Science Fair.</description>
     </item>
     
     <item>
       <title>Hugo</title>
-      <link>https://kewbish.github.io/blog/posts/200221/</link>
+      <link>https://kewbi.sh/blog/posts/200221/</link>
       <pubDate>21 Feb 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200221/</guid>
+      <guid>https://kewbi.sh/blog/posts/200221/</guid>
       <description>On migrating to a static site generator.</description>
     </item>
     
     <item>
       <title>Google Code-in &#39;19 Experience</title>
-      <link>https://kewbish.github.io/blog/posts/200214/</link>
+      <link>https://kewbi.sh/blog/posts/200214/</link>
       <pubDate>08 Feb 2020</pubDate>
       
-      <guid>https://kewbish.github.io/blog/posts/200214/</guid>
+      <guid>https://kewbi.sh/blog/posts/200214/</guid>
       <description>On my experience during Google&#39;s 2019 Code-in.</description>
     </item>
     
