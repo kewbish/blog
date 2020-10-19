@@ -5,10 +5,19 @@
     <link>https://kewbi.sh/blog/</link>
     <description>Latest Yours, Kewbish posts</description>
     <generator>Hugo + Yours, Kewbish</generator>
-    <lastBuildDate>Sun, 11 Oct 2020 18:52:59 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 18 Oct 2020 19:28:01 -0700</lastBuildDate>
     
 	<atom:link href="https://kewbi.sh/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Minutiae</title>
+      <link>https://kewbi.sh/blog/posts/201018/</link>
+      <pubDate>18 Oct 2020</pubDate>
+      
+      <guid>https://kewbi.sh/blog/posts/201018/</guid>
+      <description>On working with the small.</description>
+    </item>
     
     <item>
       <title>A metawrite</title>
