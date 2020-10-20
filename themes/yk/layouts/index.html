@@ -20,7 +20,7 @@
     <section class="index cont">
         <div class="index-main">
             <h1 class="subtitle">Yours, Kewbish</h1>
-            <p>A collection of technical musings. <a href="/posts">See all posts</a>.</p>
+            <p>A collection of technical and personal musings. <a href="/posts">See all posts</a>.</p>
             <div class="grid">
                 {{ range first 4 (where (where .Site.Pages "Params.series" "post").ByDate.Reverse  ".Date" "le" now) }}
                     <div class="grid-element" style="text-align: left;">    
@@ -38,7 +38,7 @@
                     {{ $wordCount = add $wordCount $words }}
                     {{ $articleCount = add $articleCount 1 }}
                 {{ end }}
-                <p>Yours, Kewbish was intended to be a collection of epistolary essays, but that's changed. So far, I've written {{ $wordCount }} words here over {{ $articleCount }} posts - mostly in the form of tech articles, personal stories, and other content.</p>
+                <p>So far, I've written {{ $wordCount }} words here over {{ $articleCount }} posts - mostly in the form of tech articles and personal stories.</p>
             </div><br>
         </div>
     </section>
