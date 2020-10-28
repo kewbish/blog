@@ -5,10 +5,19 @@
     <link>https://kewbi.sh/blog/posts/</link>
     <description>Latest Yours, Kewbish posts</description>
     <generator>Hugo + Yours, Kewbish</generator>
-    <lastBuildDate>Sun, 18 Oct 2020 19:28:01 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2020 19:32:42 -0700</lastBuildDate>
     
 	<atom:link href="https://kewbi.sh/blog/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Vim Spaced Recall</title>
+      <link>https://kewbi.sh/blog/posts/201025/</link>
+      <pubDate>25 Oct 2020</pubDate>
+      
+      <guid>https://kewbi.sh/blog/posts/201025/</guid>
+      <description>On active learning combined with Vim.</description>
+    </item>
     
     <item>
       <title>Minutiae</title>
