@@ -20,7 +20,7 @@
     <section class="main-2">
         <p><a href="../">&lt; More Posts</a></p>
         <h1 class="subtitle">Vim Spaced Recall</h1>
-        <p>Published 25 October 2020 at <a href="https://kewbi.sh/blog/posts/201025/">Yours, Kewbish</a>. 1368 words.</p>
+        <p>Published 25 October 2020 at <a href="https://kewbi.sh/blog/posts/201025/">Yours, Kewbish</a>. 1540 words.</p>
         
         <div class="writing">
             <h2 id="introduction">Introduction</h2>
@@ -43,6 +43,12 @@
 <p>Now, to Vim-ify the testing method, instead of doing things manually, I modified what&rsquo;s in <a href="https://www.edwinwenink.xyz/posts/50-quiz_yourself_in_vim/">Edwin Wenink&rsquo;s article on studying in Vim</a> to get this command, which I added to my .vimrc:</p>
 <pre><code>nnoremap &lt;expr&gt; &lt;leader&gt;nq ':vimgrep /\[l' .nr2char(getchar()). '\]/ %&lt;CR&gt;'
 </code></pre><p>This remaps the <code>\nq</code> command in Normal mode to look for all occurances of the levels. I originally used a <code>\d</code> regex for just any level, but I found the getchar() bit, which lets me use something like <code>\nq1</code> to start a session for level one. This starts a vimgrep session<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> in the current file, which is fine, as I have all my notes for one topic in the same file. I can move between questions with <code>:cn</code> and <code>:cp</code>, and since the questions show up at the bottom of the screen, I can&rsquo;t look at the subpoints.</p>
+<p>To raise and lower levels, I&rsquo;ve come up with two commands:</p>
+<pre><code>nnoremap &lt;leader&gt;ll :s/\[l\d\]/\[l1\]/ &lt;CR&gt;
+nnoremap &lt;leader&gt;rl :s/\[l\zs\d/\=submatch(0)+1/ &lt;CR&gt;
+</code></pre><p><code>ll</code> is a mnemonic for lower level, and this complicated regex essentially substitutes any occurances of <code>[l*digit*]</code> with <code>[l1]</code>, since we&rsquo;ll be resetting the card all the way back down to one.</p>
+<p><code>rl</code> stands for raise level, and this regex matches all digits preceded by <code>[l</code>, which should be all the card level indicators. This then does a bit of fancy submatch maths to add one to the level. Fun!</p>
+<p>Of course, if you plan to have multiple level indicators per line (not entirely sure how that would come into play or how that would work; maybe if you had categories or something?), you might want to do a global search on the line by appending <code>\g</code> to any of these lines.<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
 <h2 id="conclusion">Conclusion</h2>
 <p>Is this slightly overcomplicated? Could I not have just copy pasted questions from Quizlet or something into a file and just attempted to solve mock tests instead? Should I have just used Anki instead of spending roughly fifteen minutes Googling as to why the remap wasn&rsquo;t working when I accidentally used <code>/nq</code> instead of <code>\nq</code>? Yes, probably wouldn&rsquo;t be as fun, and maybe. Anyway, it&rsquo;s been a fun area of memory work to explore, and in the process of attempting to improve my study work, I&rsquo;ve gone through more papers than I&rsquo;d have expected to, which probably sounds boring, but I promise, it&rsquo;s rather engaging, in fact.</p>
 <p>On an extremely unrelated note, I&rsquo;m not far off my goal of 50k words this year on this blog, and this post itself has contributed its weekly total towards that. I hope to be able to properly get everything done and maybe do a bit of editing for the rather cringe posts that may or may not have appeared in the spring of this year when (or if, I should say) I get some time over winter break. It&rsquo;s almost the holidays, and that&rsquo;s probably something nice to look forward to amongst all the work and studying that needs to be done. Well, off to edit a lab.</p>
@@ -54,6 +60,9 @@
 </li>
 <li id="fn:2" role="doc-endnote">
 <p>Not entirely sure what to call it, but I&rsquo;ll assume session is the term. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>See, the time I spent playing <a href="https://regexcrossword.com/">Regex Crosswords</a> wasn&rsquo;t wasted. Maybe it was, because without it, I wouldn&rsquo;t have decided to make this complicated remapping scheme, but here we are. <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
