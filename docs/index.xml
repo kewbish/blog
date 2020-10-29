@@ -11,7 +11,7 @@
     
     
     <item>
-      <title>Vim Spaced Recall</title>
+      <title>Spaced Recall in Vim</title>
       <link>https://kewbi.sh/blog/posts/201025/</link>
       <pubDate>25 Oct 2020</pubDate>
       
@@ -305,15 +305,6 @@
       
       <guid>https://kewbi.sh/blog/posts/200214/</guid>
       <description>On my experience during Google&#39;s 2019 Code-in.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://kewbi.sh/blog/201025/</link>
-      <pubDate>01 Jan 0001</pubDate>
-      
-      <guid>https://kewbi.sh/blog/201025/</guid>
-      <description></description>
     </item>
     
   </channel>
