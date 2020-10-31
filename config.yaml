@@ -11,3 +11,9 @@ theme: "yk"
 relativeUrls: true
 disableKinds: ["taxonomy", "taxonomyTerm"]
 publishDir: "docs"
+outputs:
+  home:
+    - HTML
+    - RSS
+  section:
+    - HTML
