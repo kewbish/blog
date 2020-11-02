@@ -78,6 +78,7 @@ pre{
     padding: 3.5%;
     margin: 2% 0;
     overflow-x: auto;
+    background-color: var(--sub-colour);
 }
 figcaption {
     text-align: center;
