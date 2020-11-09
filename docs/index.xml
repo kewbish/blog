@@ -5,10 +5,58 @@
     <link>https://kewbi.sh/blog/</link>
     <description>Latest Yours, Kewbish posts</description>
     <generator>Hugo + Yours, Kewbish</generator>
-    <lastBuildDate>Sun, 01 Nov 2020 16:26:05 -0800</lastBuildDate>
+    <lastBuildDate>Sun, 08 Nov 2020 19:06:37 -0800</lastBuildDate>
     
 	<atom:link href="https://kewbi.sh/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>@everyone</title>
+      <link>https://kewbi.sh/blog/posts/201108/</link>
+      <pubDate>08 Nov 2020</pubDate>
+      
+      <guid>https://kewbi.sh/blog/posts/201108/</guid>
+      <description>On notifications and muting them.</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>Backtracking on what I said in the <a href="https://kewbi.sh/blog/posts/201101/">last blog post</a>, I&rsquo;d like to retract my statement that:</p>
+<blockquote>
+<p>Email, and Teams, I find, tend to be more of those ‘check once or twice a day’ things.</p>
+</blockquote>
+<p>In fact, they&rsquo;re probably equally as attention sucking, especially since (in my case) we&rsquo;re constantly being reminded to check, and <em>need</em> to check, in order to get the latest information. That information tends to change on a daily and even hourly basis sometimes, so I do understand why we need reminders to check. If something urgent does come up, and it does so between my (past) twice a day check, then I&rsquo;m probably going to miss it.</p>
+<p>Notifications are now very embedded into my life, at least. I have the (ir)rational fear that I&rsquo;ll miss one of those properly urgent pings, such as for a same-day assignment or change in plans that goes into effect very soon, and see it too late for me to have handed in whatever was due, or process the new plan. To somewhat offset this fear, I&rsquo;ve turned on notifications for pings from Teams / Slack / whatever, because I tend to not check those very frequently. I keep Discord on only for mentions<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, and opt out of pings or mute specific channels whenever possible.</p>
+<p>At this point, I don&rsquo;t think I&rsquo;m going to be free from notifications any time soon, and that&rsquo;s fine - I spend the time to tune my pings so that only what I consider urgent enough gets to appear as a shiny red badge alerting me that I have indeed missed something. I try to be relatively cognizant of the nature of pings (oh no - this is relevant and you should probably open it now!) and avoid pinging people when possible. However, I find that people tend to have a more cavalier attitude regarding pings, and just ping for very small things. I&rsquo;m fine with this from smaller friend servers, but when it&rsquo;s a giant email list with about a hundred-ish people in it, that adds up to a lot of &lsquo;oh, that&rsquo;s just a reply all.&rsquo; moments.</p>
+<h2 id="reply-all">Reply All</h2>
+<p>A rather recent incident of this<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> was with the aforementioned mailing list problem. An email was sent from an organizer with everyone in the To: field requesting a form. That&rsquo;s all fine and well. But then not once, not twice, but three entire times, people decided to reply, with their form (which had names attached to it, but nothing too personal - though imagine the consequences!), and send that to everyone.</p>
+<p>As I mentioned in the previous post, I&rsquo;d like to reduce the amount of things I have to process and sort out, so I was rather annoyed. It&rsquo;s a minor thing, but it adds up in time and effort spent for everyone.</p>
+<p>I&rsquo;m not entirely sure if people are aware that they&rsquo;re replying to everyone, or if they&rsquo;re intentionally doing it. Apparently, Gmail has a feature to make replying to all the default, which probably seems like a good idea with smaller chains, but is rather disastrous with giant email lists as in this situation.</p>
+<p>A solution, I suppose, is making it more difficult to reply all. A simple &lsquo;are you sure&rsquo;, similar to Discord&rsquo;s preview when pinging over thirty people (I forgot the exact limit), might help. Alternatively, BCCing people might be more efficient, and the people starting the chain may as well be doing it for privacy reasons.</p>
+<h2 id="tuning-notifications">Tuning Notifications</h2>
+<blockquote>
+<p>[xyz]: why are y&rsquo;all so annoyed when getting pings?</p>
+</blockquote>
+<p>The above is something people touch on often in class, group, and most servers. They have the same reasons as I did in the introduction - they&rsquo;d rather make sure they see everything and deal with more pings than necessary than miss something. I guess the thing is, though, I&rsquo;ve already tried to minimize what is vying for attention, and if I&rsquo;m going to be on whatever platform anyway, it&rsquo;s a bit redundant.</p>
+<p>When I get spam pings, the reflex is just to mute the channel or app or conversation or whatever it is that happens to be blowing up my feed. But this comes with the downside of also reducing the focus of it, and I find that I end up ignoring most of the channels that I mute. (I suppose I could also block one individual person, but then I wouldn&rsquo;t see their non spam messages, which is probably worse.)</p>
+<h2 id="platforms">Platforms</h2>
+<p>Communication, along with the need for quick, efficient communication, has skyrocketed as we work and learn and code from home. We&rsquo;re expected to respond quickly, and especially since for me, my grades are on the line, it&rsquo;s a responsibility. Notifications are starting to feel like an all-or-nothing situation. I either remain with my tab open all day, keep push / badges on, or rely on my schedule and memory to check.</p>
+<p>This is all shifting us towards synchronous communication, which, for most things, is probably a must. But to communicate with, and fight for someone&rsquo;s attention amidst a sea of other pings and unreads, we turn more to pings. Originally, a ping meant something was super urgent, but now, sometimes it&rsquo;s just for a quick joke.</p>
+<p>Maybe part of the reason for spam pings is that it&rsquo;s so easy to do so. A quick <code>@everyone</code> away, and the entirety of a server or channel is summoned. Most of the time, it&rsquo;s for not super urgent things (ghost <code>@channels</code>, I&rsquo;m looking at you), which makes it frustrating when I resolve to finally turn notifications for something on again.</p>
+<p>This all being said, I&rsquo;d like to end with a counterexample: the <code>@notifs-on</code> role, or the selective ping role. By default, everyone can have this applied. That&rsquo;s fine. But it&rsquo;s nice to give people an option to opt out, kind of like email unsubscribe links. By unsubscribing, you <em>know</em> that you&rsquo;re going to lose out on whatever material&rsquo;s in the next newsletter, but you&rsquo;re aware of that, and fine with that. Here, you&rsquo;d know that you&rsquo;re not getting the notification, but you&rsquo;re expected to check anyway. I really appreciate at least giving people the choice - though when that gets abused, and people return to <code>@everyone</code>ing &lsquo;because it&rsquo;s important&rsquo;, the issue still returns.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>So how do we reach each other? Do I turn off notifications and have to remember to check manually, or do I just deal with them? For most, I end up just dealing with them. It&rsquo;d have to be part of a larger shift and larger awareness of the effect of a ping. And this debate&rsquo;ll probably never end, because people will always disagree with whether or not something was <code>@everyone</code> worthy, or <code>@notifs-on</code> worthy, or even worthy of a message at all.</p>
+<p>For now, I guess, I&rsquo;ll just selectively mute and selectively unmute when I see fit, and perhaps nudge people as a reminder when the reply all problem resurfaces again.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Mentioning this was probably not a good idea, please do not spam me or I will mute you. (I suppose this ties into my points later on.) <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Yes, this is the reason I was going on about how people don&rsquo;t know how to properly use email or the reply all button. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+]]></content:encoded>
+    </item>
     
     <item>
       <title>Changing communication</title>
