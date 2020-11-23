@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git and iOS</title>
+    <meta name="description" content="On crossplatform repo editing.">
+    <meta property="og:title" content="Git and iOS">
+    <meta property="og:description" content="On crossplatform repo editing.">
+    <meta property="og:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <meta property="og:url" content="https://kewbi.sh/blog/posts/201122/">
+    <meta property="twitter:title" content="Git and iOS">
+    <meta property="twitter:description" content="On crossplatform repo editing.">
+    <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+
+<body class="cont page">
+    <section class="main-2">
+        <p><a href="../">&lt; More Posts</a></p>
+        <h1 class="subtitle">Git and iOS</h1>
+        <p>Published 22 November 2020 at <a href="https://kewbi.sh/blog/posts/201122/">Yours, Kewbish</a>. 1283 words. Subscribe via <a href="../../index.xml" target="_blank" rel="noreferrer">RSS</a>.</p>
+        
+        <div class="writing">
+            <h2 id="introduction">Introduction</h2>
+<p>I&rsquo;ve always tried to take notes as much as possible on paper, just because it was easier (and theoretically also better for me). However, with COVID and spending more time with digital resources, I&rsquo;ve tried to take more notes online. These notes have been, from the beginning, backed up somewhere. First, it was to Google Drive; later, to OneDrive, when I used OneNote. I relatively <a href="https://kewbi.sh/blog/posts/200607/">recently</a> transitioned to Markdown files, but kept them in OneDrive. On Windows, I simply left them in the OneDrive folder, and edited with Vim.</p>
+<p>On Linux, however, it&rsquo;s not quite as easy. I originally started off using <a href="https://github.com/abraunegg/onedrive">another OneDrive CLI tool</a>, which served its purpose well. I ran the sync command every so often, and I had access from my phone. However, I found myself not syncing often, and having out of date copies of work on my phone, which wasn&rsquo;t ideal. There was a bit too much friction for syncing - and to be honest, I just forgot. I could, of course, make a script and shove it in the autostart folder, but that didn&rsquo;t occur to me til much later.</p>
+<p>In an attempt to reap more of the benefits of version control, I then shunted all my files onto a Git repo. It served the same purpose, but with the same problem. I kept forgetting to sync to GitHub.</p>
+<p>As well, with just a mostly out of date version on GitHub, I couldn&rsquo;t access the latest version of my files on my phone. I&rsquo;m trying to make it as easy as possible to have a sync from both ends, so I searched around for a solution.</p>
+<p>This whole process would probably be a lot simpler on Android, but I use an iPhone. (Feel free to rant about non-free software here.) I can&rsquo;t mess with folders and edit things as easily, so here is my attempt at describing my system now.</p>
+<h2 id="overcomplicated-ascii-art">Overcomplicated ASCII Art</h2>
+<p>The system looks something like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">+---------------------+        +-------------+        +----+
+|                     |        |             |        |----|
+|    git + sync.sh    | +----&gt; |   |\---/|   | &lt;----+ ||  ||
+|                     |        |   |     |   |        ||  ||
++---------------------+        |    \___/    |        +----+
+         |---|                 |             |        | || |
+       +-------+               +-------------+        +----+
+</code></pre></div><p><em>Figure 1. An excuse to experiment with ASCII art.</em></p>
+<p>On the Git repo, I run a <code>sync.sh</code> script on log-in, which pulls the changes and commits and pushes any local ones. Everything then goes to a private GitHub repo.</p>
+<p>But the Git integration from my phone would be tricky. Sure, I could <em>view</em> from my phone with the GitHub app, but I don&rsquo;t think I can write. That&rsquo;d end up not solving the problem, so I looked for something else.</p>
+<h2 id="ios-magic">iOS Magic</h2>
+<p>Enter <strong>Working Copy</strong> and <strong>Pretext</strong>.</p>
+<p>I&rsquo;m not entirely sure if there are other Git clients on iOS, but the one I stumbled upon first was <a href="https://workingcopyapp.com/">Working Copy</a>. It let me set up another Git identity and get into my GitHub easily. I managed to get everything done in a couple minutes - this part was very simple. (Add new repo, choose GitHub source, log in if it&rsquo;s a private repo, clone, profit (?))</p>
+<p>Great, I now had my notes on the local filesystem. But where?</p>
+<p>Turns out that I had to go back and redownload the Files app (I&rsquo;d uninstalled it in one of my cyclic purges), and enable access from there. Click the three little dots on the top, and switch the slider over for Working Copy.</p>
+<figure>
+    <img src="https://i.imgur.com/qW2jhPp.png"
+         alt="Figure 2. A tricky hidden slider."/> <figcaption>
+            <p><em>Figure 2. A tricky hidden slider.</em></p>
+        </figcaption>
+</figure>
+
+<p>This is where you should get <a href="https://apps.apple.com/us/app/pretext/id1347707000">Pretext</a>, a simple Markdown editor<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. It&rsquo;s plaintext, with HTML preview, and enough tweaking features. It doesn&rsquo;t have ads, though there are some other features that are unlockable with payment.</p>
+<p>Inside Pretext, enter the Working Copy folder in Pretext, and select your repo of choice. From there, everything is a simple list view away. While Pretext can&rsquo;t edit anything other than Markdown, that&rsquo;s all my notes are in, so it works wonderfully. If I ever need to present, and don&rsquo;t want Markdown syntax, there&rsquo;s a nice HTML preview available in the <code>Share &gt; Preview as HTML</code> menu.</p>
+<h2 id="syncing">Syncing</h2>
+<p>Right, so syncing. Syncing was probably the bigger headache of the two here. For some reason, the first time round I tried getting an XFCE Autostart desktop to work, it would refuse to do anything. I assume this is due to an issue that I&rsquo;ll touch on in a few lines.</p>
+<p>Under <code>Session and Startup &gt; Application Autostart</code>, I <code>+Add</code>ed a new desktop file. I&rsquo;m pretty sure it&rsquo;s important that this doesn&rsquo;t have a space in its title - that was the only thing different between my two attempts. The command I had it run was simply the bash script I wrote, which, for my later convenience, is below:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span>
+cd ~/EVB/
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">`</span>git status --porcelain<span style="color:#e6db74">`</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+    <span style="color:#66d9ef">for</span> i in <span style="color:#f92672">{</span>1..50<span style="color:#f92672">}</span>; <span style="color:#66d9ef">do</span> ping -c1 www.google.com &amp;&gt; /dev/null <span style="color:#f92672">&amp;&amp;</span> break; <span style="color:#66d9ef">done</span>
+    NOW<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span> date <span style="color:#e6db74">&#39;+%F-%H%M&#39;</span> <span style="color:#66d9ef">)</span>
+    git add .
+    git commit --author<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Emilie Ma &lt;notarealemail@kewbi.sh&gt;&#34;</span> -m <span style="color:#e6db74">&#34;Sync: </span>$NOW<span style="color:#e6db74">&#34;</span>
+    git pull
+    git push
+    echo <span style="color:#e6db74">&#34;Successful!&#34;</span>
+<span style="color:#66d9ef">else</span>
+    echo <span style="color:#e6db74">&#34;No changes!&#34;</span>
+<span style="color:#66d9ef">fi</span>
+</code></pre></div><p>Probably change the directory to the one you&rsquo;re using for your Git. Also, probably change the author, unless you&rsquo;ve decided to impersonate me or are also named Emilie Ma.</p>
+<p>And there we go - on login (since I do this at the beginning of the day, and I often only edit anything on my phone the afternoon before or at night), all changes will be pulled (and theoretically won&rsquo;t conflict - I&rsquo;m the only one using this, and I don&rsquo;t tend to edit the same note at different times). The changes locally get pushed, and everything is fine and dandy!</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Is this incredibly overengineered? Actually, not really. This is the simplest way I&rsquo;ve found to do it, other than to just fire up my laptop every time I want to reference something, which I&rsquo;d rather not do. I&rsquo;m still not entirely sure how Working Copy even works, especially with the sandboxing things that are supposed to happen behind the scenes, but I won&rsquo;t question it too much. It&rsquo;s a nice system, and it works well enough.</p>
+<p>This post is mostly for self reference later, but if I&rsquo;ve somehow managed to help, that&rsquo;s cool too.</p>
+<h2 id="currently">Currently</h2>
+<p>It&rsquo;s been a while since I appended one of these, so apologies if the conclusion was a bit abrupt. I&rsquo;ve been working a decent bit more on my Racket x Chip-8 emulator attempt, and it hasn&rsquo;t been very successful. I chalk this up to the fact I don&rsquo;t know how to use the GUI / something&rsquo;s wrong with the display code - the rest of it worked fine (theoretically) without it.</p>
+<p>I have, however, managed to at least get some sort of display working with <a href="https://docs.racket-lang.org/charterm/index.html">charterm</a>, but I need to fix a pesky issue. The width for the display should be 64 pixels, and I can print much more to the terminal, but I need to find a way to linebreak. The display refuses to take newline characters, so that&rsquo;s a bit of a challenge. I&rsquo;m sure I&rsquo;ll manage to work out some janky solution, anyhow.</p>
+<p>I&rsquo;ve also found some other amazing Racket games and Chip-8 implementations, so hopefully I can leech a bit off of their approaches. If all goes well, I&rsquo;ll write about my progress next week. If not, I have some other ideas. Well, back to writing lab<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Having attempted to work with Notes before, I didn&rsquo;t want to bother with trying to select and bold text with the WYSIWYG panes again. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>And on another, slightly more quantitative note, I managed to hit 50k words on this blog! Five weeks ahead of schedule, so that&rsquo;s something. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+            <details>
+                <summary>Cite me</summary>
+                <div class="grid-element">
+                    <p>MLA: Ma, Emilie. "Git and iOS." <em>Yours, Kewbish.</em> n.p., 22 Nov. 2020. Web.</p>
+                    <p>APA: Ma, E. (2020, November 22). Git and iOS [Web log post]. Retrieved from https://kewbi.sh/blog/posts/201122/</p>
+                    <p><em>UBC citation style.</em></p>
+                </div>
+            </details>
+            <p>- Yours, Kewbish</p>
+        </div>
+        <br><p><a href="../">&lt; More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>
