@@ -5,10 +5,86 @@
     <link>https://kewbi.sh/blog/</link>
     <description>Latest Yours, Kewbish posts</description>
     <generator>Hugo + Yours, Kewbish</generator>
-    <lastBuildDate>Sun, 22 Nov 2020 13:03:42 -0800</lastBuildDate>
+    <lastBuildDate>Sun, 29 Nov 2020 19:58:59 -0800</lastBuildDate>
     
 	<atom:link href="https://kewbi.sh/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A Continuation of rack8</title>
+      <link>https://kewbi.sh/blog/posts/201129/</link>
+      <pubDate>29 Nov 2020</pubDate>
+      
+      <guid>https://kewbi.sh/blog/posts/201129/</guid>
+      <description>On my resulting Connect4 counters.</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>After maybe a month of intermittent work, it works!</p>
+<figure>
+    <img src="https://i.imgur.com/7n4DQhL.png"
+         alt="Figure 1. A singleplayer game of Connect 4."/> <figcaption>
+            <p><em>A singleplayer game of Connect 4</em></p>
+        </figcaption>
+</figure>
+
+<p>If you&rsquo;re not sure what &lsquo;it&rsquo; is, you&rsquo;ll probably want to read the <a href="https://kewbi.sh/blog/posts/201115/">first blog post</a> of this microseries. In it, I touch on the experience of my first couple days with Racket and Chip-8, a game emulator. It turns out that trying to figure out how to piece together the Chip-8 documentation and synthesize it into Racket wasn&rsquo;t too bad, after all.</p>
+<p>In the above blog post, I left off with working opcode interpreting and somewhat-working internals. Back then, I was on a bit of a hunt for the proper graphics library, as well as how to manage taking keyboard input without hanging. It was a toss-up between <a href="https://docs.racket-lang.org/charterm/index.html">charterm</a> and <a href="https://github.com/dys-bigwig/racket-ncurses">racket-ncurses</a> &ndash; both would do what I theoretically wanted.</p>
+<p>I&rsquo;m very happy with how rack8 (the pet name I&rsquo;ve been calling it) has turned out<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+<h2 id="managing-display">Managing Display</h2>
+<p>I initially thought the ncurses binding would be a better fit. ncurses was something I&rsquo;d briefly tried before in a toy Python project, and it didn&rsquo;t seem too difficult. It also explicitly stated an option for non-hanging input, which would be a must. It&rsquo;d be impossible to try to rig together a short delay system, at least with my limited experience. So, I <code>raco pkg install</code>ed, and was on my merry way.</p>
+<p>It turned out, however, things were not as straightforward as they seemed. (Are things ever?) First, the ncurses FFI was something like a year and a half old, and relied on <code>libncurses5</code>. I had <code>libncurses6</code>, and symlinking (not that I knew what to symlink) didn&rsquo;t seem to work. There seemed no way to get the correct library besides manually making it from the AUR snapshot, so I also attempted to learn how to do that. Surprisingly, it worked, but that wasn&rsquo;t the end of the issues with the FFI.</p>
+<p>It also seemed to escape from the window each time a key was pressed, and spit out some errors that I couldn&rsquo;t manage to trace. I&rsquo;m unsure if this was an issue with my implementation, though I copied directly from the given example, or from the package itself, or from the <code>ncurses5</code> I managed to MacGyver.</p>
+<p>I briefly flirted with the idea of just doing things with <code>(printf)</code>s and hanging input, but I figured that wouldn&rsquo;t be very satisfying either. Seeing as the ncurses FFI, which was technically more recent than charterm, was already outdated (or perhaps just not working in its abandoned stage) wasn&rsquo;t quite acting as expected, I was hesistant to try charterm. However, I didn&rsquo;t have a better solution, so one <code>raco pkg install charterm</code> later, I braced myself for the worst.</p>
+<p>After some issues with slow, character by character display, I finally had <em>some</em> output. At this point, it was just blocks of seemingly random Ms everywhere. I had two issues at this point: not getting newlines, and not drawing from memory properly</p>
+<p>charterm seems to have an issue with printing newlines with its <code>(charterm-display)</code> function. Initially, this was an error on my part (all errors here are errors on my part, to be honest) &ndash; the documentation explicitly stated to&hellip;</p>
+<blockquote>
+<p>avoid trying to send your own control sequences or using newlines</p>
+</blockquote>
+<p>&hellip;but clearly this didn&rsquo;t register. I then switched to printing each line (or horizontal row) of the display (itself a 2D vector) onto the current terminal, with a newline in between. I had some issues with the correct placement of the end brackets for for-loops, leading to a lot of time wasted trying to change parentheses around.</p>
+<p>Two tips here:</p>
+<ul>
+<li>one, maybe properly indent your code so parenthesis groupings are properly visible (oops)</li>
+<li>and two, don&rsquo;t <code>(with-charterm)</code> every operation. I found that, when I tried this, there&rsquo;d be a visible delay in printing each line / character, as opposed to just one large operation. I&rsquo;m not entirely sure why this is either. Just wrapping the entirety of the inside of the graphics display function in the <code>(with charterm)</code> was much more efficient and effective.</li>
+</ul>
+<p>With regards to the DRAW opcode itself, I remember adapting much of it from <a href="https://pastebin.com/TtCM6Hh7">this pastebin</a>, which I found off some (now lost to the depths of search history) Reddit page. Before that, I had a very janky solution that was most definitely not up to the technical implementation. It was a rather pleasant surprise to see a little Connect4 counter on my screen, after much work<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
+<h2 id="keyboard-control">Keyboard Control</h2>
+<p>In comparison to the display hell, keyboard mappings were a lot easier to control. While charterm doesn&rsquo;t have a completely blocking-less option, I managed to use a delay of 0.001 seconds<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>. My test ROM used was Connect4, which ends up only using the blocking keypress opcode, if I recall correctly, but the delay should be theoretically imperceptible even if a shorter reaction is needed. (On that note, I should probably test with more ROMs. Mental note to add to the todo list.)</p>
+<p>Chip-8 itself has a very unique<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> 16-key mapping that I had to figure out how to model. My implementation used a hash-map<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>, which I mapped to (apparently what everyone else used):</p>
+<pre><code>+---+---+---+---+
+| 0 | 1 | 2 | 3 |
++---------------+
+| 4 | 5 | 6 | 7 |
++---------------+
+| 8 | 9 | A | B |
++---------------+
+| C | D | E | F |
++---+---+---+---+
+</code></pre><p>charterm, helpfully (Racket is also to thank for this) returns nice keycodes, so I was able to map these very easily, and even add an extra condition for a global quit key.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>So is the state of my journey with Racket. I&rsquo;m probably not going to tinker with rack8 much more, though I plan on loading some more ROMs up and testing if all my opcodes are sound. I&rsquo;ll also make the repo public on GitHub at some point, if anyone is interested in perusing my very badly written Racket. When I become slightly more familiar with Racket, I might write a short guide on how to make a Chip-8 interpreter in it: the only articles I can find for writing Chip-8 emulators in anything remotely similar is &lsquo;Chicken Scheme&rsquo;. I have no idea what that is, but perhaps making a Racket guide may be useful.</p>
+<p>In making rack8, I&rsquo;ve also managed to steer myself entirely off the track of my original plan for CPSC 110 review. The material&rsquo;s still there on edX, so I should probably take the time to do the course properly. However, I think this little side excursion has been a valuable experience, both in terms of learning Racket, and having some fun with emulators. Overall, I find when I start with a hands-on project, and the higher-level details of a concept, I learn things better. I suppose rack8 can serve as my introduction to Racket syntax (so when I start properly studying, it won&rsquo;t be as jarring) and some of its concepts.</p>
+<p>My next steps, in this analogy of projects, would probably to do more theory and &lsquo;dictionary-definition&rsquo; work. I was planning on doing more algorithms (essentially just the coursework of the various CPSC courses UBC has publicly available) anyway, so I think tackling that will be my next step. Racket has been surprisingly not that painful, and rack8&rsquo;s been a charming little project to tinker with. It might be interesting, once I have more time / finish the never-ending list of things I want to program, to investigate more emulator development, but who knows what I&rsquo;ll end up doing.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>The experience of finally getting display to properly work was somewhat akin to getting the Liquid Galaxy system set up: I had no idea what I was doing, no documentation (that I could understand), and there were no clear pointers as to where I was going wrong. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>An interesting story &ndash; I was originally very confused as to why the Chip-8 was printing just blocks of 8 characters, instead of one at a time. I tried everything, including completely rewriting the DRAW opcode implementation, copy-pasting things around. In the end, the issue was that I had <code>bitwise-and</code>ed something I should have <code>bitwise-xor</code>ed. It&rsquo;s interesting how three letters can waste so much time, but I suppose this is the essence of debugging. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>Actually, now that I think about it, it might be possible to set a zero-second blocking timeout. I&rsquo;ll try this and edit the post a bit later with how it&rsquo;s gone. <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>Well, unique to us, I suppose. Apparently, these were quite common &lsquo;back in the day&rsquo;, and I see a lot of 16-key keypads around, so they must be useful for something (?) <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p>As an aside, Racket hashmaps (or dictionaries, I&rsquo;m unsure of the technically correct description) and their syntax are very unique. I&rsquo;m used to the <code>[key]: [value]</code> representation, but Racket just puts a <code>.</code> in between, and surrounds keys with parentheses. Though I suppose the parentheses are very on-brand for Racket. <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+]]></content:encoded>
+    </item>
     
     <item>
       <title>Git and iOS</title>
