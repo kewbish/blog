@@ -14,20 +14,21 @@
     <meta property="twitter:description" content="{{ .Description }}">
     <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
     <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
+    <link rel="stylesheet" href="/css/main.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
 </head>
 
 <body class="cont page">
-    <section class="main-2">
+    <section class="b-main-2">
         <p><a href="../">&lt; More Posts</a></p>
         <h1 class="subtitle">{{ .Title }}</h1>
         <p>Published {{ .PublishDate.Format "02 January 2006" }} at <a href="{{ .Permalink }}">Yours, Kewbish</a>. {{ .WordCount }} words. Subscribe via <a href="/index.xml">RSS</a>.</p>
         {{ if .Params.Dev }}
         <p>Also published on <a href="{{ .Params.Dev }}">Dev.to</a>.</p>
         {{ end }}
-        <div class="writing">
+        <div class="b-writing">
             {{ .Content }}
             <p>- Yours, Kewbish</p>
         </div>
