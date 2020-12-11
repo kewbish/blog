@@ -13,17 +13,21 @@
     <meta property="twitter:title" content="Yours, Kewbish - a blog by Emilie Ma.">
     <meta property="twitter:description" content="A blog by Kewbish // Emilie - a collection of technical essays and musings.">
     <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
 </head>
 
 <body>
     <section class="index cont">
-        <div class="index-main">
+        <div class="index-main b-main">
             <h1 class="subtitle">Yours, Kewbish</h1>
             <p>A collection of technical and personal musings. <a href="/posts">See all posts</a>.</p>
-            <div class="grid">
+            <div class="grid b-grid">
                 {{ range first 4 (where (where .Site.Pages "Params.series" "post").ByDate.Reverse  ".Date" "le" now) }}
-                    <div class="grid-element" style="text-align: left;">    
+                    <div class="grid-element b-grid-el">    
                         <h2 class="sub-3"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
                         <p>{{ .Description }}</p>
                         <small><em>{{ .PublishDate.Format "02 January 2006" }}</em></small>
