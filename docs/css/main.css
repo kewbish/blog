@@ -1,180 +1,36 @@
-/* general */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789');
-*{
-    margin: 0;
-    padding: 0;
+.b-grid-el {
+    padding: 3% 4.5%;
+    text-align: left;
 }
-:root{
-    --main-colour: #1E1E1E;
-    --sub-colour: #323232;
-    --accent-colour: #888888;
-    --grid-columns: 5fr 1fr 5fr;
-    scroll-behavior: smooth;
-    text-decoration: none;
-}
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-::-webkit-scrollbar-button {
-  width: 0px;
-  height: 0px;
-}
-::-webkit-scrollbar-thumb {
-  background: #8c8c8c;
-  border-radius: 50px;
-}
-::-webkit-scrollbar-track {
-  background: var(--sub-colour);
-  border-radius: 0px;
-}
-::-webkit-scrollbar-track:hover ::-webkit-scrollbar-track:active {
-    background: var(--sub-colour);
-}
-::-webkit-scrollbar-corner {
-  background: transparent;
-}
-html{
-    background-color: var(--main-colour);
-    color: white;
-    font-family: Montserrat, sans-serif;
-    font-size: 1.2em;
-}
-hr{
-    margin: 10px 0;
-}
-p{
-    margin: 0.4% 0;
-    padding: 0.2% 0;
+.b-grid-el p {
+    font-size: 0.8em;
     line-height: 1.4em;
 }
-a{
-    color: var(--text-color);
-    text-decoration: underline var(--accent-colour);
-    -webkit-text-decoration: underline var(--accent-colour)
-}
-a:hover{
-    color: var(--accent-colour);
-    transition: 0.3s;
-}
-strong{
-    color: var(--accent-colour)
-}
-img{
-    display: block;
-    width: auto;
-    max-width: 100%;
-}
-ol{
-    list-style-position: inside;
-}
-ol p{
-    display: inline;
-}
-ul{
-    padding-left: 2%;
-}
-pre{
-    padding: 3.5%;
-    margin: 2% 0;
-    overflow-x: auto;
-    background-color: var(--sub-colour);
-}
-figcaption {
-    text-align: center;
-}
-figure img {
-    margin: auto;
-    border-radius: 7px;
-}
-/* titles */
-.subtitle {
-    font-size: 4.3em;
-    margin: 1% 0 1% -1%;
-}
-.sub-2, h2 {
-    font-size: 3em;
-    margin-top: 1%;
-}
-h2.sub-3 {
-    font-size: 1.2em;
-}
-/* containers */
-.index {
-    background: linear-gradient(#1E1E1E88, #1E1E1E88), url("https://kewbi.sh/Back2.svg") left no-repeat, url("https://kewbi.sh/Back1.svg") right no-repeat;
-    background-size: 15%, 15%;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.index-main {
-    width: 60%;
-    margin: auto;
-    text-align: center;
-    padding: 5% 0;
-}
-.writing > p {
-    text-indent: 3%;
-}
-.cont {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.page {
-    padding: 4.5% 0 2.5%;
-    background: linear-gradient(#1E1E1E88, #1E1E1E88), url("../Back2.svg") left, url("../Back1.svg") right;
-    background-size: 15%, 15%;
-    background-repeat: repeat-y, repeat-y;
-}
-.main {
-    width: 75%;
-}
-.main-2 {
-    width: 70%;
-}
-/* grid */
-.grid{
-    display: grid;
-    grid-template-columns: var(--grid-columns);
-    grid-row-gap: 1em;
-    grid-column-gap: 1em;
+.b-grid {
     padding: 2% 0;
 }
-.grid-element, blockquote{
-    background-color: var(--sub-colour);
-    padding: 2% 3.5%;
-    border-radius: 7px;
+.b-main {
+    text-align: center;
 }
-.grid-element p {
-    font-size: 0.8em;
+.b-main-2 {
+    width: 70%;
 }
-.grid-element:nth-child(4n+2){
-    grid-column: 2 / span 2;
+.b-main-2 h2 {
+    font-size: 3em;
+    margin-top: 3%;
 }
-.grid-element:nth-child(4n+3){
-    grid-column: 1 / span 2;
+.b-main-2 p {
+    line-height: 1.4em;
+    margin: 0.4% 0;
+    padding: 0.2% 0;
 }
-.grid-element:nth-last-child(1):nth-child(odd){
-    grid-column: 1 / span 3;
+.b-writing > p {
+    text-indent: 3%;
 }
-/* mobile */
-@media all and (max-width: 768px){
-    :root{
-        --grid-columns: 1fr;
-    }
-    .subtitle {
-        font-size: 3.5em;
-    }
-    .sub-2 {
-        font-size: 2.3em;
-    }
-    .grid-element:nth-child(4n+2),
-    .grid-element:nth-child(4n+3),
-    .grid-element:nth-last-child(1):nth-child(odd){
-        grid-column: auto;
-    }
+.b-subtitle {
+    font-size: 4.3em;
+}
+.b-sub-2 {
+    color: #888888;
+    margin-bottom: 0;
 }

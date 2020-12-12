@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" id="top">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -13,16 +13,20 @@
     <meta property="twitter:title" content="Racket and Chip-8">
     <meta property="twitter:description" content="On contemplating opcodes.">
     <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
     <link rel="stylesheet" href="../../css/main.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
 </head>
 
 <body class="cont page">
-    <section class="main-2">
+    <section class="b-main-2">
         <p><a href="../">&lt; More Posts</a></p>
-        <h1 class="subtitle">Racket and Chip-8</h1>
+        <h1 class="b-subtitle">Racket and Chip-8</h1>
         <p>Published 15 November 2020 at <a href="https://kewbi.sh/blog/posts/201115/">Yours, Kewbish</a>. 1505 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
         
-        <div class="writing">
+        <div class="b-writing">
             <p>If all goes well, I will hopefully be attending the University of British Columbia this coming September - probably for computer science. As a first year, I&rsquo;m going to end up taking <a href="https://sites.google.com/site/ubccpsc110/">CPSC 110</a>. Unfortunately, CPSC 110 happens to be firmly entrenched in the language of Racket. Because I&rsquo;m also plan on challenging (credit by exam, they call it apparently) the course, and was thinking of getting some preliminary practise with Racket. It also seems like an interesting language overall, and I was a bit bored after adding an <a href="https://diveintoht.ml">editor to diveintoht.ml</a>. So, I decided to try something in Racket.</p>
 <p>That something is currently the skeleton of a <a href="https://en.wikipedia.org/wiki/CHIP-8">Chip-8 emulator</a>. Chip-8 was apparently historically used on the COSMAC VIP and run on the Chip-8 virtual machine, a sentence which I am not entirely sure I understand myself. I&rsquo;ve had about zero experience with trying to emulate or do anything lower level than <a href="https://kewbi.sh/blog/posts/200712/">CS50&rsquo;s C sections</a>. So, I thought this would be a fun challenge.</p>
 <p>Was trying to juggle learning a new programming language, the syntax of which was completely unlike anything I&rsquo;d worked with before, and wrapping my brain around hexadecimal and opcoes at the same time a good idea? Probably not, but I&rsquo;ve managed to do a decent chunk of work, and I thought I&rsquo;d write about it today.</p>
