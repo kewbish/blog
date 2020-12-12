@@ -1,7 +1,10 @@
 .b-grid-el {
-    font-size: 0.9em;
     padding: 3% 4.5%;
     text-align: left;
+}
+.b-grid-el p {
+    font-size: 0.8em;
+    line-height: 1.4em;
 }
 .b-grid {
     padding: 2% 0;
@@ -23,4 +26,11 @@
 }
 .b-writing > p {
     text-indent: 3%;
+}
+.b-subtitle {
+    font-size: 4.3em;
+}
+.b-sub-2 {
+    color: #888888;
+    margin-bottom: 0;
 }

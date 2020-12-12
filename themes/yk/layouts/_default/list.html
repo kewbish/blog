@@ -15,6 +15,7 @@
     <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
+    <link rel="stylesheet" href="../css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
 </head>
@@ -23,7 +24,7 @@
     <section class="cont page">
         <div class="main">
             <p><a href="../">&lt; Back to main</a></p>
-            <h1 class="subtitle">All posts - YK</h1>
+            <h1 class="b-subtitle subtitle">All posts - YK</h1>
             <p>A list of all posts, sorted by year and most recent. Subscribe via <a href="../index.xml">RSS</a>.</p>
             <div>
                 {{ range ((where .Site.Pages "Params.series" "post").GroupByDate "2006").Reverse }}
@@ -33,11 +34,11 @@
                     {{ $artCount = add $artCount 1 }}
                     {{ $wordCount = add $wordCount .WordCount }}
                 {{ end }}
-                <h1 class="sub-2" id="{{ .Key }}"><strong>{{ .Key }}</strong></h1>
+                <h1 class="b-sub-2 sub-2" id="{{ .Key }}"><strong>{{ .Key }}</strong></h1>
                 <p>{{ $wordCount }} words - {{ $artCount }} posts. </p>
-                <div class="grid">
+                <div class="grid b-grid">
                     {{ range .Pages.ByDate.Reverse }}
-                    <div class="grid-element">
+                    <div class="grid-element b-grid-el">
                         <h3 style="padding-bottom: 1%;"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
                         <p>{{ .Description }} - <small><em>{{ .PublishDate.Format "02 January 2006" }}</em></small></p>
                     </div>

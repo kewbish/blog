@@ -23,7 +23,7 @@
 <body class="cont page">
     <section class="b-main-2">
         <p><a href="../">&lt; More Posts</a></p>
-        <h1 class="subtitle">{{ .Title }}</h1>
+        <h1 class="b-subtitle">{{ .Title }}</h1>
         <p>Published {{ .PublishDate.Format "02 January 2006" }} at <a href="{{ .Permalink }}">Yours, Kewbish</a>. {{ .WordCount }} words. Subscribe via <a href="/index.xml">RSS</a>.</p>
         {{ if .Params.Dev }}
         <p>Also published on <a href="{{ .Params.Dev }}">Dev.to</a>.</p>
