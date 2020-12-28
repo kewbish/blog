@@ -5,10 +5,96 @@
     <link>https://kewbi.sh/blog/</link>
     <description>Latest Yours, Kewbish posts</description>
     <generator>Hugo + Yours, Kewbish</generator>
-    <lastBuildDate>Sun, 20 Dec 2020 19:05:08 -0800</lastBuildDate>
+    <lastBuildDate>Sun, 27 Dec 2020 19:16:35 -0800</lastBuildDate>
     
 	<atom:link href="https://kewbi.sh/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CPSC 110: 1b</title>
+      <link>https://kewbi.sh/blog/posts/201227/</link>
+      <pubDate>27 Dec 2020</pubDate>
+      
+      <guid>https://kewbi.sh/blog/posts/201227/</guid>
+      <description>On designing functions with HtDF.</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>Why I felt the need to <del>ruin</del> augment my Christmas week with some Racket, I don&rsquo;t know. It was fun to go through some HtDF material with CPSC 110 this week, however - surprisingly, it wasn&rsquo;t as tedious or repetitive as it seemed.</p>
+<p>For non-Racketers (Racketeers?), the HtDF recipe, or guide, I suppose, is a method essentially detailing <strong>H</strong>ow <strong>T</strong>o <strong>D</strong>esign <strong>F</strong>unctions. You write a signature (the types expected), the stub (the minimal function needed to get the function to run), the <code>check-expect</code>s (unit tests, basically), the template (the stub, but a little bit more), and the final function. While it does get slightly boring to do the same things for each function (and a bit annoying for small, one-line functions), Kiczales does remind people that it&rsquo;s not a must-follow for everything, but it&rsquo;s good guidelines.</p>
+<p>I also finally acquiesced and have started using DrRacket - I needed the stepper for the problem set checking. Besides, some of the distribution files that contain images are in some vaguely newline-filled format that doesn&rsquo;t read nicely in Vim. However, I managed to get vi-like keybindings via <a href="https://github.com/takikawa/drracket-vim-tool">this package</a>, which still works nicely. It&rsquo;s a lot easier to try things out in the REPL, and I can run check-expects aside.</p>
+<p>There wasn&rsquo;t much besides the actual recipe covered this week, so we&rsquo;ll see if this post might be a bit shorter. Also, see the <a href="https://kewbi.sh/blog/posts/201213/">CPSC 110 module 1a</a> post I wrote a couple weeks ago.</p>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>htdf recipe is a non-waterfall set of instructions to write and easily debug functions</li>
+<li>begin with writing a signature, listing the two types
+<ul>
+<li>forex, <code>Integer -&gt; String</code></li>
+<li>ensure this starts with two semicolons - Kiczales mentions that this is tested for (two semicolons start a line of comments, a single one goes at the end)</li>
+<li>sources conflict regarding whether to put the function name first, but for CPSC 110 don&rsquo;t</li>
+</ul>
+</li>
+<li>purpose statement =&gt; one line statement regarding the purpose of function
+<ul>
+<li>should be as specific regarding return paths as possible</li>
+<li>should specify what conditions should be met for a boolean function</li>
+</ul>
+</li>
+<li>function stub =&gt; define the function with its arguments
+<ul>
+<li>return an empty value for the function</li>
+<li>0 for integers, &quot;&quot; for strings, etc</li>
+</ul>
+</li>
+<li>write examples and wrap in <code>check-expect</code>s, which will function as unit tests
+<ul>
+<li>need to test each code path for example behaviour</li>
+<li>ideally number of tests should be around 3 (for boolean), one for each case</li>
+<li>DrRacket will highlight unchecked paths in orange</li>
+</ul>
+</li>
+<li>if tests fail on first run =&gt; expected, no functionality has run yet
+<ul>
+<li>just checking if well-formed</li>
+<li>if test fail later, consider the test itself if correct</li>
+<li>otherwise, check function definition</li>
+<li>however, both can also be incorrect, as Kiczales points out in the video</li>
+</ul>
+</li>
+<li>add a template, which is the stub but with a <code>...</code> and returning the argument
+<ul>
+<li>keeps track of all variables and what to do</li>
+</ul>
+</li>
+<li>finally, can copy paste and implement function
+<ul>
+<li>remember to test intermittently to catch problems as they come up</li>
+</ul>
+</li>
+<li>isn&rsquo;t a hard and fast rule, can use different steps along way
+<ul>
+<li>however, don&rsquo;t jump right into function definitions, which will lead to problems in future</li>
+</ul>
+</li>
+<li>if a problem is poorly formed, clarify all constraints and possible corner cases first</li>
+<li>(regarding problem sets and labs) keep htdf and htdd signatures, used by autograder</li>
+</ul>
+<h2 id="problem-set-and-lab">Problem Set and Lab</h2>
+<p>I still have no idea how the problem set to module timing system for CPSC 110 works. While in module 1a, the first problem set contained material about functions that was covered in module 1b and that I had, at the time, not done yet, so I left it for the next week. However, the first lab was entirely of material covered in module 1a. I&rsquo;m sure there&rsquo;s a schedule somewhere<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+<p>The problem set this week was actually quite interesting, and a good challenge level, I feel. I like that it&rsquo;s in a self contained starter file, and that you get to edit and make changes to each part. It reminds me a lot of CS50&rsquo;s distributions each week. Having each question target a specific area of knowledge and material taught in the module while giving everyone an even starting ground is beneficial, I feel, for my learning process. It makes everything feel a lot more manageable.</p>
+<p>Lab 1, the intro lab, was also very straightforward. I wasn&rsquo;t able to get access to the quiz, but it was simple material covered in the lectures. I like that each subpart is very short, and that it&rsquo;s sort of like a problem set. It was definitely good practise.</p>
+<p>I&rsquo;m not submitting anything for grading - I&rsquo;m still very unsure if I&rsquo;m <em>allowed</em> to be in this edx course at all. I figured that grading might be a bit of an issue, especially as I started the course later, but theoretically I might be able to properly do the course next semester?</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I&rsquo;ve recently found out I do have a possible chance at changing my student status to properly enroll in the course, but it&rsquo;s a bit late to do that for second semester. I&rsquo;d ideally like to challenge in the summer, but I also have several other plans. We&rsquo;ll see. In the meantime, I&rsquo;ve realized that CPSC 110 has a lot more modules than I&rsquo;ve expected, so I think finishing the course will take a lot longer, especially with work after winter break. Hopefully I&rsquo;ll be able to still preview before the April close date, and finish preparing for the summer.</p>
+<p>Happy holidays, and we&rsquo;ll see what I decide to write about in the new year. I&rsquo;ve got a lot more HCI topics to think through before I write about them, but I think they&rsquo;re interesting enough.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>[later edit]: Upon further inspection, I&rsquo;m pretty sure each week number corresponds to one complete module number. It probably makes more sense that (the hypothetical) week 1, problem set 1, lab 1, and module 1 (containing both module 1a and 1b) are supposed to be done together. I&rsquo;ll probably leave 1a and 1b as separate posts, but combine them in the future. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+]]></content:encoded>
+    </item>
     
     <item>
       <title>Branching</title>
@@ -1281,29 +1367,29 @@ latest <span style="color:#f92672">=</span> [
     <span style="color:#f92672">with</span>:
     <span style="color:#f92672">path</span>: <span style="color:#ae81ff">~/.cache/pip</span>
     <span style="color:#f92672">key</span>: <span style="color:#ae81ff">${{ runner.os }}-pip-${{ hashFiles(&#39;**/requirements.txt&#39;) }}</span>
-    <span style="color:#f92672">restore-keys</span>: <span style="color:#e6db74">|
-</span><span style="color:#e6db74">        ${{ runner.os }}-pip-
-</span></code></pre></div><p>This part sets up Python, using another premade Action, and sets the default Python version. Next, we set up the pip cache so we won&rsquo;t have to download the dependencies each time. More information about this part can be found <a href="https://docs.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions">on the GitHub site</a>.</p>
+    <span style="color:#f92672">restore-keys</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">        </span>        <span style="color:#ae81ff">${{ runner.os }}-pip-</span>
+</code></pre></div><p>This part sets up Python, using another premade Action, and sets the default Python version. Next, we set up the pip cache so we won&rsquo;t have to download the dependencies each time. More information about this part can be found <a href="https://docs.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions">on the GitHub site</a>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Install Python dependencies</span>
-    <span style="color:#f92672">run</span>: <span style="color:#e6db74">|
-</span><span style="color:#e6db74">    python -m pip install -r requirements.txt
-</span></code></pre></div><p>Here, we run one command to install the requirements from the <code>requirements.txt</code> file - here, just feedparser.</p>
+    <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">    </span>    <span style="color:#ae81ff">python -m pip install -r requirements.txt</span>
+</code></pre></div><p>Here, we run one command to install the requirements from the <code>requirements.txt</code> file - here, just feedparser.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Update README</span>
     <span style="color:#f92672">env</span>:
         <span style="color:#f92672">GITHUB_TOKEN</span>: <span style="color:#ae81ff">${{ secrets.GITHUB_TOKEN }}</span>
-    <span style="color:#f92672">run</span>: <span style="color:#e6db74">|-
+    <span style="color:#f92672">run</span>: |-<span style="color:#e6db74">
 </span><span style="color:#e6db74">    python get_post.py
-</span><span style="color:#e6db74">    cat README.md
-</span></code></pre></div><p>With this, we get the GitHub secret that auto-generated when using GitHub Actions, and then run the script we created earlier. Then, we <code>cat</code> this to README.md. Now, in our Action, our README will have updated (or not - more on that with the next block.)</p>
+</span><span style="color:#e6db74">    cat README.md</span>    
+</code></pre></div><p>With this, we get the GitHub secret that auto-generated when using GitHub Actions, and then run the script we created earlier. Then, we <code>cat</code> this to README.md. Now, in our Action, our README will have updated (or not - more on that with the next block.)</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Commit and push if changed</span>
-    <span style="color:#f92672">run</span>: <span style="color:#e6db74">|-
+    <span style="color:#f92672">run</span>: |-<span style="color:#e6db74">
 </span><span style="color:#e6db74">        git diff
 </span><span style="color:#e6db74">        git config --global user.email &#34;yourskewbot@notarealdomain.com&#34;
 </span><span style="color:#e6db74">        git config --global user.name &#34;YoursKewbot&#34;
 </span><span style="color:#e6db74">        git add -A
 </span><span style="color:#e6db74">        git commit -m &#34;Update blog posts&#34; || exit 0
-</span><span style="color:#e6db74">        git push
-</span></code></pre></div><p>We <code>diff</code> the two files. If they&rsquo;ve changed, then we set a configuration for our committer bot. Here, I&rsquo;ve just set it to some random information - this is what&rsquo;ll end up in Git history and in GitHub&rsquo;s contribution bar at the top of your repo. Then, as we normally do when committing code, we add all the files, commit them, and push them back to the repository. At this point, our README will have changed live.</p>
+</span><span style="color:#e6db74">        git push</span>        
+</code></pre></div><p>We <code>diff</code> the two files. If they&rsquo;ve changed, then we set a configuration for our committer bot. Here, I&rsquo;ve just set it to some random information - this is what&rsquo;ll end up in Git history and in GitHub&rsquo;s contribution bar at the top of your repo. Then, as we normally do when committing code, we add all the files, commit them, and push them back to the repository. At this point, our README will have changed live.</p>
 <p>See the full Action <a href="https://github.com/kewbish/kewbish/blob/master/.github/workflows/rss.yml">on my GitHub</a>.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>Now, every 6 hours, our Action will run and update our profile README. Hopefully, this was a good introduction to GitHub Actions, and now, you have a shiny new updating README! This was a really fun learning experience for me as well - now, I can be part of the cool GitHub Actions-powered README squad!</p>

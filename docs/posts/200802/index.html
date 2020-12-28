@@ -24,7 +24,7 @@
     <section class="b-main-2">
         <p><a href="../">&lt; More Posts</a></p>
         <h1 class="b-subtitle">Automating READMEs</h1>
-        <p>Published 02 August 2020 at <a href="https://kewbi.sh/blog/posts/200802/">Yours, Kewbish</a>. 1628 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
+        <p>Published 02 August 2020 at <a href="https://kewbi.sh/blog/posts/200802/">Yours, Kewbish</a>. 1626 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
         
         <p>Also published on <a href="https://dev.to/kewbish/adding-blog-posts-to-your-github-readme-with-python-58lm">Dev.to</a>.</p>
         
@@ -114,29 +114,29 @@ latest <span style="color:#f92672">=</span> [
     <span style="color:#f92672">with</span>:
     <span style="color:#f92672">path</span>: <span style="color:#ae81ff">~/.cache/pip</span>
     <span style="color:#f92672">key</span>: <span style="color:#ae81ff">${{ runner.os }}-pip-${{ hashFiles(&#39;**/requirements.txt&#39;) }}</span>
-    <span style="color:#f92672">restore-keys</span>: <span style="color:#e6db74">|
-</span><span style="color:#e6db74">        ${{ runner.os }}-pip-
-</span></code></pre></div><p>This part sets up Python, using another premade Action, and sets the default Python version. Next, we set up the pip cache so we won&rsquo;t have to download the dependencies each time. More information about this part can be found <a href="https://docs.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions">on the GitHub site</a>.</p>
+    <span style="color:#f92672">restore-keys</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">        </span>        <span style="color:#ae81ff">${{ runner.os }}-pip-</span>
+</code></pre></div><p>This part sets up Python, using another premade Action, and sets the default Python version. Next, we set up the pip cache so we won&rsquo;t have to download the dependencies each time. More information about this part can be found <a href="https://docs.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions">on the GitHub site</a>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Install Python dependencies</span>
-    <span style="color:#f92672">run</span>: <span style="color:#e6db74">|
-</span><span style="color:#e6db74">    python -m pip install -r requirements.txt
-</span></code></pre></div><p>Here, we run one command to install the requirements from the <code>requirements.txt</code> file - here, just feedparser.</p>
+    <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">    </span>    <span style="color:#ae81ff">python -m pip install -r requirements.txt</span>
+</code></pre></div><p>Here, we run one command to install the requirements from the <code>requirements.txt</code> file - here, just feedparser.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Update README</span>
     <span style="color:#f92672">env</span>:
         <span style="color:#f92672">GITHUB_TOKEN</span>: <span style="color:#ae81ff">${{ secrets.GITHUB_TOKEN }}</span>
-    <span style="color:#f92672">run</span>: <span style="color:#e6db74">|-
+    <span style="color:#f92672">run</span>: |-<span style="color:#e6db74">
 </span><span style="color:#e6db74">    python get_post.py
-</span><span style="color:#e6db74">    cat README.md
-</span></code></pre></div><p>With this, we get the GitHub secret that auto-generated when using GitHub Actions, and then run the script we created earlier. Then, we <code>cat</code> this to README.md. Now, in our Action, our README will have updated (or not - more on that with the next block.)</p>
+</span><span style="color:#e6db74">    cat README.md</span>    
+</code></pre></div><p>With this, we get the GitHub secret that auto-generated when using GitHub Actions, and then run the script we created earlier. Then, we <code>cat</code> this to README.md. Now, in our Action, our README will have updated (or not - more on that with the next block.)</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Commit and push if changed</span>
-    <span style="color:#f92672">run</span>: <span style="color:#e6db74">|-
+    <span style="color:#f92672">run</span>: |-<span style="color:#e6db74">
 </span><span style="color:#e6db74">        git diff
 </span><span style="color:#e6db74">        git config --global user.email &#34;yourskewbot@notarealdomain.com&#34;
 </span><span style="color:#e6db74">        git config --global user.name &#34;YoursKewbot&#34;
 </span><span style="color:#e6db74">        git add -A
 </span><span style="color:#e6db74">        git commit -m &#34;Update blog posts&#34; || exit 0
-</span><span style="color:#e6db74">        git push
-</span></code></pre></div><p>We <code>diff</code> the two files. If they&rsquo;ve changed, then we set a configuration for our committer bot. Here, I&rsquo;ve just set it to some random information - this is what&rsquo;ll end up in Git history and in GitHub&rsquo;s contribution bar at the top of your repo. Then, as we normally do when committing code, we add all the files, commit them, and push them back to the repository. At this point, our README will have changed live.</p>
+</span><span style="color:#e6db74">        git push</span>        
+</code></pre></div><p>We <code>diff</code> the two files. If they&rsquo;ve changed, then we set a configuration for our committer bot. Here, I&rsquo;ve just set it to some random information - this is what&rsquo;ll end up in Git history and in GitHub&rsquo;s contribution bar at the top of your repo. Then, as we normally do when committing code, we add all the files, commit them, and push them back to the repository. At this point, our README will have changed live.</p>
 <p>See the full Action <a href="https://github.com/kewbish/kewbish/blob/master/.github/workflows/rss.yml">on my GitHub</a>.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>Now, every 6 hours, our Action will run and update our profile README. Hopefully, this was a good introduction to GitHub Actions, and now, you have a shiny new updating README! This was a really fun learning experience for me as well - now, I can be part of the cool GitHub Actions-powered README squad!</p>
