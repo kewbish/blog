@@ -27,7 +27,7 @@
             <h1 class="b-subtitle subtitle">All posts - YK</h1>
             <p>A list of all posts, sorted by year and most recent. Subscribe via <a href="../index.xml">RSS</a>.</p>
             <div>
-                {{ range ((where .Site.Pages "Params.series" "post").GroupByDate "2006").Reverse }}
+                {{ range ((where .Site.Pages "Params.series" "post").GroupByDate "2006") }}
                 {{ $artCount := 0 }}
                 {{ $wordCount := 0 }}
                 {{ range .Pages.ByDate.Reverse }}
@@ -39,12 +39,12 @@
                 <div class="grid b-grid">
                     {{ range .Pages.ByDate.Reverse }}
                     <div class="grid-element b-grid-el">
-                        <h3 style="padding-bottom: 1%;"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-                        <p>{{ .Description }} - <small><em>{{ .PublishDate.Format "02 January 2006" }}</em></small></p>
+                        <h2 style="padding-bottom: 1%;"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+                        <p>{{ .Description }} - <em>{{ .PublishDate.Format "02 January 2006" }}</em></p>
                     </div>
                     {{ end }}
-                    {{ end }}
                 </div>
+                {{ end }}
             </div>
             <p><a href="../">&lt; Back to main</a></p><br>
             <br><br>
