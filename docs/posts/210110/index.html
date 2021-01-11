@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSS, bookmarks, &amp; Nitter</title>
+    <meta name="description" content="On centralizing media consumption.">
+    <meta property="og:title" content="RSS, bookmarks, &amp; Nitter">
+    <meta property="og:description" content="On centralizing media consumption.">
+    <meta property="og:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <meta property="og:url" content="https://kewbi.sh/blog/posts/210110/">
+    <meta property="twitter:title" content="RSS, bookmarks, &amp; Nitter">
+    <meta property="twitter:description" content="On centralizing media consumption.">
+    <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
+</head>
+
+<body class="cont page">
+    <section class="b-main-2">
+        <p><a href="../">&lt; More Posts</a></p>
+        <h1 class="b-subtitle">RSS, bookmarks, &amp; Nitter</h1>
+        <p>Published 10 January 2021 at <a href="https://kewbi.sh/blog/posts/210110/">Yours, Kewbish</a>. 2276 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
+        
+        <hr style="margin-bottom:-1%;">
+        <div class="b-writing">
+            <h2 id="introduction">Introduction</h2>
+<p>Over the past maybe two months, I&rsquo;ve been hoarding a list of nearly all the people I follow around the internet in a text file. It started out as a list of handles and websites for a small group of people, but quickly <a href="https://kewbi.sh/blog/posts/201220/">branched</a> out as I found new &lsquo;layers&rsquo; of interesting individuals. Through the power of The Algorithm™️ (and some branching), the list briefly expanded to a concerning length before I pruned it down to active, regular creators. Some of these people are on Twitter, others have a short writing project each week, and others put out long-form essays every so often that I find engaging. Whenever I was in need of something to productively procrastinate with, I&rsquo;d pop open the file, simply named <code>cool.md</code>, and go check in on what people had done in the last few days or so.</p>
+<p>With this new content regularly coming in, I&rsquo;d also developed a need to bookmark articles that I wanted to read either later, or keep in mind to revisit sometime in the future. This sort of thing would usually be from a site that had one or two pieces I wanted to keep an eye on, but not a site that I&rsquo;d want to consume content from regularly. To give you a sense of what fills this category, stuff like tutorials and productivity advice appears regularly. At the moment, I have a <a href="https://andymatuschak.org/prompts/">long essay</a> by Andy Matuschak I&rsquo;ve been meaning to read for the last week but haven&rsquo;t gotten the time to yet there. Apparently, people call files of this sort their &lsquo;attics&rsquo;.</p>
+<p>I&rsquo;ve been meaning to collate the websites and RSS feeds of the aforementioned people for a while, but hadn&rsquo;t bothered to set up an RSS reader yet. Most of the ones I&rsquo;ve seen have a reader view, folders, and favouriting - while that&rsquo;s certainly a must-have for some people, I was looking for something much simpler. Yet after scouring the Internet, I&rsquo;ve found that the intersection of my rather specific criteria seem to be the odd Chrome extension or Android app, instead of any established site. I&rsquo;d been searching for something small to work on over winter break, so I decided I may as well try to gain some insights into my content consumption<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> and do a bit of programming<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> as well.</p>
+<p>This is a log of what I&rsquo;ve done to build <a href="https://github.com/kewbish/matter">Matter</a>, my personal (very minimalistic) RSS reader, and also keep track of all the other feeds and bookmarks as well.</p>
+<h2 id="rss">RSS</h2>
+<p>I broke the contents of the <code>cool.md</code> up into three subsections: people (on Twitter), articles (personal websites, most with RSS feeds), and bookmarks (things I wanted to get around to reading someday). I decided to tackle the RSS reader first - I&rsquo;d live without checking Twitter, and keeping a list of bookmarks in a text file was not optimal, but fine for now.</p>
+<p>As mentioned in the introduction, I spent a while looking for RSS readers. I was leaning towards Feedly, but I also kind of wanted to work on a small project. (At least, that&rsquo;s my justification for it, I really have no idea why I decided this was a good idea either.)</p>
+<p>I wanted it to feel sort of like <a href="https://lobste.rs">lobste.rs</a> or <a href="https://news.ycombinator.com/">HackerNews</a> - just a simple collection of links. Most RSS readers were a bit overcomplicated, in my opinion, for what I wanted it to do: collect links so I could later <del>waste time</del> develop my personal knowledge with them. I wasn&rsquo;t very interested in a reading pane or annotations - those I could do in my notes repository, just to keep everything in one place. This way, I&rsquo;d avoid having to make more glue scripts to import and export and shuffle data around.</p>
+<p>I ended up with something like this:</p>
+<figure>
+    <img src="https://i.imgur.com/PB8bVVL.png"
+         alt="Figure 1. Matter, my personal RSS reader."/> <figcaption>
+            <p><em>Matter, my personal RSS reader.</em></p>
+        </figcaption>
+</figure>
+
+<p>It&rsquo;s basically a reskin of my blog&rsquo;s archive page, but I think that the simplicity makes it feel less addicting and less complicated-for-the-sake-of-marketing-and-features. I wanted to keep the same minimalist atmosphere I get from Lobsters and HN with Matter, and while the execution (read: code) was perhaps not very clean, it works nicely.</p>
+<p>I now find that it&rsquo;s a lot easier to remember what I&rsquo;ve read and where I&rsquo;ve read it - I have fewer sources to scour before I find the one post I was trying to think about. It&rsquo;s also nice that I can finally have one feed for everything. Reading now feels more engaging, rather than something I do purely out of boredom (which biases towards short articles and quick posts), though boredom still factors into when I read. Matter solves a lot of the annoyances I&rsquo;ve had with reading blogs: it felt like too much work to go around and click through all the links in the <code>cool.md</code> file, and I&rsquo;d often miss or re-find articles since I didn&rsquo;t have a central place to keep track of them. I like it so far, and we&rsquo;ll see how my usage of it changes in the future.</p>
+<p>I&rsquo;m also doing a little experiment with tracking articles over the month of January - I plan on writing a bit more about it at the end of the month.</p>
+<h2 id="bookmarking">Bookmarking</h2>
+<p>After I&rsquo;d gotten the RSS parsing done and dusted (somewhat less difficult than expected), I was also looking for a place to keep my temporary bookmarks. These are usually longer articles I don&rsquo;t have the time to read right this second, but that I&rsquo;d like to read in the near future. I try to group reading these over the weekend whenever I have a break (which is rather infrequently, but we&rsquo;re trying our best). With the <code>cool.md</code> file, I&rsquo;d usually reach for the shortest article, and often left longer articles, and those added earlier, for ages.</p>
+<p>I already keep a private Git repo with all my school and personal notes, and I thought this might be a good place to use it. Yes, I could have used Pocket, Evernote, or even the Chrome bookmarks bar (oh the horrors), but I wanted to sort of keep my bookmarks and my notes in the same place. The rationale was that I&rsquo;d be more inclined to take notes and track things down, but more about this at the end of January. I also sort of wanted Matter to be my singular feed and source that I could check regularly, sort of like an <a href="https://jetgirl.art/2019/07/21/rss-is-better-than-reddit-twitter-and-email-subscriptions-for-updates/">all-encompassing life thread</a>.</p>
+<p>So, I slapped together a simple function to pull in the list of comments from a GitHub issue. (Note, if you&rsquo;re going to do this, maybe remember to disable email notifications.) Through Matter, I can add new bookmarks (with or without a short note about its purpose), and delete ones I&rsquo;ve just read. As for technical details, the GitHub API is actually surprisingly painfree with comments and issues - I just had to feed it a repo, an issue number, and a PAT.</p>
+<p>With this, I notice that while I still kind of bias towards first reading shorter articles, I&rsquo;ve also been sort of encouraged to go in a vaguely chronological order (in terms of adding said article to Matter). I definitely also remember to refer to these more, especially as they display on the top of all my other RSS feeds and articles. I also perceive it as easier to add items, even though technically opening Matter and pasting in a link takes about the same time as opening a Markdown file and editing one in.</p>
+<h2 id="twitter">Twitter</h2>
+<p>I&rsquo;ve realized that, for someone who doesn&rsquo;t even have a Twitter account, I spend a relatively disproportionate amount of time on Twitter. It&rsquo;s mostly to keep up with a couple people whose work gets posted to Twitter first, as well as explore some of those branching threads that seem to come up every now and then. In the <code>cool.md</code> file, I kept the list of Twitter handles mixed with a list of blogs as well, and would go manually decide to check in on one whenever I was bored.</p>
+<p>However, this was a bit annoying - for all the supposed shortcomings of the Twitter feed, I&rsquo;d still say that having one place to catch up on the latest whatever is still markedly better than having to manually go through a bunch of profiles. I briefly toyed with the idea of actually creating an account and making a Twitter List for myself. However, I also realized that this would incentivize spending <em>more</em> time on Twitter, not streamlining the reading process, and end up not solving the problem.</p>
+<p>I looked around for some way to make an RSS feed out of certain Twitter handles without an account - after all, I now had an RSS reader, and I thought I might as well also use that for Twitter. There were some seemingly defunct projects available - <a href="http://twitrss.me/">twitrss.me</a> was one of the free ones I checked out. (It&rsquo;ll throw an internal server error if you try anything; I assume the project&rsquo;s a bit dead.) However, after enough searching, I found that <a href="https://nitter.net/">nitter.net</a> has an RSS feature.</p>
+<p>Upon a cursory search, I then found out that I could generate a <a href="https://github.com/zedeus/nitter/issues/83">single RSS feed for multiple users</a>. This was great - I&rsquo;d managed to create my own pseudofeed. However, upon loading it into Matter, I realized that the formatting of the RSS feed was a bit awkward. This was to no fault of Nitter&rsquo;s - what else would an expected title be besides, well, the tweet itself? The description also displayed the tweet, though, and because most tweets are longer than I&rsquo;d like for a single box in Matter, it ended up being a bit clunky<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>.</p>
+<p>It was at the moment I realized that Nitter was, well, an alternative Twitter interface. The same link I was using to aggregate RSS feeds could also be used to simply browse Nitter (after I removed the <code>/rss</code> bit). So far, it&rsquo;s been pretty great - I don&rsquo;t need to create an account of any sort, and I can&rsquo;t really comment or try to interact with things either. I scroll through the last dayIs tweets in the morning, mark down anything worth bookmarking in Matter, and then just go about the rest of my day. With this setup, I manage to limit my &lsquo;oh wait have I checked if xyz person&rsquo;s done anything&rsquo; moments.</p>
+<p>As I see it, Nitters&rsquo;s a bit of a read-only interface, which fits my purposes well. It&rsquo;s really easy to &lsquo;follow&rsquo; and &lsquo;unfollow&rsquo; users by removing them from the URL, and Nitter&rsquo;s also pretty good for going into individual tweets and such. The only issue I&rsquo;ve ever had with it is rate limiting, but that&rsquo;s to be expected without requiring any sort of API key from a user. Luckily, there are tonnes of <a href="https://github.com/zedeus/nitter/wiki/Instances">other Nitter instances</a>, so I can just swap out the URL and continue my doomscrolling.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>There&rsquo;s a constant inflow of information that has to pass through my brain for processing: the internet, school, people, and all the other miscellaneous work I have to do. Matter, and the methods I use to read through content that I&rsquo;ve written about above, are my attempts to distill things down to something that&rsquo;s more manageable. I don&rsquo;t want to spend ages scrolling through infinite feeds, but honestly, if I don&rsquo;t have anything else to fill the time with, I&rsquo;m probably going to revert to that. Matter reduces the friction that comes with reading things that actually interest me more - as a website (that I don&rsquo;t have to log in to), I can access it on my phone as well. This leads me to go read things I have in my Matter backlog, instead of scrolling Reddit, for example.</p>
+<p>I like building small things for myself (and releasing them and then realizing this fits absolutely no one except me, but that&rsquo;s alright) - it&rsquo;s more fun than trying to make things for people, I guess. This sort of ties into making your own tools - <a href="https://thesephist.com/posts/tools/">thesephist&rsquo;s post on the topic</a>, and <a href="https://www.robinsloan.com/notes/home-cooked-app/">Robin Sloan&rsquo;s</a> are both pretty great posts that I think encapsulate what I tried to do with Matter nicely.</p>
+<p>I haven&rsquo;t switched Matter to a public repo on GitHub yet, but I&rsquo;ll update this bottom paragraph when I do. I&rsquo;d like to clean up the code a bit more (probably unlikely given I have rather scuffed JS skills), and maybe tweak some of the bookmarking stuff. But for now, I&rsquo;m happy with it, and hey - for something I made for myself anyhow, that&rsquo;s enough.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>I used to really hate the phrase media consumption. It reminded me of that disease that novel characters always seemed to come down with, and also implied that we were being spoonfed content by a mysterious algorithm with no real choice in the matter. But really - that&rsquo;s exactly what&rsquo;s going on, isn&rsquo;t it? The Twitter recommended box comes up with three contacts of a given person, and nudges the user to go see what those people are up to as well. You don&rsquo;t have any influence over who comes up, so I suppose the only thing you can control is how you respond to that. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Admittedly somewhat unnecessary programming, since using a pre-existing reader would have worked just fine and saved a bit of winter break time, but I was looking for something to do anyhow. The experience of building this was a bit of a complementing contrast to the rest of the work I had to do. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>This did lead me to add a nice truncation feature for other websites' links that would overflow though, so I suppose it wasn&rsquo;t all bad. <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+            <p>- Yours, Kewbish</p>
+        </div>
+        <br><p><a href="../">&lt; More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>
