@@ -3,17 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://kewbi.sh/blog/posts/</loc>
-    <lastmod>2021-01-10T17:01:42-08:00</lastmod>
+    <loc>https://kewbi.sh/blog/posts/210124/</loc>
+    <lastmod>2021-01-24T19:19:00-08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://kewbi.sh/blog/posts/210110/</loc>
-    <lastmod>2021-01-10T17:01:42-08:00</lastmod>
+    <loc>https://kewbi.sh/blog/posts/</loc>
+    <lastmod>2021-01-24T19:19:00-08:00</lastmod>
   </url>
   
   <url>
     <loc>https://kewbi.sh/blog/</loc>
+    <lastmod>2021-01-24T19:19:00-08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kewbi.sh/blog/posts/210110/</loc>
     <lastmod>2021-01-10T17:01:42-08:00</lastmod>
   </url>
   
