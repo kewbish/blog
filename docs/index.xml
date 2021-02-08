@@ -5,10 +5,103 @@
     <link>https://kewbi.sh/blog/</link>
     <description>Latest Yours, Kewbish posts</description>
     <generator>Hugo + Yours, Kewbish</generator>
-    <lastBuildDate>Sun, 24 Jan 2021 19:19:00 -0800</lastBuildDate>
+    <lastBuildDate>Sun, 07 Feb 2021 19:11:56 -0800</lastBuildDate>
     
 	<atom:link href="https://kewbi.sh/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A Month of Articles</title>
+      <link>https://kewbi.sh/blog/posts/210207/</link>
+      <pubDate>07 Feb 2021</pubDate>
+      <author>Emilie Ma ◦ Kewbish</author>
+      <guid>https://kewbi.sh/blog/posts/210207/</guid>
+      <description>On tracking every single article I read in January.</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>I&rsquo;ve hinted at this before in my last two posts, but I&rsquo;ve been thinking more about the things I read: content, perspective, and contribution to my being in some form. As of now, content-wise, I prefer a mix of technology and meta-productivity or knowledge-building. Perspective-wise, I don&rsquo;t really have an opinion on, but seeing things from very passionate and very noncommital points of view can be interesting. Recently, I&rsquo;ve been mostly thinking about how what I read fits in, contribution-wise.</p>
+<p>This started with me doing a decent chunk of self-study of maths, physics, and some CS over the summer. I was reading a lot of drier information each day, but most of it was material I needed to cover (well, not needed, but wanted to, for the sake of pre-reading) and properly remember. Trying to take proper notes and a library of references I could look back to later was not the most innovative or impactful summer project, but at least it helped me build a sense of what I liked in content, and what role I wanted consuming that information to play in my daily life.</p>
+<p>While trying to teach myself, I started to notice that there were certain information &lsquo;aesthetics&rsquo; that I tended towards. I have a thing both for older, pre-&lsquo;CSS is important&rsquo; era university sites, where math profs simply share their knowledge without any ulterior motive; and newer sites that perhaps contained interactives, or more casual information sharing. My article aesthetic now is similar - I tend towards finding indie personal sites, rather than &lsquo;popular&rsquo; blogs with share buttons plastered all over. However, finding those articles and websites is pretty difficult - how do I search for &lsquo;small blogs that write generally about programming but in a easy-to-understand way&rsquo;?</p>
+<p><a href="https://findka.com">Findka</a>, so far, has been eerily good at recommending things that I&rsquo;m actually interested in - I suppose the closer and more active user base has something to do with that<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Despite not nearly having the popularity of other forums like r/programming and dev.to, it strikes a nice balance of articles outside my interests, and articles that align well with them. It&rsquo;s become much easier to find a couple articles to read a day to satisfy my productive procrastination needs, rather than having to scroll through other sites with a much higher noise to signal ratio.</p>
+<p>However, I still found that I was trying to skim through a bit too much each day. I was still alt-tabbing to go off on blog post tangents when I&rsquo;d set out to do something completely different, and I wanted to try to curtail that as much as possible. With the new year, and all the vague self-improvement energy that saturates the internet, I decided to track every article I read for the month of January (spoiler: I have somehow trained myself to subconsciously continue this, well into February). I was looking to see what insights I could gain, and observe if consciously tracking things would make a difference in what and why I was reading.</p>
+<h2 id="the-rules">The Rules</h2>
+<p>I&rsquo;ll go into how I tracked and counted these articles exactly in a bit, but I&rsquo;d like to explain my materials and methods first. (I will try my best not to turn this into a giant lab report.) I imposed a couple of rules on what counted as an article to track or not, mainly to keep statistics more consistent.</p>
+<ul>
+<li>I&rsquo;d keep forum-like sites out of the article count - things like Reddit, Lobste.rs discussions, Twitter threads and StackOverflow pages wouldn&rsquo;t count.</li>
+<li>Speaking of StackOverflow, tutorials and other technical references also weren&rsquo;t included. Documentation for libraries, looking up regex, or following some walkthrough to set something up, for example, fall into this category.</li>
+<li>Content required for schoolwork was not included as well - the point of this experiment was to track what I was reading outside of school, not how much I was studying.</li>
+<li>I allowed myself to skim the first paragraph-ish to determine if I&rsquo;d like to read the article fully or not, and then track the article. I was definitely also allowed to stop reading the post at any time, but by any point after the first hundred-ish words, the article would already be tracked.</li>
+<li>Every single article besides that would be counted - blog posts, Reddit and Twitter links, Findka recommendations would all count towards the day&rsquo;s total.</li>
+</ul>
+<h2 id="the-graphs">The Graphs</h2>
+<p>So we&rsquo;ve come to the graphs, of which there are only two - I think they encapsulate most of the data well enough, and leaves out the parts that I&rsquo;d rather not share (for example, the list of posts I read). One shows a total of articles read per day, with a three day rolling average, and the other shows a distribution of the times I read any article each day.</p>
+<figure>
+    <img src="https://i.imgur.com/0ChbUQV.png"
+         alt="Figure 1. A graph showing articles read per day"/> <figcaption>
+            <p><em>Figure 1. Articles read per day.</em></p>
+        </figcaption>
+</figure>
+
+<p>You can see a large spike in the beginning of the experiment - I&rsquo;ve coloured those bars a darker grey because I don&rsquo;t think they represent what I was actually reading. If I go back through the Google Sheet (more about technical implementations later) that houses all my responses, there&rsquo;s a lot of repeated links clustered very close together, so I&rsquo;m going to assume I was trying to figure out how to make the technical bits and pieces work together.</p>
+<p>There&rsquo;s also a pretty significant dip in the middle of the experiment - it was already coming to the end of term, and there was a steady influx of homework, leaving less time for reading. It&rsquo;s interesting to see how homework has such a significant impact on what I can consume content-wise, but that&rsquo;s sort of expected anyhow.</p>
+<p>I&rsquo;d also like to mention that I went from 5 Findka articles a day, to 3, somewhere in that second week, which ended up increasing back to 4 in the third. I&rsquo;ve been increasingly turning to Matter and Findka (on Matter, yay RSS feeds!) more instead of scrolling through aggregators, so a fluctuation in articles there generally correlates with changes in reading.</p>
+<figure>
+    <img src="https://i.imgur.com/CAnUol8.png"
+         alt="Figure 2. A graph showing time distribution for article readings per day."/> <figcaption>
+            <p><em>Figure 2. Time distribution for article readings per day.</em></p>
+        </figcaption>
+</figure>
+
+<p>If you&rsquo;d like some raw numbers:</p>
+<ul>
+<li>I read 174 articles over 26 days - short and long form are included</li>
+<li>That averages to around 6.69 articles a day over the entire range</li>
+<li>Each week, I averaged a different number of articles:
+<ul>
+<li>The first week (I was doing a lot of testing with my Shortcuts and things), I averaged 9.5 per day</li>
+<li>The second week, I averaged 4.6 articles a day</li>
+<li>The third week, I averaged 4.4 articles per day</li>
+<li>For the last week of the experiment, I averaged 5.5 a day</li>
+</ul>
+</li>
+</ul>
+<h2 id="the-findings">The Findings</h2>
+<p>I suppose that this would be the discussion part of this pseudo-lab report, so let&rsquo;s get into some expectations, findings and takeaways.</p>
+<p>My hypothesis going into this entire tracking experiment was that by being more conscious about what and when I was reading, I&rsquo;d manage to self-regulate more impulsive reading sprees, and check the productive procrastination that sometimes ticks in. Before I started this, I had a bit of a reflex to just Ctrl-T, open up a new tab, and sort of spam whatever into the omnibox before my brain consciously processed what I was doing, and then close the tab. (Oddly enough, I ended up not going down those rabbit holes most of the time anyway, but it was a bit annoying to accidentally keep opening and searching around for things to procrastinate with.)</p>
+<p>In the rules, I explicitly stated that I wouldn&rsquo;t include Reddit, Twitter, or discussion threads in the totals for each day. I thought that this would lead me to spend proportionally more time there, but I don&rsquo;t think it&rsquo;s made a significant difference. I think that having to explicitly log what I was reading while giving myself planned time to read reduced the urge to go look for something to read well enough. At the moment, I go through my Findka, Matter, and Nitter in the morning, and I&rsquo;ve realized that there&rsquo;s really no point in checking much more frequently - people don&rsquo;t create meaningful content in 15 minute intervals. It feels more satisfying to go through a larger chunk of content anyways, though I can&rsquo;t measure how much of this was due to the tracking in any quantifiable numbers. Creating a regular schedule for reading through things, and keeping myself accountable with the log, was surprisingly useful.</p>
+<p>Speaking of surprises, tracking every single link I&rsquo;d read over the past month has built up sort of a library effect. While retention of points isn&rsquo;t something I&rsquo;ve explored in my data at all, I have less of an issue finding really great articles and then losing them in my browser history. I know that everything I&rsquo;ve read is in a central location, and it&rsquo;s much easier to find things in one place than to search for that place, and then for the article I&rsquo;m looking for<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>. (It&rsquo;s also probably useful to mention that I do generate summaries of what I&rsquo;ve read each week to review and see what I&rsquo;d like to take away from.) I find that I can at least vaguely remember what I&rsquo;ve read better - especially since I try to consciously choose better articles to &lsquo;commit&rsquo; to when I track them.</p>
+<p>Going back to the raw data, and the charts I put in the section above, it&rsquo;s interesting to see how the amount of schoolwork (a non-tracked item, but something I can very clearly remember) has an impact on my reading. It&rsquo;s probably just because of how I organize my days - if I really have homework to catch up on, I&rsquo;ll work in the time that I have scheduled out for checking various social media, which pushes the reading to the next available block of time (which, if I&rsquo;m busy, would be in a while). It&rsquo;s also interesting to see that, even with heavy workloads, I kept up with most of my recommendations and reading, never going a day without reading at least something. I think it&rsquo;s valuable to set aside time to see what others have written about, so that&rsquo;s a habit I think I&rsquo;d like to continue.</p>
+<p>If I scan the time logged for each article logged, I can see two main blocks - morning and night. (Disregarding the first couple days - those long runs are probably from when I was testing out my system.) It&rsquo;s interesting that I read very consistently at night, and a bit less, though still very consistently, in the mornings. (Let&rsquo;s pretend the ones in the middle are me during breaks and not me █████ █████████████ in █████.)</p>
+<p>I have no other data to compare my totals against (I can&rsquo;t exactly just search up blog post total articles spent), so I also have absolutely no idea how my consumption &lsquo;ranks&rsquo; to the average population. Maybe I spend a lot more time compared to other people, maybe I don&rsquo;t. I&rsquo;d be interested to see how others perform this experiment and how it changes their views, but it&rsquo;s also not a data comparison I&rsquo;m that interested in.</p>
+<p>In terms of sources of error (always a fun section to write in labs), I can&rsquo;t think of much besides a) not balancing for word counts and b) mixing the testing / development data in with the actual end data. I don&rsquo;t think it makes too much of a difference for point a if you consider ideas absorbed instead of purely articles read, or their length. In terms of point b, I think it&rsquo;s fine to just ignore days 6 through 8, and pretend I started the entire experiment a little later.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>There was an interesting article <a href="https://junglegym.substack.com/p/the-t-shaped-information-diet">about the T-shaped approach to content</a> that I read recently, which discusses the types of information that you choose to consume. That was something I tried to keep in mind throughout the experiment, and I think that, considering my findings and my managing to train myself not to unconsciously alt-tab away to be unproductive when I work, the experiment can be considered a success.</p>
+<p>In lab reports, this is the part where I try to convince you how relevant this research is, and how it can be applied. In terms of relevance and application, there&rsquo;s not much else besides being a bit more aware of what content you consume. That, and keeping extremely detailed data on your reading habits, which might appeal to some. I wouldn&rsquo;t recommend this to someone, nor would I advise against it - it&rsquo;s pretty fun to do, and an interesting dataset to analyze later.</p>
+<p>In the future, I might like to look at how I use forum sites instead: an area that I specifically left out of this post. That, combined with more productivity-oriented research, might be an interesting area of self-experimentation. I can&rsquo;t figure out a way to analyze the subject matter or word count of each post, but I&rsquo;m pretty happy with the data I&rsquo;ve managed to collect so far. I&rsquo;m still continuing this experiment - I&rsquo;ll probably continue to track everything this year. Because of how I designed the Chrome extension and the shortcut, the friction of adding a new article is close to none, meaning I&rsquo;ll be more likely to continue using it anyway. It&rsquo;s become a new reflex anyway, and I think having this big of a dataset to analyze maybe later in the year will provide additional interesting insights.</p>
+<h2 id="appendix-technical-meanderings">Appendix: Technical Meanderings</h2>
+<p>This is the part that fellow nerds might find mildly interesting, but that you should feel free to skip. Some of the work I did with the tracking inspired the <a href="https://kewbi.sh/blog/posts/210124/">hyperpersonalization</a> post I wrote earlier, while I was continuing this experiment on my own. I&rsquo;ll try to briefly explain how everything gets logged, and leave some trails for interested parties to follow up on.</p>
+<p>I knew right off the bat that I wanted the process of logging to be as simple as possible - that meant a maximum of one click away on my laptop, and from the share sheet on my phone. Instead of trying to rig up some complicated API and spin up a Heroku server, I decided to go a simpler route: a simple Google Form, linked directly to a Google Sheet. The form has a field for the URL of the post and notes (I didn&rsquo;t end up writing notes as I read, but rather later at the end of my week during my review), and automatically fills in the exact time the form was submitted.</p>
+<p>However, I obviously wouldn&rsquo;t <em>fill in a form manually</em> - we have automation to overengineer! Google Forms have a great link function, where you can autofill and submit a form from just a link. From the form link, something like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">https://docs.google.com/forms/d/e/{id}/viewform/
+</code></pre></div><p>you can get to something like</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">https://docs.google.com/forms/d/e/{id}/formResponse?usp=pp_url&amp;{key}={val}&amp;{key}={val}&amp;submit=Submit
+</code></pre></div><p>You can get this from getting a prefilled link within Google Forms itself.</p>
+<p>I managed to slap this into a fetch inside a Chrome extension, which I then bound to a keyboard shortcut. I also slapped this fetch into a iOS Shortcut by enabling share sheet for the shortcut, and getting the URL from the input to put into a &lsquo;Get Contents of URL&rsquo; block. I can then log articles from my phone and my laptop super easily, which was a major reason the experiment went so well. I expect there&rsquo;s a similar shortcut-maker for Android, but iOS Shortcuts feel so snappy to make. You might also want to reference <a href="https://www.reddit.com/r/shortcuts/comments/bp735g/how_to_add_rows_to_google_sheets_from_a_shortcut/">this brilliant guide</a>, and adapt it for whatever platform you&rsquo;re planning to track on.</p>
+<p>I then wrote a simple Python script to persist a &lsquo;row last read&rsquo; count of the Sheet in a file, and parsed the CSV values since the last pull with <code>csv</code> and <code>requests</code>. That all gets sent into a Markdown file for me to process and read through at the end of the week. I can also download a full CSV file to process the data in an external app directly from Sheets.</p>
+<p>None of the above is open source at the moment, but I trust the guide and the Internet can get you to what I&rsquo;ve managed to do in much shorter time than it took me to even try to figure out how to do it.</p>
+<p>In terms of <a href="#the-graphs">the graphs</a>, those were generated with a little bit of pivot table magic in LibreOffice Calc. The first required a little bit of summing each day together, and the other required just inserting a normal chart and editing the major gridlines to fit with the whole times-as-fractions that LO does. It took much more time than I&rsquo;m willing to admit, but all in the name of science, right?</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>I can&rsquo;t figure out if it&rsquo;s just a relatively small number of users, or really similar tastes, but it&rsquo;s got to the point that my friends have made a game out of trying to figure out which articles I submit, with scary accuracy. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>This is part of the reason why I also built Matter - it&rsquo;s one place to look for things, as opposed to over several different aggregators. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+]]></content:encoded>
+    </item>
     
     <item>
       <title>Hyperpersonalization</title>
@@ -583,54 +676,6 @@ cd ~/EVB/
 </li>
 <li id="fn:3" role="doc-endnote">
 <p>Though I <em>was</em> looking at Curses for Python, and that seems relatively painless. Doesn&rsquo;t seem to be a proper Curses library for Racket that I&rsquo;ve found ye. However, I&rsquo;m also entirely unsure how package management in Racket even works. A problem for later. [edit: I found <a href="https://github.com/dys-bigwig/racket-ncurses">racket-ncurses</a>, which looks like it should work!] <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</section>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>@everyone</title>
-      <link>https://kewbi.sh/blog/posts/201108/</link>
-      <pubDate>08 Nov 2020</pubDate>
-      <author>Emilie Ma ◦ Kewbish</author>
-      <guid>https://kewbi.sh/blog/posts/201108/</guid>
-      <description>On notifications and muting them.</description>
-      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
-<p>Backtracking on what I said in the <a href="https://kewbi.sh/blog/posts/201101/">last blog post</a>, I&rsquo;d like to retract my statement that:</p>
-<blockquote>
-<p>Email, and Teams, I find, tend to be more of those ‘check once or twice a day’ things.</p>
-</blockquote>
-<p>In fact, they&rsquo;re probably equally as attention sucking, especially since (in my case) we&rsquo;re constantly being reminded to check, and <em>need</em> to check, in order to get the latest information. That information tends to change on a daily and even hourly basis sometimes, so I do understand why we need reminders to check. If something urgent does come up, and it does so between my (past) twice a day check, then I&rsquo;m probably going to miss it.</p>
-<p>Notifications are now very embedded into my life, at least. I have the (ir)rational fear that I&rsquo;ll miss one of those properly urgent pings, such as for a same-day assignment or change in plans that goes into effect very soon, and see it too late for me to have handed in whatever was due, or process the new plan. To somewhat offset this fear, I&rsquo;ve turned on notifications for pings from Teams / Slack / whatever, because I tend to not check those very frequently. I keep Discord on only for mentions<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, and opt out of pings or mute specific channels whenever possible.</p>
-<p>At this point, I don&rsquo;t think I&rsquo;m going to be free from notifications any time soon, and that&rsquo;s fine - I spend the time to tune my pings so that only what I consider urgent enough gets to appear as a shiny red badge alerting me that I have indeed missed something. I try to be relatively cognizant of the nature of pings (oh no - this is relevant and you should probably open it now!) and avoid pinging people when possible. However, I find that people tend to have a more cavalier attitude regarding pings, and just ping for very small things. I&rsquo;m fine with this from smaller friend servers, but when it&rsquo;s a giant email list with about a hundred-ish people in it, that adds up to a lot of &lsquo;oh, that&rsquo;s just a reply all.&rsquo; moments.</p>
-<h2 id="reply-all">Reply All</h2>
-<p>A rather recent incident of this<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> was with the aforementioned mailing list problem. An email was sent from an organizer with everyone in the To: field requesting a form. That&rsquo;s all fine and well. But then not once, not twice, but three entire times, people decided to reply, with their form (which had names attached to it, but nothing too personal - though imagine the consequences!), and send that to everyone.</p>
-<p>As I mentioned in the previous post, I&rsquo;d like to reduce the amount of things I have to process and sort out, so I was rather annoyed. It&rsquo;s a minor thing, but it adds up in time and effort spent for everyone.</p>
-<p>I&rsquo;m not entirely sure if people are aware that they&rsquo;re replying to everyone, or if they&rsquo;re intentionally doing it. Apparently, Gmail has a feature to make replying to all the default, which probably seems like a good idea with smaller chains, but is rather disastrous with giant email lists as in this situation.</p>
-<p>A solution, I suppose, is making it more difficult to reply all. A simple &lsquo;are you sure&rsquo;, similar to Discord&rsquo;s preview when pinging over thirty people (I forgot the exact limit), might help. Alternatively, BCCing people might be more efficient, and the people starting the chain may as well be doing it for privacy reasons.</p>
-<h2 id="tuning-notifications">Tuning Notifications</h2>
-<blockquote>
-<p>[xyz]: why are y&rsquo;all so annoyed when getting pings?</p>
-</blockquote>
-<p>The above is something people touch on often in class, group, and most servers. They have the same reasons as I did in the introduction - they&rsquo;d rather make sure they see everything and deal with more pings than necessary than miss something. I guess the thing is, though, I&rsquo;ve already tried to minimize what is vying for attention, and if I&rsquo;m going to be on whatever platform anyway, it&rsquo;s a bit redundant.</p>
-<p>When I get spam pings, the reflex is just to mute the channel or app or conversation or whatever it is that happens to be blowing up my feed. But this comes with the downside of also reducing the focus of it, and I find that I end up ignoring most of the channels that I mute. (I suppose I could also block one individual person, but then I wouldn&rsquo;t see their non spam messages, which is probably worse.)</p>
-<h2 id="platforms">Platforms</h2>
-<p>Communication, along with the need for quick, efficient communication, has skyrocketed as we work and learn and code from home. We&rsquo;re expected to respond quickly, and especially since for me, my grades are on the line, it&rsquo;s a responsibility. Notifications are starting to feel like an all-or-nothing situation. I either remain with my tab open all day, keep push / badges on, or rely on my schedule and memory to check.</p>
-<p>This is all shifting us towards synchronous communication, which, for most things, is probably a must. But to communicate with, and fight for someone&rsquo;s attention amidst a sea of other pings and unreads, we turn more to pings. Originally, a ping meant something was super urgent, but now, sometimes it&rsquo;s just for a quick joke.</p>
-<p>Maybe part of the reason for spam pings is that it&rsquo;s so easy to do so. A quick <code>@everyone</code> away, and the entirety of a server or channel is summoned. Most of the time, it&rsquo;s for not super urgent things (ghost <code>@channels</code>, I&rsquo;m looking at you), which makes it frustrating when I resolve to finally turn notifications for something on again.</p>
-<p>This all being said, I&rsquo;d like to end with a counterexample: the <code>@notifs-on</code> role, or the selective ping role. By default, everyone can have this applied. That&rsquo;s fine. But it&rsquo;s nice to give people an option to opt out, kind of like email unsubscribe links. By unsubscribing, you <em>know</em> that you&rsquo;re going to lose out on whatever material&rsquo;s in the next newsletter, but you&rsquo;re aware of that, and fine with that. Here, you&rsquo;d know that you&rsquo;re not getting the notification, but you&rsquo;re expected to check anyway. I really appreciate at least giving people the choice - though when that gets abused, and people return to <code>@everyone</code>ing &lsquo;because it&rsquo;s important&rsquo;, the issue still returns.</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>So how do we reach each other? Do I turn off notifications and have to remember to check manually, or do I just deal with them? For most, I end up just dealing with them. It&rsquo;d have to be part of a larger shift and larger awareness of the effect of a ping. And this debate&rsquo;ll probably never end, because people will always disagree with whether or not something was <code>@everyone</code> worthy, or <code>@notifs-on</code> worthy, or even worthy of a message at all.</p>
-<p>For now, I guess, I&rsquo;ll just selectively mute and selectively unmute when I see fit, and perhaps nudge people as a reminder when the reply all problem resurfaces again.</p>
-<section class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1" role="doc-endnote">
-<p>Mentioning this was probably not a good idea, please do not spam me or I will mute you. (I suppose this ties into my points later on.) <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2" role="doc-endnote">
-<p>Yes, this is the reason I was going on about how people don&rsquo;t know how to properly use email or the reply all button. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
