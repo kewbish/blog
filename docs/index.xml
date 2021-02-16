@@ -5,10 +5,47 @@
     <link>https://kewbi.sh/blog/</link>
     <description>Latest Yours, Kewbish posts</description>
     <generator>Hugo + Yours, Kewbish</generator>
-    <lastBuildDate>Sun, 07 Feb 2021 19:11:56 -0800</lastBuildDate>
+    <lastBuildDate>Sun, 14 Feb 2021 17:25:28 -0800</lastBuildDate>
     
 	<atom:link href="https://kewbi.sh/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>After Code-in</title>
+      <link>https://kewbi.sh/blog/posts/210214/</link>
+      <pubDate>14 Feb 2021</pubDate>
+      <author>Emilie Ma ◦ Kewbish</author>
+      <guid>https://kewbi.sh/blog/posts/210214/</guid>
+      <description>On GCI&#39;s impacts over the last year.</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>Yes, today is Valentine&rsquo;s, and today is three days before something is due, but today is also exactly one year after I wrote the first post on Yours, Kewbish. (I think I thought the date would be funny, but that&rsquo;s besides the point.) I know absolutely everyone says this, but it&rsquo;s hard to believe it&rsquo;s been a year already. The span of time between last February and now feels like ages ago, but it also feels extremely short. Quarantine and the endless routines of work have morphed time into some non-Newtonian fluid, and I can&rsquo;t make sense of how it&rsquo;s been an entire year since then.</p>
+<p>In this past year, (yes, I know everyone says this as well) I genuinely feel like I&rsquo;ve gained so much: in terms of friendships, experiences, and skills, even though it&rsquo;s all been behind a screen. Essentially living online has its challenges, but I honestly wouldn&rsquo;t regret the past year in any terms. I never did a proper year in review, so maybe this might be a nice place to catalogue my progress over the last three hundred something days.</p>
+<h2 id="gci">GCI</h2>
+<p>GCI stands for Google Code-in, one of Google&rsquo;s sadly now terminated competitions, and the subject of <a href="https://kewbi.sh/blog/posts/200214/">my first YK post</a>. In short, several thousand teenagers from across the world slaved away day and night for two months to make at least somewhat useful contributions to open source. It&rsquo;s aimed to introduce open source to a larger teen audience, and in that respect, I think it&rsquo;s accomplished its goal excellently. Despite the slight dip in my grades and general impact to my mental health, I wouldn&rsquo;t have gotten to where I am without the competition. Though I would hesitate to repeat the experience, I&rsquo;m glad I participated: it&rsquo;s served as an accelerator for my development in, well, development.</p>
+<p>In retrospect, GCI may not have been the best at encouraging people to go in-depth into technologies (perhaps a side effect of the tasks instead), but it&rsquo;s an excellent opportunity to explore a large amount of areas in open source. (It leans heavily on breadth, though to succeed, you&rsquo;ve also got to balance in depth with more difficult tasks.) The list of areas GCI introduced me to includes, but is not limited to: bash scripting, Linux, VMs and trying to get those to network, KML + other Google Earth-specific features, Arduino, and a bunch of different languages and scripts. I&rsquo;ve probably already forgot all the tasks and problems I puzzled through in my spare time those seven weeks, but I&rsquo;m sure there&rsquo;s much more that I&rsquo;ve learned.</p>
+<h2 id="experiences">Experiences</h2>
+<p>Besides inspiring me to investigate these areas, GCI also prompted me to go discover a host of development opportunities and companies that offered internships and programs. I&rsquo;ve had decent successes, and I can&rsquo;t help but trace their inspirations and origins back to GCI.</p>
+<p>I think one story particularly stands out: after GCI, I noticed a collection of developers on Dev.to, another technical community, which was running a hackathon at the time. Originally, I had planned to participate just for the participation prizes, but I ended up <a href="https://github.com/kewbish/revshare">surprisingly winning</a>. I was in physics class when they announced the winners, and it took me approximately the duration of one practise problem to actually realize I was on the list. With the work from this hackathon, I continued to work on <a href="https://github.com/kewbish/revshare-gh">another smaller project</a>, which became my CS50 project. I&rsquo;m still regularly checking in on the Web Monetization proposal every so often, and I&rsquo;m excited to see how the implementation and adoption of other WM ideas go in the future. I can see so many connections between the programs I&rsquo;ve participated in in the past, and despite COVID, I&rsquo;m grateful for where I&rsquo;ve come to with these projects.</p>
+<p>I genuinely credit GCI with rapidly accelerating my development skills, as well as with letting me meet a bunch of amazing mentors, developers, and friends. There are too many to list and link (and I&rsquo;d feel rather bad about missing people), so I&rsquo;ll just leave this in as a very appreciative acknowledgement of everyone in the community. Without GCI, I don&rsquo;t think I&rsquo;d have applied to various fellowships, participated in a myriad of hackathons, started writing this very blog, or even switched to Linux<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. It&rsquo;s truly unfortunate that the program&rsquo;s shut down - I would have had so much fun mentoring and giving advice in later years. Oh well.</p>
+<h2 id="writing">Writing</h2>
+<p>I also want to touch briefly on writing, and this blog in general. I started writing more frequently because of Dev.to (and found Dev.to through GCI - all the roads lead back to one place). I built a rhythm there, but continued it even as I drifted away from crossposting there. Though I cringe when I look back on older posts, I think Yours, Kewbish has still been a valuable way to keep track of what was in my mind and when last year. It&rsquo;s only been a year, but keeping memories alive on my blog will be a fun way to look back when I&rsquo;m a bit older.</p>
+<p>Maybe it&rsquo;s just my subjective opinion, but I also think my writing style and skills have slightly improved throughout this experience. I think that writing so often led me to begin to understand what my voice is, and I look forward to continuing to develop it as I grow. Part of it&rsquo;ll come with time, I hope, but having weekly (now, somewhat less frequently) posts to write also made me realize what ideas I had that I wanted to share with <del>the, what, four people who read my blog</del> the world. I&rsquo;d like to continue writing here as frequently as I can - I&rsquo;ve plotted out a bunch of ideas I have for things I&rsquo;d like to write, if I have the time.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>A lot has happened this year. I think 2020, while it was perhaps not the best year in other regards, was the first year I became more involved in programming, furthering not only my technical skills, but also my depth of experiences and opportunities. I&rsquo;ve made a lot of friends, a lot of memories, and had a lot of fun this year despite everything that&rsquo;s been going on in the world, and I&rsquo;m grateful for that. There won&rsquo;t be a GCI in 2021, but there&rsquo;ll be other opportunities for me to have a go at. I don&rsquo;t know what my GCI, or my yearly accelerator, will be this year, but I have a feeling it might be university.</p>
+<p>I suppose this wouldn&rsquo;t be complete without thanking whoever&rsquo;s reading this: thank you for tolerating my overly nerdy, sometimes long and windy, very quirky writing, and thank you for following along as I try to figure out what I&rsquo;m developing. I&rsquo;d be writing this regardless, even if it were to an audience of 0, but thanks for getting all the way here<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>I also suppose GCI is therefore responsible for me being called &lsquo;Linux kid&rsquo;, but it&rsquo;s tolerable and endearing enough. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Unless you&rsquo;re reading this in voice, and I&rsquo;m deafened in the corner, in which case I will rescind my thanks. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+]]></content:encoded>
+    </item>
     
     <item>
       <title>A Month of Articles</title>
@@ -632,51 +669,6 @@ cd ~/EVB/
 </li>
 <li id="fn:2" role="doc-endnote">
 <p>And on another, slightly more quantitative note, I managed to hit 50k words on this blog! Five weeks ahead of schedule, so that&rsquo;s something. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</section>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Racket and Chip-8</title>
-      <link>https://kewbi.sh/blog/posts/201115/</link>
-      <pubDate>15 Nov 2020</pubDate>
-      <author>Emilie Ma ◦ Kewbish</author>
-      <guid>https://kewbi.sh/blog/posts/201115/</guid>
-      <description>On contemplating opcodes.</description>
-      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
-<p>If all goes well, I will hopefully be attending the University of British Columbia this coming September - probably for computer science. As a first year, I&rsquo;m going to end up taking <a href="https://sites.google.com/site/ubccpsc110/">CPSC 110</a>. Unfortunately, CPSC 110 happens to be firmly entrenched in the language of Racket. Because I&rsquo;m also plan on challenging (credit by exam, they call it apparently) the course, and was thinking of getting some preliminary practise with Racket. It also seems like an interesting language overall, and I was a bit bored after adding an <a href="https://diveintoht.ml">editor to diveintoht.ml</a>. So, I decided to try something in Racket.</p>
-<p>That something is currently the skeleton of a <a href="https://en.wikipedia.org/wiki/CHIP-8">Chip-8 emulator</a>. Chip-8 was apparently historically used on the COSMAC VIP and run on the Chip-8 virtual machine, a sentence which I am not entirely sure I understand myself. I&rsquo;ve had about zero experience with trying to emulate or do anything lower level than <a href="https://kewbi.sh/blog/posts/200712/">CS50&rsquo;s C sections</a>. So, I thought this would be a fun challenge.</p>
-<p>Was trying to juggle learning a new programming language, the syntax of which was completely unlike anything I&rsquo;d worked with before, and wrapping my brain around hexadecimal and opcoes at the same time a good idea? Probably not, but I&rsquo;ve managed to do a decent chunk of work, and I thought I&rsquo;d write about it today.</p>
-<h2 id="printf-so-racket">(printf &ldquo;So, Racket.&quot;)</h2>
-<p>After blundering through some install instructions, I had Racket. And just because I decided to, I didn&rsquo;t install DrRacket either. I originally had the contents of above printf as &lsquo;Hello World&rsquo;. I don&rsquo;t think I&rsquo;ve ever done a proper Hello World program<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, and hey, there was no time like the present. So began my stumbling into Racket.</p>
-<p>The Racket language docs are rather complicated for a complete beginner, which I was. I also had the misfortune of only finding <a href="https://cs.uwaterloo.ca/~plragde/flaneries/TYR/">Teach Yourself Racket</a> and <a href="https://docs.racket-lang.org/guide/">The Racket Guide</a> just after muddling my way through too many Stack Overflow pages.</p>
-<p>Racket is apparently &lsquo;functional programming&rsquo; (oh look - a buzzword!), so that was another challenge I had to deal with. Most lines are something like <code>([function] a b)</code>. This is extremely different from what I&rsquo;ve worked with before. This means it took me a solid couple minutes while trying my first Pythagorean&rsquo;s project to even realize that I was unconsciously doing <code>(a + b)</code>. The proper <code>(+ a b)</code>. The constant parenthesis matching is something that <a href="https://github.com/neoclide/coc-pairs">coc-pairs</a> really helped with, so I&rsquo;m happy I didn&rsquo;t have to deal with constantly reaching around. Also, something else that was interesting - no semicolons! The whole wrapping expressions and definitions concept wasn&rsquo;t too bad either.</p>
-<p>Another unique issue I encountered while trying to grasp the basics was the fact that Racket is a subset of Scheme, which is itself a dialect of Lisp. Racket seems to be a very niche language that seems to only have resources from university course websites. It&rsquo;s therefore sometimes difficult to find the answer to a question. I have to first look for something like &lsquo;print variable in racket&rsquo; (very basic, I know). Then, when that doesn&rsquo;t come up with many results that aren&rsquo;t just the Racket docs (which at that point weren&rsquo;t very comprehensible). I then have to google for Scheme, which seems a little more widely used, so that&rsquo;s something to keep in mind.</p>
-<p>I find that having such a unique syntax with the functions and parentheses completely different from something like Python was probably helpful. I didn&rsquo;t end up confusing functions with each other - as I did when doing CS50 with C and constantly forgetting that the print function was actually printf - and that I actually needed semicolons (or when I switched back to Python and found myself accidentally writing C). I&rsquo;m still very much a beginner, and I have very far to go, but Racket is certainly a lot less painful than it was the first few days.</p>
-<h2 id="hexadecimal-hindrances">Hexadecimal Hindrances</h2>
-<p>I think in decimal, and I can attempt to convert with bytes, but oh boy, dealing with hex and trying to manipulate the data read in for each opcode was a pain.</p>
-<p>Part of the problem was simply that I didn&rsquo;t have much (or any, really) experience with hexadecimal or assembly. Most of this was also down to the fact that I forgot that I had to divide by hexadecimal 100 to get the correct digit I wanted, or that I needed to check if the variable was equal to a hex equivalent, instead of a decimal number.</p>
-<p>The most challenging part of understanding Chip-8 so far, I find, was definitely masking. All the binary operations that go into decoding just one opcode are rather tricky. It also didn&rsquo;t entirely help that I was unfamiliar with what the Racket syntax was when looking at example emulators. This ended up causing documentation tangents every time I found a new function. Just yesterday, I figured out a problem I&rsquo;d been having for two days where apparently I was reading bytes from out of bounds. The issue? I had masked the value properly and gotten the correct digit, but it was stored in the hundredths place of the entire hex number. That meant that I was reading at the position 768 (or #x300 in hex) instead of at the correct register, 3. This was because I&rsquo;d ignored an implementation&rsquo;s division by #x100 (256 in decimal) and misguidedly tried to use the value itself.</p>
-<p>Speaking of registers, I also had to properly learn how to access things from places in memory in a way that I didn&rsquo;t have to do with lists in Python. Well, for one, I didn&rsquo;t make giant byte strings with entire ROMs in Python, but I&rsquo;d have slightly more of a clue what to do in Python as opposed to Racket. Oh well.</p>
-<p>In the end, with the help of several resources that I&rsquo;ll acknowledge a bit later so they&rsquo;re all in once place, I managed to figure out what the example was doing. I somehow also figured out why it was doing it<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, and how I could do so in my own program. It got to the point where my parents were questioning why I was trying to divide seemingly random numbers by 16 on pieces of scrap paper while I was taking a break, but hey, I figured it out.</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>At the moment, I&rsquo;m feeling a bit more acquainted with Racket. Nowhere near the point that I&rsquo;d have needed to challenge CPSC 110, but somewhere, at least. Interestingly enough, I apparently went in the opposite direction that 110 would have gone. While 110&rsquo;s past papers reveal a lot of data structures, I instead focused on some lower level applications. A mental note to review data structures later when I finish this emulator.</p>
-<p>I should also point out that most of my emulator has been based, or at least somewhat referenced from <a href="https://github.com/Bourg/chip8">Austin Bourgerie&rsquo;s emulator</a>. It seemed to be the only emulator in Racket I was able to find that wasn&rsquo;t too incomplete. [edit: also found <a href="https://github.com/theo-lw/chip8">theo-lw&rsquo;s</a> recently. Was helpful.] It pointed me in the right direction in several tricky places. My approaches for getting specific bytes and positions for specific opcodes and the general program was heavily inspired by it. I&rsquo;d also like to recommend <a href="http://devernay.free.fr/hacks/chip8/C8TECH10.HTM">Thomas Greene&rsquo;s, aka Cowgod&rsquo;s, reference on Chip-8</a>. Clear and concise, and was helpful when I encountered new concepts.</p>
-<p>I&rsquo;m nowhere near done with my emulator. As of writing this, I have the reading of the ROM and the beginnings of the opcode processing for codes starting with characters 0 through 7. I hope to finish the opcodes sometime this week and see where I can get myself with graphics and input. From preliminary research, graphics doesn&rsquo;t seem too bad - I can probably just do those in terminal with half blocks ASCII characters for each row. Input, though, looks a bit tricky. Apparently, Chip-8 itself has a bunch of inconsistencies with how implementations handle input. Besides, I&rsquo;m not entirely sure how to tackle input in the terminal without messing up display at the same time.<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
-<p>It&rsquo;s been a fun detour from web and tinkering with NPM though, and while I&rsquo;ve been trying to learn the basics of Racket and Chip-8, I&rsquo;m also learning a lot.</p>
-<section class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1" role="doc-endnote">
-<p>At this point, I feel like Hello World programs are kind of the baseline of programming one needs to know. Similar to the &lsquo;vast knowledge of web design&rsquo; lines people slap on their resume, maybe Hello Worlds are also part of that extremely limited but perhaps resume-able set of things people first learn to program. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2" role="doc-endnote">
-<p>Instead of just copy-pasting code, which would have been the easiest way to get a working emulator up, but also the most useless. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3" role="doc-endnote">
-<p>Though I <em>was</em> looking at Curses for Python, and that seems relatively painless. Doesn&rsquo;t seem to be a proper Curses library for Racket that I&rsquo;ve found ye. However, I&rsquo;m also entirely unsure how package management in Racket even works. A problem for later. [edit: I found <a href="https://github.com/dys-bigwig/racket-ncurses">racket-ncurses</a>, which looks like it should work!] <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
