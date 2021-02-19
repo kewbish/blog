@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Yours, Kewbish</title>
+    <title>Yours, Kewbish - a collection of </title>
     <link>https://kewbi.sh/blog/</link>
     <description>Latest Yours, Kewbish posts</description>
-    <generator>Hugo + Yours, Kewbish</generator>
+    <managingEditor>(Emilie Ma ◦ Kewbish)</managingEditor>
     <lastBuildDate>Sun, 14 Feb 2021 17:25:28 -0800</lastBuildDate>
     
 	<atom:link href="https://kewbi.sh/blog/index.xml" rel="self" type="application/rss+xml" />
@@ -15,7 +15,6 @@
       <link>https://kewbi.sh/blog/posts/210214/</link>
       <pubDate>14 Feb 2021</pubDate>
       <author>Emilie Ma ◦ Kewbish</author>
-      <guid>https://kewbi.sh/blog/posts/210214/</guid>
       <description>On GCI&#39;s impacts over the last year.</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>Yes, today is Valentine&rsquo;s, and today is three days before something is due, but today is also exactly one year after I wrote the first post on Yours, Kewbish. (I think I thought the date would be funny, but that&rsquo;s besides the point.) I know absolutely everyone says this, but it&rsquo;s hard to believe it&rsquo;s been a year already since then. The span of time between last February and now feels like ages ago, but it also feels extremely short. Quarantine and the endless routines of work have morphed time into some non-Newtonian fluid, and I can&rsquo;t make sense of how it&rsquo;s been an entire year since then.</p>
@@ -52,7 +51,6 @@
       <link>https://kewbi.sh/blog/posts/210207/</link>
       <pubDate>07 Feb 2021</pubDate>
       <author>Emilie Ma ◦ Kewbish</author>
-      <guid>https://kewbi.sh/blog/posts/210207/</guid>
       <description>On tracking every single article I read in January.</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>I&rsquo;ve been thinking more about the things I read: content, perspective, and contribution to my being in some form. As of now, content-wise, I prefer a mix of technology and meta-productivity or knowledge-building. Perspective-wise, I don&rsquo;t really have an opinion on, but seeing things from very passionate and very noncommital points of view can be interesting. Recently, I&rsquo;ve been mostly focusing on thinking about how what I read fits in, contribution-wise.</p>
@@ -146,7 +144,6 @@
       <link>https://kewbi.sh/blog/posts/210124/</link>
       <pubDate>24 Jan 2021</pubDate>
       <author>Emilie Ma ◦ Kewbish</author>
-      <guid>https://kewbi.sh/blog/posts/210124/</guid>
       <description>On extending and making personal tools.</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>A few months ago, I applied for an internship somewhere. It was a pretty standard application for a pretty standard development position. List your specialties, why you wish to apply, what makes you a good candidate. Have a 250 word input to cram your life&rsquo;s goals and achievements. Upload your resume, mindlessly fill demographic information, do you wish to forward a copy of your responses to your email, click send. A cookie-cutter application, nothing special.</p>
@@ -196,7 +193,6 @@
       <link>https://kewbi.sh/blog/posts/210110/</link>
       <pubDate>10 Jan 2021</pubDate>
       <author>Emilie Ma ◦ Kewbish</author>
-      <guid>https://kewbi.sh/blog/posts/210110/</guid>
       <description>On centralizing media consumption.</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>Over the past maybe two months, I&rsquo;ve been hoarding a list of nearly all the people I follow around the internet in a text file. It started out as a list of handles and websites for a small group of people, but quickly <a href="https://kewbi.sh/blog/posts/201220/">branched</a> out as I found new &lsquo;layers&rsquo; of interesting individuals. Through the power of The Algorithm™️ (and some branching), the list briefly expanded to a concerning length before I pruned it down to active, regular creators. Some of these people are on Twitter, others have a short writing project each week, and others put out long-form essays every so often that I find engaging. Whenever I was in need of something to productively procrastinate with, I&rsquo;d pop open the file, simply named <code>cool.md</code>, and go check in on what people had done in the last few days or so.</p>
@@ -256,7 +252,6 @@
       <link>https://kewbi.sh/blog/posts/201227/</link>
       <pubDate>27 Dec 2020</pubDate>
       <author>Emilie Ma ◦ Kewbish</author>
-      <guid>https://kewbi.sh/blog/posts/201227/</guid>
       <description>On designing functions with HtDF.</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>Why I felt the need to <del>ruin</del> augment my Christmas week with some Racket, I don&rsquo;t know. It was fun to go through some HtDF material with CPSC 110 this week, however - surprisingly, it wasn&rsquo;t as tedious or repetitive as it seemed.</p>
@@ -342,7 +337,6 @@
       <link>https://kewbi.sh/blog/posts/201220/</link>
       <pubDate>20 Dec 2020</pubDate>
       <author>Emilie Ma ◦ Kewbish</author>
-      <guid>https://kewbi.sh/blog/posts/201220/</guid>
       <description>On Wikipedia rabbit holes and clickchains.</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>I&rsquo;m currently trying to plod my way through <a href="https://kewbi.sh/blog/posts/201213/">designing functions</a>, so I thought I&rsquo;d write about a new thought-chain<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>: branching. I&rsquo;ve not read a lot of posts or threads regarding branching, but maybe I just can&rsquo;t manage to find the right search terms yet.</p>
@@ -384,7 +378,6 @@
       <link>https://kewbi.sh/blog/posts/201213/</link>
       <pubDate>13 Dec 2020</pubDate>
       <author>Emilie Ma ◦ Kewbish</author>
-      <guid>https://kewbi.sh/blog/posts/201213/</guid>
       <description>On finding my way into CPSC 110.</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>Racket, so far, has been an interesting language - lots of parentheses matching and prefix notation mistakes. It&rsquo;s unlike what I&rsquo;m used to (which is rather cobbled-together Python) but it&rsquo;s also quite fun to use. Also, because people keep asking: no, I didn&rsquo;t just decide to learn Racket for my own amusement, though I&rsquo;ve certainly got a lot out of the few short weeks I&rsquo;ve used it. I&rsquo;m planning on taking CPSC 110<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, which uses Racket extensively, and I&rsquo;d like to do the course first. (Why does it feel like I&rsquo;ve said this before? I don&rsquo;t know.)</p>
@@ -475,7 +468,6 @@
       <link>https://kewbi.sh/blog/posts/201206/</link>
       <pubDate>06 Dec 2020</pubDate>
       <author>Emilie Ma ◦ Kewbish</author>
-      <guid>https://kewbi.sh/blog/posts/201206/</guid>
       <description>On dots, dashes, and annotations.</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>Hello, and welcome to another episode of <em>Kewbish talks about notes and knowledge for no reason whatsoever</em>. I&rsquo;ve somehow fallen into the corner of the interwebs vaguely describable as &lsquo;knowledge twt&rsquo;<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Reading papers, especially CS-ish design (read: not entirely incomprehensible) ones, is kind of nice. Perhaps this habit stems from the lab reports we constantly have to write, but I find reading through them therapeutic, in a way.</p>
@@ -525,7 +517,6 @@
       <link>https://kewbi.sh/blog/posts/201129/</link>
       <pubDate>29 Nov 2020</pubDate>
       <author>Emilie Ma ◦ Kewbish</author>
-      <guid>https://kewbi.sh/blog/posts/201129/</guid>
       <description>On Racket and Chip-8, part 2.</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>After maybe a month of intermittent work, it works!</p>
@@ -601,7 +592,6 @@
       <link>https://kewbi.sh/blog/posts/201122/</link>
       <pubDate>22 Nov 2020</pubDate>
       <author>Emilie Ma ◦ Kewbish</author>
-      <guid>https://kewbi.sh/blog/posts/201122/</guid>
       <description>On crossplatform repo editing.</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>I&rsquo;ve always tried to take notes as much as possible on paper, just because it was easier (and theoretically also better for me). However, with COVID and spending more time with digital resources, I&rsquo;ve tried to take more notes online. These notes have been, from the beginning, backed up somewhere. First, it was to Google Drive; later, to OneDrive, when I used OneNote. I relatively <a href="https://kewbi.sh/blog/posts/200607/">recently</a> transitioned to Markdown files, but kept them in OneDrive. On Windows, I simply left them in the OneDrive folder, and edited with Vim.</p>
