@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPSC 110: Week 2</title>
+    <meta name="description" content="On designing data in Racket.">
+    <meta property="og:title" content="CPSC 110: Week 2">
+    <meta property="og:description" content="On designing data in Racket.">
+    <meta property="og:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <meta property="og:url" content="https://kewbi.sh/blog/posts/210221/">
+    <meta property="twitter:title" content="CPSC 110: Week 2">
+    <meta property="twitter:description" content="On designing data in Racket.">
+    <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
+</head>
+
+<body class="cont page">
+    <section class="b-main-2">
+        <p><a href="../">&lt; More Posts</a></p>
+        <h1 class="b-subtitle">CPSC 110: Week 2</h1>
+        <p>Published 21 February 2021 at <a href="https://kewbi.sh/blog/posts/210221/">Yours, Kewbish</a>. 992 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
+        
+        <hr style="margin-bottom:-1%;">
+        <div class="b-writing">
+            <h2 id="introduction">Introduction</h2>
+<p>Somehow through the whirlwind couple months it&rsquo;s been, I&rsquo;ve neglected to touch CPSC 110 at all. I&rsquo;ve been mostly focused with fixing <a href="https://github.com/kewbish/matter">Matter</a> up and inserting all the nice quality-of-life features I&rsquo;d want in order to make it my main information center. But that&rsquo;s besides the point - I&rsquo;ve decided I want to finish as much of CPSC 110 as I can before spring break, or during it. At the latest, I&rsquo;d like to sort everything out by summer, and see if I can finagle myself a spot in the summer session. (Planning for multiple summer things in advance is sort of difficult.)</p>
+<p>I&rsquo;ve made myself a proper CPSC 110 repo and even bothered to get DrRacket working to my standards, so hopefully I&rsquo;ll be more motivated to solve the problem sets properly. Before I dived into this week&rsquo;s material, I may or may not have had to rewatch most of week 1 to relearn the function recipes again, but I&rsquo;ve made more notes this time round. Going into the data definitions bit wasn&rsquo;t actually much of a challenge once I went through and watched the videos again.</p>
+<p>The design recipes, as Kiczales mentions, are sort of ingrained into my memory now. It&rsquo;s very intuitive how they all slot together, and though sometimes it feels extremely repetitive to keep making examples and stubs, I can see why it helps when debugging and adding more complex parts on top of the recipe. This week, I had gotten ahead of myself and tried to do everything with structs, but that really wasn&rsquo;t the point of this week yet. It&rsquo;s rather surprising to see how each recipe and definition builds on the others, though sometimes I&rsquo;m left wondering if all these conventions are really all that useful.</p>
+<p>If you&rsquo;re uninterested in wrangling with data definition recipes, this might not be very interesting, but I think keeping this as a record of what I&rsquo;ve been doing with Racket will be helpful for later revision.</p>
+<h2 id="notes">Notes</h2>
+<p>Week 2 deals with designing data, and how to create data definitions that work with the function definition recipe.</p>
+<ul>
+<li>cond expressions are if statements with multiple branches
+<ul>
+<li>use square brackets to test the question =&gt; <code>[(Q) A]</code></li>
+<li>if only else body =&gt; the then block is evaluated instead</li>
+<li>evaluation steps: evaluate the first expression&rsquo;s Q block
+<ul>
+<li>if it&rsquo;s false, it gets removed from evaluation</li>
+<li>keep evaluating and removing until you meet a true block, then return the answer</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>data definitions =&gt; information represented in problem domain, and restricts what is allowed
+<ul>
+<li>type signature comment, what it is</li>
+<li>interpretation of what the data is supposed to represent</li>
+<li>examples of the data =&gt; &lsquo;one of&rsquo; comments</li>
+</ul>
+</li>
+<li>atomic non-distinct =&gt; can&rsquo;t break into meaningfully smaller pieces
+<ul>
+<li>now have a data driven template =&gt; <code>fn-for-x</code>, then have a body from the table
+<ul>
+<li>never actually use it, so keep it commented</li>
+</ul>
+</li>
+<li>when atomic non-distinct =&gt; <code>(... x)</code>, if distinct, then just <code>(...)</code>
+<ul>
+<li>write a comment detailing the data driven template body type</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>following the HtDF recipe is easier to understand + already learned metadesign
+<ul>
+<li>function recipe is independent to data definitions, so don&rsquo;t need to learn a new one</li>
+</ul>
+</li>
+<li>interval data definition =&gt; numbers within a certain range
+<ul>
+<li>when giving type comment, use range =&gt; use proper interval notation</li>
+</ul>
+</li>
+<li>enumeration =&gt; two or more distinct values
+<ul>
+<li>for rules used, add &lsquo;one of&rsquo;, and the number of cases / subclasses</li>
+<li>use a cond to represent each case in body</li>
+<li>don&rsquo;t need to use examples =&gt; add comment to explain redundancy</li>
+</ul>
+</li>
+<li>itemization =&gt; two or more categories, but one or more of which isn&rsquo;t distinct
+<ul>
+<li>for example, a preflight, postflight, and inflight altitude</li>
+<li>type guard required for each case if mixed data types</li>
+<li>last condition will be an else, because we know that by process of elimination it must be that value
+<ul>
+<li>if all remaining data types are same data type, no guard needed</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>amount of tests will differ based on the data
+<ul>
+<li>with an interval =&gt; closed boundaries and midpoints (~3)</li>
+</ul>
+</li>
+<li>when using HtDF with own data definitions =&gt; can reuse template
+<ul>
+<li>function recipe and prompt gives information about tests, etc</li>
+<li>design behaviour of function while designing tests</li>
+</ul>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>I actually managed to work my way through the lab and problem set while trying to learn the material at the same time (not very fun, do not recommend because you&rsquo;ll be very confused at the conventions that the example solution gives you), so I developed two ways of doing things. It was interesting to contrast how I took shortcuts the first way round: not putting enough <code>check-expect</code>s or ignoring the stub parts of recipes. Again, sometimes it really does feel like a chore to have to repeat the steps over and over again, but maybe that&rsquo;s part of how you learn things<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+<p>Coming from spending a month and a bit away from Racket was a bit disorienting at first - I had to familiarize myself with the brackets again, and the functions and recipes. The way I write Racket has been tinted a lot by the procedural waterfall way of doing things that&rsquo;s been prescribed by the problem sets and labs, so it was an experience to go from writing essentially whatever fit without much proper testing, to having to make testing an integral part of the programs.</p>
+<p>I&rsquo;d forgotten how much fun listening to 2x lectures have been - I suppose it&rsquo;s just part of the natural recursion<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>. I&rsquo;ve been trying to make CPSC a priority in my free time, so hopefully I&rsquo;ll be back next week with either more notes or a proper post. I have ideas for both, but we&rsquo;ll see.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>No matter how many times Kiczales repeats the fact that whatever semicolons is a comment and whatever semicolons is for a stub or purpose, I cannot remember. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>I don&rsquo;t think I&rsquo;ve gotten far enough in for Kiczales to have made the joke yet, but I&rsquo;m still somehow aware of this. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+            <p>- Yours, Kewbish</p>
+        </div>
+        <br><p><a href="../">&lt; More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>

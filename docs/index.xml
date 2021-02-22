@@ -5,10 +5,115 @@
     <link>https://kewbi.sh/blog/</link>
     <description>Latest Yours, Kewbish posts</description>
     <managingEditor>(Emilie Ma ◦ Kewbish)</managingEditor>
-    <lastBuildDate>Sun, 14 Feb 2021 17:25:28 -0800</lastBuildDate>
+    <lastBuildDate>Sun, 21 Feb 2021 19:14:36 -0800</lastBuildDate>
     
 	<atom:link href="https://kewbi.sh/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CPSC 110: Week 2</title>
+      <link>https://kewbi.sh/blog/posts/210221/</link>
+      <pubDate>21 Feb 2021</pubDate>
+      <author>Emilie Ma ◦ Kewbish</author>
+      <description>On designing data in Racket.</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>Somehow through the whirlwind couple months it&rsquo;s been, I&rsquo;ve neglected to touch CPSC 110 at all. I&rsquo;ve been mostly focused with fixing <a href="https://github.com/kewbish/matter">Matter</a> up and inserting all the nice quality-of-life features I&rsquo;d want in order to make it my main information center. But that&rsquo;s besides the point - I&rsquo;ve decided I want to finish as much of CPSC 110 as I can before spring break, or during it. At the latest, I&rsquo;d like to sort everything out by summer, and see if I can finagle myself a spot in the summer session. (Planning for multiple summer things in advance is sort of difficult.)</p>
+<p>I&rsquo;ve made myself a proper CPSC 110 repo and even bothered to get DrRacket working to my standards, so hopefully I&rsquo;ll be more motivated to solve the problem sets properly. Before I dived into this week&rsquo;s material, I may or may not have had to rewatch most of week 1 to relearn the function recipes again, but I&rsquo;ve made more notes this time round. Going into the data definitions bit wasn&rsquo;t actually much of a challenge once I went through and watched the videos again.</p>
+<p>The design recipes, as Kiczales mentions, are sort of ingrained into my memory now. It&rsquo;s very intuitive how they all slot together, and though sometimes it feels extremely repetitive to keep making examples and stubs, I can see why it helps when debugging and adding more complex parts on top of the recipe. This week, I had gotten ahead of myself and tried to do everything with structs, but that really wasn&rsquo;t the point of this week yet. It&rsquo;s rather surprising to see how each recipe and definition builds on the others, though sometimes I&rsquo;m left wondering if all these conventions are really all that useful.</p>
+<p>If you&rsquo;re uninterested in wrangling with data definition recipes, this might not be very interesting, but I think keeping this as a record of what I&rsquo;ve been doing with Racket will be helpful for later revision.</p>
+<h2 id="notes">Notes</h2>
+<p>Week 2 deals with designing data, and how to create data definitions that work with the function definition recipe.</p>
+<ul>
+<li>cond expressions are if statements with multiple branches
+<ul>
+<li>use square brackets to test the question =&gt; <code>[(Q) A]</code></li>
+<li>if only else body =&gt; the then block is evaluated instead</li>
+<li>evaluation steps: evaluate the first expression&rsquo;s Q block
+<ul>
+<li>if it&rsquo;s false, it gets removed from evaluation</li>
+<li>keep evaluating and removing until you meet a true block, then return the answer</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>data definitions =&gt; information represented in problem domain, and restricts what is allowed
+<ul>
+<li>type signature comment, what it is</li>
+<li>interpretation of what the data is supposed to represent</li>
+<li>examples of the data =&gt; &lsquo;one of&rsquo; comments</li>
+</ul>
+</li>
+<li>atomic non-distinct =&gt; can&rsquo;t break into meaningfully smaller pieces
+<ul>
+<li>now have a data driven template =&gt; <code>fn-for-x</code>, then have a body from the table
+<ul>
+<li>never actually use it, so keep it commented</li>
+</ul>
+</li>
+<li>when atomic non-distinct =&gt; <code>(... x)</code>, if distinct, then just <code>(...)</code>
+<ul>
+<li>write a comment detailing the data driven template body type</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>following the HtDF recipe is easier to understand + already learned metadesign
+<ul>
+<li>function recipe is independent to data definitions, so don&rsquo;t need to learn a new one</li>
+</ul>
+</li>
+<li>interval data definition =&gt; numbers within a certain range
+<ul>
+<li>when giving type comment, use range =&gt; use proper interval notation</li>
+</ul>
+</li>
+<li>enumeration =&gt; two or more distinct values
+<ul>
+<li>for rules used, add &lsquo;one of&rsquo;, and the number of cases / subclasses</li>
+<li>use a cond to represent each case in body</li>
+<li>don&rsquo;t need to use examples =&gt; add comment to explain redundancy</li>
+</ul>
+</li>
+<li>itemization =&gt; two or more categories, but one or more of which isn&rsquo;t distinct
+<ul>
+<li>for example, a preflight, postflight, and inflight altitude</li>
+<li>type guard required for each case if mixed data types</li>
+<li>last condition will be an else, because we know that by process of elimination it must be that value
+<ul>
+<li>if all remaining data types are same data type, no guard needed</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>amount of tests will differ based on the data
+<ul>
+<li>with an interval =&gt; closed boundaries and midpoints (~3)</li>
+</ul>
+</li>
+<li>when using HtDF with own data definitions =&gt; can reuse template
+<ul>
+<li>function recipe and prompt gives information about tests, etc</li>
+<li>design behaviour of function while designing tests</li>
+</ul>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>I actually managed to work my way through the lab and problem set while trying to learn the material at the same time (not very fun, do not recommend because you&rsquo;ll be very confused at the conventions that the example solution gives you), so I developed two ways of doing things. It was interesting to contrast how I took shortcuts the first way round: not putting enough <code>check-expect</code>s or ignoring the stub parts of recipes. Again, sometimes it really does feel like a chore to have to repeat the steps over and over again, but maybe that&rsquo;s part of how you learn things<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+<p>Coming from spending a month and a bit away from Racket was a bit disorienting at first - I had to familiarize myself with the brackets again, and the functions and recipes. The way I write Racket has been tinted a lot by the procedural waterfall way of doing things that&rsquo;s been prescribed by the problem sets and labs, so it was an experience to go from writing essentially whatever fit without much proper testing, to having to make testing an integral part of the programs.</p>
+<p>I&rsquo;d forgotten how much fun listening to 2x lectures have been - I suppose it&rsquo;s just part of the natural recursion<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>. I&rsquo;ve been trying to make CPSC a priority in my free time, so hopefully I&rsquo;ll be back next week with either more notes or a proper post. I have ideas for both, but we&rsquo;ll see.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>No matter how many times Kiczales repeats the fact that whatever semicolons is a comment and whatever semicolons is for a stub or purpose, I cannot remember. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>I don&rsquo;t think I&rsquo;ve gotten far enough in for Kiczales to have made the joke yet, but I&rsquo;m still somehow aware of this. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+]]></content:encoded>
+    </item>
     
     <item>
       <title>After Code-in</title>
@@ -581,84 +686,6 @@
 </li>
 <li id="fn:5" role="doc-endnote">
 <p>As an aside, Racket hashmaps (or dictionaries, I&rsquo;m unsure of the technically correct description) and their syntax are very unique. I&rsquo;m used to the <code>[key]: [value]</code> representation, but Racket just puts a <code>.</code> in between, and surrounds keys with parentheses. Though I suppose the parentheses are very on-brand for Racket. <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</section>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Git and iOS</title>
-      <link>https://kewbi.sh/blog/posts/201122/</link>
-      <pubDate>22 Nov 2020</pubDate>
-      <author>Emilie Ma ◦ Kewbish</author>
-      <description>On crossplatform repo editing.</description>
-      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
-<p>I&rsquo;ve always tried to take notes as much as possible on paper, just because it was easier (and theoretically also better for me). However, with COVID and spending more time with digital resources, I&rsquo;ve tried to take more notes online. These notes have been, from the beginning, backed up somewhere. First, it was to Google Drive; later, to OneDrive, when I used OneNote. I relatively <a href="https://kewbi.sh/blog/posts/200607/">recently</a> transitioned to Markdown files, but kept them in OneDrive. On Windows, I simply left them in the OneDrive folder, and edited with Vim.</p>
-<p>On Linux, however, it&rsquo;s not quite as easy. I originally started off using <a href="https://github.com/abraunegg/onedrive">another OneDrive CLI tool</a>, which served its purpose well. I ran the sync command every so often, and I had access from my phone. However, I found myself not syncing often, and having out of date copies of work on my phone, which wasn&rsquo;t ideal. There was a bit too much friction for syncing - and to be honest, I just forgot. I could, of course, make a script and shove it in the autostart folder, but that didn&rsquo;t occur to me til much later.</p>
-<p>In an attempt to reap more of the benefits of version control, I then shunted all my files onto a Git repo. It served the same purpose, but with the same problem. I kept forgetting to sync to GitHub.</p>
-<p>As well, with just a mostly out of date version on GitHub, I couldn&rsquo;t access the latest version of my files on my phone. I&rsquo;m trying to make it as easy as possible to have a sync from both ends, so I searched around for a solution.</p>
-<p>This whole process would probably be a lot simpler on Android, but I use an iPhone. (Feel free to rant about non-free software here.) I can&rsquo;t mess with folders and edit things as easily, so here is my attempt at describing my system now.</p>
-<h2 id="overcomplicated-ascii-art">Overcomplicated ASCII Art</h2>
-<p>The system looks something like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">+---------------------+        +-------------+        +----+
-|                     |        |             |        |----|
-|    git + sync.sh    | +----&gt; |   |\---/|   | &lt;----+ ||  ||
-|                     |        |   |     |   |        ||  ||
-+---------------------+        |    \___/    |        +----+
-         |---|                 |             |        | || |
-       +-------+               +-------------+        +----+
-</code></pre></div><p><em>Figure 1. An excuse to experiment with ASCII art.</em></p>
-<p>On the Git repo, I run a <code>sync.sh</code> script on log-in, which pulls the changes and commits and pushes any local ones. Everything then goes to a private GitHub repo.</p>
-<p>But the Git integration from my phone would be tricky. Sure, I could <em>view</em> from my phone with the GitHub app, but I don&rsquo;t think I can write. That&rsquo;d end up not solving the problem, so I looked for something else.</p>
-<h2 id="ios-magic">iOS Magic</h2>
-<p>Enter <strong>Working Copy</strong> and <strong>Pretext</strong>.</p>
-<p>I&rsquo;m not entirely sure if there are other Git clients on iOS, but the one I stumbled upon first was <a href="https://workingcopyapp.com/">Working Copy</a>. It let me set up another Git identity and get into my GitHub easily. I managed to get everything done in a couple minutes - this part was very simple. (Add new repo, choose GitHub source, log in if it&rsquo;s a private repo, clone, profit (?))</p>
-<p>Great, I now had my notes on the local filesystem. But where?</p>
-<p>Turns out that I had to go back and redownload the Files app (I&rsquo;d uninstalled it in one of my cyclic purges), and enable access from there. Click the three little dots on the top, and switch the slider over for Working Copy.</p>
-<figure>
-    <img src="https://i.imgur.com/qW2jhPp.png"
-         alt="Figure 2. A tricky hidden slider."/> <figcaption>
-            <p><em>Figure 2. A tricky hidden slider.</em></p>
-        </figcaption>
-</figure>
-
-<p>This is where you should get <a href="https://apps.apple.com/us/app/pretext/id1347707000">Pretext</a>, a simple Markdown editor<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. It&rsquo;s plaintext, with HTML preview, and enough tweaking features. It doesn&rsquo;t have ads, though there are some other features that are unlockable with payment.</p>
-<p>Inside Pretext, enter the Working Copy folder in Pretext, and select your repo of choice. From there, everything is a simple list view away. While Pretext can&rsquo;t edit anything other than Markdown, that&rsquo;s all my notes are in, so it works wonderfully. If I ever need to present, and don&rsquo;t want Markdown syntax, there&rsquo;s a nice HTML preview available in the <code>Share &gt; Preview as HTML</code> menu.</p>
-<h2 id="syncing">Syncing</h2>
-<p>Right, so syncing. Syncing was probably the bigger headache of the two here. For some reason, the first time round I tried getting an XFCE Autostart desktop to work, it would refuse to do anything. I assume this is due to an issue that I&rsquo;ll touch on in a few lines.</p>
-<p>Under <code>Session and Startup &gt; Application Autostart</code>, I <code>+Add</code>ed a new desktop file. I&rsquo;m pretty sure it&rsquo;s important that this doesn&rsquo;t have a space in its title - that was the only thing different between my two attempts. The command I had it run was simply the bash script I wrote, which, for my later convenience, is below:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
-</span><span style="color:#75715e"></span>
-cd ~/EVB/
-<span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">`</span>git status --porcelain<span style="color:#e6db74">`</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
-    <span style="color:#66d9ef">for</span> i in <span style="color:#f92672">{</span>1..50<span style="color:#f92672">}</span>; <span style="color:#66d9ef">do</span> ping -c1 www.google.com &amp;&gt; /dev/null <span style="color:#f92672">&amp;&amp;</span> break; <span style="color:#66d9ef">done</span>
-    NOW<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span> date <span style="color:#e6db74">&#39;+%F-%H%M&#39;</span> <span style="color:#66d9ef">)</span>
-    git add .
-    git commit --author<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Emilie Ma &lt;notarealemail@kewbi.sh&gt;&#34;</span> -m <span style="color:#e6db74">&#34;Sync: </span>$NOW<span style="color:#e6db74">&#34;</span>
-    git pull
-    git push
-    echo <span style="color:#e6db74">&#34;Successful!&#34;</span>
-<span style="color:#66d9ef">else</span>
-    echo <span style="color:#e6db74">&#34;No changes!&#34;</span>
-<span style="color:#66d9ef">fi</span>
-</code></pre></div><p>Probably change the directory to the one you&rsquo;re using for your Git. Also, probably change the author, unless you&rsquo;ve decided to impersonate me or are also named Emilie Ma.</p>
-<p>And there we go - on login (since I do this at the beginning of the day, and I often only edit anything on my phone the afternoon before or at night), all changes will be pulled (and theoretically won&rsquo;t conflict - I&rsquo;m the only one using this, and I don&rsquo;t tend to edit the same note at different times). The changes locally get pushed, and everything is fine and dandy!</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>Is this incredibly overengineered? Actually, not really. This is the simplest way I&rsquo;ve found to do it, other than to just fire up my laptop every time I want to reference something, which I&rsquo;d rather not do. I&rsquo;m still not entirely sure how Working Copy even works, especially with the sandboxing things that are supposed to happen behind the scenes, but I won&rsquo;t question it too much. It&rsquo;s a nice system, and it works well enough.</p>
-<p>This post is mostly for self reference later, but if I&rsquo;ve somehow managed to help, that&rsquo;s cool too.</p>
-<h2 id="currently">Currently</h2>
-<p>It&rsquo;s been a while since I appended one of these, so apologies if the conclusion was a bit abrupt. I&rsquo;ve been working a decent bit more on my Racket x Chip-8 emulator attempt, and it hasn&rsquo;t been very successful. I chalk this up to the fact I don&rsquo;t know how to use the GUI / something&rsquo;s wrong with the display code - the rest of it worked fine (theoretically) without it.</p>
-<p>I have, however, managed to at least get some sort of display working with <a href="https://docs.racket-lang.org/charterm/index.html">charterm</a>, but I need to fix a pesky issue. The width for the display should be 64 pixels, and I can print much more to the terminal, but I need to find a way to linebreak. The display refuses to take newline characters, so that&rsquo;s a bit of a challenge. I&rsquo;m sure I&rsquo;ll manage to work out some janky solution, anyhow.</p>
-<p>I&rsquo;ve also found some other amazing Racket games and Chip-8 implementations, so hopefully I can leech a bit off of their approaches. If all goes well, I&rsquo;ll write about my progress next week. If not, I have some other ideas. Well, back to writing lab<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
-<section class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1" role="doc-endnote">
-<p>Having attempted to work with Notes before, I didn&rsquo;t want to bother with trying to select and bold text with the WYSIWYG panes again. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2" role="doc-endnote">
-<p>And on another, slightly more quantitative note, I managed to hit 50k words on this blog! Five weeks ahead of schedule, so that&rsquo;s something. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
