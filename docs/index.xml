@@ -5,10 +5,128 @@
     <link>https://kewbi.sh/blog/</link>
     <description>Latest Yours, Kewbish posts</description>
     <managingEditor>(Emilie Ma ◦ Kewbish)</managingEditor>
-    <lastBuildDate>Sun, 07 Mar 2021 20:05:24 -0800</lastBuildDate>
+    <lastBuildDate>Sun, 14 Mar 2021 16:44:25 -0700</lastBuildDate>
     
 	<atom:link href="https://kewbi.sh/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CPSC 110: Weeks 3 and 4</title>
+      <link>https://kewbi.sh/blog/posts/210314/</link>
+      <pubDate>14 Mar 2021</pubDate>
+      <author>Emilie Ma ◦ Kewbish</author>
+      <description>On trusting the natural recursion.</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>Spring break has just begun, and I&rsquo;ve decided to devote some more significant time to CPSC 110. It helps that I&rsquo;m sort of floating between projects and want a bit of bland coursework to churn through, so I&rsquo;ve been spending nice long chunks of time listening to Kiczales go on about data and recursion. As well, I&rsquo;ve decided to shift my goal more towards a September challenge, to give myself time over the summer to cram and practise with old papers. (Ironically, I&rsquo;d also decided at the beginning of the year that I&rsquo;d take this summer to rest and relax before university, but I suppose that&rsquo;s gone out the window in lieu of some hopefully more engaging plans. And hey, if I choose to relax that way, I guess it&rsquo;s a perfectly fine thing to do.)</p>
+<p>I&rsquo;ve been ramping up my progress with CPSC 110 for the last couple weeks, and have managed to do a couple &lsquo;weeks&rsquo;, or modules, since I last published a set of notes. After getting back in the swing of Racket and relearning the templates and design recipes, these couple modules haven&rsquo;t been too challenging. Working from the recipes and beginning to explore data systematically makes the jumps between CS concepts less stark, and makes the course much less intimidating. Having a repository and tracking my progress with the course has definitely motivated me to work on it more. So, here&rsquo;s a couple modules' worth of notes - again, if you&rsquo;re not following along with CPSC 110 or have no interest in learning about compound and arbitrarily long data, you might want to go off and read a different post.</p>
+<h2 id="notes---week-3">Notes - Week 3</h2>
+<p>Week 3 goes over how to define compound data (essentially structs), and integrates that data in building &lsquo;worlds&rsquo;, or GUI programs. Having a proper definition for data simplifies things in future weeks, and makes the data definitions seem more solid or &lsquo;real&rsquo;.</p>
+<ul>
+<li>ticks =&gt; update behaviour, but can be changed by interactive input
+<ul>
+<li>tick rate is defined by the program, can change</li>
+<li>can use a data definition to interpret the current state</li>
+</ul>
+</li>
+<li><code>(big-bang)</code> function used to make these graphical programs =&gt; called worlds
+<ul>
+<li>import <code>(2htdp/image)</code> and <code>(2htdp/universe)</code></li>
+<li>use <code>(place-image)</code> and the <code>(empty-scene)</code> frequently to draw and render</li>
+<li>rendering is done by setting the <code>(to-draw)</code>, and tick behaviour by <code>(on-tick)</code>
+<ul>
+<li>later use <code>(on-key)</code> and <code>(on-mouse)</code> to handle those behaviours</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>start by doing a domain analysis =&gt; what remains constant and what changes each tick
+<ul>
+<li>each function is first wish-listed as the overall world is structured</li>
+<li>apply HtDD to design the program state data =&gt; structs in second half of week</li>
+<li>apply standard HtDF to create functions used in big-bang</li>
+<li>use constants in the <code>(check-expect)</code>s to maximize adaptability</li>
+</ul>
+</li>
+<li>use <code>(define-struct name (args))</code> to define compound data =&gt; data that relate to each other
+<ul>
+<li>when expression run, generates the <code>(name?)</code>, <code>(name-args)</code>, and <code>(make-name)</code> operators</li>
+<li>in HtDD example definitions and tests =&gt; now have to use <code>(make-name (args))</code>
+<ul>
+<li>include the data types here and intervals if using Naturals or Numbers</li>
+</ul>
+</li>
+<li>need to add interpretation for data types with the <code>;; Name is ...</code> comment</li>
+<li>add interpretation for each field in HtDD interpretation comment</li>
+<li>HtDD <code>(fn-for-name)</code> now includes each of the fields used in the args</li>
+<li>include number of fields with the compound keyword when listing template rules used</li>
+<li>when using HtDF =&gt; add constraints and notes in the tests =&gt; clarity of examples and behaviour</li>
+</ul>
+</li>
+<li><code>(on-mouse)</code> and the <code>(on-key)</code> events are handled with an overall cond
+<ul>
+<li>will take mouse event / key event as argument</li>
+<li>need to check the state / key with <code>string=?</code> or <code>key=?</code></li>
+</ul>
+</li>
+<li>use helper functions where possible to ensure function does one thing</li>
+</ul>
+<h2 id="notes---week-4">Notes - Week 4</h2>
+<p>In Week 4, Kiczales discusses arbitrarily sized data, which is essentially a convoluted way of working with lists. This week also has to deal a lot with recursion, which is something I&rsquo;ve sort of avoided as much as possible. However, it&rsquo;s been pretty interesting to see how to solve problems recursively, which I think will come in handy down the line.</p>
+<ul>
+<li>we use recursive data definitions to model arbitrarily sized data =&gt; compound data
+<ul>
+<li>set a base case (empty, or false), as well as <code>(cons)</code>&lsquo;ing it with an element and then the original data definition
+<ul>
+<li>this element can be atomic non-distinct data, not just another data definition (reference)</li>
+</ul>
+</li>
+<li>an example of self-reference, where the data definition involves itself</li>
+<li>new primitives: <code>(first list)</code> returns the first element, and <code>(rest list)</code> returns everything but the first element</li>
+</ul>
+</li>
+<li>with HtDF, several things have changed to accomodate new branches
+<ul>
+<li>refer to the type comment and how it refers to itself =&gt; preserve that in the function templates</li>
+<li>template now needs to apply a <code>(fn-for-element)</code> for the first element
+<ul>
+<li>this should be another helper function generally, want the function to do one thing at a time</li>
+</ul>
+</li>
+<li>template applies the <code>(fn-for-list)</code> for the rest of the list</li>
+<li>generally use a <code>(cond)</code> to check if the list is empty (base case handling)</li>
+<li>examples can help clarify the behaviour of the function first, and show where you might need helpers
+<ul>
+<li>also insert tests for base cases =&gt; tend to forget this</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>positions in list templates matter and have their own functions
+<ul>
+<li>base =&gt; when the function exits and &lsquo;bottoms out&rsquo;</li>
+<li>contribution of first =&gt; the first element (type checking generally goes here)</li>
+<li>combination =&gt; check other cases or perform operations on the value of the rest of the list</li>
+</ul>
+</li>
+<li>when the recursive data definition handles another data definition =&gt; reference rule
+<ul>
+<li>produces a natural helper =&gt; abstract this to another function</li>
+</ul>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>As I write this, I&rsquo;m actually halfway through week 5, but it&rsquo;ll take me a good while to write up the notes properly, and I&rsquo;d rather not extend this post too much. I&rsquo;m almost at the halfway mark of the whole course, but I&rsquo;ve noticed that most of the next modules are broken up into a and b sections, so I expect it&rsquo;ll probably be more work than the first couple weeks. I&rsquo;ve also heard that the later weeks heavily build on the beginning weeks, so I might come back and update my notes posts every so often. I hope I&rsquo;ll be able to at least go through another couple weeks before spring break ends, but I also want to take enough time to relax and recharge<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+<p>I have no big plans with regards to projects at the moment - I&rsquo;m just trying to keep everything stable before I graduate, and continue to explore opportunities I might like to take after I enter university. It&rsquo;s rather scary that I&rsquo;ll be an actual university student in a couple months, and that my quintessential &lsquo;high school experience&rsquo; is nearly over. A post about Racket is probably not the best place to digress into all the amazing experiences that&rsquo;ve filled the last couple years, but I will say it feels a bit strange to consider that I&rsquo;ll be one of &lsquo;them&rsquo; in the fall, and that I have no idea what I have time for in the last three (well, two and a half, if we&rsquo;re going to be precise) months. Well, we&rsquo;ll figure it out eventually (and finish CPSC 110 somewhere in the process too).</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>I suppose you can start laughing now, but I&rsquo;m trying, alright. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+]]></content:encoded>
+    </item>
     
     <item>
       <title>Towards Web Monetization</title>
@@ -611,55 +729,6 @@
 </li>
 <li id="fn:2" role="doc-endnote">
 <p>I was not aware the question could see what part of the screen you were clicking on, which enabled some interesting question formats. Think along the lines of &lsquo;identify a parameter in this function call code block, put this green dot over it.&rsquo; <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</section>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Morse Code Context</title>
-      <link>https://kewbi.sh/blog/posts/201206/</link>
-      <pubDate>06 Dec 2020</pubDate>
-      <author>Emilie Ma ◦ Kewbish</author>
-      <description>On dots, dashes, and annotations.</description>
-      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
-<p>Hello, and welcome to another episode of <em>Kewbish talks about notes and knowledge for no reason whatsoever</em>. I&rsquo;ve somehow fallen into the corner of the interwebs vaguely describable as &lsquo;knowledge twt&rsquo;<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Reading papers, especially CS-ish design (read: not entirely incomprehensible) ones, is kind of nice. Perhaps this habit stems from the lab reports we constantly have to write, but I find reading through them therapeutic, in a way.</p>
-<p>These papers have a host of ideas spanning many disciplines and areas of thought. That&rsquo;s something I kind of like, as someone very inexperienced in the field. HCI, as I think it&rsquo;s properly called, spans a large breadth of thought. Luckily, most of it is the sort of thing that balances yet complements the science-focused learning I do for school. I find it fun to read papers (yes, I&rsquo;m a massive nerd), especially these, where I don&rsquo;t have to constantly do math or think about theory (though that can also be fun).</p>
-<p>One of the ideas I&rsquo;ve seen over the last couple weeks was the concept of context, and either persisting or deleting it. How does one encapsulate the context of a moment, be it <a href="https://twitter.com/szymon_k/status/1289942401318977537">branching browser history</a> or <a href="https://zettelkasten.de/posts/bookmark-breadcrumbs/">leaving a trail of thoughts between processing sessions</a>? The concept is striking: when looking through things I&rsquo;ve written even just a year ago, there&rsquo;s often a question of why I even thought it was a good idea. Re-entering, or even getting a glimpse into, the frame of mind I was in then would be very interesting for reflection<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
-<p>I&rsquo;d like to bookmark my thoughts and keep a giant log of posts that have sparked a rabbit hole of thought, but I also think it&rsquo;s kind of charming to rediscover posts on their own. It&rsquo;s a slow, perhaps luck-based, process, and I&rsquo;m not guaranteed to recover a key article, but it&rsquo;s more organic. Increasing serendipity or something.</p>
-<p>I&rsquo;m vaguely free from school at the moment, so I might write a bit about some thought-chains I&rsquo;ve had surrounding HCI topics. Maybe these posts&rsquo;ll get published, maybe they won&rsquo;t. Please don&rsquo;t take these seriously; I wanted to record random things I was thinking about and I thought I may as well publish them.</p>
-<h2 id="dots-and-dashes">Dots and Dashes</h2>
-<p>The first inspiration for this chain of thought was a tweet involving Cal Newport&rsquo;s <a href="https://www.calnewport.com/blog/2008/02/18/monday-master-class-rapid-note-taking-with-the-morse-code-method/">Morse Code Method</a>. It&rsquo;s from a while ago, but it has some interesting points regarding contexts, and context switching.</p>
-<p>In the article, Newport touches on a efficient style of notetaking: the Morse Code Method. The only two symbols are, aptly, a dot and a dash. While skimming through and processing content a first time, mark each main point with a dot. Supporting ideas are denoted instead with a dash. It&rsquo;s important to maintain momentum while processing the literature, which makes the entire process a lot quicker than the typical &lsquo;read and annotate at the same time&rsquo; technique. Not breaking the reading flow also would definitely reduce the amount of <a href="https://kewbi.sh/blog/posts/201018/">context switching</a> required.</p>
-<p>Newport then suggests annotating and pulling together additional notes <em>after</em> the process of reading, making it a distinct second step. I see this as playing into active recall somewhat, albeit in a very short-term, very non-spaced repetition way. Dots are reviewed for their striking-ness, and discarded if now irrelevant. This process of reviewing and redoing notes after having a different view on the paper definitely helps with filtering. I find that notes <em>before</em> or <em>while</em> learning a topic are a lot less polished and full of (usually unanswered) questions instead of actual new thought. After taking the time to understand and condense information<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>, the third step to this strategy-of-sorts, notes are usually more direct and dense.</p>
-<h2 id="a-search-for-serendipity">A Search for Serendipity</h2>
-<p>Sometime when I was supposed to be doing work, I had a thought. I haven&rsquo;t tried it myself, nor have I had the idea long enough to evaluate it, but I think it might be interesting. What would happen if the second and third steps of the above method were eliminated? There might be something intriguing there if the need to paraphrase and keep annotations was gone, and we just had dots and dashes scrawled in page margins.</p>
-<p>Obviously, if a line inspires a groundbreaking idea, that might warrant more permanent storage. While there&rsquo;s some use to writing everything I take out of a given text or chunk of information, I feel like it makes things a lot more rigid. Rigid, as in, I now have one interpretation (hopefully mostly thoughts that are original and add to the material) in front of me. If I never looked at the text itself again, I might never try to reinterpret and rethink the ideas with my current worldview. After all, I&rsquo;ve read it once, and I now have these very comprehensive notes, so why should I? Perhaps a book isn&rsquo;t quite good enough to warrant a second reading, and maybe the notes are good enough™.</p>
-<p>But I feel like there&rsquo;s a lost possible serendipity. Sure, finding ideas anew without rereading is certainly possible, especially if you&rsquo;ve densely interwoven your notes with other thoughts, as in a <a href="https://zettelkasten.de/posts/overview/">Zettelkasten</a>. There&rsquo;s the chance that you might stumble upon an orphaned or unlinked markdown file. However, I don&rsquo;t know if there&rsquo;s enough of a reason to revisit and reevaluate thoughts this way.</p>
-<p>If I was just presented with a trail of dots and dashes, and perhaps had to filter out information again, I&rsquo;d probably develop a whole new set of ideas. Coming from the possible added perspective of a couple months or years, this might be a bit better than static (evergreen?) notes. There&rsquo;s a sense of wonder and clicking through rabbit holes the first time one finds a particularly well-linked and well-connected thread of thoughts. I&rsquo;m not sure if I can document that all the first time, and I&rsquo;m also not sure if I&rsquo;d be able to remember key points that were most interesting again.</p>
-<p>I was thinking of building another personal Chrome extension lately. Instead of keeping more fleshed-out annotations in a bank, simple dots and dashes were placed in the margin of a webpage. (CSS-wise this might be a bit tricky, but let&rsquo;s not discuss the technical details.) I&rsquo;d not keep proper thoughts; just little circles and lines. Perhaps these could be reordered with shortcuts, and maybe even combined in different contexts. It might also provide insight through time by track placement of these pico-annotations.</p>
-<p>This, however, does come with the same caveats as footnote 3<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>. While it does increase the possibility to rediscover and readd new ideas, ideas will be filtered out and left in the dust at times. These might not be as &lsquo;big&rsquo; as some of the other points, and not get passed on to the next generation of notes. Context, as well, might well be lost. If a thought from generation 1 of a note only happened due to connections with other similar thoughts in context of mindspace 1, what happens if mindspace 1 is entirely dissimilar from mindspace 2 when taking generation 2 notes?</p>
-<h2 id="mapping-context">Mapping Context</h2>
-<p>The idea I&rsquo;m trying to explore is the persistence of context. On one hand, a constant, rigid context (if well-written) provides stability at the expense of some additional commitment and friction when trying to add to them. Not only does one have to recomprehend the text or work at hand, but one also has to try to reenter the mental location they were in when first processing information. The ideas surrounding previous ideas may unknowingly invade newer thoughts, tainting them retroactively, in a way.</p>
-<p>I don&rsquo;t want to lose my place, or my frame of mind. An ideal situation would be infinite memory, and an equally infinite and expandable notation for my current context. (But that might be a tad overwhelming.) Leaving a breadcrumb trail of similar thoughts that led to a specific thought would increase the amount of notetaking friction at one point in time, but may help in the future. There&rsquo;s no point to do context-heavy notes for a topic that you know won&rsquo;t be referenced in the future, so that might reduce the amount of labour if you&rsquo;re fully aware this for a one-off thing. But how does someone evaluate this &lsquo;one-off&rsquo;ness? You could argue that no notes should be made at all, if it&rsquo;s only to be used in the extremely short term.</p>
-<p>On the other hand, completely throwing away trying to recall the context, and focusing on just the current interpretation gives some more flexibility for the future. With a way to remember which points and which areas made you think last time, it might be an interesting balance to investivate. The main points and supporting points you picked out last time would still be available to see, but perhaps the interpretation could be different this time around, or maybe it&rsquo;s largely the same.</p>
-<p>I&rsquo;m wondering how I can reflect a context of a moment into my notes without creating too much extra friction force against taking notes. Currently, the persistent pico-annotation idea, combined with perhaps note versioning but with fresh starts every so often, is my best thought on the topic. Perhaps another day of diving into Twitter threads might be in order.</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>Context, especially wih regards to processing, is an intriguing area of thought. A lack of context forms a certain atmosphere, if I can call it that, and a large amount of it creates an metalayer. The amusing screenshots that fill up my Imgur are generally taken out of context. Notetaking often happens without context - especially if it&rsquo;s just raw information without reflection. Automatically added metadata (file creation time, EXIF data) adds another layer of searching possibilities, and a feeling of meta-organization. I have no idea whether context is absolutely essential or not, but I can see how it (over?)shadows interpretation. Just earlier, I was annotating an act of a play for class again (I did it in a different format that I wasn&rsquo;t satisfied with the first time round), and found myself essentially reframing past thoughts slightly. Maybe it&rsquo;s just me, and the way I work.</p>
-<p>Tech Twitter is a very deep rabbit hole, and is very good at leading me into long clickchains. However, I can justify reading papers and being extremely nerdy about this because it&rsquo;s semi-productive, right? It&rsquo;s led me to investigate a lot of literature I wouldn&rsquo;t have without it, and is strangely therapeutic, so that&rsquo;s that.</p>
-<p>I suppose this is a nice round place to end off. This was indeed full of tangents and small points, but I think it&rsquo;s a nice way to frame my thoughts for later (look, context!). I have nowhere else to put them, and this essay&rsquo;s vaguely technical, so here it shall stay.</p>
-<section class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1" role="doc-endnote">
-<p>That being said, I also don&rsquo;t have a Twitter, which makes things slightly less addicting / more difficult to check in on all the content, but here we are. It&rsquo;s also interesting to note how seemingly everyone in HCItwt seems to know, or at least somewhere reference the others. It&rsquo;s a Roam graph of people - which I suppose is the essence of a social network. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2" role="doc-endnote">
-<p>And the same process will happen in two or three years when I return to these posts. It&rsquo;s a cycle, and it&rsquo;s a process - but that doesn&rsquo;t mean I won&rsquo;t cringe. Well, at least the cringe now is several magnitudes less than two years ago: will this pattern continue? <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3" role="doc-endnote">
-<p>It might be interesting to see how this process would play out if intermediary layers were scrapped. Perhaps if they were on scratch paper, intended on being thrown away or (a less harsh approach) filed into a &lsquo;cold&rsquo; archive for very unfrequent retrieval, it might reduce the pressure of making &lsquo;good notes&rsquo;. However, there&rsquo;d come the very real possibility of not recording any new thoughts that might have helped with future iterations of a concept, or losing existing ones in the condensing process. <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
