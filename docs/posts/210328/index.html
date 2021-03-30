@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPSC 110: Weeks 5 and 6</title>
+    <meta name="description" content="On helpers and binary search trees.">
+    <meta property="og:title" content="CPSC 110: Weeks 5 and 6">
+    <meta property="og:description" content="On helpers and binary search trees.">
+    <meta property="og:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <meta property="og:url" content="https://kewbi.sh/blog/posts/210328/">
+    <meta property="twitter:title" content="CPSC 110: Weeks 5 and 6">
+    <meta property="twitter:description" content="On helpers and binary search trees.">
+    <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
+</head>
+
+<body class="cont page">
+    <section class="b-main-2">
+        <p><a href="../">&lt; More Posts</a></p>
+        <h1 class="b-subtitle">CPSC 110: Weeks 5 and 6</h1>
+        <p>Published 28 March 2021 at <a href="https://kewbi.sh/blog/posts/210328/">Yours, Kewbish</a>. 1572 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
+        
+        <hr style="margin-bottom:-1%;">
+        <div class="b-writing">
+            <h2 id="introduction">Introduction</h2>
+<p>Spring break is almost over, and perhaps so is my CPSC 110 sprint. For a lack of creative inspiration to work on anything other than practise problems, I&rsquo;ve been spending a good amount of my remaining break on very routine homework - I guess CPSC 110 falls into that category? We&rsquo;ve started to delve further into the theory side of things this couple weeks, and it&rsquo;s been very interesting to see how my methods for designing things in Racket has sort of evolved through the modules.</p>
+<p>Part of me being able to complete a rather surprising (to me, at least) number of weeks over a rather short amount of calendar weeks was conveniently forgetting to do both the problem sets or labs for the past couple weeks. I&rsquo;d become part of my habit to do those after writing up a week&rsquo;s set of notes, but I think I got a bit too carried away somewhere in between. Anyhow, I had to go back and do said problem sets and labs, and it was interesting how difficult it was to remember what techniques I was &lsquo;allowed&rsquo; to use. Somewhere in the middle of weeks 6 and 7, some template rules get changed, and some shorthand is now added, which I almost reflexively tried to use before realizing I was supposed to operate in on a past set of guidelines while looking at problem set solutions. It&rsquo;s remarkable that I even forgot that there was a change in shorthand allowed - I think that&rsquo;s part of what makes CPSC 110 one of those required courses: it forces you to look at things very systematically, and builds on what you&rsquo;re supposed to do systematically, systematically. (In other words, the addition of new parts of information follows nicely from past weeks, and everything is consistent.)</p>
+<p>As always, you&rsquo;re probably uninterested in the contents of this post unless you&rsquo;re taking CPSC 110 yourself, or have the very niche interest of learning how to program in Racket. Feel free to check out some of my other posts (I promise I don&rsquo;t blather on about Racket this frequently usually, but Spring Break sort of encouraged me to do as much CPSC 110 as I could), or check back in a couple weeks - I have some ideas for other articles I&rsquo;d like to write.</p>
+<h2 id="notes---week-5">Notes - Week 5</h2>
+<p>This week dealt with helper function design, as well as more information on inbuilt natural number functions.</p>
+<ul>
+<li>natural numbers are good to illustrate examples of self-referential data definitions
+<ul>
+<li>unlike lists, don&rsquo;t need to cons at all
+<ul>
+<li>the one off statement is either zero or <code>(add1 n)</code> =&gt; why it presents recursion</li>
+</ul>
+</li>
+<li>use <code>(add1 n)</code> to add 1 to a number and <code>(sub1 n)</code> to subtract 1 =&gt; useful for recursion</li>
+<li>add n to the template =&gt; easier to work with contribution of first rule</li>
+</ul>
+</li>
+<li>function decomposition =&gt; breaking design problems down to one atomic purpose
+<ul>
+<li>in past weeks, we&rsquo;ve added helper functions: this week dives further into when to add them and how to do so</li>
+</ul>
+</li>
+<li>places to put helper functions:
+<ul>
+<li>where there&rsquo;s a reference =&gt; natural place to insert a helper function
+<ul>
+<li>world design recipe =&gt; also using helpers</li>
+<li>where types of what you&rsquo;re operating really changes</li>
+</ul>
+</li>
+<li>when an expression operates on a list =&gt; arbitrarily far into the list
+<ul>
+<li>because this is a form of recursion</li>
+</ul>
+</li>
+<li>when a function shifts into a new knowledge domain
+<ul>
+<li>knowledge domain =&gt; when you need to operate on a new facet of the data, or change what you need to &lsquo;know&rsquo;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>essentially breaking everything down into individual steps for the problem =&gt; can begin seeing this in the <code>(check-expects)</code>
+<ul>
+<li>sometimes avoid referring to constants in these to fully illustrate the example</li>
+<li>function composition only needs to test the composition
+<ul>
+<li>no need to deal with base case</li>
+<li>can essentially test the two only together and call function in the check-expect</li>
+<li>make it as obvious as possible if something&rsquo;s gone wrong</li>
+</ul>
+</li>
+<li>work systematically with the wishlist as a todo list</li>
+</ul>
+</li>
+</ul>
+<h2 id="notes---week-6">Notes - Week 6</h2>
+<p>This week describes binary search trees, as well as mutually referential data.</p>
+<ul>
+<li>have now graduated to BSL with List Abbreviations =&gt; use <code>(list 1 2 3)</code> to declare a list without all the <code>(cons)</code>s
+<ul>
+<li>if <code>(cons)</code> is applied to a list, concatenates it to the beginning</li>
+<li><code>(append l1 l2)</code> takes two lists (not elements), and appends l2 to l1 so the list is flattened into <code>(list [elements of l1] [elements of l2])</code>
+<ul>
+<li>if you instead run list (or cons) on the two lists, you get a list containing two lists (not flattened, and with 1 list for <code>(cons)</code>)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>here, we could use a self-referential data definition to create a list of any given element =&gt; concatenating an element onto the self-referential data def
+<ul>
+<li>can sort the list and use <code>(first)</code> and <code>(rest)</code> to traverse the list in order of magnitude
+<ul>
+<li>on average, n/2 elements searched</li>
+</ul>
+</li>
+<li>however, faster on average to use a binary search tree, where elements are ordered on branches
+<ul>
+<li>middle value goes on the &lsquo;top&rsquo; of any given fractal part of the tree</li>
+<li>smaller values go on the left, larger values go on the right =&gt; of a given element</li>
+<li>balance the tree (shift things around) if it&rsquo;s looking sort of like a list =&gt; at that point you have no advantage</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>BST data definition utilizes compound data definitions with 2 self-reference cycles
+<ul>
+<li>create a struct with fields for BSTs for both left and right branches stemming from the given element
+<ul>
+<li>specify invariant rule =&gt; right/left interpretations</li>
+</ul>
+</li>
+<li>run <code>(fn-for-bst)</code> on each self-reference =&gt; natural recursion</li>
+<li>rendering BSTs =&gt; also with recursion
+<ul>
+<li>for the check-expects, remember to order according to test &lsquo;difficulty&rsquo; and test each case (right/left to right/left)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>searching BSTs is a matter of determining whether the searched-for value is greater than, equal to, or less than the current node
+<ul>
+<li>then traverse either the left or right BSTs depending on above condition</li>
+</ul>
+</li>
+<li>arbitrary arity tree =&gt; form of data that&rsquo;s arbitrarily large in two dimensions
+<ul>
+<li>arbitrary (as in length, can be an unspecified number of elements long), arity =&gt; arbitrarily long in two dimensions (folder =&gt; file)</li>
+<li>to deal with these two dimensions, will need 2 cycles in type reference graph
+<ul>
+<li>generally have a data definition for an element, and one for its listofelement =&gt; use arbitrary data definition template</li>
+<li>these two data definitions refer to each other =&gt; Element has a &lsquo;children&rsquo; field that refers to its list, and ListOfElement refers to Element in its <code>(cons)</code> branch of the one-of</li>
+<li>known as mutual reference</li>
+<li>reference arrows =&gt; describe mutual ref, then self ref, then find the normal ref</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>mutual reference template involves two HtDF problems, one of each type
+<ul>
+<li>name them with <code>([fn]--element)</code> and <code>([fn]--loe)</code>, or similar</li>
+<li>at the points with a reference to the other type of mutual reference =&gt; insert a natural mutual reference recursion helper</li>
+<li>test the base case (may not be the element case that&rsquo;s the simplest)
+<ul>
+<li>base case is the case in which no mutual reference is invoked =&gt; generally the empty or false of the LOE type</li>
+<li>use <code>(check-expect)</code>s to clarify what the expected output will be</li>
+</ul>
+</li>
+<li>usually, both functions produce the same type of data in the end</li>
+</ul>
+</li>
+<li>backtracking search =&gt; use special signature of <code>[type] or [base]</code>
+<ul>
+<li>usually would be using something like an exception, except BSL doesn&rsquo;t have those</li>
+<li>search for the desired value in all children, if not, runs on all siblings as well
+<ul>
+<li>if it produces false =&gt; check the siblings / rest of the LOE</li>
+<li>use the <code>(if (not (false? (fn-for-loe))))</code> to check above condition</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>I&rsquo;ll save the notes for Week 7 for the next week I&rsquo;m looking for something share - I&rsquo;d rather keep the amount of double-weeks to a minimum. I also doubt there&rsquo;ll be that many more double weeks, since school&rsquo;s started again, but we&rsquo;ll see. I&rsquo;m now past the midway point and on a good streak of work, so I hope I&rsquo;ll be able to finish the course well before school ends in June. I plan to spend the summer revising for the challenge before I actually take it, which I hope will be enough time. I&rsquo;ve looked at past papers, and they don&rsquo;t seem too too bad, so let&rsquo;s hope a couple months of review should be enough.</p>
+<p>In other unrelated news, I helped run a hackathon this weekend, which was an amazing experience. <a href="https://vhhacks.ca">vhHacks 2021</a> was a super fun event to organize and run workshops for, and I was incredibly impressed at everything that was submitted. The majority of hackathon-esque events I&rsquo;ve been to have been online, which is usually something people label as &lsquo;unfortunate&rsquo;, but to be honest, there&rsquo;s something sort of nice about async hackathons and weekends spent grinding away alone at a project in the comfort of your office. I hope some of the wholesome hacker vibe that I personally got at my first online hackathon was successfully transmitted somewhere in the process, and that, most of all, it was fun<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. I might write a bit about organizing the hackathon (not that I know what to write about regarding the entire shenanigans) in the future, but for now, I&rsquo;ll go back to catching up on CPSC 110&rsquo;s problem sets and labs for the next weeks.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Preliminary survey results with people I know has been positive, but I&rsquo;m entirely sure they&rsquo;re biased and at least 50% trying to validate me, which is still much appreciated. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+            <p>- Yours, Kewbish</p>
+        </div>
+        <br><p><a href="../">&lt; More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>
