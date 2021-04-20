@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPSC 110: Weeks 7 and 8</title>
+    <meta name="description" content="On local expressions and built-in abstractions.">
+    <meta property="og:title" content="CPSC 110: Weeks 7 and 8">
+    <meta property="og:description" content="On local expressions and built-in abstractions.">
+    <meta property="og:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <meta property="og:url" content="https://kewbi.sh/blog/posts/210411/">
+    <meta property="twitter:title" content="CPSC 110: Weeks 7 and 8">
+    <meta property="twitter:description" content="On local expressions and built-in abstractions.">
+    <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
+</head>
+
+<body class="cont page">
+    <section class="b-main-2">
+        <p><a href="../">&lt; More Posts</a></p>
+        <h1 class="b-subtitle">CPSC 110: Weeks 7 and 8</h1>
+        <p>Published 11 April 2021 at <a href="https://kewbi.sh/blog/posts/210411/">Yours, Kewbish</a>. 1531 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
+        
+        <hr style="margin-bottom:-1%;">
+        <div class="b-writing">
+            <h2 id="introduction">Introduction</h2>
+<p>A couple weeks ago, I predicted that my CPSC 110 sprint was probably going to peter out, and would you look at that - I was somewhat right. A combination of school restarting, lots of homework to catch up on, and a general procrastination of writing anything all led to me sort of conveniently forgetting to go through a couple videos a day. It was also convenient that these couple of modules are starting to pick up in difficulty, and are generally the points where people start crying for help on the Piazza (or so I&rsquo;ve been told). All in all, I&rsquo;d definitely put off writing notes for the last few modules I&rsquo;ve completed until today, so I suppose here&rsquo;s a good place to start.</p>
+<p>Local expressions and the section on one-of types were surprisingly comprehensible - I&rsquo;ve always admired how systematically this course builds on past material, but I suppose there&rsquo;s a reason why the course name is &lsquo;Systematic Program Design&rsquo;. Week 8&rsquo;s module on built-in abstractions was also relatively easy to understand - drawing on past experience with similar functions and styles in Python and especially Javascript definitely helped.</p>
+<p>I think I&rsquo;ve said this something like five times before, but as always, you&rsquo;ll probably be very confused and disinterested in the contents of this article unless you&rsquo;re taking CPSC 110, or somehow have stumbled upon this in the interest of learning Racket (it&rsquo;s an experience). I&rsquo;ve put up the notes for the rest of the course up til this point in the posts preceding, so if you are indeed interested, <a href="https://kewbi.sh/blog/posts/">check those out</a>.</p>
+<h2 id="notes---week-7">Notes - Week 7</h2>
+<p>Week 7 discusses two one-of types (the cross product table), and local expressions.</p>
+<ul>
+<li>when a function&rsquo;s arguments have more than one type with one-of type comments, use cross product table to determine which cases to handle
+<ul>
+<li>design function based on model of function instead</li>
+<li>create a table with the one of possibilities for type a horizontally, and possibilities for type b vertically
+<ul>
+<li>will have a box per case, which you can fill in with the desired behaviour for each case</li>
+<li>often, can condense boxes that are next to each other and have the same behaviour (<code>#t</code>/<code>#f</code> cases)</li>
+<li>collect into a <code>(cond)</code> expression</li>
+</ul>
+</li>
+<li>helps with determining what to test =&gt; at least one per case in the <code>(cond)</code></li>
+</ul>
+</li>
+<li>with more difficult behaviours =&gt; remember to keep natural recursion
+<ul>
+<li>even if this is a branching statement, keep in one <code>(cond)</code> QA pair</li>
+<li>keep self-reference applying to the rest of the list (if it&rsquo;s one)</li>
+</ul>
+</li>
+<li>we&rsquo;ve graduated to ISL =&gt; intermediate student language
+<ul>
+<li>one of its new feature is local expressions =&gt; function and variable definitions within a larger definition</li>
+</ul>
+</li>
+<li>local expressions nest into another definition =&gt; <code>(local [(define x a)] (expression))</code>
+<ul>
+<li>any number of function or variable definitions are allowed =&gt; override any definitions outside of the local at top level</li>
+<li>expression is evaluated to produce the result of the local</li>
+<li>these local variables do not exist outside of the local =&gt; lexical scoping
+<ul>
+<li>definitions that exist at the top level are in the global scope</li>
+<li>scope contours show where functions and variables are defined and redefined =&gt; like nesting boxes that only take the most specific one</li>
+<li>definitions reference the innermost enclosing box =&gt; defaulting to top level</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>to evaluate local functions, use a method of renaming and lifting
+<ul>
+<li>combining all the rules previously learned =&gt; first start by substituting variables outside local as normal</li>
+<li>then rename all local&rsquo;s references to a program-unique name</li>
+<li>then lift the renamed definition into top level / global scope</li>
+<li>then replace the local with a body expression</li>
+<li>then replace any renamed definitions within the local with their values</li>
+</ul>
+</li>
+<li>local expressions are used to encapsulate the ugly mutual reference functions, as well as prevent recomputing in recursive functions
+<ul>
+<li>encapsulation helps avoid practically, naming problems, and helps decomplicate the rest of the program
+<ul>
+<li>wrap the two mutually referential functions into a local definition, and run only one of the functions in the local expression (single)</li>
+<li>delete all tests that reference the other definition (list), and rename the rest of the lists</li>
+<li>can pre-encapsulate within the template, moving the same two function templates within a data definition&rsquo;s template</li>
+</ul>
+</li>
+<li>in recursive functions, the time to evaluate a function rapidly increases =&gt; exponential
+<ul>
+<li>to avoid this, we wrap recursive function calls that are repeated in a local definition</li>
+<li>look for the closest expression that wraps the function calls, and replace with pre-computed values =&gt; only compute these once, saving time</li>
+<li>rename each of the function calls to the local definitions</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="notes---week-8">Notes - Week 8</h2>
+<p>This week deals with using Racket&rsquo;s built-in abstract functions and creating your own. (Starting to get into things that are more closely related to what you stereotypically think of as functional programming.)</p>
+<ul>
+<li>abstraction helps reduce the amount of repetition in code, especially from templates that are very similar to each other
+<ul>
+<li>use function definitions to plug into other generalized function =&gt; more abstract fns</li>
+</ul>
+</li>
+<li>basic example of abstraction =&gt; take several functions that are very similar, and make one generalized function that takes only the differing points as arguments
+<ul>
+<li>because most functions are directly based off templates =&gt; not much change between functions if same types and signature</li>
+<li>add the check-expects for each function to the generalized function check-expects</li>
+<li>add each argument to the check-expects and each function</li>
+<li>edit the body of each function to make a call to the generalized function with its specialized predicate / differing points</li>
+<li>purpose can just generalize to the main function</li>
+<li>called higher-order functions =&gt; fns that call other functions</li>
+</ul>
+</li>
+<li>signature and type notation is now changing =&gt; type inference
+<ul>
+<li>look at each argument =&gt; if it&rsquo;s a function that can apply to any types, instead of denoting the types that it uses, use abstract letters like X and Y
+<ul>
+<li>each function needs to be in parentheses =&gt; something like <code>(X =&gt; Boolean)</code></li>
+</ul>
+</li>
+<li>look at argument functions that take in the same types, or produce the same types</li>
+<li>also, can now use the <code>(listof X)</code> shorthand to avoid having to produce a data definition for the lists</li>
+</ul>
+</li>
+<li>Racket also has a large number of built-in abstract functions:
+<ul>
+<li>check the type to input and the type to output, then find the corresponding function in the list below ⇓</li>
+<li>build-list: <code>Natural =&gt; (listof X)</code></li>
+<li>filter: <code>(listof X) =&gt; (listof X)</code></li>
+<li>map: <code>(listof X) =&gt; (listof Y)</code></li>
+<li>andmap: <code>(listof X) =&gt; Boolean</code></li>
+<li>foldr (and foldl): <code>(listof X) =&gt; Y</code>
+<ul>
+<li>call with a function, a base case, and a list to operate on =&gt; similar to the list template</li>
+</ul>
+</li>
+<li>can use these to form larger functions without all the template work</li>
+</ul>
+</li>
+<li>closures =&gt; when a function requires access to a parameter part of the larger function =&gt; use local
+<ul>
+<li>for example, in a function with arguments x and fn1, where fn1 needs access to x</li>
+<li>only passes one argument =&gt; unlike writing your own fold function where you have to pass all arguments</li>
+</ul>
+</li>
+<li>produce your own fold functions from the template =&gt; abstract with each base case and function argument as an argument
+<ul>
+<li>in functions that you pass, then have to specify with all arguments of struct members</li>
+<li>forex: fn1 that operates on an image takes two arguments now, not one like in closures</li>
+<li>generally compose your own local functions to use in the fold function</li>
+<li>can check like most other functions =&gt; just copy paste the check-expects over, wrapping functions as needed in local expressions</li>
+</ul>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>As of writing this conclusion, I&rsquo;ve actually managed to go through module 9 as well, so we&rsquo;ll see if I can manage to publish those notes soon as well. I can definitely see the course starting to ramp up in difficulty, but I think the design problems are a nice challenge, aside from the mundanity that can sometimes be trying to write check-expects and follow templates to a T. As I look back on each module, I&rsquo;m surprised to see how clear everything actually is - the first time round, everything certainly seemed a lot more difficult. I guess I&rsquo;ve just found that it really is impossible to try to rush through things, even the dull humdrum of copy-pasting stubs and templates and such. I&rsquo;m excited to see what the later couple weeks have in store, especially in terms of this magic they call &lsquo;functional programming&rsquo;.</p>
+<p>I&rsquo;m also looking forward to making some more good progress before summer break, and seeing when I can finish the bulk of the course. I have several more modules left, but after that, I think I can start devoting more time to completing more start-to-end problems and tackling the practise finals from past years. Hopefully, I&rsquo;ll be able to finish up the course by June, though I genuinely don&rsquo;t know what else&rsquo;ll come up with school. I think I&rsquo;ve generally settled on challenging in September instead of the summer, which should give me some more time to prepare, and might hopefully lift a bit of the courseload (if I do manage to pass the challenge) in my first semester. I think I&rsquo;m well on track to this, and I&rsquo;m happy to start applying some of the more fun theoretical techniques to problems.</p>
+
+            <p>- Yours, Kewbish</p>
+        </div>
+        <br><p><a href="../">&lt; More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPSC 110: Weeks 9 and 10</title>
+    <meta name="description" content="On generative struggles and accumulators.">
+    <meta property="og:title" content="CPSC 110: Weeks 9 and 10">
+    <meta property="og:description" content="On generative struggles and accumulators.">
+    <meta property="og:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <meta property="og:url" content="https://kewbi.sh/blog/posts/210418/">
+    <meta property="twitter:title" content="CPSC 110: Weeks 9 and 10">
+    <meta property="twitter:description" content="On generative struggles and accumulators.">
+    <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
+</head>
+
+<body class="cont page">
+    <section class="b-main-2">
+        <p><a href="../">&lt; More Posts</a></p>
+        <h1 class="b-subtitle">CPSC 110: Weeks 9 and 10</h1>
+        <p>Published 18 April 2021 at <a href="https://kewbi.sh/blog/posts/210418/">Yours, Kewbish</a>. 1380 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
+        
+        <hr style="margin-bottom:-1%;">
+        <div class="b-writing">
+            <h2 id="introduction">Introduction</h2>
+<p>Last week, I think I predicted that these couple weeks would be some of the hardest so far in the course, and I think I wasn&rsquo;t far off. The lab and problem set for week 9 were especially difficult - it seemed to be very much a &lsquo;it&rsquo;s a matter of thinking&rsquo; type of problem. Generative search and this type of recursion are techniques I haven&rsquo;t even touched outside of Racket, so I think the lack of experience definitely didn&rsquo;t help, as well as my not understanding the problem half the time. Week 10&rsquo;s work wasn&rsquo;t much better - I&rsquo;m still working through the lab and problem set as of now. However, I feel like Week 10 &lsquo;clicks&rsquo; more than Week 9, but maybe that&rsquo;s just because Week 9 had a large problem example instead of smaller, more digestible ones. However, going through the practise problems and solutions has been helping, and I&rsquo;ve really learned that you cannot rush it - taking my time to work through problems fully has been a lot more helpful than trying to speedrun a couple easy check-expect cases.</p>
+<p>As with every other CPSC 110 post, if you&rsquo;re not doing the course or don&rsquo;t have the very niche interest of tackling aforementioned generative recursion and accumulators, this is the part where you might want to go read one of my other posts. I promise there&rsquo;s some interesting thoughts somewhere in my post history, so feel free to go check those out instead.</p>
+<h2 id="notes---week-9">Notes - Week 9</h2>
+<p>This week covers generative recursion, and applies it to backtracking search, a method of search that generates all possible permutations of a problem in a tree before eliminating invalid ones.</p>
+<ul>
+<li>generative recursion differs from previous structural recursion =&gt; instead of taking a sub-piece of data as argument to next call, we now generate entirely new data to call
+<ul>
+<li>fractals are a good example of this =&gt; layering images onto each other</li>
+</ul>
+</li>
+<li>use the HtDF recipe for generative recursion =&gt; instead of an empty case, we have a trivial case and a non-trivial generative case
+<ul>
+<li>generally nest images around other recursive cases, instead of only having a recursive expression</li>
+<li>base case for generative recursive check-expect is the case that doesn&rsquo;t recurse anymore =&gt; set a cutoff constant
+<ul>
+<li>next ones can be those that do recurse (generally one or two &lsquo;steps&rsquo;)</li>
+</ul>
+</li>
+<li>can use locals to avoid redundant competition (i.e. when multiple recursive areas or multiple of the same nonrecursive cases)</li>
+<li>can re-call the recursive function =&gt; make sure to operate on the arguments (generally for side length)</li>
+</ul>
+</li>
+<li>can&rsquo;t count on type comment rules to determine that the recursion will end =&gt; halting problem
+<ul>
+<li>need to use our own proofs: three-part system of base case, reduction steps, and halting or termination argument
+<ul>
+<li>base case is the trivial question expression in the cond</li>
+<li>reduction step is the, well, reduction of the expression argument</li>
+<li>then use logic to state an argument that repeating the reduction will eventually reach the base case</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>use lambda (λ) expressions to avoid having to create a whole local function =&gt; anonymous function
+<ul>
+<li>only use in place of expressions that will only be used once =&gt; like Python lambdas</li>
+<li>ensure the body is easily understood and that the naming adds nothing to its comprehension</li>
+<li>format: <code>(λ (n) (&gt; n 5))</code> where the n expression is the list of other expressions</li>
+</ul>
+</li>
+<li>backtracking search is composed of several parts =&gt; structural recursion for the tree structure, and handling function composition
+<ul>
+<li>use the HtDF backtracking search template =&gt; use local functions to nest all required functions in a single expression</li>
+<li>two main parts =&gt; the &lsquo;trivial&rsquo; or success case, and the subs, or the descendents case</li>
+<li>descendents generally requires a couple helper functions =&gt; break the problem down into several smaller steps to solve with function composition, abstract builtins, or other methods</li>
+</ul>
+</li>
+</ul>
+<h2 id="notes---week-10">Notes - Week 10</h2>
+<p>Week 10 deels with accumulators, a new technique used to preserve context that&rsquo;s often lost in recursive functions.</p>
+<ul>
+<li>structural recursion templates are very powerful =&gt; easy to abstract upon
+<ul>
+<li>however, cannot see &lsquo;where&rsquo; they are in a data structure</li>
+<li>cannot preserve past-touched data, or accumulate data to add to future computations</li>
+</ul>
+</li>
+<li>context preserving accumulator =&gt; brings data from parent/child or keeps track of other values that need to stay constant within a sub-traversal
+<ul>
+<li>wrap the function body in a local expression and add a trampoline with a base accumulator</li>
+<li>add an argument to the inner functions</li>
+<li>the context preserving accumulator changes every step depending on the fn behaviour</li>
+<li>add parameter to where it might be used in a function</li>
+</ul>
+</li>
+<li>also introduces the concept of tail recursion =&gt; any recursion placed in the last expression position in function, not wrapped in anything
+<ul>
+<li>reduces the problem where many sub-expressions are created before reducing the answer</li>
+<li>optimized in many languages, including Racket</li>
+<li>instead of a context-preserving accumulator, now a result-so-far accumulator is introduced
+<ul>
+<li>represents the built-up information (such as the sum function)</li>
+<li>generally used to produce tail-recursive functions instead of cons-ing infinitely</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>third accumulator type is the worklist, where you consistently build onto a list that&rsquo;s called each function iteration
+<ul>
+<li>run the mutually recursive list function on the todo worklist instead
+<ul>
+<li>take the first of the worklist and operate on it, then if using another accumulator attach to that</li>
+</ul>
+</li>
+<li>used often when operating on data with more than one graph cycle =&gt; arbitrary arity trees with tail-recursion</li>
+</ul>
+</li>
+<li>general accumulator advice
+<ul>
+<li>when writing accumulators, ensure a base accumulator is set in the trampoline =&gt; empty, 0, depends on function behaviour</li>
+<li>to debug accumulators, draw out an example of a call tree including the arguments and how they&rsquo;re expected to be operated on</li>
+</ul>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Only a couple modules left - though those might take a while to get through, given that they&rsquo;re the last, and probably most difficult sections of the entire course. I foresee a lot of cross-module work, as well as more complex program design. I&rsquo;m looking forward to tackling it, but a bit hesitant to find out what &lsquo;graphs&rsquo; and &lsquo;mutation&rsquo; are supposed to mean<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. I&rsquo;m still on track to finishing CPSC 110 well before summer break, but I think I might have to take things a little slower given with how school&rsquo;s going. Perhaps more consistent but less intense work with the course will be more effective, anyways?</p>
+<p>I haven&rsquo;t found the time to write a proper post in a while, but I think it&rsquo;s high time I went back to more regular posts - I have a list of pretty viable ideas that I&rsquo;d like to expand more on, and maybe a couple addendums and things to other posts that I might update. YK was started as half a joke, but I think it&rsquo;s become more a place to swirl thoughts together and hypothesize about the very niche things I&rsquo;m into. I don&rsquo;t think my posting style&rsquo;d fit in more micro-blog formats, so I plan on continuing to tend this digital garden (hey, am I trendy now?) for a very long time - and that means keeping my consistently posting schedule. I got a bit lax in the past month - while my very rigid posting schedule maybe wasn&rsquo;t the best for quality in 2020, it did incentivize me to stick to it, and at least put something out. Anyways, I hope I&rsquo;ll manage to edit up my latest post and have it up soon, and follow it up with a bunch of other thoughtchains. We&rsquo;ll see<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Did Kiczales intentionally name the last couple units the most vaguely just to add to the mystique? <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Also, if you&rsquo;ve read this far, it probably means that you&rsquo;re one of the few people that I talk to regularly and hey, if you unironically check the footnotes, I think I can trust y&rsquo;all enough. (Please don&rsquo;t spill to others though, at least since I&rsquo;m theoretically not supposed to talk about this yet.) So - life update! I made it into UBC, which still hasn&rsquo;t entirely hit. It&rsquo;s absolutely crazy that I&rsquo;ve got here, and at 15, too, and ███████ a ████████ ██████████ too (that&rsquo;ll stay redacted until I&rsquo;m properly legally allowed to talk about it.). 2020 and 2021 so far have been absolute rollercoasters, but hey, with GCI, GfTW, and now this - it&rsquo;s definitely been worth it. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+            <p>- Yours, Kewbish</p>
+        </div>
+        <br><p><a href="../">&lt; More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>
