@@ -5,10 +5,84 @@
     <link>https://kewbi.sh/blog/</link>
     <description>Latest Yours, Kewbish posts</description>
     <managingEditor>(Emilie Ma ◦ Kewbish)</managingEditor>
-    <lastBuildDate>Sun, 13 Jun 2021 14:52:15 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 11 Jul 2021 13:36:07 -0700</lastBuildDate>
     
 	<atom:link href="https://kewbi.sh/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>XFCE Monitor &#43; Bluetooth Setup</title>
+      <link>https://kewbi.sh/blog/posts/210711/</link>
+      <pubDate>11 Jul 2021</pubDate>
+      <author>Emilie Ma ◦ Kewbish</author>
+      <description>On my workarounds for my laptop setup.</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>I suppose it wasn&rsquo;t particularly &lsquo;recently&rsquo; anymore, but I quote-unquote &lsquo;recently&rsquo; redid my laptop setup. (It&rsquo;s been at least three months now, but I&rsquo;ve been procrastinating on the writeup for unknown reasons.) My previous setup, if you can even call it that, was the typical hunching over my laptop, staring into the depths of a 15&quot; screen for hours on end situation. Not very good for posture, and probably not very good for my eyesight either. I went through the better part of the pandemic Zooming from there, but my parents and I decided it was probably not a great idea to continue like this. So, I acquired a monitor, a clamshell stand, a Bluetooth keyboard and mouse, a webcam, and off I went.</p>
+<p>Setting all of this up probably would have been easier on Ubuntu with the normal DE and everything, but when I <a href="https://kewbi.sh/blog/posts/200906/">got into Linux</a>, I went with <a href="https://manjaro.org/">Manjaro</a> + <a href="https://xfce.org">XFCE</a> as a DE + <a href="https://i3wm.org/">i3</a> for a WM. Most of the tutorials I found for setting up display profiles on monitor connect, pairing Bluetooth peripherals, and wrangling the power manager to avoid suspending on lid close were mostly for GNOME Ubuntu. The few I found for Manjaro were quite convoluted, and would be using a different DE or device. I was left to trawl my way through the Arch Linux wiki and bodge together pieces of different writeups for what fit my system - it wasn&rsquo;t a very straightforward process. Since I don&rsquo;t want to bother having to figure everything out from scratch if I reinstall, I&rsquo;ve decided to put together what I remember doing to Make Everything Just Work™. If you&rsquo;re looking for a tutorial that&rsquo;ll go through how to replicate a system where:</p>
+<ul>
+<li>your laptop is running Manjaro with XFCE as a DE,</li>
+<li>your laptop is docked in clamshell mode,</li>
+<li>your laptop&rsquo;s only display is rendering to an external monitor (specifically Dell, though I doubt this makes a difference), and</li>
+<li>your laptop&rsquo;s connected to a <a href="https://www.microsoft.com/en-my/accessories/products/keyboards/designer-bluetooth-desktop?activetab=overview%3aprimaryr2">Microsoft Designer Desktop Bluetooth keyboard and mouse</a> (monitor is irrelevant but this model is, I think)
+you&rsquo;re in the right place.</li>
+</ul>
+<p>This&rsquo;ll be a decently technical post, but it&rsquo;s here to serve as a semi-tutorial for how to replicate my setup, just in case I have to reset my laptop or someone out there has the exact same, very niche problem as I did. I won&rsquo;t cover any of the more general advice, so there&rsquo;s a decent chance this is entirely irrelevant to you. Apologies, please check out one of the numerous other tutorials I&rsquo;m sure are out there. As with most of my articles here, take this with a grain of salt as well, and if what I&rsquo;ve done doesn&rsquo;t quite work on your setup, consider this your liability waiver: don&rsquo;t execute any of the commands or follow any of my instructions unless you understand them, and I hereby cleanse myself of any responsibility for you messing up.</p>
+<h2 id="monitor-displays">Monitor Displays</h2>
+<p>Now that we&rsquo;ve got that out of the way, let&rsquo;s start with the monitor setup itself. I have a Dell monitor - I don&rsquo;t think the model number is relevant at all, since I just plugged the monitor in via HDMI. (I&rsquo;m fairly certain this should be roughly the same for most other monitors.) What&rsquo;s a bit tricky, however, is the monitor display setup. It took a while for me to get how to turn on and off displays, since I just wanted my monitor on, and not have my laptop screen mirroring it.</p>
+<p>Plug in your monitor to your laptop and open <code>xfce4-display-settings</code>, or just search for Display. You should have something like this:
+<figure><img src="https://i.imgur.com/DSRtQQO.png"
+         alt="Figure 1. When you first open Display."/><figcaption>
+            <p><em>Figure 1. When you first open Display.</em></p>
+        </figcaption>
+</figure>
+
+The little toggle next to laptop will likely be green instead - toggle it off (and toggle off &lsquo;primary display&rsquo; for good measure). This will turn off the laptop display, and leave you with your monitor on. (You&rsquo;ll still have to leave your laptop open and use it for keyboard and mouse controls though, at least until we get to the Bluetooth pairing.)</p>
+<p>Click the dropdown that currently reads &lsquo;1 - Laptop&rsquo;, and switch to &lsquo;2 - Dell Inc.&rsquo;, followed by the screen size of your monitor. Have fun playing with any of the bottom settings, but once you&rsquo;re done, toggle &lsquo;primary display&rsquo; to on, and ensure the toggle beside the monitor name is still on. At this point, you can go ahead and drag the monitor displays on the left side of the screen around, but nothing should happen.</p>
+<p>If you want to set up display profiles, so that your laptop automatically switches between monitor and laptop screen as primary display (for example, when you&rsquo;re on the go and your monitor&rsquo;s not plugged in), you&rsquo;ll have to tab over to the Advanced menu.
+<figure><img src="https://i.imgur.com/d6AOrmA.png"
+         alt="Figure 2. The Advanced Display menu."/><figcaption>
+            <p><em>Figure 2. The Advanced Display menu.</em></p>
+        </figcaption>
+</figure>
+
+Click the little file icon with a plus in the lower right hand of the main box, and name your new profile something like &lsquo;Home&rsquo;. Check &lsquo;Configure new displays when connected&rsquo; and &lsquo;automatically enable profiles when new display is connected&rsquo;, and toggle off &lsquo;Show popup windows to identify displays&rsquo;. This will become your Home profile, and you can click &lsquo;Apply&rsquo; in the bottom right of the main box to apply it currently. For your other display profile, create a new profile as before, with a different name. Tab back over to General display settings, and toggle &lsquo;1 - Laptop&rsquo; back on, as well as enabling it as a primary display. Turn off the monitor as well - select it in the dropdown and toggle it off. You might want to unplug your monitor, update (download icon), and apply your profile for good measure. This will give you a fallback profile when you&rsquo;re away from your monitor, and the two profiles should automatically switch when you return home and plug in your monitor.</p>
+<p>Random note: sometimes plugging and unplugging my monitor disables my WiFi for no apparent reason, but this is easily fixed with <code>sudo wifi on</code> in the terminal.</p>
+<h2 id="clamshell-mode">Clamshell Mode</h2>
+<p>Now that the monitor&rsquo;s on and working as expected, it&rsquo;s time to set up a pseudo-clamshell mode for your laptop. XFCE Power Settings are a bit finicky - what I found in old tutorials was an outdated setting that automatically went and set it so the laptop wouldn&rsquo;t suspend on lid close, but from what I can see, that&rsquo;s gone now. There are a couple files you&rsquo;ll have to edit:</p>
+<p>In <code>/etc/systemd/logind.conf</code>:</p>
+<pre><code>HandleLidSwitch=ignore
+HandleLidSwitchExternalPower=ignore
+HandleLidSwitchDocked=ignore
+LidSwitchIgnoreInhibited=no
+</code></pre><p>In <code>/etc/UPower/UPower.conf</code>:</p>
+<pre><code>IgnoreLid=true
+</code></pre><p>And for good measure, tweak the Display settings in <code>xfce4-power-manager</code> to not blank. I tried just the systemd logind.conf fix, and just the UPower.conf fix, but it seems that it didn&rsquo;t quite work until I&rsquo;d edited both files - not sure why. After all this, reboot, and try closing the laptop lid (while having it plugged into your monitor). Hopefully, your laptop should remain on. (From now on, remember to properly suspend your laptop before closing it when it&rsquo;s not docked, if the suspend-on-close feature was something you were used to.)</p>
+<p>I docked my laptop vertically in one of those clamshell holders off Amazon. When suspended, my laptop automatically wakes if I open the lid, so whenever I want to turn on my laptop, I crack it open a bit in the dock. (I had to widen the holder a bit so I could open my laptop enough for the magnetic switch to disengage and detect my laptop was open.)</p>
+<h2 id="bluetooth-peripherals">Bluetooth Peripherals</h2>
+<p>Since your laptop will mostly now be docked, you&rsquo;ll still need some way to control it - I opted for a <a href="https://www.microsoft.com/en-my/accessories/products/keyboards/designer-bluetooth-desktop?activetab=overview%3aprimaryr2">Bluetooth keyboard and mouse</a>. I won&rsquo;t go into starting Bluetooth services and autoenabling controllers on startup, but I&rsquo;ll go over how I managed to get my mouse and keyboard both working. Pairing Bluetooth devices is generally pretty easy with blueman&rsquo;s <code>blueman-manager</code>, so I thought that this&rsquo;d be the simplest part of the entire process. (And hey, I was only half wrong.)</p>
+<p><figure><img src="https://i.imgur.com/d6AOrmA.png"
+         alt="Figure 3. Blueman pairing."/><figcaption>
+            <p><em>Figure 3. Blueman pairing.</em></p>
+        </figcaption>
+</figure>
+
+First, let&rsquo;s pair the mouse. Once in Blueman, click &lsquo;setup&rsquo; to go through the pairing assistant. Hold down the small button on the bottom of the mouse, and wait for it to show up in the &lsquo;Device&rsquo; menu of the wizard. Click it, and once everything sets up, the mouse should be good to go. Right-click on the mouse (it should read &lsquo;Designer Mouse&rsquo;) in the main pane of Blueman, and select Trust. I have it set up so that trusted devices are automatically connected, which makes everything a lot less complicated when I go to start up my laptop.</p>
+<p>Now, onto the fun bit. Trying to pair my keyboard to my laptop was a pain, but I finally found some hints in the <a href="https://wiki.archlinux.org/title/bluetooth_keyboard">Arch Linux wiki page</a>. You&rsquo;ll need <code>bluez-utils</code> in addition to Blueman for this bit, so pull that from whatever repository you decide to use. Similar to the wiki, we&rsquo;ll be using <code>bluetoothctl</code> for the pairing process.</p>
+<p>Run <code>bluetoothctl</code> to enter the tool, and enter <code>power on</code> to boot up the controller. Hopefully, no error messages appear. Then, enter <code>agent KeyboardOnly</code> and <code>default-agent</code> to limit the search to keyboards. Next, run <code>pairable on</code> to put the laptop&rsquo;s controller into pairing mode, and then hold the little button on the left underside of the keyboard to put the keyboard into pairing mode. Once you enter <code>scan on</code>, the keyboard should be discovered pretty quickly. To actually pair your keyboard, run <code>pair </code>, followed by the Bluetooth MAC address that the scanner spit out. For example, if you had something like <code>01:02:03:04:05:06</code>, run <code>pair 01:02:03:04:05:06</code>. The Microsoft Designer Keyboard is interesting in that it demands some PIN to be entered, so enter that physically on the Bluetooth keyboard. Then run <code>trust 01:02:03:04:05:06</code> to trust the device, and <code>connect 01:02:03:04:05:06</code> to connect. At this point, you can <code>quit</code> the tool, and the keyboard should be connected and working. It should also auto-connect once you turn your laptop on.</p>
+<p>Sometimes, the keyboard and mouse don&rsquo;t connect right away when I turn my laptop on (or, strangely, one&rsquo;ll connect but not the other, and then they&rsquo;ll switch or lag for a while). This is fixed by using whichever device is connected to suspend the laptop again. Once it rewakes, I find that most connection lag errors are gone, but maybe this has nothing to do with the keyboard and mouse and is just an issue with my Bluetooth controller.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Congratulations! You should now, in theory and with a tablespoon or two of good luck, have an aesthetic laptop setup with a nice comfortable monitor and a very satisfying keyboard<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Future me, if you&rsquo;re reading this: try not to mess up whatever you&rsquo;ve just done to warrant a reset now again. I doubt anyone&rsquo;ll properly need this guide, but hey, it at least will help me when I unexpectedly break everything sometime in the future.</p>
+<p>It doesn&rsquo;t particularly feel like it, but I suppose it&rsquo;s summer vacation now. I&rsquo;ve been spending maybe a bit too much time in the same old routines of studying things that I&rsquo;m sure I&rsquo;ll do fine in even if I didn&rsquo;t bother previewing. It&rsquo;s nice to have a lot more freedom in what, when, and how I&rsquo;m learning, however - having this much time to dive into topics I&rsquo;m interested in and self-study has been something I&rsquo;ve been looking forward to for a long time. I&rsquo;ve also been trying to do more creative things, and spend more time writing, so hopefully I&rsquo;ll be more consistent with this blog as well. (I know I append some version of this to each post, but I&rsquo;ve gone and made a backlog of ideas, and it&rsquo;s something I&rsquo;ve really decided I need to devote more time to in the future.) I&rsquo;m pretty sure writing about vaguely technical topics and slaving away over online courses probably isn&rsquo;t everyone&rsquo;s idea of an ideal summer, but to me, it really is the perfect transition to university.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>I genuinely like the feel of this keyboard. I&rsquo;ve never tried mechanical keyboards, and they seem a bit clunky; the original keyboard built into my laptop is a bit too soft. This keyboard is a really nice balanace between easy to type on without a rather flimsy feeling - and it sounds pretty aesthetic as well, if that&rsquo;s somewhere on your criteria.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+]]></content:encoded>
+    </item>
     
     <item>
       <title>Indie Games: Influences</title>
@@ -797,111 +871,6 @@ which directly echoes the whole layers concept that I think is an interesting pl
 </li>
 <li id="fn:3" role="doc-endnote">
 <p>They say RSS died away because it was never integrated directly into the browser, with explicit features to follow and interact with feeds. I&rsquo;m not entirely sure of the truth behind that, but I think that by increasing the size of the WM userbase, people will be more incentivized to use it, especially if it&rsquo;s built into a popular browser in an easy-to-understand way.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</section>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>CPSC 110: Week 2</title>
-      <link>https://kewbi.sh/blog/posts/210221/</link>
-      <pubDate>21 Feb 2021</pubDate>
-      <author>Emilie Ma ◦ Kewbish</author>
-      <description>On designing data in Racket.</description>
-      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
-<p>Somehow through the whirlwind couple months it&rsquo;s been, I&rsquo;ve neglected to touch CPSC 110 at all. I&rsquo;ve been mostly focused with fixing <a href="https://github.com/kewbish/matter">Matter</a> up and adding all the quality-of-life features I&rsquo;d want in order to designate it a main information source. But that&rsquo;s besides the point: I&rsquo;ve decided I want to finish as much of CPSC 110 as I can before spring break, or at least during it. At the latest, I&rsquo;d like to sort everything out by summer, and see if I can finagle myself a spot in the summer session (fingers crossed).</p>
-<p>I&rsquo;ve made myself a proper CPSC 110 repo and even bothered to figure out how to convert GUI DrRacket files into ones Vim can handle, so hopefully I&rsquo;ll be more motivated to solve the problem sets properly. Before I dove into this week&rsquo;s material, I had to rewatch most of week 1 to relearn the function recipes again, but I&rsquo;ve made more notes this time round (and referred to the ones on my blog - I told y&rsquo;all it would come in handy). Going into the data definitions section wasn&rsquo;t actually much of a challenge once I went through and watched the videos again.</p>
-<p>The design recipes, as Kiczales mentions, are becoming ingrained into my memory now. It&rsquo;s very intuitive how they all slot together, and though sometimes it feels extremely repetitive to keep making examples and stubs, I can see why it helps when debugging more complex parts on top of the recipe. This week, I&rsquo;d gotten ahead of myself and briefly tried to do things with structs, but that really wasn&rsquo;t the point of this week yet (I&rsquo;m told it&rsquo;s part of week 3.). It&rsquo;s rather surprising to see how each recipe and definition builds on the others, though sometimes I&rsquo;m left wondering if all these conventions are really all that useful.</p>
-<p>If you&rsquo;re uninterested in wrangling with data definition recipes, this might not be very fascinating, but I think keeping this as a record of what I&rsquo;ve been doing with Racket will be helpful for later revision.</p>
-<h2 id="notes">Notes</h2>
-<p>Week 2 deals with designing data, and how to create data definitions that work with the function definition recipe.</p>
-<ul>
-<li>cond expressions are if statements with multiple branches
-<ul>
-<li>use square brackets to test the question =&gt; <code>[(Q) A]</code></li>
-<li>if only else body =&gt; the then block is evaluated instead</li>
-<li>evaluation steps: evaluate the first expression&rsquo;s Q block
-<ul>
-<li>if it&rsquo;s false, it gets removed from evaluation</li>
-<li>keep evaluating and removing until you meet a true block, then return the answer</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>data definitions =&gt; information represented in problem domain, and restricts what is allowed
-<ul>
-<li>type signature comment, what it is</li>
-<li>interpretation of what the data is supposed to represent</li>
-<li>examples of the data =&gt; &lsquo;one of&rsquo; comments</li>
-</ul>
-</li>
-<li>atomic non-distinct =&gt; can&rsquo;t break into meaningfully smaller pieces
-<ul>
-<li>now have a data driven template =&gt; <code>fn-for-x</code>, then have a body from the table
-<ul>
-<li>never actually use it, so keep it commented</li>
-</ul>
-</li>
-<li>when atomic non-distinct =&gt; <code>(... x)</code>, if distinct, then just <code>(...)</code>
-<ul>
-<li>write a comment detailing the data driven template body type</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>following the HtDF recipe is easier to understand + already learned metadesign
-<ul>
-<li>function recipe is independent to data definitions, so don&rsquo;t need to learn a new one</li>
-</ul>
-</li>
-<li>interval data definition =&gt; numbers within a certain range
-<ul>
-<li>when giving type comment, use range =&gt; use proper interval notation</li>
-</ul>
-</li>
-<li>enumeration =&gt; two or more distinct values
-<ul>
-<li>for rules used, add &lsquo;one of&rsquo;, and the number of cases / subclasses</li>
-<li>use a cond to represent each case in body</li>
-<li>don&rsquo;t need to use examples =&gt; add comment to explain redundancy</li>
-</ul>
-</li>
-<li>itemization =&gt; two or more categories, but one or more of which isn&rsquo;t distinct
-<ul>
-<li>for example, a preflight, postflight, and inflight altitude</li>
-<li>type guard required for each case if mixed data types</li>
-<li>last condition will be an else, because we know that by process of elimination it must be that value
-<ul>
-<li>if all remaining data types are same data type, no guard needed</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>amount of tests will differ based on the data
-<ul>
-<li>with an interval =&gt; closed boundaries and midpoints (~3)</li>
-</ul>
-</li>
-<li>when using HtDF with own data definitions =&gt; can reuse template
-<ul>
-<li>function recipe and prompt gives information about tests, etc</li>
-<li>design behaviour of function while designing tests</li>
-</ul>
-</li>
-</ul>
-<h2 id="conclusion">Conclusion</h2>
-<p>I actually managed to work my way through the lab and problem set while trying to learn the material at the same time (not very fun, do not recommend because you&rsquo;ll be very confused at the conventions that the example solution assumes), so I developed my own way of doing things the first time. It was interesting to contrast how I took shortcuts the first way round: not putting down enough <code>check-expect</code>s or ignoring the stub parts of recipes. Again, sometimes it really does feel like a chore to have to repeat the steps over and over again, but maybe that&rsquo;s part of how you learn things<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
-<p>Spending a month and a bit away from Racket, then suddenly returning was a bit disorienting at first - I had to familiarize myself with the syntax again, and the various builtins. The way I write Racket has been tinted a lot by the procedural way of doing things that&rsquo;s been prescribed by the course, so it was an experience to go from writing essentially whatever fit without much proper testing (Matter), to having to make testing an integral part of the programs.</p>
-<p>I&rsquo;d forgotten how much fun listening to 2x lectures was - I suppose it&rsquo;s just part of the natural recursion<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>. I&rsquo;ve been trying to make CPSC a priority in my free time (of which I have very little - oh, the woes of senior year), so hopefully I&rsquo;ll be back next week with either more notes or a proper post. I have ideas for both, but we&rsquo;ll see.</p>
-<section class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1" role="doc-endnote">
-<p>No matter how many times Kiczales repeats the fact that whatever semicolons is a comment and whatever semicolons is for a stub or purpose, I cannot remember.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2" role="doc-endnote">
-<p>I don&rsquo;t think I&rsquo;ve gotten far enough in for Kiczales to have made the joke yet, but I&rsquo;m still somehow aware of this.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
