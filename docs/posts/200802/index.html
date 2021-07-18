@@ -24,7 +24,7 @@
     <section class="b-main-2">
         <p><a href="../">&lt; More Posts</a></p>
         <h1 class="b-subtitle">Automating READMEs</h1>
-        <p>Published 02 August 2020 at <a href="https://kewbi.sh/blog/posts/200802/">Yours, Kewbish</a>. 1625 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
+        <p>Published 02 August 2020 at <a href="https://kewbi.sh/blog/posts/200802/">Yours, Kewbish</a>. 1624 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
         
         <p>Also published on <a href="https://dev.to/kewbish/adding-blog-posts-to-your-github-readme-with-python-58lm">Dev.to</a>.</p>
         
@@ -69,7 +69,7 @@
 </code></pre></div><p>Next, we&rsquo;re going to get all our feed entries.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">feed <span style="color:#f92672">=</span> parse(<span style="color:#e6db74">&#34;https://kewbish.github.io/blog/index.xml&#34;</span>)<span style="color:#f92672">.</span>entries
 latest <span style="color:#f92672">=</span> [
-    f<span style="color:#e6db74">&#34;&#34;&#34;- [{feed[i].title}]({feed[i].link})  </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{feed[i].description} - {feed[i].published}&#34;&#34;&#34;</span>
+    <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;&#34;&#34;- [</span><span style="color:#e6db74">{</span>feed[i]<span style="color:#f92672">.</span>title<span style="color:#e6db74">}</span><span style="color:#e6db74">](</span><span style="color:#e6db74">{</span>feed[i]<span style="color:#f92672">.</span>link<span style="color:#e6db74">}</span><span style="color:#e6db74">)  </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>feed[i]<span style="color:#f92672">.</span>description<span style="color:#e6db74">}</span><span style="color:#e6db74"> - </span><span style="color:#e6db74">{</span>feed[i]<span style="color:#f92672">.</span>published<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
     <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">3</span>)]
 </code></pre></div><p><code>feed</code> contains all the entries of your RSS feed (you&rsquo;re going to want to change the URL to something other than my blog URL, obviously). Then, we create a new list to store the first three entries, formatted as a two-line bullet point. The first line will have a link to the post and the title, and the second a description and publishing date. You can definitely play around with this, it&rsquo;s just plain markdown, and this is just how I decided to format my README.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">farr <span style="color:#f92672">=</span> []
