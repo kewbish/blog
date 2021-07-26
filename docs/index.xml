@@ -5,10 +5,45 @@
     <link>https://kewbi.sh/blog/</link>
     <description>Latest Yours, Kewbish posts</description>
     <managingEditor>(Emilie Ma ◦ Kewbish)</managingEditor>
-    <lastBuildDate>Sun, 18 Jul 2021 08:10:48 -0700</lastBuildDate>
+    <lastBuildDate>Mon, 26 Jul 2021 06:49:08 -0700</lastBuildDate>
     
 	<atom:link href="https://kewbi.sh/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Software as Containers</title>
+      <link>https://kewbi.sh/blog/posts/210725/</link>
+      <pubDate>26 Jul 2021</pubDate>
+      <author>Emilie Ma ◦ Kewbish</author>
+      <description>On browsers, terminals, and the boxing principle.</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>When I was little, I really liked lists. Yes, lists - of next year&rsquo;s required school supplies, of things to bring to summer school, and of groceries that I&rsquo;d try to optimize a path through the store for whenever I&rsquo;d tag along shopping. Regardless of what the list was about, something about bullet points and orderly collections of information was captivating, and without realizing it, I&rsquo;d structure my own systems around lists for a while to come<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Even now, most of my notetaking and organization still <a href="https://kewbi.sh/blog/posts/210516/">revolves around list-like methods</a>, though I&rsquo;ve since drifted from my original requiprement for micro-managed structure.</p>
+<p>Lists were a way I could distill a variety of information and knowledge down, and have it all in one place. Forms of structure and organization have become things I value - they drop information I&rsquo;m interested in into a central location, where I can process them and have an overall picture of everything. Lists serve as containers for information, and easily ordered and accessed ones at that.</p>
+<p>In a way, everything I&rsquo;ve discussed about lists also relates to certain other organized structures, albeit digital ones. I&rsquo;ve noticed that I tend towards two specific areas of cyberspace: the Internet, through web development and browsers, and the command-line, with its wealth of terminal user interfaces. In this post, I&rsquo;d like to think about these platforms as intermediaries for work of all sorts, and explore why I&rsquo;m drawn to them.</p>
+<h2 id="containers-for-centralization">Containers for Centralization</h2>
+<p>Web browsers, the terminal, and many apps aim to be containers: an all-encompassing solution for their given applications. They&rsquo;re collections of information, where everything about something can be found. With a web browser environment, for example, that&rsquo;s likely where you&rsquo;ll find all of your browsing history, your tabs, and your Wikipedia rabbit holes of clicking. Containers range from widely encompassing (your computer) to specific and niche (consolidating all your social media inboxes into one app). Most platforms, I&rsquo;d say, are striving to be containers - what I want to investigate probably also applies if you architect your life around other systems, like mobile apps, an e-ink tablet, or plain old paper.</p>
+<p>As I discussed in the introduction, containers are nice. I know that if I want to check my calendar, I can trigger a shortcut to open my terminal, and bam, my meetings and todos are blocked out. Instead of jumping between a bunch of different apps, one for todos, one for meetings, an internal one for communications - it&rsquo;s all in one place. There&rsquo;s something about containers that makes them so satisfying to use, and so tempting in terms of trusting them with a portion of your life.</p>
+<h2 id="the-boxing-principle">The Boxing Principle</h2>
+<p>I&rsquo;m not sure if there&rsquo;s a name for that phenomenon, but I&rsquo;ll nickname it the boxing principle. It&rsquo;s the comforting feeling of being able to collect things in one place, and even if it&rsquo;s at times redundant or not the best place for information, it still feels grounding. It&rsquo;s the feeling about having the power to draw from a central repository of anything - something I think that&rsquo;s only become more desired as apps and services become increasingly niche and targeted. And it&rsquo;s also what I think proponents of platforms like Notion and Roam seek, especially as they characterize their app of choice as the be-all-and-end-all of their productivity.</p>
+<p>Notion&rsquo;s premise, right smack on their front page in 74px font, is that they&rsquo;re the &lsquo;All-in-one workspace&rsquo;. Users can &lsquo;write, plan, and get organized&rsquo; with it, and it&rsquo;ll be the &lsquo;one tool&rsquo;. Implied, of course, is the &lsquo;you&rsquo;ll ever need&rsquo; - and if you&rsquo;re someone who&rsquo;s filled out entire life dashboards in the app, why would you ever need anything else? For members of the #roamcult, the same follows, and I&rsquo;m sure everyone&rsquo;d agree if you switched out the slogans for the taglines of their apps of choice. These companies actively want you to centralize and make use of all of its features, becoming your &lsquo;second brain&rsquo;, because that&rsquo;s their business - and to be fair, there&rsquo;s nothing wrong with that.</p>
+<p>I&rsquo;m not saying the boxing principle or companies that try to get you to apply it to their services are bad. However, I think they&rsquo;re something to consider as you build your own &lsquo;life stack&rsquo;, or choose the apps that&rsquo;ll bear the brunt of your digital life. For me, my calendar, notetaking, learning, and (software) development are all terminal-based, and my social media and communications are mainly in the browser. It&rsquo;d be interesting to build my own set of tools that cover all of these use cases, but for now, I&rsquo;m trying to keep my tools either easily customizable, or migratable. I&rsquo;m not worried about Gmail, Discord, or Slack drastically changing - if that happens, I&rsquo;m sure a more global migration will take place - since I don&rsquo;t depend on a more customized workflow with those. With my terminal apps, however, they&rsquo;re all ones that I&rsquo;ve either heavily configured, built at least partly myself, or decided that fit my needs well. I don&rsquo;t really see the point of investing so much in a container, and &lsquo;filling it up&rsquo;, to continue the metaphor, while it doesn&rsquo;t match the workflow I need.</p>
+<p>There&rsquo;s also the question of if an application for your container is the best fit for the job. Continuing with the Notion / Roam thread, common examples I&rsquo;ve seen come up when I discuss the topic are things like custom timeblocking views, spaced repetition, and grade calculators. I&rsquo;ve seen people come up with gorgeous implementations in many different apps, and while there&rsquo;s the voice in the back of my head going &lsquo;they could have just used GCal / Anki / Excel&rsquo;, I&rsquo;m suitably impressed. I&rsquo;m guilty (if this is really something to lay shame to) of this myself. It&rsquo;s arguably easier to use an existing notetaking app than to rig one that has spaced repetition, linking, search, and more all in Vim - and I concede. But that&rsquo;s the draw, and the temptation of containers - I have an existing system set up, how difficult can it be to shape it and add new features so I can have everything in one place? It&rsquo;s a difficult balance, and while I&rsquo;ll ask myself over and over why I bother to create custom scripts to have things in the terminal or browser, I&rsquo;m not likely to give up my workflows anytime soon.</p>
+<h2 id="easy-customization">Easy Customization</h2>
+<p>There&rsquo;s something to be said for the ability to customize, however. Many apps, including the examples I touched on above (Notion, Roam, and Vim), have infinite, or nearly infinite, ways to add plugins and develop new functionality. With the browser, for example, it&rsquo;s <a href="https://kewbi.sh/blog/posts/210124/">relatively easy to create your own extension</a> to scrape, manipulate, or connect whatever data you want. I think having the ability to extend and customize itself is almost a core principle of being a container - otherwise, why would people bother investing more into your app if it doesn&rsquo;t fit their specific use cases?</p>
+<p>As well, since containers contain all the information you&rsquo;d ever need in a specific domain in your life, operating on what&rsquo;s inside can provide larger insights and innovative ways to work. If a container&rsquo;s especially large (like a browser or command-line environment), even more can be done to create pipelines and connections. Having these abilities to customize and extend containers is another part of why they&rsquo;re so attractive. It&rsquo;s workflow inertia, where people don&rsquo;t see a point in switching apps or creating a whole new profile if their needs can be addressed with just a couple tweaks or configurations.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I&rsquo;ve been working on revamping my <a href="https://kewbi.sh/blog/posts/200607/">notetaking system</a> and personal productivity flows recently, so I guess this post is a more in-depth reflection on and justification of the choices I&rsquo;ve made (namely, to stick with a obscure custom-built approach). In the end, it&rsquo;s my workflow, so there&rsquo;s no one really to explain or report to, but it&rsquo;s been nice to expand my ideas on why I&rsquo;ve stuck to my cobbled-together systems of web extensions and local bash scripts. The containers I&rsquo;ll use might, and will, change, but I hope the principles of how I use them will stay the same.</p>
+<p>Speaking of my notetaking system, I&rsquo;m very excited about a new addition or two that I&rsquo;ve managed to work in, mainly centering around linking, searching, and navigating my digital notebook. In typical Kewbish fashion, it consists of misusing an existing tool, as well as some difficult-to-parse regex, so I&rsquo;m looking forward to creating a writeup on that, also touching on a talk I gave earlier (I&rsquo;ll discuss both in a bit). I&rsquo;ve been reading a bit more on the Zettelkasten methodology, and while I&rsquo;ve changed several key parts of it, I like what I have so far. The system&rsquo;s likely to adapt and evolve over the next few months, but as with all slightly unnecessary deep-dives on productivity, I&rsquo;m happy with it.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>I&rsquo;m fully aware I sound insanely obsessive over literal lists, but I promise I&rsquo;m fine, and that this whole introduction is meant to be a segue into the main post.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+]]></content:encoded>
+    </item>
     
     <item>
       <title>CPSC 110: Week 11</title>
@@ -779,124 +814,6 @@ which directly echoes the whole layers concept that I think is an interesting pl
 <ol>
 <li id="fn:1" role="doc-endnote">
 <p>Preliminary survey results with people I know has been positive, but I&rsquo;m entirely sure they&rsquo;re biased and at least 50% trying to validate me, which is still much appreciated.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</section>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>CPSC 110: Weeks 3 and 4</title>
-      <link>https://kewbi.sh/blog/posts/210314/</link>
-      <pubDate>14 Mar 2021</pubDate>
-      <author>Emilie Ma ◦ Kewbish</author>
-      <description>On trusting the natural recursion.</description>
-      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
-<p>Spring break has just begun, and I&rsquo;ve decided to devote some more significant time to CPSC 110. It helps that I&rsquo;m sort of floating between projects and want a bit of bland coursework to churn through at the moment, so I&rsquo;ve been spending my leisure time listening to Kiczales go on about data and recursion. I&rsquo;ve been ramping up my progress with CPSC 110 for the last couple weeks, and I&rsquo;ve managed to do a couple &lsquo;weeks&rsquo;, or modules, since I last published a set of notes. Regarding my old end date goal, I&rsquo;ve decided to shift my goal more towards a September challenge (of the exam), to give myself time over the summer to cram and practise with old papers. (Ironically, I&rsquo;d also decided at the beginning of the year that I&rsquo;d take this summer to rest and relax before university, but I suppose that&rsquo;s gone out the window in lieu of some hopefully more engaging plans. And hey, if I choose to relax that way, I guess it&rsquo;s a perfectly fine thing to do.)</p>
-<p>After getting back in the swing of Racket and relearning the templates and design recipes, these couple modules haven&rsquo;t been too challenging. Adding systematically onto the recipes makes the logical jumps between concepts less sharp, and makes the course much less intimidating. Having a repository and tracking my progress with the course has definitely motivated me to work on it more. So, here&rsquo;s a couple modules' worth of notes - but as always, if you&rsquo;re not following along with CPSC 110 or have no interest in learning about compound and arbitrarily long data, you might want to go off and read a <a href="https://kewbi.sh/blog/posts/210307/">different post</a>.</p>
-<h2 id="notes---week-3">Notes - Week 3</h2>
-<p>Week 3 goes over how to define compound data (essentially adding structs to the data definition recipe), and integrates that data in building &lsquo;worlds&rsquo;, or GUI programs. Having a proper definition for data simplifies things in future weeks, and makes the data definitions seem more solid or &lsquo;real&rsquo;, in my opinion.</p>
-<ul>
-<li>ticks =&gt; update behaviour, but can be changed by interactive input
-<ul>
-<li>tick rate is defined by the program, can change</li>
-<li>can use a data definition to interpret the current state</li>
-</ul>
-</li>
-<li><code>(big-bang)</code> function used to make these graphical programs =&gt; called worlds
-<ul>
-<li>import <code>(2htdp/image)</code> and <code>(2htdp/universe)</code></li>
-<li>use <code>(place-image)</code> and the <code>(empty-scene)</code> frequently to draw and render</li>
-<li>rendering is done by setting the <code>(to-draw)</code>, and tick behaviour by <code>(on-tick)</code>
-<ul>
-<li>later use <code>(on-key)</code> and <code>(on-mouse)</code> to handle those behaviours</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>start by doing a domain analysis =&gt; what remains constant and what changes each tick
-<ul>
-<li>each function is first wish-listed as the overall world is structured</li>
-<li>apply HtDD to design the program state data =&gt; structs in second half of week</li>
-<li>apply standard HtDF to create functions used in big-bang</li>
-<li>use constants in the <code>(check-expect)</code>s to maximize adaptability</li>
-</ul>
-</li>
-<li>use <code>(define-struct name (args))</code> to define compound data =&gt; data that relate to each other
-<ul>
-<li>when expression run, generates the <code>(name?)</code>, <code>(name-args)</code>, and <code>(make-name)</code> operators</li>
-<li>in HtDD example definitions and tests =&gt; now have to use <code>(make-name (args))</code>
-<ul>
-<li>include the data types here and intervals if using Naturals or Numbers</li>
-</ul>
-</li>
-<li>need to add interpretation for data types with the <code>;; Name is ...</code> comment</li>
-<li>add interpretation for each field in HtDD interpretation comment</li>
-<li>HtDD <code>(fn-for-name)</code> now includes each of the fields used in the args</li>
-<li>include number of fields with the compound keyword when listing template rules used</li>
-<li>when using HtDF =&gt; add constraints and notes in the tests =&gt; clarity of examples and behaviour</li>
-</ul>
-</li>
-<li><code>(on-mouse)</code> and the <code>(on-key)</code> events are handled with an overall cond
-<ul>
-<li>will take mouse event / key event as argument</li>
-<li>need to check the state / key with <code>string=?</code> or <code>key=?</code></li>
-</ul>
-</li>
-<li>use helper functions where possible to ensure function does one thing</li>
-</ul>
-<h2 id="notes---week-4">Notes - Week 4</h2>
-<p>In Week 4, Kiczales discusses arbitrarily sized data, which is basically a convoluted way of working with lists. This week also has to deal a lot with recursion, which is something I&rsquo;ve sort of avoided as much as possible in the past. However, it&rsquo;s been pretty interesting to see how to solve problems recursively, which I think will come in handy down the line.</p>
-<ul>
-<li>we use recursive data definitions to model arbitrarily sized data =&gt; compound data
-<ul>
-<li>set a base case (empty, or false), as well as <code>(cons)</code>&lsquo;ing it with an element and then the original data definition
-<ul>
-<li>this element can be atomic non-distinct data, not just another data definition (reference)</li>
-</ul>
-</li>
-<li>an example of self-reference, where the data definition involves itself</li>
-<li>new primitives: <code>(first list)</code> returns the first element, and <code>(rest list)</code> returns everything but the first element</li>
-</ul>
-</li>
-<li>with HtDF, several things have changed to accomodate new branches
-<ul>
-<li>refer to the type comment and how it refers to itself =&gt; preserve that in the function templates</li>
-<li>template now needs to apply a <code>(fn-for-element)</code> for the first element
-<ul>
-<li>this should be another helper function generally, want the function to do one thing at a time</li>
-</ul>
-</li>
-<li>template applies the <code>(fn-for-list)</code> for the rest of the list</li>
-<li>generally use a <code>(cond)</code> to check if the list is empty (base case handling)</li>
-<li>examples can help clarify the behaviour of the function first, and show where you might need helpers
-<ul>
-<li>also insert tests for base cases themselves</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>positions in list templates matter and have their own functions
-<ul>
-<li>base =&gt; when the function exits and &lsquo;bottoms out&rsquo;</li>
-<li>contribution of first =&gt; the first element (type checking generally goes here)</li>
-<li>combination =&gt; check other cases or perform operations on the value of the rest of the list</li>
-</ul>
-</li>
-<li>when the recursive data definition handles another data definition =&gt; reference rule
-<ul>
-<li>produces a natural helper =&gt; abstract this to another function</li>
-</ul>
-</li>
-</ul>
-<h2 id="conclusion">Conclusion</h2>
-<p>As I write this, I&rsquo;m actually halfway through week 5, but it&rsquo;ll take me a good while to write up that double module&rsquo;s notes properly, and I&rsquo;d rather not extend this post too much. I&rsquo;m also almost at the halfway mark of the whole course (yay me!), but I&rsquo;ve noticed that most of the next modules are broken up into a and b sections, so I expect it&rsquo;ll probably be more work than the first couple weeks. I&rsquo;ve heard that the later weeks heavily build on the beginning weeks, so I might come back and update my notes posts every so often. I hope I&rsquo;ll be able to at least go through another couple weeks before spring break ends, but I also want to take enough time to relax and recharge<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
-<p>I have no big plans with regards to projects at the moment - I&rsquo;m just trying to keep everything stable before I graduate, and continue to explore opportunities I might like to take after I enter university. It&rsquo;s rather scary that I&rsquo;ll be an actual university student in a couple months, and that my quintessential &lsquo;high school experience&rsquo; is nearly over. A post about Racket is probably not the best place to digress into all the amazing experiences that&rsquo;ve filled the last couple years, but I will say it feels a bit strange to consider that I&rsquo;ll be one of &lsquo;them&rsquo; (an actual student) in the fall, and that I have no idea what I have time for left in the last three (well, two and a half, if we&rsquo;re going to be precise) months. Well, we&rsquo;ll figure it out eventually (and finish CPSC 110 somewhere in the process too).</p>
-<section class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1" role="doc-endnote">
-<p>I suppose you can start laughing now, but I&rsquo;m trying, alright?&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software as Containers</title>
+    <meta name="description" content="On browsers, terminals, and the boxing principle.">
+    <meta property="og:title" content="Software as Containers">
+    <meta property="og:description" content="On browsers, terminals, and the boxing principle.">
+    <meta property="og:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <meta property="og:url" content="https://kewbi.sh/blog/posts/210725/">
+    <meta property="twitter:title" content="Software as Containers">
+    <meta property="twitter:description" content="On browsers, terminals, and the boxing principle.">
+    <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
+</head>
+
+<body class="cont page">
+    <section class="b-main-2">
+        <p><a href="../">&lt; More Posts</a></p>
+        <h1 class="b-subtitle">Software as Containers</h1>
+        <p>Published 26 July 2021 at <a href="https://kewbi.sh/blog/posts/210725/">Yours, Kewbish</a>. 1516 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
+        
+        <hr style="margin-bottom:-1%;">
+        <div class="b-writing">
+            <h2 id="introduction">Introduction</h2>
+<p>When I was little, I really liked lists. Yes, lists - of next year&rsquo;s required school supplies, of things to bring to summer school, and of groceries that I&rsquo;d try to optimize a path through the store for whenever I&rsquo;d tag along shopping. Regardless of what the list was about, something about bullet points and orderly collections of information was captivating, and without realizing it, I&rsquo;d structure my own systems around lists for a while to come<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Even now, most of my notetaking and organization still <a href="https://kewbi.sh/blog/posts/210516/">revolves around list-like methods</a>, though I&rsquo;ve since drifted from my original requiprement for micro-managed structure.</p>
+<p>Lists were a way I could distill a variety of information and knowledge down, and have it all in one place. Forms of structure and organization have become things I value - they drop information I&rsquo;m interested in into a central location, where I can process them and have an overall picture of everything. Lists serve as containers for information, and easily ordered and accessed ones at that.</p>
+<p>In a way, everything I&rsquo;ve discussed about lists also relates to certain other organized structures, albeit digital ones. I&rsquo;ve noticed that I tend towards two specific areas of cyberspace: the Internet, through web development and browsers, and the command-line, with its wealth of terminal user interfaces. In this post, I&rsquo;d like to think about these platforms as intermediaries for work of all sorts, and explore why I&rsquo;m drawn to them.</p>
+<h2 id="containers-for-centralization">Containers for Centralization</h2>
+<p>Web browsers, the terminal, and many apps aim to be containers: an all-encompassing solution for their given applications. They&rsquo;re collections of information, where everything about something can be found. With a web browser environment, for example, that&rsquo;s likely where you&rsquo;ll find all of your browsing history, your tabs, and your Wikipedia rabbit holes of clicking. Containers range from widely encompassing (your computer) to specific and niche (consolidating all your social media inboxes into one app). Most platforms, I&rsquo;d say, are striving to be containers - what I want to investigate probably also applies if you architect your life around other systems, like mobile apps, an e-ink tablet, or plain old paper.</p>
+<p>As I discussed in the introduction, containers are nice. I know that if I want to check my calendar, I can trigger a shortcut to open my terminal, and bam, my meetings and todos are blocked out. Instead of jumping between a bunch of different apps, one for todos, one for meetings, an internal one for communications - it&rsquo;s all in one place. There&rsquo;s something about containers that makes them so satisfying to use, and so tempting in terms of trusting them with a portion of your life.</p>
+<h2 id="the-boxing-principle">The Boxing Principle</h2>
+<p>I&rsquo;m not sure if there&rsquo;s a name for that phenomenon, but I&rsquo;ll nickname it the boxing principle. It&rsquo;s the comforting feeling of being able to collect things in one place, and even if it&rsquo;s at times redundant or not the best place for information, it still feels grounding. It&rsquo;s the feeling about having the power to draw from a central repository of anything - something I think that&rsquo;s only become more desired as apps and services become increasingly niche and targeted. And it&rsquo;s also what I think proponents of platforms like Notion and Roam seek, especially as they characterize their app of choice as the be-all-and-end-all of their productivity.</p>
+<p>Notion&rsquo;s premise, right smack on their front page in 74px font, is that they&rsquo;re the &lsquo;All-in-one workspace&rsquo;. Users can &lsquo;write, plan, and get organized&rsquo; with it, and it&rsquo;ll be the &lsquo;one tool&rsquo;. Implied, of course, is the &lsquo;you&rsquo;ll ever need&rsquo; - and if you&rsquo;re someone who&rsquo;s filled out entire life dashboards in the app, why would you ever need anything else? For members of the #roamcult, the same follows, and I&rsquo;m sure everyone&rsquo;d agree if you switched out the slogans for the taglines of their apps of choice. These companies actively want you to centralize and make use of all of its features, becoming your &lsquo;second brain&rsquo;, because that&rsquo;s their business - and to be fair, there&rsquo;s nothing wrong with that.</p>
+<p>I&rsquo;m not saying the boxing principle or companies that try to get you to apply it to their services are bad. However, I think they&rsquo;re something to consider as you build your own &lsquo;life stack&rsquo;, or choose the apps that&rsquo;ll bear the brunt of your digital life. For me, my calendar, notetaking, learning, and (software) development are all terminal-based, and my social media and communications are mainly in the browser. It&rsquo;d be interesting to build my own set of tools that cover all of these use cases, but for now, I&rsquo;m trying to keep my tools either easily customizable, or migratable. I&rsquo;m not worried about Gmail, Discord, or Slack drastically changing - if that happens, I&rsquo;m sure a more global migration will take place - since I don&rsquo;t depend on a more customized workflow with those. With my terminal apps, however, they&rsquo;re all ones that I&rsquo;ve either heavily configured, built at least partly myself, or decided that fit my needs well. I don&rsquo;t really see the point of investing so much in a container, and &lsquo;filling it up&rsquo;, to continue the metaphor, while it doesn&rsquo;t match the workflow I need.</p>
+<p>There&rsquo;s also the question of if an application for your container is the best fit for the job. Continuing with the Notion / Roam thread, common examples I&rsquo;ve seen come up when I discuss the topic are things like custom timeblocking views, spaced repetition, and grade calculators. I&rsquo;ve seen people come up with gorgeous implementations in many different apps, and while there&rsquo;s the voice in the back of my head going &lsquo;they could have just used GCal / Anki / Excel&rsquo;, I&rsquo;m suitably impressed. I&rsquo;m guilty (if this is really something to lay shame to) of this myself. It&rsquo;s arguably easier to use an existing notetaking app than to rig one that has spaced repetition, linking, search, and more all in Vim - and I concede. But that&rsquo;s the draw, and the temptation of containers - I have an existing system set up, how difficult can it be to shape it and add new features so I can have everything in one place? It&rsquo;s a difficult balance, and while I&rsquo;ll ask myself over and over why I bother to create custom scripts to have things in the terminal or browser, I&rsquo;m not likely to give up my workflows anytime soon.</p>
+<h2 id="easy-customization">Easy Customization</h2>
+<p>There&rsquo;s something to be said for the ability to customize, however. Many apps, including the examples I touched on above (Notion, Roam, and Vim), have infinite, or nearly infinite, ways to add plugins and develop new functionality. With the browser, for example, it&rsquo;s <a href="https://kewbi.sh/blog/posts/210124/">relatively easy to create your own extension</a> to scrape, manipulate, or connect whatever data you want. I think having the ability to extend and customize itself is almost a core principle of being a container - otherwise, why would people bother investing more into your app if it doesn&rsquo;t fit their specific use cases?</p>
+<p>As well, since containers contain all the information you&rsquo;d ever need in a specific domain in your life, operating on what&rsquo;s inside can provide larger insights and innovative ways to work. If a container&rsquo;s especially large (like a browser or command-line environment), even more can be done to create pipelines and connections. Having these abilities to customize and extend containers is another part of why they&rsquo;re so attractive. It&rsquo;s workflow inertia, where people don&rsquo;t see a point in switching apps or creating a whole new profile if their needs can be addressed with just a couple tweaks or configurations.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I&rsquo;ve been working on revamping my <a href="https://kewbi.sh/blog/posts/200607/">notetaking system</a> and personal productivity flows recently, so I guess this post is a more in-depth reflection on and justification of the choices I&rsquo;ve made (namely, to stick with a obscure custom-built approach). In the end, it&rsquo;s my workflow, so there&rsquo;s no one really to explain or report to, but it&rsquo;s been nice to expand my ideas on why I&rsquo;ve stuck to my cobbled-together systems of web extensions and local bash scripts. The containers I&rsquo;ll use might, and will, change, but I hope the principles of how I use them will stay the same.</p>
+<p>Speaking of my notetaking system, I&rsquo;m very excited about a new addition or two that I&rsquo;ve managed to work in, mainly centering around linking, searching, and navigating my digital notebook. In typical Kewbish fashion, it consists of misusing an existing tool, as well as some difficult-to-parse regex, so I&rsquo;m looking forward to creating a writeup on that, also touching on a talk I gave earlier (I&rsquo;ll discuss both in a bit). I&rsquo;ve been reading a bit more on the Zettelkasten methodology, and while I&rsquo;ve changed several key parts of it, I like what I have so far. The system&rsquo;s likely to adapt and evolve over the next few months, but as with all slightly unnecessary deep-dives on productivity, I&rsquo;m happy with it.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>I&rsquo;m fully aware I sound insanely obsessive over literal lists, but I promise I&rsquo;m fine, and that this whole introduction is meant to be a segue into the main post.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+            <p>- Yours, Kewbish</p>
+        </div>
+        <br><p><a href="../">&lt; More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>
