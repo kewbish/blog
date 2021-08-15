@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Plaintext Zettelkasten</title>
+    <meta name="description" content="On speaking at Augment Minds 2021 and my notetaking system.">
+    <meta property="og:title" content="A Plaintext Zettelkasten">
+    <meta property="og:description" content="On speaking at Augment Minds 2021 and my notetaking system.">
+    <meta property="og:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <meta property="og:url" content="https://kewbi.sh/blog/posts/210815/">
+    <meta property="twitter:title" content="A Plaintext Zettelkasten">
+    <meta property="twitter:description" content="On speaking at Augment Minds 2021 and my notetaking system.">
+    <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
+</head>
+
+<body class="cont page">
+    <section class="b-main-2">
+        <p><a href="../">&lt; More Posts</a></p>
+        <h1 class="b-subtitle">A Plaintext Zettelkasten</h1>
+        <p>Published 15 August 2021 at <a href="https://kewbi.sh/blog/posts/210815/">Yours, Kewbish</a>. 3224 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
+        
+        <hr style="margin-bottom:-1%;">
+        <div class="b-writing">
+            <h2 id="introduction">Introduction</h2>
+<p>Something I&rsquo;ve realized with my notetaking workflow is that I enjoy working on the meta-flow, building tools, integrations, and new features for myself, just as much as I enjoy actually writing and filling out the content there. I&rsquo;ve been fiddling a bit more with my system, integrating more principles of the wildly popular Zettelkasten system, and having tonnes of fun messing around with command-line tools and Vimscript. In fact, a couple weeks ago, I sat down and worked through my notetaking system wishlist: searching within files, jumping to files from outside of Vim, finally integrating tags and intra-note navigation, and more. I&rsquo;ve wanted to implement these features for a while now, so finally getting them integrated with my Vim setup was a very satisfying weekend accomplishment.</p>
+<p>Cleaning up my commands and experimenting with my usecases coincided with my <a href="https://kewbi.sh/blog/posts/210801/">learning about Augmented Minds 2021</a>, a short unconference that took place a couple weeks ago. Prominent speakers in the HCI space (well, let&rsquo;s be real, cool people on Twitter) and a morning of discussion about tools for thought? That sounded like a dream come true - so I spontaneously registered for a ticket. While scanning the OpenCollective page, I noted that they were taking proposals for shorter talks throughout the conference: in fact, the entire unconference was built around these smaller breakout sessions. It seemed like a casual, fun way to share on a topic I&rsquo;m pretty passionate about, and giving lightning talks at other conferences was something I was considering in the future, anyways. Long story short, I also impulsively signed up to deliver a talk on my Zettelkasten-in-progress, the first topic I could think of off the top of my head. So, among much more qualified speakers and more engaging presentation topics:</p>
+<blockquote>
+<p>Vim + FZF + RipGrep = A Plaintext Zettelkasten*
+A demo of my notetaking system, built around Vim, FZF (and FZF.vim), and rg, followed by an open discussion on building your own Zettelkasten systems.</p>
+</blockquote>
+<p>popped up in the schedule of events. I was nervous, but the opportunity to give a talk, and especially one in such a welcoming, open space, was something I was definitely excited and grateful for.</p>
+<p>This post is a standalone discussion (and a bit about the experience of actually delivering the talk) on my current pseudo-Zettelkasten system adapted directly from my talk, but is part of a two-part series on <a href="https://opencollective.com/psionica/events/augment-minds-7d13842a">Augment Minds 2021</a> that I started with <a href="https://kewbi.sh/blog/posts/210801/">this post</a>. If you&rsquo;re here to nerd out with me about personal knowledge management, this&rsquo;ll likely be the more attractive post, but feel free to check that one out as well - I go a bit more in depth on some of the amazing talks and ideas inspired from the unconference.</p>
+<h2 id="heres-a-video">Here&rsquo;s a Video</h2>
+<p>&hellip; well, soon, anyways. I&rsquo;ll update this section with the talk recording as soon as it comes out.</p>
+<h2 id="my-notetaking-system">My Notetaking System</h2>
+<p>My Zettelkasten (or, really, pseudo-Zettelkasten) is entirely local and entirely Markdown, and my workflow with it involves a combination of Vim, <a href="https://github.com/junegunn/fzf">FZF</a>, and <a href="https://github.com/BurntSushi/ripgrep">rg</a>. If you&rsquo;re not familiar with the concept of Zettelkasten, most people&rsquo;ll point you to <a href="https://zettelkasten.de">Zettelkasten.de</a>, and maybe <a href="https://reddit.com/r/Zettelkasten">r/Zettelkasten</a>. Look through a couple posts, and you&rsquo;ll be sure to get the gist of Niklas Luhmann and what he proposed, the central concept of atomic notes, and all the hyped-up software that people tend to use with it. My Zettelkasten&rsquo;s not much of a &lsquo;proper&rsquo; Zettelkasten besides in that it borrows some of the concepts of stages of notes, and some of the concepts of interlinking, but I think it&rsquo;s still interesting in terms of possible ways that it can be modified and expanded, even if you&rsquo;re striving for a by-the-books Zettelkasten approach.</p>
+<p>First, let&rsquo;s look at the file structure. Zettelkasten purists generally advocate a flat-file approach, with the usual argument being that links should serve to connect and group files, instead of imposing a decision. As well, what if something belongs in two categories, right? Extra mental overhead, and even if you manage to subcategorize, you&rsquo;re increasing the sprawl and unmaintainability of your notes - or so people tend to say. Even with all these cons, in my system, I work with a bunch of folders instead. I opted for this approach mainly because I take notes over several rather disparate categories, and because it makes things easier to navigate visually in a file manager. With just my first term at university, I&rsquo;ll be taking six classes, all in different topics. I have quite a bit of range with the notes, and to my brain, it makes more sense to group them in a folder. Besides, with my linking system, which I&rsquo;ll touch on in a bit, I can still achieve the same knowledge-connecting ability.</p>
+<p>Something else that&rsquo;s super nice about having an entirely plaintext productivity system is that everything can be backed up through Git or another system. I keep a repository on GitHub, and just run a sync script through cron to commit the changes in the root of my notebook.</p>
+<h2 id="source-fleeting--literature-notes">Source (Fleeting / Literature) Notes</h2>
+<p>What the Zettelkasten system might call fleeting, or literature, notes, I group into one big category of source notes. These are generally going to be the notes that I take from something I need to study, be it a paper, a video course on Khan Academy, or a textbook. I tend to jot quick thoughts down as I&rsquo;m going through the source material, and then return to take more detailed notes in my own words either with a second pass, or pausing between sections. Notes here are almost always linear, or linear-like, where I just go through the material again in the order it was presented in the source. I find that I don&rsquo;t really have time when I&rsquo;m taking notes in class to go through and network and piece things together. I&rsquo;m also a strong believer in the whole &lsquo;have something ready at each stage&rsquo; methodology - I don&rsquo;t want to neglect material just to add a couple linking notes. The format of these notes are also very non-atomic, since I&rsquo;m generally trying to collect all the information in one place with a bit more context.</p>
+<h2 id="evergreen-notes">Evergreen Notes</h2>
+<p>In terms of evergreen notes, I don&rsquo;t have many of them either - I&rsquo;ve just gotten the linking working not that long ago, and I haven&rsquo;t really been &lsquo;tending&rsquo; this digital garden for too long. However, I think my idea of evergreen notes is a lot more in line with the main Zettelkasten workflow. They&rsquo;re drawn either from source notes, though that&rsquo;s a bit rarer since I don&rsquo;t really see myself having marvellous interdisciplinary connections between, say, cold fronts and public-key cryptography (yes, those are real examples - you can thank ATSC113 and my vague interest in crypto). Otherwise, they&rsquo;re just collections of my own thoughts, which is usually more often where the evergreen notes stem from. Anything and everything goes here, from my thoughts on random posts I see on Twitter, to some of my life goals, as long as they have sufficient linkage surface area and context.</p>
+<p>Here&rsquo;s an example: I played with Web Monetization not too long ago, and I found a bunch of posts and talk describing why it was super great and the next big thing, which I do appreciate and support, but I came up with a couple thoughts about why it&rsquo;s not quite working yet, and then I just wrote about it. Eventually, evergreen notes sometimes get promoted to their own blog post, like this web monetization one, and sometimes I translate blog posts into evergreen notes as well for older content, but let&rsquo;s finally get into the components that make my Zettelkasten more unique.</p>
+<h2 id="my-tools-of-choice">My Tools of Choice</h2>
+<p>My notetaking toolkit currently includes:</p>
+<ul>
+<li>Vim =&gt; (Sorry, Emacs users!) I&rsquo;d been trying Vim out ever since I was on Windows, because I kept hearing my friends rave about how efficient, customizable, and smooth everything was, so I wanted to see what all the fuss was about. Long story short, I took to the idea of modal editing, and stuck to using it as my main code editor ever since. It makes sense that I want my notes to be as easily editable as possible, so I went with what I was familiar with.
+<ul>
+<li>This also brings up the nice bonus that I can interact with code right beside my notes, and add to my notes when I&rsquo;m thinking of something even when coding.</li>
+</ul>
+</li>
+<li>FZF =&gt; FZF is a fuzzy-finder tool, where you can pass in a bunch of sources, and it&rsquo;ll search through all of them for you. It&rsquo;s useful outside of vim for searching through files and processes, but I mostly use it in conjunction with FZF.vim, a Vim plugin that wraps a bunch of commands and everything into a very nice interface.</li>
+<li>RG =&gt; Ripgrep is a search tool, written in Rust, and it&rsquo;s extremely quick when searching through regexes and files. Honestly, I could have just gone with normal find, but as ripgrep integrates so well with FZF and FZF.vim, I thought I may as well integrate it.</li>
+<li>CTags =&gt; CTags, or more specifically, Universal CTags, is a tagging utility that was built to be used to index code files and implement &lsquo;jump to definition&rsquo; features and the like. In my system, I abuse its ability to define custom languages and its existing mappings within Vim to make my notes linkable and navigatable.</li>
+</ul>
+<h2 id="search">Search</h2>
+<p>Everything so far has been pretty vanilla, right, just modified Zettelkasten workflows. Well, here&rsquo;re the spicy parts: I&rsquo;m first going to touch on search, and how I&rsquo;ve integrated ripgrep and FZF.vim with shortcuts and aliases for editing, and then linking things together in a bit. I think search and linking are two of the big points as to why people generally turn to things like Notion, Obsidian, or Roam instead for their personal knowledge base, since it comes with those things built in, and you don&rsquo;t have to spend hours toying with Vim configs, but that&rsquo;s what makes me happy.</p>
+<p>There are a couple different things I search in my workflow: files to open, files containing specific notes, or searching through my links. The first one, files to open, is done through bash instead of within vim. I use the alias <code>evb</code> to<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>:</p>
+<pre><code>cd /home/kewbish/EVB/;vim -o &quot;$(rg --files $evb | fzf)&quot;; ctags -R .
+</code></pre><p>Ignore the <code>ctags</code> but for now, but what this does is change directory into my notebook, look for all files, and open the FZF fuzzy searching window. I usually know what file I&rsquo;m going to work on when I&rsquo;m going to take notes - like for example, my course notes or lecture notes, so I can just look the name up with this.</p>
+<p>The second mini workflow is integrated within Vim, and is a remap of a FZF command. I use</p>
+<pre><code>command! -bang -nargs=* Sevb 
+  \ call fzf#vim#grep(&quot;rg --column --line-number --no-heading --color=always --smart-case &quot;.shellescape(&lt;q-args&gt;), 1, {'dir': '/home/kewbish/EVB/'}, &lt;bang&gt;0)
+</code></pre><pre><code>this big blob of Vimscript to run ripgrep in my notebook folder. It looks a lot more complicated than it is, but I need to use the custom fzf.vim call because I need to a) search within file contents, as well as b) search all files within my notebook. I've remapped this to `nnoremap &lt;leader&gt;se :Sevb&lt;CR&gt;`, so a quick \se gets me what I'm looking for.
+</code></pre>
+<h2 id="linking">Linking</h2>
+<ul>
+<li>The third searching command involves tags, which was what the <code>ctags -R .</code> was for in my bash alias. Inspired by <a href="https://www.edwinwenink.xyz/posts/48-vim_fast_creating_and_linking_notes/">Edwin Wenink&rsquo;s plaintext Zettelkasten</a>, I use these tags instead to link between notes. I denote a link with <code>(\#: link contents here)</code>, mostly because I&rsquo;d never type <code>(\#:)</code> in normal notetaking. It&rsquo;s a bit clunky, but it also stands out visually, so I&rsquo;ve stuck with it. I&rsquo;ve defined this as a custom tag pattern in my <code>~/.ctags.d/</code> folder</li>
+</ul>
+<pre><code>--langdef=markdowntags
+--languages=markdowntags
+--langmap=markdowntags:.md
+--kinddef-markdowntags=l,link,links
+--mline-regex-markdowntags=/(^|[[:space:]])\(\#: ([^\)]*)/\2/l/{mgroup=1}
+</code></pre><p>Every time I open my notebook with <code>evb</code>, the tags are generated, and I can then use the FZF.vim <code>:Tags</code> mapping, which I have as \st, to search through my links. While on a link, I can also use this mapping:</p>
+<pre><code>nnoremap &lt;leader&gt;ln va)y:exe &quot;:Sevb &quot; . substitute(substitute(getreg('&quot;'), &quot;\(#:&quot;, &quot;&quot;, &quot;/g&quot;), &quot;\)&quot;, &quot;&quot;, &quot;/g&quot;)&lt;CR&gt;
+</code></pre><p>to search through my tags, and insert it somewhere. The first block here yanks my link to a register so I can paste it, then searches my notebook for similar topics as the content of the link. I can always change what I search for, and then quickly jump to the file position and paste the link. I can also use Vim&rsquo;s inbuilt :ts and g] commands to search through my links and jump to them, but I use that a bit less frequently. I think this linking system&rsquo;s pretty unique, and one of the biggest features that admittedly, most other software implements out of the box, but that I finally have, in my little plaintext notebook.</p>
+<h2 id="the-experience">The Experience</h2>
+<p>Admittedly, the entire decision to give the above talk was completely spontaneous, so I can&rsquo;t go on about some impressive motivation. Yes, I wanted to talk, but I&rsquo;d like to think that it was more about sharing what my Zettelkasten was like. I also kind of wanted to push myself out of my lurker-by-default existence at bigger events, and force myself to do something slightly outside my comfort zone. People talk about stretching yourself - giving this lightning talk, I think, is a great example of that. I&rsquo;m not afraid of public speaking, but it&rsquo;s one of those things I&rsquo;ll have to mentally steel myself for. Being able to share on something I&rsquo;ve been very into lately meant that I essentially could talk forever without a script anyways, so I didn&rsquo;t have to worry about not knowing what to say. Preparing for the talk wasn&rsquo;t an arduous process: mostly just piecing together past thoughts I&rsquo;d jotted down or thinking through the best order to present my notebook subsections. As well, with the small number of attendees for Augment Minds in general, there&rsquo;d be a minimal audience to, in the worst-case scenario, mess up in front of. Doing one slightly scary thing, but combining it with a bunch of mostly-familiar topics, is probably a recipe that I&rsquo;ll continue to apply in other places - it brings you new and more positive experiences than if I&rsquo;d, say, done a talk on a foreign topic with tonnes of people.</p>
+<p>Not many people showed up to the talk, which I&rsquo;ll be positive about and call it a good thing. With just a couple people in the room, the little discussion session we had at the end was a lot more close-knit and meaningful. Getting to talk to other people at the end was honestly the best part of the entire Augment Minds 2021 experience - I really enjoyed getting to have these small group chitchats, and talk about alternative Zettelkasten systems, so thanks to everyone who engaged in that! Here&rsquo;s a brief, slightly abridged, list of the followup points that I took away:</p>
+<ul>
+<li>I&rsquo;d like to check out <a href="https://github.com/wookayin/fzf-ripgrep.vim">fzf-ripgrep.vim</a>
+<ul>
+<li>It appears to have more builtin rg bindings, and I wonder if I can pass the directory to search more easily (to avoid the mess of Vimscript everything currently is)</li>
+</ul>
+</li>
+<li>Someone asked if I&rsquo;ve considered NLP, and how can I make fancy AI tools work for my thought
+<ul>
+<li>One of the projects by the hosting organization, <a href="https://psionica.org/tools/autocards/">Autocards by Psionica</a>, looks really interesting, especially since I&rsquo;ve been looking into flashcard and spaced-repetition models recently</li>
+<li>Integrating notes directly into my calendar, or being able to pull between sources, would be interesting to consider</li>
+<li>Tools like <a href="https://elicit.org/">Elicit</a> for coming up with a general scheme of things and terms to dive into - sort of like mapping a field - are also very appealing</li>
+<li>A &lsquo;fancy AI&rsquo; idea: can I get some NLP tool (i.e. GPT{2, 3}) to distill information while I&rsquo;m researching? Coming up with plain layman&rsquo;s explanations of common things to look into would help me know what to look into first, and help me build a personal curriculum</li>
+</ul>
+</li>
+<li>Another person asked if I use other old-school Linux utilities (the examples given for &lsquo;old-school Linux&rsquo; were sed and awk, so do with that what you will) and if they were powerful enough for me
+<ul>
+<li>I find my current toolkit powerful enough for me (right now), and I don&rsquo;t plan to switch anytime soon</li>
+<li>Why have I stuck to such a minimal set? It&rsquo;s definitely enough for my use case, but there&rsquo;s also a config barrier that prevents a lot of people from taking this route, which is 100% valid logic</li>
+</ul>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Part of the reason why I like having my notetaking system in Vim, and stitched together with all these open source tools is because I feel that Vim&rsquo;s kind of become my Notion, or become my Roam. Or not specifically Vim, after all, but mainly the terminal. It feels like a kind of plaintext home to me, since I spend a lot of time programming and hacking away in the terminal anyways. There&rsquo;s something about being able to create a workflow that I fully understand, and that fits me perfectly, rather than have to try to slot myself into something that an external tool recommends. And I know, it&rsquo;s probably a lot easier and a massive waste of time in a lot of people&rsquo;s opinions for very small optimizations, but hey, it&rsquo;s my notetaking system, so I don&rsquo;t really have to explain myself, do I? Open source and plain text as general philosophies are some of the lesser points of my system, but I think they still matter. I guess a lot of general purpose notetaking ecosystems like Roam cover a lot of the same features, but being able to have full control over something so integral to my learning and life is pretty important to me.</p>
+<p>Since I gave the talk, I&rsquo;ve been able to experiment with, and really put, my system to test - I&rsquo;ve been working on a <a href="https://github.com/kewbish/srs">research project</a> on probablistic primality testing with the <a href="http://www.math.bas.bg/srs/newsite/srs/">Summer Research School</a> (which was an amazing experience and program, by the way - more on it in an upcoming post). It&rsquo;s a pretty number-theory-heavy field, and the first couple weeks of the program especially involved a lot of reading through the basics of modular math, theorem proofs, and processing jargon-filled papers. I&rsquo;ve been taking quite a number of notes, and I&rsquo;ve seen that having these improved searching and linking capabilities has significantly improved my workflow. I&rsquo;m happy that I took the time to finally get the features I&rsquo;d been longing for for ages finally into my system, but I think I won&rsquo;t be touching new Zettelkasten ideas for a while. I try not to mess with my system too often, or else I tend to get more tweaking done than actual work - I also try to limit myself to a couple indulgences of Vimscripting and diving into other people&rsquo;s systems a year. I&rsquo;ll see if I need any major changes to happen in my system once September rolls around and school starts, but we&rsquo;ll see - customizing my workflows is something I tend to enjoy doing anyways.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>By the way, all my Vim commands can be found in my <code>.vimrc</code> in my <a href="https://github.com/kewbish/dotfiles">dotfiles repo</a> - take a look there for my reference implementations if you want to replicate anything.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+            <p>- Yours, Kewbish</p>
+        </div>
+        <br><p><a href="../">&lt; More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>
