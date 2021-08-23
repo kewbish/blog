@@ -5,10 +5,41 @@
     <link>https://kewbi.sh/blog/</link>
     <description>Latest Yours, Kewbish posts</description>
     <managingEditor>(Emilie Ma ◦ Kewbish)</managingEditor>
-    <lastBuildDate>Sun, 15 Aug 2021 11:20:04 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 22 Aug 2021 19:50:41 -0700</lastBuildDate>
     
 	<atom:link href="https://kewbi.sh/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Summer Research School</title>
+      <link>https://kewbi.sh/blog/posts/210822/</link>
+      <pubDate>22 Aug 2021</pubDate>
+      <author>Emilie Ma ◦ Kewbish</author>
+      <description>On determinism and delightful doner.</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>I&rsquo;ve mentioned it a couple times in the footnotes and conclusions of previous posts, but I recently (well, a couple weeks ago, but who&rsquo;s counting) wrapped up my time at the <a href="http://www.math.bas.bg/srs/newsite/srs/">Summer Research School</a>. Hosted by the Bulgarian High School Student Institute for Mathematics and Informatics, the program takes in about forty Bulgarian and international students to pursue an intensive research topic of their choice. For three weeks, each student works with their mentor on an area of inquiry through analysis, theory, literature searches, and more - and end up both writing a paper and creating a presentation to defend against mentors' questions. Normally, all students, including international ones, gathered at locations in Bulgaria for the duration of the camp, but COVID restrictions meant that only the Bulgarian students were able to do so. Even though I participated virtually with a ten-hour time difference (I&rsquo;ve always been an early bird, but I will confess I dropped a couple of the 6AM lectures for the sake of my sanity), I had an amazing time, and I&rsquo;ve gained valuable experience writing academically and creating my own research program.</p>
+<p>I&rsquo;d heard about SRS from a friend a couple years ago (thanks Umang!) over the summer, just when the program was starting up. I thought it sounded enticing, what with the opportunity to be mentored through writing a proper research article, and getting exposed to an abridged version of the academic research environment. I hit the lower bound of the program&rsquo;s age requirement (15-19), so I had to apply just after my birthday to be even considered. To be honest, I didn&rsquo;t think my limited research experience - restricted to a very scuffed audio-visual random number generator at a district science fair and maybe playing up whatever I did during Google Code-in - was sufficient to be accepted. When I got the acceptance email, I was super excited: I&rsquo;d been hoping to participate for a while, so it was a pleasant suprise.</p>
+<p>SRS was an amazing opportunity for me, both to explore the fields of theoretical mathematics and computer science, and to meet other students passionate about their research. I had one of the most memorable summers of my life here, and I’m very happy I attended.</p>
+<h2 id="probablistic-primality-testing">Probablistic Primality Testing</h2>
+<p>On my application, I listed cryptography, random number generation, and programming language theory as my interests - three things that I have very insubstantial experience with. Even going into SRS, I had no concrete project ideas, so when the coordinators sent out the list of proposed topics, I was happy to find something that sort of fell into crypto and seemed to combine CS with maths theory. That something was a project on primality testing, and while I had absolutely no idea about the field before (except perhaps a cursory glance over the Sieve of Eratosthenes algorithm), I&rsquo;m pretty proud of what I was able to do in my three weeks here.</p>
+<p>My project specifically centered around probablistic primality testing. In layman&rsquo;s terms, tests that differentiate prime numbers from non-prime, or composite, ones and that do this differentiating with some element of randomness. These primality tests are essential in modern cryptography, ensuring the security and reversibility of encryption and decryption in most systems. For the number-theory inclined, I specifically analyzed the Fermat, Euler (Solovay-Strassen), and Miller-Rabin tests. I looked at the accuracy, or the number of composite numbers marked as prime (in essence, wrong results), and efficiency, or the wall time elapsed to test the given numbers for each test.</p>
+<p>There are also deterministic primality tests, or test that verify the primality of a number with none of the randomness, and with 100% accuracy. For example, the Agarwal-Kayal-Saxena (AKS) test is notable for being a deterministic primality test, and one that runs in polynomial-bounded (more efficient than other options) time at that. However, though deterministic tests are perfectly accurate and return no incorrect results, they&rsquo;re very slow compared to the probablistic tests. This is why probablistic primality tests are usually used: for practicality reasons.</p>
+<p>My project also included a proposal for a new variant of AKS, known as probablistic AKS. It replaced the computationally expensive and extensive checks needed to verify primality at the cost of returning some incorrect results (as with all probablistic tests). This test ran significantly faster than the deterministic algorithm, reducing the bounds from <code>soft-O((log n)^15/2)</code> to <code>soft-O(k(log n)^5)</code>, further dropping to <code>soft-O(k(log n)^4)</code> in best case scenarios.</p>
+<p>All this analysis was done through Python (more on the technical implementations later) and a bunch of data conversion scripts that pulled the results out to a CSV file. I then collected all the data into a couple central Excel documents for graphing. All the pretty figures and results are available in <a href="https://github.com/kewbish/srs/blob/master/Primality.pdf">the actual paper</a> and in the <a href="https://github.com/kewbish/srs/">project repository</a>.</p>
+<p>I chose this project as I wanted to work on something related to my existing interests of CS and crypto, but I also wished to explore something new. That ended up being modular arithmetic and the world of number theory - a decent challenge, given that the BC curriculum pretty much does not acknowledge any of these concepts. I was also looking forward to having a mentor with me, which made me feel more confident to step outside my knowledge comfort zone and engage in something that&rsquo;d really let me learn something new.</p>
+<h2 id="my-saviour-numba">My Saviour, Numba</h2>
+<p>Even with my mentor, Pressiana Marinova, and her consistent support and guidance, there were a couple obstacles throughout this whole experience. One of which, and also the title of this section (you&rsquo;ll see why in a bit), was optimization. I initially had written my primality test implementations in <a href="https://www.sagemath.org/">Sage</a>, a Python-like mathematics system that I&rsquo;d heard of previously. I knew its more advanced capabilities for maths were quite powerful, so I thought I&rsquo;d try that. I also thought it&rsquo;d be faster than raw Python - but I was incredibly wrong. Once I got to writing the Miller-Rabin tests (read, the tests with more computations), testing even 10000 integers was becoming frustratingly slow. I tried switching to pure Python, which delivered a slight speed increase, but it was my friends (thanks Pranav and Sayam!) who suggested I take a look at <a href="https://numpy.org/">Numpy</a> and, the saving grave of my entire project, <a href="http://numba.pydata.org/">Numba</a>. These compile Python code down to lower-level languages, which, after a brief but difficult struggle with decorators and external functions, sped up my code from an average runtime of five minutes to five seconds. Pretty significant, and incredibly liberating (especially when I started implementing deterministic AKS, I don&rsquo;t think I could have gotten reasonable data for even a hundred integers without Numba).</p>
+<p>Learning the material itself was also a challenge. I had a vague understanding of some of the modular arithmetic and group theory from my past forays into crypto with <a href="https://cryptohack.org/">Cryptohack</a>. However, trying to wrap my head around all this new notation in the context of primality testing and the papers I had to read was a challenge. The first couple days of SRS were spent speedrunning modular arithmetic on Khan Academy and binge watching Fermat&rsquo;s Little Theorem proofs off YouTube. Still, trying to comprehend all the theory was pretty difficult, especially since primality testing is a complex topic with a decent amount of prerequisite knowledge, so there wasn&rsquo;t a lot of easily accessible explanations of proofs or the tests. Then again, the project was an amazing crash course in number theory and modular arithmetic, and I&rsquo;d like to extend a world of thanks to my amazing mentor and the resources she provided - without them, I couldn&rsquo;t have cracked even the first couple days' worth of material.</p>
+<p>The last major struggle I had was dealing with the deadlines. I kept up a pretty reasonable working pace throughout the entire program, but I still ended up speedrunning the paper and presentation last minute. I wrote a good chunk (read, pretty much the entire analysis of results and discussion) on the day before the deadline day (which was still a decent amount of time in advance, since I was behind ten hours). I also started the presentation completely from scratch (and with no knowledge of <a href="https://www.overleaf.com/learn/latex/Beamer">Beamer</a>) the day before I was scheduled to present my paper. I ended up not having a ton of prep time, but I satisfactorily managed to muddle my way through. I remember planning to have finished my paper by the beginning of the last week, and having an entire week to prep my presentation, but that was certainly not the case. I don&rsquo;t even think it was due to time management - the program just crams a lot of material into a short period of time, so I was genuinely working at my full ability.</p>
+<h2 id="the-cult-of-doner">The Cult of Doner</h2>
+<p>But it wasn&rsquo;t all work - there was an appropriate amount of fun and games as well, even if I was an entire 9271km away. There were a couple social nights and weekend activities over the course of the program, especially in the first week. Our online quiz night and extraordinarily cursed Cards Against Humanity game stand out as my favourite memories. I also received a very thorough Bulgarian education on everything from Bulgarian music, food, innovations, and culture in our SRS Discord, which I <del>un</del>fortunately started.</p>
+<p>Speaking of starting the Discord, I&rsquo;m quite glad we had that community as well, since I would have never been graced with the Bulgarian sensation of doner (or duner, apparently). I don&rsquo;t think it even originated in Bulgaria (at least, the places I found in Vancouver were either advertising &lsquo;Berlin-style&rsquo; or &lsquo;authentic Middle-Eastern&rsquo;, so take that as you will), but as all the Bulgarian participants will gladly tell you, doner is a pita-style wrap-sandwich-burrito-esque combo. The second day the server had been running, I woke up to a deluge of doner pictures, discussion, and &lsquo;research purpose&rsquo; requests for doner supremacy and admin. Over the course of the week, I&rsquo;d come to learn what doner was, as well as agree to trying it. I eventually stopped by <a href="https://www.google.com/maps/dir//robson+street+doner/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x548671883df1ec17:0xa031e83d87de69cf?sa=X&amp;ved=2ahUKEwjNmMvyjsbyAhVSJzQIHVoTC34Q9RcwAHoECAsQBA">this little</a> place in Vancouver to try it, thereby fulfilling my SRS doner duties.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Overall, I really, really liked SRS. As my first research experience, I gained valuable skills and insights regarding the whole academic procedure, sort of like a preview for my future studies. However, I wish it were longer, since it felt a bit like I was cramming an entire thesis process into three weeks. I didn&rsquo;t find that as enough time for the theory to really sink in, as well as not enough time to finish up my analysis as I would have wanted. I also wish I&rsquo;d have been able to see what SRS was like in person. Unfortunately, COVID was a major obstacle (and apparently they had a slightly scuffed location), but it would have been nice to get to know fellow participants more and get more involved in the community. I would have been able to have closer feedback loops with my mentor - but all in all, it was still an amazing experience, and has left me with incredible memories.</p>
+<p>I&rsquo;d like to thank my mentor for her hard work and support throughout this entire rollercoaster ride of a program. Her clear explanations and daily checkins helped me get through even the worst obstacles. As well, much gratitude to the HSSIMI and SRS coordination team. I really appreciate all the work the team&rsquo;s put in to make the experience enriching and fulfilling, even for international students half a world away.</p>
+<p>In the future, I plan to continue tinkering with my analysis, and finish editing my paper for potential publishing - I&rsquo;ve been looking at a couple youth journals in Canada. I&rsquo;d like to adjust my testing bounds, as well as iron out a couple inconsistencies in the amount of data collected due to time constraints during SRS. I also plan on diving deeper into the theory and underlying system of the AKS test to see if I can improve the probablistic version more. I&rsquo;m decently proud of what I&rsquo;ve managed to produce given three weeks' time, but I can&rsquo;t help but see all the tiny things I&rsquo;d like to fix. SRS has inspired me to put more time into considering research opportunities, but we&rsquo;ll see how my edits and that all pans out as school starts.</p>
+]]></content:encoded>
+    </item>
     
     <item>
       <title>A Plaintext Zettelkasten</title>
@@ -546,124 +577,6 @@ which directly echoes the whole layers concept that I think is an interesting pl
 </li>
 <li id="fn:2" role="doc-endnote">
 <p>Apparently this changes to LaTeX in university, so there&rsquo;s something else to consider.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</section>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>CPSC 110: Weeks 9 and 10</title>
-      <link>https://kewbi.sh/blog/posts/210418/</link>
-      <pubDate>18 Apr 2021</pubDate>
-      <author>Emilie Ma ◦ Kewbish</author>
-      <description>On generative struggles and accumulators.</description>
-      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
-<p>Last week, I think I predicted that these couple weeks would be some of the hardest so far in the course, and I think I wasn&rsquo;t far off. The lab and problem set for week 9 were especially difficult - it seemed to be very much a &lsquo;it&rsquo;s a matter of thinking&rsquo; type of problem. Generative search and this type of recursion are techniques I haven&rsquo;t even touched outside of Racket, so I think the lack of experience definitely didn&rsquo;t help, as well as my not understanding the problem half the time. Week 10&rsquo;s work wasn&rsquo;t much better - I&rsquo;m still working through the lab and problem set as of now. However, I feel like Week 10 &lsquo;clicks&rsquo; more than Week 9, but maybe that&rsquo;s just because Week 9 had a large problem example instead of smaller, more digestible ones. However, going through the practise problems and solutions has been helping, and I&rsquo;ve really learned that you cannot rush it - taking my time to work through problems fully has been a lot more helpful than trying to speedrun a couple easy check-expect cases.</p>
-<p>As with every other CPSC 110 post, if you&rsquo;re not doing the course or don&rsquo;t have the very niche interest of tackling aforementioned generative recursion and accumulators, this is the part where you might want to go read one of my other posts. I promise there&rsquo;s some interesting thoughts somewhere in my post history, so feel free to go check those out instead.</p>
-<h2 id="notes---week-9">Notes - Week 9</h2>
-<p>This week covers generative recursion, and applies it to backtracking search, a method of search that generates all possible permutations of a problem in a tree before eliminating invalid ones.</p>
-<ul>
-<li>generative recursion differs from previous structural recursion =&gt; instead of taking a sub-piece of data as argument to next call, we now generate entirely new data to call
-<ul>
-<li>fractals are a good example of this =&gt; layering images onto each other</li>
-</ul>
-</li>
-<li>use the HtDF recipe for generative recursion =&gt; instead of an empty case, we have a trivial case and a non-trivial generative case
-<ul>
-<li>generally nest images around other recursive cases, instead of only having a recursive expression</li>
-<li>base case for generative recursive check-expect is the case that doesn&rsquo;t recurse anymore =&gt; set a cutoff constant
-<ul>
-<li>next ones can be those that do recurse (generally one or two &lsquo;steps&rsquo;)</li>
-</ul>
-</li>
-<li>can use locals to avoid redundant competition (i.e. when multiple recursive areas or multiple of the same nonrecursive cases)</li>
-<li>can re-call the recursive function =&gt; make sure to operate on the arguments (generally for side length)</li>
-</ul>
-</li>
-<li>can&rsquo;t count on type comment rules to determine that the recursion will end =&gt; halting problem
-<ul>
-<li>need to use our own proofs: three-part system of base case, reduction steps, and halting or termination argument
-<ul>
-<li>base case is the trivial question expression in the cond</li>
-<li>reduction step is the, well, reduction of the expression argument</li>
-<li>then use logic to state an argument that repeating the reduction will eventually reach the base case</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>use lambda (λ) expressions to avoid having to create a whole local function =&gt; anonymous function
-<ul>
-<li>only use in place of expressions that will only be used once =&gt; like Python lambdas</li>
-<li>ensure the body is easily understood and that the naming adds nothing to its comprehension</li>
-<li>format: <code>(λ (n) (&gt; n 5))</code> where the n expression is the list of other expressions</li>
-</ul>
-</li>
-<li>backtracking search is composed of several parts =&gt; structural recursion for the tree structure, and handling function composition
-<ul>
-<li>use the HtDF backtracking search template =&gt; use local functions to nest all required functions in a single expression</li>
-<li>two main parts =&gt; the &lsquo;trivial&rsquo; or success case, and the subs, or the descendents case</li>
-<li>descendents generally requires a couple helper functions =&gt; break the problem down into several smaller steps to solve with function composition, abstract builtins, or other methods</li>
-</ul>
-</li>
-</ul>
-<h2 id="notes---week-10">Notes - Week 10</h2>
-<p>Week 10 deels with accumulators, a new technique used to preserve context that&rsquo;s often lost in recursive functions.</p>
-<ul>
-<li>structural recursion templates are very powerful =&gt; easy to abstract upon
-<ul>
-<li>however, cannot see &lsquo;where&rsquo; they are in a data structure</li>
-<li>cannot preserve past-touched data, or accumulate data to add to future computations</li>
-</ul>
-</li>
-<li>context preserving accumulator =&gt; brings data from parent/child or keeps track of other values that need to stay constant within a sub-traversal
-<ul>
-<li>wrap the function body in a local expression and add a trampoline with a base accumulator</li>
-<li>add an argument to the inner functions</li>
-<li>the context preserving accumulator changes every step depending on the fn behaviour</li>
-<li>add parameter to where it might be used in a function</li>
-</ul>
-</li>
-<li>also introduces the concept of tail recursion =&gt; any recursion placed in the last expression position in function, not wrapped in anything
-<ul>
-<li>reduces the problem where many sub-expressions are created before reducing the answer</li>
-<li>optimized in many languages, including Racket</li>
-<li>instead of a context-preserving accumulator, now a result-so-far accumulator is introduced
-<ul>
-<li>represents the built-up information (such as the sum function)</li>
-<li>generally used to produce tail-recursive functions instead of cons-ing infinitely</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>third accumulator type is the worklist, where you consistently build onto a list that&rsquo;s called each function iteration
-<ul>
-<li>run the mutually recursive list function on the todo worklist instead
-<ul>
-<li>take the first of the worklist and operate on it, then if using another accumulator attach to that</li>
-</ul>
-</li>
-<li>used often when operating on data with more than one graph cycle =&gt; arbitrary arity trees with tail-recursion</li>
-</ul>
-</li>
-<li>general accumulator advice
-<ul>
-<li>when writing accumulators, ensure a base accumulator is set in the trampoline =&gt; empty, 0, depends on function behaviour</li>
-<li>to debug accumulators, draw out an example of a call tree including the arguments and how they&rsquo;re expected to be operated on</li>
-</ul>
-</li>
-</ul>
-<h2 id="conclusion">Conclusion</h2>
-<p>Only a couple modules left - though those might take a while to get through, given that they&rsquo;re the last, and probably most difficult sections of the entire course. I foresee a lot of cross-module work, as well as more complex program design. I&rsquo;m looking forward to tackling it, but a bit hesitant to find out what &lsquo;graphs&rsquo; and &lsquo;mutation&rsquo; are supposed to mean<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. I&rsquo;m still on track to finishing CPSC 110 well before summer break, but I think I might have to take things a little slower given with how school&rsquo;s going. Perhaps more consistent but less intense work with the course will be more effective, anyways?</p>
-<p>I haven&rsquo;t found the time to write a proper post in a while, but I think it&rsquo;s high time I went back to more regular posts - I have a list of pretty viable ideas that I&rsquo;d like to expand more on, and maybe a couple addendums and things to other posts that I might update. YK was started as half a joke, but I think it&rsquo;s become more a place to swirl thoughts together and hypothesize about the very niche things I&rsquo;m into. I don&rsquo;t think my posting style&rsquo;d fit in more micro-blog formats, so I plan on continuing to tend this digital garden (hey, am I trendy now?) for a very long time - and that means keeping my consistently posting schedule. I got a bit lax in the past month - while my very rigid posting schedule maybe wasn&rsquo;t the best for quality in 2020, it did incentivize me to stick to it, and at least put something out. Anyways, I hope I&rsquo;ll manage to edit up my latest post and have it up soon, and follow it up with a bunch of other thoughtchains. We&rsquo;ll see<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
-<section class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1" role="doc-endnote">
-<p>Did Kiczales intentionally name the last couple units the most vaguely just to add to the mystique?&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2" role="doc-endnote">
-<p>Also, if you&rsquo;ve read this far, it probably means that you&rsquo;re one of the few people that I talk to regularly and hey, if you unironically check the footnotes, I think I can trust y&rsquo;all enough. (Please don&rsquo;t spill to others though, at least since I&rsquo;m theoretically not supposed to talk about this yet.) So - life update! I made it into UBC, which still hasn&rsquo;t entirely hit. It&rsquo;s absolutely crazy that I&rsquo;ve got here, and at 15, too. (Not to mention the very spicy Schulich Leader scholarship - still kinda in shock.) 2020 and 2021 so far have been absolute rollercoasters, but hey, with GCI, GfTW, and now this - it&rsquo;s definitely been worth it.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
