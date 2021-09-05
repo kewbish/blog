@@ -36,7 +36,7 @@
 <p>This whole process would probably be a lot simpler on Android, but I use an iPhone. (Feel free to rant about non-free software here.) I can&rsquo;t mess with folders and edit things as easily, so here is my attempt at describing my system now.</p>
 <h2 id="overcomplicated-ascii-art">Overcomplicated ASCII Art</h2>
 <p>The system looks something like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">+---------------------+        +-------------+        +----+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">+---------------------+        +-------------+        +----+
 |                     |        |             |        |----|
 |    git + sync.sh    | +----&gt; |   |\---/|   | &lt;----+ ||  ||
 |                     |        |   |     |   |        ||  ||
@@ -62,7 +62,7 @@
 <h2 id="syncing">Syncing</h2>
 <p>Right, so syncing. Syncing was probably the bigger headache of the two here. For some reason, the first time round I tried getting an XFCE Autostart desktop to work, it would refuse to do anything. I assume this is due to an issue that I&rsquo;ll touch on in a few lines.</p>
 <p>Under <code>Session and Startup &gt; Application Autostart</code>, I <code>+Add</code>ed a new desktop file. I&rsquo;m pretty sure it&rsquo;s important that this doesn&rsquo;t have a space in its title - that was the only thing different between my two attempts. The command I had it run was simply the bash script I wrote, which, for my later convenience, is below:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>
 cd ~/EVB/
 <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">`</span>git status --porcelain<span style="color:#e6db74">`</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>

@@ -46,40 +46,40 @@
 <ul>
 <li>Changing the description (line 18):</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;description&gt;</span>Recent content {{ if ne  .Title  .Site.Title }}{{ with .Title }}in {{.}} {{ end }}{{ end }}on {{ .Site.Title }}<span style="color:#f92672">&lt;/description&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;description&gt;</span>Recent content {{ if ne  .Title  .Site.Title }}{{ with .Title }}in {{.}} {{ end }}{{ end }}on {{ .Site.Title }}<span style="color:#f92672">&lt;/description&gt;</span>
 </code></pre></div><p>This is pretty self-explanatory, just changed it to:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;description&gt;</span>Latest Yours, Kewbish posts<span style="color:#f92672">&lt;/description&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;description&gt;</span>Latest Yours, Kewbish posts<span style="color:#f92672">&lt;/description&gt;</span>
 </code></pre></div><ul>
 <li>Changing the date format (line 32):</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;pubDate&gt;</span>{{ .Date.Format &#34;Mon, 02 Jan 2006 15:04:05 -0700&#34; | safeHTML }}<span style="color:#f92672">&lt;/pubDate&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;pubDate&gt;</span>{{ .Date.Format &#34;Mon, 02 Jan 2006 15:04:05 -0700&#34; | safeHTML }}<span style="color:#f92672">&lt;/pubDate&gt;</span>
 </code></pre></div><p>I prefer a cleaner date format (02 Jan 2006) instead of <em>all</em> this time info, so I changed this to:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;pubDate&gt;</span>{{ .Date.Format &#34;02 Jan 2006&#34; | safeHTML }}<span style="color:#f92672">&lt;/pubDate&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;pubDate&gt;</span>{{ .Date.Format &#34;02 Jan 2006&#34; | safeHTML }}<span style="color:#f92672">&lt;/pubDate&gt;</span>
 </code></pre></div><ul>
 <li>Move from summary to description (line 35):</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;description&gt;</span>{{ .Summary | html }}<span style="color:#f92672">&lt;/description&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;description&gt;</span>{{ .Summary | html }}<span style="color:#f92672">&lt;/description&gt;</span>
 </code></pre></div><p>I wanted to use my descriptions instead of the first couple lines, so I used this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;description&gt;</span>{{ .Description | html }}<span style="color:#f92672">&lt;/description&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;description&gt;</span>{{ .Description | html }}<span style="color:#f92672">&lt;/description&gt;</span>
 </code></pre></div><p>These are all just personal preference, but it makes the README bit a little more consistent with the actual blog.</p>
 <h2 id="scripting-with-python">Scripting with Python</h2>
 <p>The README update script is only 18 lines of Python, and uses the <a href="https://github.com/kurtmckee/feedparser">feedparser</a> library to, well, parse the RSS feed.</p>
 <p>Of course, let&rsquo;s start with installing and importing the library with <code>pip install feedparser</code> and:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#f92672">from</span> feedparser <span style="color:#f92672">import</span> parse
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#f92672">from</span> feedparser <span style="color:#f92672">import</span> parse
 </code></pre></div><p>Next, we&rsquo;re going to get all our feed entries.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">feed <span style="color:#f92672">=</span> parse(<span style="color:#e6db74">&#34;https://kewbish.github.io/blog/index.xml&#34;</span>)<span style="color:#f92672">.</span>entries
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">feed <span style="color:#f92672">=</span> parse(<span style="color:#e6db74">&#34;https://kewbish.github.io/blog/index.xml&#34;</span>)<span style="color:#f92672">.</span>entries
 latest <span style="color:#f92672">=</span> [
     <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;&#34;&#34;- [</span><span style="color:#e6db74">{</span>feed[i]<span style="color:#f92672">.</span>title<span style="color:#e6db74">}</span><span style="color:#e6db74">](</span><span style="color:#e6db74">{</span>feed[i]<span style="color:#f92672">.</span>link<span style="color:#e6db74">}</span><span style="color:#e6db74">)  </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>feed[i]<span style="color:#f92672">.</span>description<span style="color:#e6db74">}</span><span style="color:#e6db74"> - </span><span style="color:#e6db74">{</span>feed[i]<span style="color:#f92672">.</span>published<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
     <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">3</span>)]
 </code></pre></div><p><code>feed</code> contains all the entries of your RSS feed (you&rsquo;re going to want to change the URL to something other than my blog URL, obviously). Then, we create a new list to store the first three entries, formatted as a two-line bullet point. The first line will have a link to the post and the title, and the second a description and publishing date. You can definitely play around with this, it&rsquo;s just plain markdown, and this is just how I decided to format my README.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">farr <span style="color:#f92672">=</span> []
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">farr <span style="color:#f92672">=</span> []
 <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;README.md&#34;</span>, <span style="color:#e6db74">&#34;r&#34;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8&#39;</span>) <span style="color:#66d9ef">as</span> x:
     <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> x:
         <span style="color:#66d9ef">if</span> line<span style="color:#f92672">.</span>strip() <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&lt;!--bp--&gt;&#34;</span>:
             <span style="color:#66d9ef">break</span>
         farr<span style="color:#f92672">.</span>append(line)
 </code></pre></div><p>We then open the README file and read each line into an array if it isn&rsquo;t this specific HTML comment. At this point, you might want to go back to your README and add the <code>&lt;!--bp--&gt;</code> comment at the end. (If you want it somewhere in the middle, you&rsquo;re going to have to modify the code by adding a new array and reading into that array after the comment is encountered, probably by setting a boolean value somewhere.)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;README.md&#34;</span>, <span style="color:#e6db74">&#34;w&#34;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8&#39;</span>) <span style="color:#66d9ef">as</span> x:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;README.md&#34;</span>, <span style="color:#e6db74">&#34;w&#34;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf8&#39;</span>) <span style="color:#66d9ef">as</span> x:
     x<span style="color:#f92672">.</span>writelines(farr)
     x<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#34;&lt;!--bp--&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
     li <span style="color:#f92672">=</span> [x<span style="color:#f92672">.</span>write(i <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> latest]
@@ -91,21 +91,21 @@ latest <span style="color:#f92672">=</span> [
 <p>Note: <a href="https://simonwillison.net/2020/Jul/10/self-updating-profile-readme/">SimonW&rsquo;s blog post</a> was super helpful in figuring this out - much of my code was created after looking through theirs!</p>
 </blockquote>
 <p>Now that we have our script and requirements, let&rsquo;s make our Action. There&rsquo;s a little Actions button on the main page of your repository, so click that and create a new workflow. Choose the &lsquo;by yourself&rsquo; option, which will spit out a long YAML file. We&rsquo;re going to rewrite the file, so go ahead and delete it.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#f92672">name</span>: <span style="color:#ae81ff">Add newest YK</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#f92672">name</span>: <span style="color:#ae81ff">Add newest YK</span>
 
 <span style="color:#f92672">on</span>:
   <span style="color:#f92672">workflow_dispatch</span>:
   <span style="color:#f92672">schedule</span>:
     - <span style="color:#f92672">cron</span>: <span style="color:#e6db74">&#39;0 */6 * * *&#39;</span>
 </code></pre></div><p>First, we start with our Action name. Pretty self explanatory, call it whatever you want. Next, we have our <code>on</code> triggers. These define when our Action will run. <code>workflow_dispatch</code> lets me trigger one manually, and <code>schedule</code> uses familiar cron syntax. (In case you&rsquo;re wondering, this runs the Action every 6 hours. I highly recommend <a href="https://crontab.guru/">crontab.guru</a> for figuring this out. GitHub does have a built-in tooltip though, so that can be helpful.)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#f92672">jobs</span>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#f92672">jobs</span>:
   <span style="color:#f92672">build</span>:
     <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span>
     <span style="color:#f92672">steps</span>:
     - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Check out repo</span>
       <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v2</span>
 </code></pre></div><p>Every Action also has a set of jobs that you can run on it. The <code>build</code> and <code>runs-on</code> line are pretty standard, just defining your Action to be run on the latest version of Ubuntu. Then, we have a set of steps, which are each individual tasks that can then run commands for us. Our first step will be checking out the repo. This is also pretty standard, as we just use one of GitHub&rsquo;s premade Actions.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Set up Python</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Set up Python</span>
     <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/setup-python@v2</span>
     <span style="color:#f92672">with</span>:
     <span style="color:#f92672">python-version</span>: <span style="color:#ae81ff">3.8</span>
@@ -117,18 +117,18 @@ latest <span style="color:#f92672">=</span> [
     <span style="color:#f92672">restore-keys</span>: |<span style="color:#e6db74">
 </span><span style="color:#e6db74">        </span>        <span style="color:#ae81ff">${{ runner.os }}-pip-</span>
 </code></pre></div><p>This part sets up Python, using another premade Action, and sets the default Python version. Next, we set up the pip cache so we won&rsquo;t have to download the dependencies each time. More information about this part can be found <a href="https://docs.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions">on the GitHub site</a>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Install Python dependencies</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Install Python dependencies</span>
     <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
 </span><span style="color:#e6db74">    </span>    <span style="color:#ae81ff">python -m pip install -r requirements.txt</span>
 </code></pre></div><p>Here, we run one command to install the requirements from the <code>requirements.txt</code> file - here, just feedparser.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Update README</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Update README</span>
     <span style="color:#f92672">env</span>:
         <span style="color:#f92672">GITHUB_TOKEN</span>: <span style="color:#ae81ff">${{ secrets.GITHUB_TOKEN }}</span>
     <span style="color:#f92672">run</span>: |-<span style="color:#e6db74">
 </span><span style="color:#e6db74">    python get_post.py
 </span><span style="color:#e6db74">    cat README.md</span>    
 </code></pre></div><p>With this, we get the GitHub secret that auto-generated when using GitHub Actions, and then run the script we created earlier. Then, we <code>cat</code> this to README.md. Now, in our Action, our README will have updated (or not - more on that with the next block.)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Commit and push if changed</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Commit and push if changed</span>
     <span style="color:#f92672">run</span>: |-<span style="color:#e6db74">
 </span><span style="color:#e6db74">        git diff
 </span><span style="color:#e6db74">        git config --global user.email &#34;yourskewbot@notarealdomain.com&#34;
