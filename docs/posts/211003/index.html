@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More Linux Tweaks</title>
+    <meta name="description" content="On troubleshooting many Linux-related issues.">
+    <meta property="og:title" content="More Linux Tweaks">
+    <meta property="og:description" content="On troubleshooting many Linux-related issues.">
+    <meta property="og:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <meta property="og:url" content="https://kewbi.sh/blog/posts/211003/">
+    <meta property="twitter:title" content="More Linux Tweaks">
+    <meta property="twitter:description" content="On troubleshooting many Linux-related issues.">
+    <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
+    <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
+</head>
+
+<body class="cont page">
+    <section class="b-main-2">
+        <p><a href="../">&lt; More Posts</a></p>
+        <h1 class="b-subtitle">More Linux Tweaks</h1>
+        <p>Published 03 October 2021 at <a href="https://kewbi.sh/blog/posts/211003/">Yours, Kewbish</a>. 2621 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
+        
+        <hr style="margin-bottom:-1%;">
+        <div class="b-writing">
+            <h2 id="introduction">Introduction</h2>
+<p>It&rsquo;s been a while since I had the time to write anything for YK - I&rsquo;ve been getting settled into the quintessential university freshman experience at UBC, and loving it so far. Every upper-year I meet keeps telling me about the rose-coloured glasses apparently all freshmen have, with something along the lines of &lsquo;well, I hope you can keep that mindset up!&rsquo;. It&rsquo;s not particularly encouraging, but to be fair, I&rsquo;ve only been here a month, and haven&rsquo;t had any major quizzes or midterms yet, so maybe I do still have my pink spectacles quite firmly on. More on this some other time: this isn&rsquo;t some university reflection, after all, it&rsquo;s a tech blog!</p>
+<p>So, in other news, I got a new laptop, and have been juggling close readings and annotations with setting it up. I&rsquo;ve finally got everything installed and configured to my liking, however, so I thought I&rsquo;d write a bit about the process of getting everything together, similar to my <a href="https://kewbi.sh/blog/posts/210711/">previous one about my monitor and Bluetooth setup</a>. While I was able to follow my past notes for display and Bluetooth configuration, I encountered my fair share of struggles along the way. It&rsquo;s just mostly stuff I&rsquo;d set up on my old laptop but without writing notes about how I got myself through the messes in the first place, I had no idea where to go this time round. However, I managed to work things out, very slowly and steadily, and I&rsquo;m now writing this very post with my new setup.</p>
+<p>Some specs:</p>
+<ul>
+<li>It&rsquo;s the Lenovo Yoga 7 14ITL5 - got it off Best Buy for a half decent deal.</li>
+<li>It&rsquo;s got a 11th Gen Intel i7-1165G7, with 8 cores, Intel Iris Xe graphics, a very nice 16GB of RAM that I didn&rsquo;t even have to dismantle the chassis for, and 1TB of NVMe SSD. It&rsquo;s currently running 5.13.19-2MANJARO, and everything (minus fingerprint reader and sound) works really well.</li>
+<li>One of the immediate improvements over my old laptop (well, besides weight) is how quickly it boots and runs things. My old laptop had to go for at least half a minute to boot up, which was certainly an annoyance when it&rsquo;d suddenly crash in the middle of Zoom class. Granted, it had to go through Grub and a shabbily patched together Windows dual boot configuration, but this laptop is so much quicker. It boots from completely shut down in what I can perceive to be a second or two, which is crazy fast compared to my past habits of staring blankly at a HP loading circle for ages.</li>
+<li>Speaking of weight, the laptop&rsquo;s quite thin and light, something I appreciate when I have other binders and things to shove in my bag. It&rsquo;s about half a kg lighter than my old laptop, which isn&rsquo;t entirely much, but it makes a nice difference that I value.</li>
+<li>The battery life&rsquo;s also pretty amazing - the first time I took this laptop to school, I hadn&rsquo;t yet ordered a second charger cable, and my packaged one was still at home. It managed to churn through three hours of Zoom meetings, and three hours of a physics lab, all while still having a good 30% left. It&rsquo;s amazing what this 71Wh battery can do - it can definitely hold tonnes more than my old 38Wh.</li>
+<li>Something else I really like about the laptop so far is that I have one (1!) cable to plug in when I get home. I have my power, monitor, printer, webcam and various other little cables all hooked into a singular USB-C hub, which then plugs right into my laptop. I used to have to plug each individual cable in, and because each port was on different sides of my old HP, it was a bit of a mess, visually. This does present the problem of always having to be charging the laptop if I want to use my monitor, but it&rsquo;s somehow configured itself to only charge when not full, and then run off what I assume is AC after that.</li>
+<li>And it looks amazingly cute - I&rsquo;m not usually one to fuss over the colour of laptops, but it&rsquo;s just such a <em>nice</em> slate grey.</li>
+</ul>
+<p>Overall, definitely a big improvement over my old HP, and very grateful I&rsquo;m able to have a better machine.</p>
+<p>Similarly to my other Linux-setup-tweaks post, this article will cover a bunch of my troubleshooting, thought processes, and eventual solutions to my various issues: getting my printer drivers working, fixing screen tearing, duplicating Chrome history and passwords, tweaking fonts, and more. This is mostly to keep a record for myself of all the little problems that I&rsquo;ve had, just in case I have to reinstall or do this all over again for some other machine. I don&rsquo;t think this post&rsquo;ll be of much use if you don&rsquo;t have the exact same model of laptop, but maybe some of the more general tweaks, like for fonts and such, will help someone out there. Throughout this guide, I assume you&rsquo;ll be running Manjaro or some Arch relative, and have a basic knowledge of how to run commands and install packages - I&rsquo;ll only be going into what I did to fix my issues, so you&rsquo;ll have to look at more general advice elsewhere.</p>
+<h2 id="cups-and-printing">CUPS and Printing</h2>
+<p>I&rsquo;m going go start with CUPS troubleshooting first, because I went through a whole struggle to set up my printer. I specifically have the Brother-MFC7340 laser printer, which is a rather old black and white model that comes without any of the fancy modern QoL features like double sided printing or wireless connections. It even has a fax - that&rsquo;s how old it is. But Brother does a pretty decent job of keeping their drivers backward compatible and up to date, even for older models like mine, so I thought I&rsquo;d have a pretty easy time at it here. I installed <a href="https://github.com/OpenPrinting/cups">cups</a>, and trawled the internet a bit for the Brother driver I thought would work, which ended up being <a href="https://aur.archlinux.org/packages/brother-mfc7340/">this one (brother-mfc7340)</a> on the AUR. Spoiler alert: it doesn&rsquo;t work.</p>
+<p>I tried uninstalling sane, disabling usblp, and manually editing PPD files, all things listed in the <a href="https://wiki.archlinux.org/title/CUPS">Arch Wiki</a> troubleshooting page. Long story short - the driver doesn&rsquo;t work, wasn&rsquo;t the one I thought I had installed on my old laptop, and you shouldn&rsquo;t bother trying any of the above. Instead, install <a href="https://github.com/pdewacht/brlaser">brlaser</a> from the AUR, and set up your printers to use that driver instead. I&rsquo;m not going to go into the specifics of how to set printers up, but know that you&rsquo;ll have to select something like &lsquo;Brother MFC7360N&rsquo; instead of MFC7340. It&rsquo;s not an exact model match, but it works perfectly fine for me, so I&rsquo;m not going to ask questions.</p>
+<p>An aside: to configure scanning properly, you&rsquo;ll have to install <a href="https://aur.archlinux.org/packages/brscan3/">brscan3</a>, or install brother-mfc7340 as above. Then, install <code>simple-scan</code> or another scanning tool, which should automatically register your printer / scanner combo.</p>
+<h2 id="screen-tearing">Screen Tearing</h2>
+<p>When madly scrolling through tonnes of forum pages in an attempt to resolve the above CUPS issue, I also encountered a bunch of screen tearing issues. I&rsquo;m running Chrome<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, and found that without hardware acceleration on (which for some reason, didn&rsquo;t work properly in Chromium) and another fix I&rsquo;ll detail below, I had pretty significant screen tearing while scrolling. It wasn&rsquo;t anything too severe, but annoying to notice when trying to read pages and scroll nicely.</p>
+<p>What got my screen to stop tearing was, for one, enabling hardware acceleration in Chrome settings (see chrome://settings), and messing around with Intel graphics files.
+I created <code>/usr/share/X11/xorg.conf.d/20-intel.conf</code>, and put the following in it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Section &#34;Device&#34;
+  Identifier  &#34;Intel Graphics&#34;
+  Driver      &#34;intel&#34;
+  Option      &#34;AccelMethod&#34;  &#34;sna&#34;
+  Option      &#34;TearFree&#34;     &#34;true&#34;
+EndSection
+</code></pre></div><p>When I rebooted, the boot was getting stuck at &lsquo;/dev/[something] clean, &hellip; files, &hellip; blocks&rsquo;, so I thought I&rsquo;d have to start over and reinstall my system again. But don&rsquo;t panic - hit <!-- raw HTML omitted -->CTRL<!-- raw HTML omitted -->-<!-- raw HTML omitted -->ALT<!-- raw HTML omitted -->-<!-- raw HTML omitted -->F2<!-- raw HTML omitted --> to get into a recovery terminal. From here, you can either <code>pacman -Syu</code> and see if that fixes it; or, as that didn&rsquo;t work in my case, run <code>sudo mhwd -f -i pci video-linux</code>, which did some scary things for a while and then popped me back into my login screen. The above command is the equivalent of <code>sudo mhwd -r pci video-linux</code> followed by <code>sudo mhwd -i pci video-linux</code>, if that helps.</p>
+<h2 id="retracing-history">Retracing History</h2>
+<p>It turns out Chrome conveniently stores all of its data in <code>~/.config/google-chrome/</code>. Most of what you&rsquo;ll want will be in the <code>~/.config/google-chrome/Default/</code> directory, which is home to the History, Cookies, Extension Cookies, and Shortcuts databases. I&rsquo;m going to be honest - I don&rsquo;t entirely know which have carryover effects and which don&rsquo;t, but I essentially copy-pasted all the databases I could find to my new laptop. This let me retain my history, but I still had to log into each website and refresh cookies where necessary on my own. Note that the Extensions directories don&rsquo;t appear to do anything - I thought that this would copy over all of my extensions, but alas, I had to do that manually as well, which is surprising, since the directory contains what appears to be the raw extension files.</p>
+<p>Speaking of logins, I&rsquo;ve saved most of my passwords into the Chrome password manager (not very secure, I know), and wanted to transfer those over as well<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>. On my origin / old laptop, I went into <code>chrome://settings/passwords</code>, and clicked the hamburger menu near Saved Passwords. This let me export all my passwords into a very dangerous, unencrypted CSV. Try not to let anyone get access to that. On my new installation, I went to <code>chrome://flags</code>, and searched for and enabled Password Import. Navigate back to the <code>chrome://settings/passwords</code> page, and it&rsquo;ll let you import a whole bunch of passwords in the same menu.</p>
+<p>Also, a cute tip if you, like me, enable login to Gmail without login to Chrome but still want a custom profile pic in Chrome: click on your profile, click edit, and select some other profile pic. This&rsquo;ll spit out the photo in <code>~/.config/google-chrome/Avatars/</code>. Take whatever photo you want to use as a profile pic, rename it to whatever&rsquo;s in the Avatars directory, and replace the Chrome avatar with your custom pic.</p>
+<h2 id="font-tweaking">Font Tweaking</h2>
+<p>I had two major font tweaks to do - one with my preferred emoji font, and one with my type hinting in LibreOffice.</p>
+<p>First, the emojis. I prefer to use <a href="https://twemoji.twitter.com/">Twemoji</a>, which is Twitter&rsquo;s custom emoji font - also the same one used in Discord. I like how round and flat and cohesive it is, but maybe that&rsquo;s just an acquired taste from spending much too long on Discord. Regardless, to make Twemoji work at a baseline level, you&rsquo;ll have to install <a href="https://aur.archlinux.org/packages/ttf-twemoji/">ttf-twemoji</a>. There&rsquo;s another package, <a href="https://aur.archlinux.org/packages/ttf-twemoji-color">ttf-twemoji-color</a>, that provides the colour version of the font, as well as the B&amp;W files. However, Chrome apparently doesn&rsquo;t have full support for SVG colour by default, and the colour version wasn&rsquo;t appearing in other apps like my terminal. So, I had to do some finagling, and install <a href="https://archlinux.org/packages/ttf-bitstream-vera">ttf-bitstream-vera</a>, <em>then</em> ttf-twemoji-color. Finally, I had to create <code>~/.config/fontconfig/fonts.conf</code>, and put the following inside:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+&lt;!DOCTYPE fontconfig SYSTEM &#34;fonts.dtd&#34;&gt;
+
+&lt;fontconfig&gt;
+    &lt;match&gt;
+        &lt;test name=&#34;family&#34;&gt;&lt;string&gt;sans-serif&lt;/string&gt;&lt;/test&gt;
+        &lt;edit name=&#34;family&#34; mode=&#34;prepend&#34; binding=&#34;strong&#34;&gt;
+            &lt;string&gt;Twemoji&lt;/string&gt;
+        &lt;/edit&gt;
+    &lt;/match&gt;
+    &lt;match&gt;
+        &lt;test name=&#34;family&#34;&gt;&lt;string&gt;serif&lt;/string&gt;&lt;/test&gt;
+        &lt;edit name=&#34;family&#34; mode=&#34;prepend&#34; binding=&#34;strong&#34;&gt;
+            &lt;string&gt;Twemoji&lt;/string&gt;
+        &lt;/edit&gt;
+    &lt;/match&gt;
+    &lt;match&gt;
+        &lt;test name=&#34;family&#34;&gt;&lt;string&gt;Apple Color Emoji&lt;/string&gt;&lt;/test&gt;
+        &lt;edit name=&#34;family&#34; mode=&#34;prepend&#34; binding=&#34;strong&#34;&gt;
+            &lt;string&gt;Twemoji&lt;/string&gt;
+        &lt;/edit&gt;
+    &lt;/match&gt;
+&lt;/fontconfig&gt;
+</code></pre></div><p>Run <code>fc-cache -f -v</code> to clear the font cache, log out and back in for good measure, and you should be graced with some very quirky, iconic emojis.</p>
+<p>I also had a small problem with <a href="https://aur.archlinux.org/packages/ttf-ms-fonts">ttf-ms-fonts</a>, which is a package that includes all the default Windows fonts, like Times New Roman. I&rsquo;m required to use it for school, so I&rsquo;d have to be staring at it quite regularly. A pity then, that LibreOffice wasn&rsquo;t displaying it properly - it was a bit too short and compressed, and there were some spacing issues that came up occasionally. So, I had to further edit my <code>fonts.conf</code>, and add some bitmap edits:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">&lt;match target=&#34;font&#34;&gt;
+	&lt;edit name=&#34;embeddedbitmap&#34; mode=&#34;assign&#34;&gt;
+		&lt;bool&gt;false&lt;/bool&gt;
+	&lt;/edit&gt;
+&lt;/match&gt;
+</code></pre></div><p>Put this inside the <code>&lt;fontconfig&gt;</code> tag, and run <code>fc-cache -f -v</code> again.</p>
+<p>The final <code>~/.config/fontconfig/fonts.conf</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+&lt;!DOCTYPE fontconfig SYSTEM &#34;fonts.dtd&#34;&gt;
+
+&lt;fontconfig&gt;
+    &lt;match&gt;
+        &lt;test name=&#34;family&#34;&gt;&lt;string&gt;sans-serif&lt;/string&gt;&lt;/test&gt;
+        &lt;edit name=&#34;family&#34; mode=&#34;prepend&#34; binding=&#34;strong&#34;&gt;
+            &lt;string&gt;Twemoji&lt;/string&gt;
+        &lt;/edit&gt;
+    &lt;/match&gt;
+    &lt;match&gt;
+        &lt;test name=&#34;family&#34;&gt;&lt;string&gt;serif&lt;/string&gt;&lt;/test&gt;
+        &lt;edit name=&#34;family&#34; mode=&#34;prepend&#34; binding=&#34;strong&#34;&gt;
+            &lt;string&gt;Twemoji&lt;/string&gt;
+        &lt;/edit&gt;
+    &lt;/match&gt;
+    &lt;match&gt;
+        &lt;test name=&#34;family&#34;&gt;&lt;string&gt;Apple Color Emoji&lt;/string&gt;&lt;/test&gt;
+        &lt;edit name=&#34;family&#34; mode=&#34;prepend&#34; binding=&#34;strong&#34;&gt;
+            &lt;string&gt;Twemoji&lt;/string&gt;
+        &lt;/edit&gt;
+    &lt;/match&gt;
+    &lt;match target=&#34;font&#34;&gt;
+        &lt;edit name=&#34;embeddedbitmap&#34; mode=&#34;assign&#34;&gt;
+            &lt;bool&gt;false&lt;/bool&gt;
+        &lt;/edit&gt;
+    &lt;/match&gt;
+&lt;/fontconfig&gt;
+</code></pre></div><h2 id="and-finally-sync">And, Finally, Sync</h2>
+<p>No actual problems here - I&rsquo;d just like to keep a note of the rsync command I use to back things up for further reference:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">rsync -r --info=progress2 --exclude=.git --exclude=node_modules --exclude=archive --exclude=&#34;*.mp4&#34; /home/kewbish/Downloads/dev/* /media/kewbish/Seagate\ Basic/dev/
+</code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p>Every time I set up a laptop, or break something and need to fix it, I&rsquo;ve realized that even though there&rsquo;ll inevitably be trials and tribulations, I end up learning a lot - not just about how to fix said bugs, but in general how computers work. The first time I installed Linux, I had to learn about dual booting, what partitions even were, and how to make partition schemes, and port all my hacky Windows experience over into a whole new world of Unix. When I was trying to troubleshoot my monitor last time, I learned a whole lot about displays and profiles, and likewise when I sorted out my Bluetooth connections. These processes of constantly breaking, then fixing and learning, are what&rsquo;s kind of fun about Linux. Sure, you won&rsquo;t ever have to run into major issues on Windows (as long as you don&rsquo;t do anything too crazy), but it ends up abstracting all the interesting system files and configurations away from the user. Sometimes diving into the <code>/etc/</code> or <code>/usr/</code> directories can lead to a whole lot of research and fun findings - that&rsquo;s why I still bodge my way through Linux, even though I&rsquo;ve been &lsquo;haha linux kid&rsquo;ed so many times.</p>
+<p>There&rsquo;s still some things that refuse to work - the fingerprint scanner, and the speakers, for some reason, are either not supported on Linux, or require some <a href="https://bugzilla.kernel.org/show_bug.cgi?id=208555">complicated kernel patches</a> that for the sake of my sanity I don&rsquo;t think I&rsquo;ll attempt. As well, now comes the process of wiping my old HP and figuring out how to reinstall Windows, and then handing it off to a family member. I also need to sort out some small little config problems here and there, but I don&rsquo;t run into them enough to bother. For the most part, what I need to work works fine: I wasn&rsquo;t planning on using the scanner, I have headphones or earbuds for when I need audio, and my programming environment works pretty much identically to my HP anyways. It&rsquo;s good that I managed to set everything up so quickly - I don&rsquo;t have to tote around such a bulky laptop anymore, and the extra battery life&rsquo;s definitely a boon for uni.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>The Googled one, as I found Chromium was a bit buggy in some respects, such as not letting me sign into my Gmail because the &lsquo;browser was insecure&rsquo;, and also not letting me save my passwords properly. I haven&rsquo;t found any performance differences, and to be honest, I&rsquo;m okay with not crusading the whole privacy narrative if I&rsquo;ll be able to check my bloody email.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>I never got around to enabling and really using Google Account sync, which apparently takes all your locally saved passwords and associates them with your Google Account instead. This has the added benefit of syncing extensions as well - something that would have been nice to maintain my preferences from. Having sync enabled makes switching installations and machines a lot easier, but I don&rsquo;t know if I want to bother.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+            <p>- Yours, Kewbish</p>
+        </div>
+        <br><p><a href="../">&lt; More Posts</a></p>
+        <br><br>
+    </section>
+    
+</body>
+
+</html>

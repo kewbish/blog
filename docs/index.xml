@@ -5,10 +5,133 @@
     <link>https://kewbi.sh/blog/</link>
     <description>Latest Yours, Kewbish posts</description>
     <managingEditor>(Emilie Ma ◦ Kewbish)</managingEditor>
-    <lastBuildDate>Sun, 05 Sep 2021 14:26:50 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 03 Oct 2021 17:06:37 -0700</lastBuildDate>
     
 	<atom:link href="https://kewbi.sh/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>More Linux Tweaks</title>
+      <link>https://kewbi.sh/blog/posts/211003/</link>
+      <pubDate>03 Oct 2021</pubDate>
+      <author>Emilie Ma ◦ Kewbish</author>
+      <description>On troubleshooting many Linux-related issues.</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>It&rsquo;s been a while since I had the time to write anything for YK - I&rsquo;ve been getting settled into the quintessential university freshman experience at UBC, and loving it so far. Every upper-year I meet keeps telling me about the rose-coloured glasses apparently all freshmen have, with something along the lines of &lsquo;well, I hope you can keep that mindset up!&rsquo;. It&rsquo;s not particularly encouraging, but to be fair, I&rsquo;ve only been here a month, and haven&rsquo;t had any major quizzes or midterms yet, so maybe I do still have my pink spectacles quite firmly on. More on this some other time: this isn&rsquo;t some university reflection, after all, it&rsquo;s a tech blog!</p>
+<p>So, in other news, I got a new laptop, and have been juggling close readings and annotations with setting it up. I&rsquo;ve finally got everything installed and configured to my liking, however, so I thought I&rsquo;d write a bit about the process of getting everything together, similar to my <a href="https://kewbi.sh/blog/posts/210711/">previous one about my monitor and Bluetooth setup</a>. While I was able to follow my past notes for display and Bluetooth configuration, I encountered my fair share of struggles along the way. It&rsquo;s just mostly stuff I&rsquo;d set up on my old laptop but without writing notes about how I got myself through the messes in the first place, I had no idea where to go this time round. However, I managed to work things out, very slowly and steadily, and I&rsquo;m now writing this very post with my new setup.</p>
+<p>Some specs:</p>
+<ul>
+<li>It&rsquo;s the Lenovo Yoga 7 14ITL5 - got it off Best Buy for a half decent deal.</li>
+<li>It&rsquo;s got a 11th Gen Intel i7-1165G7, with 8 cores, Intel Iris Xe graphics, a very nice 16GB of RAM that I didn&rsquo;t even have to dismantle the chassis for, and 1TB of NVMe SSD. It&rsquo;s currently running 5.13.19-2MANJARO, and everything (minus fingerprint reader and sound) works really well.</li>
+<li>One of the immediate improvements over my old laptop (well, besides weight) is how quickly it boots and runs things. My old laptop had to go for at least half a minute to boot up, which was certainly an annoyance when it&rsquo;d suddenly crash in the middle of Zoom class. Granted, it had to go through Grub and a shabbily patched together Windows dual boot configuration, but this laptop is so much quicker. It boots from completely shut down in what I can perceive to be a second or two, which is crazy fast compared to my past habits of staring blankly at a HP loading circle for ages.</li>
+<li>Speaking of weight, the laptop&rsquo;s quite thin and light, something I appreciate when I have other binders and things to shove in my bag. It&rsquo;s about half a kg lighter than my old laptop, which isn&rsquo;t entirely much, but it makes a nice difference that I value.</li>
+<li>The battery life&rsquo;s also pretty amazing - the first time I took this laptop to school, I hadn&rsquo;t yet ordered a second charger cable, and my packaged one was still at home. It managed to churn through three hours of Zoom meetings, and three hours of a physics lab, all while still having a good 30% left. It&rsquo;s amazing what this 71Wh battery can do - it can definitely hold tonnes more than my old 38Wh.</li>
+<li>Something else I really like about the laptop so far is that I have one (1!) cable to plug in when I get home. I have my power, monitor, printer, webcam and various other little cables all hooked into a singular USB-C hub, which then plugs right into my laptop. I used to have to plug each individual cable in, and because each port was on different sides of my old HP, it was a bit of a mess, visually. This does present the problem of always having to be charging the laptop if I want to use my monitor, but it&rsquo;s somehow configured itself to only charge when not full, and then run off what I assume is AC after that.</li>
+<li>And it looks amazingly cute - I&rsquo;m not usually one to fuss over the colour of laptops, but it&rsquo;s just such a <em>nice</em> slate grey.</li>
+</ul>
+<p>Overall, definitely a big improvement over my old HP, and very grateful I&rsquo;m able to have a better machine.</p>
+<p>Similarly to my other Linux-setup-tweaks post, this article will cover a bunch of my troubleshooting, thought processes, and eventual solutions to my various issues: getting my printer drivers working, fixing screen tearing, duplicating Chrome history and passwords, tweaking fonts, and more. This is mostly to keep a record for myself of all the little problems that I&rsquo;ve had, just in case I have to reinstall or do this all over again for some other machine. I don&rsquo;t think this post&rsquo;ll be of much use if you don&rsquo;t have the exact same model of laptop, but maybe some of the more general tweaks, like for fonts and such, will help someone out there. Throughout this guide, I assume you&rsquo;ll be running Manjaro or some Arch relative, and have a basic knowledge of how to run commands and install packages - I&rsquo;ll only be going into what I did to fix my issues, so you&rsquo;ll have to look at more general advice elsewhere.</p>
+<h2 id="cups-and-printing">CUPS and Printing</h2>
+<p>I&rsquo;m going go start with CUPS troubleshooting first, because I went through a whole struggle to set up my printer. I specifically have the Brother-MFC7340 laser printer, which is a rather old black and white model that comes without any of the fancy modern QoL features like double sided printing or wireless connections. It even has a fax - that&rsquo;s how old it is. But Brother does a pretty decent job of keeping their drivers backward compatible and up to date, even for older models like mine, so I thought I&rsquo;d have a pretty easy time at it here. I installed <a href="https://github.com/OpenPrinting/cups">cups</a>, and trawled the internet a bit for the Brother driver I thought would work, which ended up being <a href="https://aur.archlinux.org/packages/brother-mfc7340/">this one (brother-mfc7340)</a> on the AUR. Spoiler alert: it doesn&rsquo;t work.</p>
+<p>I tried uninstalling sane, disabling usblp, and manually editing PPD files, all things listed in the <a href="https://wiki.archlinux.org/title/CUPS">Arch Wiki</a> troubleshooting page. Long story short - the driver doesn&rsquo;t work, wasn&rsquo;t the one I thought I had installed on my old laptop, and you shouldn&rsquo;t bother trying any of the above. Instead, install <a href="https://github.com/pdewacht/brlaser">brlaser</a> from the AUR, and set up your printers to use that driver instead. I&rsquo;m not going to go into the specifics of how to set printers up, but know that you&rsquo;ll have to select something like &lsquo;Brother MFC7360N&rsquo; instead of MFC7340. It&rsquo;s not an exact model match, but it works perfectly fine for me, so I&rsquo;m not going to ask questions.</p>
+<p>An aside: to configure scanning properly, you&rsquo;ll have to install <a href="https://aur.archlinux.org/packages/brscan3/">brscan3</a>, or install brother-mfc7340 as above. Then, install <code>simple-scan</code> or another scanning tool, which should automatically register your printer / scanner combo.</p>
+<h2 id="screen-tearing">Screen Tearing</h2>
+<p>When madly scrolling through tonnes of forum pages in an attempt to resolve the above CUPS issue, I also encountered a bunch of screen tearing issues. I&rsquo;m running Chrome<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, and found that without hardware acceleration on (which for some reason, didn&rsquo;t work properly in Chromium) and another fix I&rsquo;ll detail below, I had pretty significant screen tearing while scrolling. It wasn&rsquo;t anything too severe, but annoying to notice when trying to read pages and scroll nicely.</p>
+<p>What got my screen to stop tearing was, for one, enabling hardware acceleration in Chrome settings (see chrome://settings), and messing around with Intel graphics files.
+I created <code>/usr/share/X11/xorg.conf.d/20-intel.conf</code>, and put the following in it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Section &#34;Device&#34;
+  Identifier  &#34;Intel Graphics&#34;
+  Driver      &#34;intel&#34;
+  Option      &#34;AccelMethod&#34;  &#34;sna&#34;
+  Option      &#34;TearFree&#34;     &#34;true&#34;
+EndSection
+</code></pre></div><p>When I rebooted, the boot was getting stuck at &lsquo;/dev/[something] clean, &hellip; files, &hellip; blocks&rsquo;, so I thought I&rsquo;d have to start over and reinstall my system again. But don&rsquo;t panic - hit <!-- raw HTML omitted -->CTRL<!-- raw HTML omitted -->-<!-- raw HTML omitted -->ALT<!-- raw HTML omitted -->-<!-- raw HTML omitted -->F2<!-- raw HTML omitted --> to get into a recovery terminal. From here, you can either <code>pacman -Syu</code> and see if that fixes it; or, as that didn&rsquo;t work in my case, run <code>sudo mhwd -f -i pci video-linux</code>, which did some scary things for a while and then popped me back into my login screen. The above command is the equivalent of <code>sudo mhwd -r pci video-linux</code> followed by <code>sudo mhwd -i pci video-linux</code>, if that helps.</p>
+<h2 id="retracing-history">Retracing History</h2>
+<p>It turns out Chrome conveniently stores all of its data in <code>~/.config/google-chrome/</code>. Most of what you&rsquo;ll want will be in the <code>~/.config/google-chrome/Default/</code> directory, which is home to the History, Cookies, Extension Cookies, and Shortcuts databases. I&rsquo;m going to be honest - I don&rsquo;t entirely know which have carryover effects and which don&rsquo;t, but I essentially copy-pasted all the databases I could find to my new laptop. This let me retain my history, but I still had to log into each website and refresh cookies where necessary on my own. Note that the Extensions directories don&rsquo;t appear to do anything - I thought that this would copy over all of my extensions, but alas, I had to do that manually as well, which is surprising, since the directory contains what appears to be the raw extension files.</p>
+<p>Speaking of logins, I&rsquo;ve saved most of my passwords into the Chrome password manager (not very secure, I know), and wanted to transfer those over as well<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>. On my origin / old laptop, I went into <code>chrome://settings/passwords</code>, and clicked the hamburger menu near Saved Passwords. This let me export all my passwords into a very dangerous, unencrypted CSV. Try not to let anyone get access to that. On my new installation, I went to <code>chrome://flags</code>, and searched for and enabled Password Import. Navigate back to the <code>chrome://settings/passwords</code> page, and it&rsquo;ll let you import a whole bunch of passwords in the same menu.</p>
+<p>Also, a cute tip if you, like me, enable login to Gmail without login to Chrome but still want a custom profile pic in Chrome: click on your profile, click edit, and select some other profile pic. This&rsquo;ll spit out the photo in <code>~/.config/google-chrome/Avatars/</code>. Take whatever photo you want to use as a profile pic, rename it to whatever&rsquo;s in the Avatars directory, and replace the Chrome avatar with your custom pic.</p>
+<h2 id="font-tweaking">Font Tweaking</h2>
+<p>I had two major font tweaks to do - one with my preferred emoji font, and one with my type hinting in LibreOffice.</p>
+<p>First, the emojis. I prefer to use <a href="https://twemoji.twitter.com/">Twemoji</a>, which is Twitter&rsquo;s custom emoji font - also the same one used in Discord. I like how round and flat and cohesive it is, but maybe that&rsquo;s just an acquired taste from spending much too long on Discord. Regardless, to make Twemoji work at a baseline level, you&rsquo;ll have to install <a href="https://aur.archlinux.org/packages/ttf-twemoji/">ttf-twemoji</a>. There&rsquo;s another package, <a href="https://aur.archlinux.org/packages/ttf-twemoji-color">ttf-twemoji-color</a>, that provides the colour version of the font, as well as the B&amp;W files. However, Chrome apparently doesn&rsquo;t have full support for SVG colour by default, and the colour version wasn&rsquo;t appearing in other apps like my terminal. So, I had to do some finagling, and install <a href="https://archlinux.org/packages/ttf-bitstream-vera">ttf-bitstream-vera</a>, <em>then</em> ttf-twemoji-color. Finally, I had to create <code>~/.config/fontconfig/fonts.conf</code>, and put the following inside:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+&lt;!DOCTYPE fontconfig SYSTEM &#34;fonts.dtd&#34;&gt;
+
+&lt;fontconfig&gt;
+    &lt;match&gt;
+        &lt;test name=&#34;family&#34;&gt;&lt;string&gt;sans-serif&lt;/string&gt;&lt;/test&gt;
+        &lt;edit name=&#34;family&#34; mode=&#34;prepend&#34; binding=&#34;strong&#34;&gt;
+            &lt;string&gt;Twemoji&lt;/string&gt;
+        &lt;/edit&gt;
+    &lt;/match&gt;
+    &lt;match&gt;
+        &lt;test name=&#34;family&#34;&gt;&lt;string&gt;serif&lt;/string&gt;&lt;/test&gt;
+        &lt;edit name=&#34;family&#34; mode=&#34;prepend&#34; binding=&#34;strong&#34;&gt;
+            &lt;string&gt;Twemoji&lt;/string&gt;
+        &lt;/edit&gt;
+    &lt;/match&gt;
+    &lt;match&gt;
+        &lt;test name=&#34;family&#34;&gt;&lt;string&gt;Apple Color Emoji&lt;/string&gt;&lt;/test&gt;
+        &lt;edit name=&#34;family&#34; mode=&#34;prepend&#34; binding=&#34;strong&#34;&gt;
+            &lt;string&gt;Twemoji&lt;/string&gt;
+        &lt;/edit&gt;
+    &lt;/match&gt;
+&lt;/fontconfig&gt;
+</code></pre></div><p>Run <code>fc-cache -f -v</code> to clear the font cache, log out and back in for good measure, and you should be graced with some very quirky, iconic emojis.</p>
+<p>I also had a small problem with <a href="https://aur.archlinux.org/packages/ttf-ms-fonts">ttf-ms-fonts</a>, which is a package that includes all the default Windows fonts, like Times New Roman. I&rsquo;m required to use it for school, so I&rsquo;d have to be staring at it quite regularly. A pity then, that LibreOffice wasn&rsquo;t displaying it properly - it was a bit too short and compressed, and there were some spacing issues that came up occasionally. So, I had to further edit my <code>fonts.conf</code>, and add some bitmap edits:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">&lt;match target=&#34;font&#34;&gt;
+	&lt;edit name=&#34;embeddedbitmap&#34; mode=&#34;assign&#34;&gt;
+		&lt;bool&gt;false&lt;/bool&gt;
+	&lt;/edit&gt;
+&lt;/match&gt;
+</code></pre></div><p>Put this inside the <code>&lt;fontconfig&gt;</code> tag, and run <code>fc-cache -f -v</code> again.</p>
+<p>The final <code>~/.config/fontconfig/fonts.conf</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+&lt;!DOCTYPE fontconfig SYSTEM &#34;fonts.dtd&#34;&gt;
+
+&lt;fontconfig&gt;
+    &lt;match&gt;
+        &lt;test name=&#34;family&#34;&gt;&lt;string&gt;sans-serif&lt;/string&gt;&lt;/test&gt;
+        &lt;edit name=&#34;family&#34; mode=&#34;prepend&#34; binding=&#34;strong&#34;&gt;
+            &lt;string&gt;Twemoji&lt;/string&gt;
+        &lt;/edit&gt;
+    &lt;/match&gt;
+    &lt;match&gt;
+        &lt;test name=&#34;family&#34;&gt;&lt;string&gt;serif&lt;/string&gt;&lt;/test&gt;
+        &lt;edit name=&#34;family&#34; mode=&#34;prepend&#34; binding=&#34;strong&#34;&gt;
+            &lt;string&gt;Twemoji&lt;/string&gt;
+        &lt;/edit&gt;
+    &lt;/match&gt;
+    &lt;match&gt;
+        &lt;test name=&#34;family&#34;&gt;&lt;string&gt;Apple Color Emoji&lt;/string&gt;&lt;/test&gt;
+        &lt;edit name=&#34;family&#34; mode=&#34;prepend&#34; binding=&#34;strong&#34;&gt;
+            &lt;string&gt;Twemoji&lt;/string&gt;
+        &lt;/edit&gt;
+    &lt;/match&gt;
+    &lt;match target=&#34;font&#34;&gt;
+        &lt;edit name=&#34;embeddedbitmap&#34; mode=&#34;assign&#34;&gt;
+            &lt;bool&gt;false&lt;/bool&gt;
+        &lt;/edit&gt;
+    &lt;/match&gt;
+&lt;/fontconfig&gt;
+</code></pre></div><h2 id="and-finally-sync">And, Finally, Sync</h2>
+<p>No actual problems here - I&rsquo;d just like to keep a note of the rsync command I use to back things up for further reference:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">rsync -r --info=progress2 --exclude=.git --exclude=node_modules --exclude=archive --exclude=&#34;*.mp4&#34; /home/kewbish/Downloads/dev/* /media/kewbish/Seagate\ Basic/dev/
+</code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p>Every time I set up a laptop, or break something and need to fix it, I&rsquo;ve realized that even though there&rsquo;ll inevitably be trials and tribulations, I end up learning a lot - not just about how to fix said bugs, but in general how computers work. The first time I installed Linux, I had to learn about dual booting, what partitions even were, and how to make partition schemes, and port all my hacky Windows experience over into a whole new world of Unix. When I was trying to troubleshoot my monitor last time, I learned a whole lot about displays and profiles, and likewise when I sorted out my Bluetooth connections. These processes of constantly breaking, then fixing and learning, are what&rsquo;s kind of fun about Linux. Sure, you won&rsquo;t ever have to run into major issues on Windows (as long as you don&rsquo;t do anything too crazy), but it ends up abstracting all the interesting system files and configurations away from the user. Sometimes diving into the <code>/etc/</code> or <code>/usr/</code> directories can lead to a whole lot of research and fun findings - that&rsquo;s why I still bodge my way through Linux, even though I&rsquo;ve been &lsquo;haha linux kid&rsquo;ed so many times.</p>
+<p>There&rsquo;s still some things that refuse to work - the fingerprint scanner, and the speakers, for some reason, are either not supported on Linux, or require some <a href="https://bugzilla.kernel.org/show_bug.cgi?id=208555">complicated kernel patches</a> that for the sake of my sanity I don&rsquo;t think I&rsquo;ll attempt. As well, now comes the process of wiping my old HP and figuring out how to reinstall Windows, and then handing it off to a family member. I also need to sort out some small little config problems here and there, but I don&rsquo;t run into them enough to bother. For the most part, what I need to work works fine: I wasn&rsquo;t planning on using the scanner, I have headphones or earbuds for when I need audio, and my programming environment works pretty much identically to my HP anyways. It&rsquo;s good that I managed to set everything up so quickly - I don&rsquo;t have to tote around such a bulky laptop anymore, and the extra battery life&rsquo;s definitely a boon for uni.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>The Googled one, as I found Chromium was a bit buggy in some respects, such as not letting me sign into my Gmail because the &lsquo;browser was insecure&rsquo;, and also not letting me save my passwords properly. I haven&rsquo;t found any performance differences, and to be honest, I&rsquo;m okay with not crusading the whole privacy narrative if I&rsquo;ll be able to check my bloody email.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>I never got around to enabling and really using Google Account sync, which apparently takes all your locally saved passwords and associates them with your Google Account instead. This has the added benefit of syncing extensions as well - something that would have been nice to maintain my preferences from. Having sync enabled makes switching installations and machines a lot easier, but I don&rsquo;t know if I want to bother.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+]]></content:encoded>
+    </item>
     
     <item>
       <title>The Process Matters</title>
@@ -114,21 +237,21 @@ A demo of my notetaking system, built around Vim, FZF (and FZF.vim), and rg, fol
 <h2 id="search">Search</h2>
 <p>Everything so far has been pretty vanilla - just modified Zettelkasten workflows. Well, here begins the spicy parts: I&rsquo;m first going to touch on notebook search, and how I&rsquo;ve integrated ripgrep and FZF.vim with shortcuts and aliases for editing, and then linking things together in a bit. I think search and linking are two of the big features why people generally turn to things like Notion, Obsidian, or Roam instead for their personal knowledge base, since it comes with those things built in, and you don&rsquo;t have to spend hours toying with Vim configs - but that&rsquo;s what makes me happy.</p>
 <p>There are a couple different things I search in my workflow: files to open, files containing specific notes, or searching through my links. The first one, files to open, is done through Bash instead of within Vim. I alias <code>evb</code> to<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>:</p>
-<pre><code>cd /home/kewbish/EVB/;vim -o &quot;$(rg --files $evb | fzf)&quot;; ctags -R .
+<pre tabindex="0"><code>cd /home/kewbish/EVB/;vim -o &quot;$(rg --files $evb | fzf)&quot;; ctags -R .
 </code></pre><p>Ignore the <code>ctags</code>, but for now, but what this does is change directory into my notebook, look for all files, and open the FZF fuzzy searching window. I usually know what file I&rsquo;m going to work on when I&rsquo;m going to take notes - like, for example, my course notes or lecture notes, so I can just open them with this.</p>
 <p>The second mini workflow is integrated within Vim, and is a remap of a FZF command. I use</p>
-<pre><code>command! -bang -nargs=* Sevb 
+<pre tabindex="0"><code>command! -bang -nargs=* Sevb 
   \ call fzf#vim#grep(&quot;rg --column --line-number --no-heading --color=always --smart-case &quot;.shellescape(&lt;q-args&gt;), 1, {'dir': '/home/kewbish/EVB/'}, &lt;bang&gt;0)
 </code></pre><p>this big blob of Vimscript to run ripgrep in my notebook folder. It looks a lot more complicated than it is, but I need to use the custom FZF.vim call because I need to a) search within file contents, as well as b) search all files within my notebook. I&rsquo;ve remapped this to <code>nnoremap &lt;leader&gt;se :Sevb&lt;CR&gt;</code>, so a quick <code>\se</code> gets me what I&rsquo;m looking for.</p>
 <h2 id="linking">Linking</h2>
 <p>The third searching command involves tags, which was what the earlier <code>ctags -R .</code> was for in my bash alias. Inspired by <a href="https://www.edwinwenink.xyz/posts/48-vim_fast_creating_and_linking_notes/">Edwin Wenink&rsquo;s plaintext Zettelkasten</a>, I use these tags instead to link between notes. I denote a link with <code>(#: link contents here)</code>, mostly because I&rsquo;d never type <code>(#:)</code> in normal notetaking. It&rsquo;s a bit clunky, but it also stands out visually, so I&rsquo;ve stuck with it. I&rsquo;ve defined this as a custom tag pattern in my <code>~/.ctags.d/</code> folder</p>
-<pre><code>--langdef=markdowntags
+<pre tabindex="0"><code>--langdef=markdowntags
 --languages=markdowntags
 --langmap=markdowntags:.md
 --kinddef-markdowntags=l,link,links
 --mline-regex-markdowntags=/(^|[[:space:]])\(\#: ([^\)]*)/\2/l/{mgroup=1}
 </code></pre><p>Every time I open my notebook with <code>evb</code>, the tags are generated, and I can then use the FZF.vim <code>:Tags</code> mapping, which I have as \st, to search through my links. While on a link, I can also use this mapping:</p>
-<pre><code>nnoremap &lt;leader&gt;ln va)y:exe &quot;:Sevb &quot; . substitute(substitute(getreg('&quot;'), &quot;\(#:&quot;, &quot;&quot;, &quot;/g&quot;), &quot;\)&quot;, &quot;&quot;, &quot;/g&quot;)&lt;CR&gt;
+<pre tabindex="0"><code>nnoremap &lt;leader&gt;ln va)y:exe &quot;:Sevb &quot; . substitute(substitute(getreg('&quot;'), &quot;\(#:&quot;, &quot;&quot;, &quot;/g&quot;), &quot;\)&quot;, &quot;&quot;, &quot;/g&quot;)&lt;CR&gt;
 </code></pre><p>to search through my tags, and insert it somewhere. The first block here yanks my link to a register so I can paste it, then searches my notebook for similar topics as the content of the link. I can always change what I search for, and then quickly jump to the file position and paste the link. I can also use Vim&rsquo;s inbuilt :ts and g] commands to search through my links and jump to them, but I use that a bit less frequently. I think this linking system&rsquo;s pretty unique, and one of the biggest features that admittedly, most other software implements out of the box, but that I finally have, in my little plaintext notebook.</p>
 <h2 id="the-experience">The Experience</h2>
 <p>Admittedly, the decision to give the above talk was completely spontaneous, so I can&rsquo;t go on about some impressive intrinsic motivation. Yes, I wanted to talk, but I&rsquo;d like to think that it was more about sharing what my Zettelkasten was like. I also wanted to push myself out of my lurker-by-default existence at bigger events, and force myself to do something slightly outside my comfort zone. People talk about stretching yourself - giving this lightning talk, I think, is a great example of that. I&rsquo;m not afraid of public speaking per se, but it&rsquo;s one of those things I&rsquo;ll have to mentally steel myself for. Being able to share on something I&rsquo;ve been very into lately meant that I essentially could talk forever without a script anyways, so I didn&rsquo;t have to worry about not knowing what to say. Preparing for the talk wasn&rsquo;t an arduous process: mostly just piecing together past thoughts I&rsquo;d jotted down or thinking through the best order to present my notebook subsections. As well, with the small number of attendees for Augment Minds in general, there&rsquo;d be a minimal audience to, in the worst-case scenario, mess up in front of. Doing one slightly scary thing, but combining it with a bunch of mostly-familiar topics, is a recipe that I&rsquo;ll continue to apply in other places - it brings you more positive experiences than if I&rsquo;d, say, done a talk on a foreign topic with an audience of tonnes of people.</p>
@@ -299,7 +422,7 @@ A demo of my notetaking system, built around Vim, FZF (and FZF.vim), and rg, fol
 <li>define each <code>-X-</code> variable and use the same variable in the list of linking nodes =&gt; numbers are convention, letters are preferred</li>
 <li>i.e.</li>
 </ul>
-<pre><code>(shared ((-A- (make-room &quot;A&quot; -B-))
+<pre tabindex="0"><code>(shared ((-A- (make-room &quot;A&quot; -B-))
         (-B- (make-room &quot;B&quot; -A-)))
         -A-)
 </code></pre></li>
@@ -379,12 +502,12 @@ Click the little file icon with a plus in the lower right hand of the main box, 
 <h2 id="clamshell-mode">Clamshell Mode</h2>
 <p>Now that the monitor&rsquo;s on and working as expected, it&rsquo;s time to set up a pseudo-clamshell mode for your laptop. XFCE Power Settings are a bit finicky - what I found in old tutorials was an outdated setting that automatically went and set it so the laptop wouldn&rsquo;t suspend on lid close, but from what I can see, that&rsquo;s gone now. There are a couple files you&rsquo;ll have to edit:</p>
 <p>In <code>/etc/systemd/logind.conf</code>:</p>
-<pre><code>HandleLidSwitch=ignore
+<pre tabindex="0"><code>HandleLidSwitch=ignore
 HandleLidSwitchExternalPower=ignore
 HandleLidSwitchDocked=ignore
 LidSwitchIgnoreInhibited=no
 </code></pre><p>In <code>/etc/UPower/UPower.conf</code>:</p>
-<pre><code>IgnoreLid=true
+<pre tabindex="0"><code>IgnoreLid=true
 </code></pre><p>And for good measure, tweak the Display settings in <code>xfce4-power-manager</code> to not blank. I tried just the systemd logind.conf fix, and just the UPower.conf fix, but it seems that it didn&rsquo;t quite work until I&rsquo;d edited both files - not sure why. After all this, reboot, and try closing the laptop lid (while having it plugged into your monitor). Hopefully, your laptop should remain on. (From now on, remember to properly suspend your laptop before closing it when it&rsquo;s not docked, if the suspend-on-close feature was something you were used to.)</p>
 <p>I docked my laptop vertically in one of those clamshell holders off Amazon. When suspended, my laptop automatically wakes if I open the lid, so whenever I want to turn on my laptop, I crack it open a bit in the dock. (I had to widen the holder a bit so I could open my laptop enough for the magnetic switch to disengage and detect my laptop was open.)</p>
 <h2 id="bluetooth-peripherals">Bluetooth Peripherals</h2>
@@ -517,47 +640,6 @@ First, let&rsquo;s pair the mouse. Once in Blueman, click &lsquo;setup&rsquo; to
 </li>
 <li id="fn:3" role="doc-endnote">
 <p>Oh dear - I can tell this will be a footnote heavy post, but there are a lot of tangents I want to reminisce about, but I suppose you can skip these if you&rsquo;d like. Before picking up Javascript for Kids or Dummies or whatever it was, we used to use Internet Explorer at home, while the old clunky laptops at school were slowly transitioning to Chrome. Well, to get that spicy console inspector, the book directed me to download a copy of Chrome, which I remember thinking was the absolute coolest thing ever. I was <em>installing my very own web browser</em> - in short, I may as well have been in sunglasses and an oversized black hoodie: I was a <em>hacker</em>. The next time we used the laptops, I pulled out my new <code>alert()</code> and <code>console.log()</code> magic to prank all my friends. I think the moment when they realized that no, the FBI was not, in fact, watching them was one of the most inspiring moments for 9-year-old me - my first computer science clout.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</section>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Dimensional Writing</title>
-      <link>https://kewbi.sh/blog/posts/210516/</link>
-      <pubDate>16 May 2021</pubDate>
-      <author>Emilie Ma ◦ Kewbish</author>
-      <description>On outlining and non-linear work.</description>
-      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
-<p>I can&rsquo;t seem to find it again, but earlier this month, I saw a video on Twitter of a proof-of-concept zooming essay model. It featured a straightforward explanation of some maths, but what really struck me was the layering of the concepts: each &lsquo;sentence&rsquo; or major phrase was underlined in a different colour, and when clicked, would expand into a longer, more intuitive layman&rsquo;s explanation of the topic. Not every word was expandable, but, for example, a sentence involving a couple formula definitions would lengthen into several more phrases developing the background knowledge. That &lsquo;second level&rsquo; explanation in turn contained a little bit of theory based on some other assumptions, so the reader could click again to expand key points in that explanation, and so on. I think this continued for three or four levels, and what I found most interesting was that this augmentation wasn&rsquo;t limited to individual phrases. If I recall correctly, one of the sentences involved the definition of some probability statistics,which was also touched on later in the paragraph. Clicking once on the first definition would expand topics later on in the writing, so the entire piece of writing had several levels of explanation &lsquo;advancement&rsquo;, going from expert complexity, with lots of notation and terms; all the way to something comprehensible by even those with no maths background.</p>
-<p>Imagine the possibilities if these were extended to mainstream explanations and articles. With most blog posts (including mine, newsletters, and platforms like <a href="https://buttondown.email">buttondown.email</a>, this level of expansion and &lsquo;for later investigation by the reader&rsquo; is already possible with footnotes, but not quite to the level that was demonstrated in the GIF. Sure, you can link relevant resources and direct the reader to other related ideas, but with the Twitter example mentioned above, there&rsquo;s an extra dimension of presentation control. The author can fine-tune the level of jargon and generalizations present in each expansion, and has more power to present their essay or text as they&rsquo;d like it to be experienced.</p>
-<p>If you read any Wikipedia article, you&rsquo;ll find that the first paragraph or so is a simple, clear summary of the topic at hand. Further links lead the reader to additional materials to increase their understanding of the depth of the topic, but skimming that first chunk is enough to get a gist of the topic itself. I&rsquo;m reminded of the idea of incremental learning<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, where instead of starting from complex theory step by step, you build a general understanding of the topic first. You might have to make a couple overall generalizations and assumptions, but the reader&rsquo;s left with a basic grasp of most of the topic. Then, each iteration of a text can build on the level before, clearing up a specific point or introducing new vocabulary. At each step in the process, the learner has a working understanding - it might not be the deepest or most accurate, but it&rsquo;s there. This works well with a sort of reversed version of the Twitter example (I&rsquo;ll just call it that since I forgot the actual name of the creator and can&rsquo;t find the video anymore) - using each expansion to further comprehension, not explain a point. Same concept of levels of knowledge, different structures.</p>
-<p>This post is an exploration of my thoughts on theories that expand beyond just lists and dry bullet points, how to efficiently pursue idea connection, and how I approach the writing process. I really like the idea of infinite subexplorations and the &lsquo;zooming&rsquo; magnification present in that demo, and I don&rsquo;t entirely know why. Perhaps it&rsquo;s that it affords the reader more opportunities to customize the text to their own reading and comprehension levels, or maybe it&rsquo;s that everything is structured very logically, with an overall outline that can be (almost) infinitely expanded. Honestly, thinking back to the long <a href="https://kewbi.sh/blog/posts/201220/">digressions I had on click-holes</a>, I think it&rsquo;s just what appeals to my brain the most.</p>
-<h2 id="non-linear-thinking">Non-linear Thinking</h2>
-<p>This type of thinking ties basically the whole non-linear notetaking workflow and recent networked thought revolution together. Processing information in a way that doesn&rsquo;t involve immediately writing down final notes or content sequentially, or what I call non-linear thinking, is something that&rsquo;s been gaining traction recently. People praise it for mimicking how their brain works, and are surprised with how much less restrictive the entire system is. Thinking like this is inherent in models like the Twitter example, where each &lsquo;layer&rsquo; of text interacts with others but stays independent (for example, you can expand one set of definitions, while leaving another about a topic you&rsquo;re more comfortable with as-is).</p>
-<p>There are many different manifestations of platforms that I think fall somewhere under the non-linear umbrella, such as infinitely nesting notes, linked systems like the ever-popular Zettelkasten or Roam Research graphs, and outlining tools. Tools available in this area might overlap in one or more of the areas above, but the main point is that things don&rsquo;t (have) to happen sequentially or from start to finish in one go. Thoughts can have intermediate layers, and iterations can stand alone while being incomplete and marked for further revision. Systems like this work to reorganize and restructure large amounts of information quickly and efficiently. Think back to trying to edit context-heavy sentences that draw on its neighbours to provide transitions and such, versus copy-pasting a bunch of bullet points around, while retaining any links those may have to other points. Off the top of my head, I can think of two main players in the space.</p>
-<p>While I&rsquo;ve never used <a href="https://workflowy.com/">Workflowy</a> as a daily notetaking driver, I&rsquo;ve heard it described as one of the original implementations of non-linear thinking. One of its biggest selling points is the infinite nesting and pagination present in its model. Each point, termed a &lsquo;bullet&rsquo;, is an entire page - sort of a lower level of what&rsquo;s available in Notion and Roam. Each bullet can contain infinitely many other bullets, which opens up the possibilities for a lot of outlining-style and level-zooming type interactions. On its marketing page, it states that:</p>
-<blockquote>
-<p>No other document has an infinitely deep structure that lets you choose the exact focus level you want.
-which directly echoes the whole layers concept that I think is an interesting platform to work with.</p>
-</blockquote>
-<p>Roam Research is slightly different, but has equal following (especially on Twitter, with the whole #roamcult shebang) and vaguely similar aims. Also one of the most popular tools for building networked knowledge bases, its main selling point is its whole graphs ecosystem and the blocks model that it so popularly uses. It&rsquo;s a cult favourite in the <a href="https://kewbi.sh/blog/posts/200607/">Zettelkasten</a> community, and has been lauded for completely revitalizing how people work. I&rsquo;ve also never personally used Roam, so while I can&rsquo;t speak directly to its apparent life-changing potential, I think it marks something interesting: the shift in awareness and prevalence of non-linear thinking tools.</p>
-<h2 id="dimensional-dilution">Dimensional Dilution</h2>
-<p>Over the past couple months at school, I&rsquo;ve realized that I keep returning to one &lsquo;way&rsquo; of doing schoolwork. Every time I create a new document for some homework assignment and finish all the setup of 12pt Times New Roman and double spacing, I start by copying over the guiding questions<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, which I find is a nice way of sparking thoughts and feeling a lot more productive than I really am. Oh well. Then, I start going through each question - and where I used to start by going systematically in with fully-fledged answers right away, I tend to just create a new bulleted list and come up with my main points and subpoints. I call this system outlining, and it&rsquo;s been pretty surprising how much it&rsquo;s taken over how I work.</p>
-<p>Outlining is a bit of a one-dimensional version of the general ecosystem of networked and infinitely capable knowledge management tools. It dilutes (or well, not dilute, since the concentration of thought is the same, if not more) the complex process of creating full notes with perfect grammar and fully thought-out ideas into a more iterative process. I can quickly lay out each of my points, while not having to worry about grammar, coherence, or even having a proper idea. I tend to use super casual language, and just go ahead with stream-of-consciousness style writing, full of &lsquo;like&rsquo;s and &lsquo;whatever&rsquo;s and such. I don&rsquo;t have to worry about crafting each sentence until I&rsquo;ve actually developed my idea and figured out what I actually want to say, and it&rsquo;s a lot easier to work through several levels of iteration in the process. At this stage, things can still be reordered and ideas can be more developed very efficiently, and you&rsquo;re not locked in by any concrete &lsquo;work&rsquo;. Once I&rsquo;m done with my outline, I go back to restructure the text into full sentences and paragraphs, taking out all the slang, replacing repeated words, and refining the overall thoughts.</p>
-<p>This kind of ties back to &lsquo;conversational notetaking&rsquo;: I find that with just typing out whatever I feel, I end up writing vaguely sentence-like thoughts, but they&rsquo;re still less focused on the wording and more on the idea. Feedback loops are very short, and I can work to develop my ideas more quickly than if I&rsquo;d have to go directly in with worrying about grammar and stressing over the correct language to use. Oddly, I&rsquo;ve found that I end up using most of the right words anyways, but I&rsquo;ve found that the writing process still goes by much more quickly than if I&rsquo;d started with an empty document and started grinding through full sentences. At each iteration of the outlining process, I have a full document - all my ideas at each point in time are laid out on the screen. An advantage of this method over the more linear ways of working is exactly that - the layering and successive development makes each step more efficient, and it definitely helps with avoiding that helpless feeling, since each thought is at a technically completed state with each stage of the system.</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>Strangely enough, even having found that my brain really likes the intermediary structures of outlining and the networked capabilities of a linked notes database, I still write blog posts the &lsquo;normal&rsquo; way: just start to end, composing full sentences as I go. I guess part of it is that articles here feel a lot more casual and stream-of-lightly-edited-and-filtered-consciousness here as opposed to more formal schoolwork, but I think it&rsquo;s also that I have a pretty good understanding of what I want to write about every time I sit down to work through a post. I don&rsquo;t have to struggle to structure my thoughts more, so while I lay out a couple of markdown headers with work-in-progress headers and put down a couple key bullet points, I largely just go ahead without a formal &lsquo;outlining&rsquo; process. I do jump around a bunch when sentences pop up to the top of my head, but I really have no idea why I haven&rsquo;t tried outlining a post the way I&rsquo;d write other work. Something to consider for the next post.</p>
-<p>Speaking of posts, it&rsquo;s been a while, and it might continue to be a while. It feels weird to be apologizing (?) with each post, but I genuinely don&rsquo;t feel like I&rsquo;ve been putting in enough time to write, even when I do have ideas. School was expected to start winding down roundabout now, but it&rsquo;s started ramping up with final projects and such instead, and I&rsquo;m looking ahead to prepare as best I can for UBC. The next couple weeks look pretty packed, but I think I won&rsquo;t bother writing unless I make it a personal assignment, so I will certainly attempt to slot in more timeblocks in my calendar. This blog is a place I feel that I can sort of finally expand on and formulate my own thoughts, and it serves as a reminder of what I was thinking of each week in time - I&rsquo;d like to keep it up as much as possible. Oh well - next week we&rsquo;ll see what&rsquo;s going on, and we&rsquo;ll see if I come up with another couple coherent thoughts or not.</p>
-<section class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1" role="doc-endnote">
-<p>I guess this is why the education system (at least in Canada) is structured in such a spiralling method, where we cover a topic, then go up a grade and do essentially the same thing, but in an ever so slightly more advanced way. I&rsquo;m not entirely sure why learning in layers (such as a textbook organized in the Twitter demo-esque way) is appealing while I find the spiral method awfully slow. I suspect it might have something to do with <a href="https://brianlui.dog/2020/05/10/beware-of-tight-feedback-loops/">tighter feedback loops</a> and having the ability to control your own speed in one (self-learning) but not the other (school). An interesting thought.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2" role="doc-endnote">
-<p>Generally, most of my work ends up being stuff like reflections, essays, question / problem sets, which apply well to my system. With things that are more free-form, this process still works well, but there&rsquo;ll be an intermediate step of brainstorming actual creative directions and ideas instead of just copy pasting any requirements over.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>

@@ -62,12 +62,12 @@ Click the little file icon with a plus in the lower right hand of the main box, 
 <h2 id="clamshell-mode">Clamshell Mode</h2>
 <p>Now that the monitor&rsquo;s on and working as expected, it&rsquo;s time to set up a pseudo-clamshell mode for your laptop. XFCE Power Settings are a bit finicky - what I found in old tutorials was an outdated setting that automatically went and set it so the laptop wouldn&rsquo;t suspend on lid close, but from what I can see, that&rsquo;s gone now. There are a couple files you&rsquo;ll have to edit:</p>
 <p>In <code>/etc/systemd/logind.conf</code>:</p>
-<pre><code>HandleLidSwitch=ignore
+<pre tabindex="0"><code>HandleLidSwitch=ignore
 HandleLidSwitchExternalPower=ignore
 HandleLidSwitchDocked=ignore
 LidSwitchIgnoreInhibited=no
 </code></pre><p>In <code>/etc/UPower/UPower.conf</code>:</p>
-<pre><code>IgnoreLid=true
+<pre tabindex="0"><code>IgnoreLid=true
 </code></pre><p>And for good measure, tweak the Display settings in <code>xfce4-power-manager</code> to not blank. I tried just the systemd logind.conf fix, and just the UPower.conf fix, but it seems that it didn&rsquo;t quite work until I&rsquo;d edited both files - not sure why. After all this, reboot, and try closing the laptop lid (while having it plugged into your monitor). Hopefully, your laptop should remain on. (From now on, remember to properly suspend your laptop before closing it when it&rsquo;s not docked, if the suspend-on-close feature was something you were used to.)</p>
 <p>I docked my laptop vertically in one of those clamshell holders off Amazon. When suspended, my laptop automatically wakes if I open the lid, so whenever I want to turn on my laptop, I crack it open a bit in the dock. (I had to widen the holder a bit so I could open my laptop enough for the magnetic switch to disengage and detect my laptop was open.)</p>
 <h2 id="bluetooth-peripherals">Bluetooth Peripherals</h2>
