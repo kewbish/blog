@@ -5,10 +5,75 @@
     <link>https://kewbi.sh/blog/</link>
     <description>Latest Yours, Kewbish posts</description>
     <managingEditor>(Emilie Ma ◦ Kewbish)</managingEditor>
-    <lastBuildDate>Sun, 19 Dec 2021 16:34:07 -0800</lastBuildDate>
+    <lastBuildDate>Sat, 25 Dec 2021 19:41:25 -0800</lastBuildDate>
     
 	<atom:link href="https://kewbi.sh/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A Year of Articles</title>
+      <link>https://kewbi.sh/blog/posts/211226/</link>
+      <pubDate>25 Dec 2021</pubDate>
+      <author>Emilie Ma ◦ Kewbish</author>
+      <description>On tracking (almost) every article I read this year.</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>Early in January this year, I had a bit of a realization I was spending too much time reading blog posts. That, combined with a typical New-Year&rsquo;s resolution-y mood, resulted in me <a href="https://kewbi.sh/blog/posts/210207/">tracking every single article I read that month</a>. I&rsquo;d been reading a bit about the whole <a href="https://reddit.com/r/QuantifiedSelf">Quantified Self</a> community, and thought that while I wouldn&rsquo;t go as hardcore with collecting data on myself, I&rsquo;d take a stab at recording and rationalizing my leisure content consumption. Armed with a shabbily-patched-together Chrome extension and a hacky Google Form, I sorted out a system where I&rsquo;d hit a keybind to record the URL and timestamp of any post I was reading. This experiment mostly aimed to give me a sense of what my reading habits were like, and give me a fun data visualization at the end. Well, I guess my muscle memory of hitting Alt-T every time I stumbled across anything interesting on Twitter persisted, because I ended up continuing this experiment for the whole year.</p>
+<p>I wrote out a more comprehensive list of &lsquo;rules&rsquo; in the January blog post, but the gist of it was that: I wouldn&rsquo;t include forum sites, programming help, quick Googles for one-off topics. I would, on the other hand, include the jumping-off points of deeper rabbit holes, any long and short form articles, and a new addition to the criteria - sometimes also lengthy / interesting Twitter feeds. Data was collected with my custom Chrome extension (source not available, but it just programmatically pushes to a central Google Forms - more about this was in the January post). For today&rsquo;s analysis, I pulled all the article information I had from the very beginning of this year (~6 January) to about the 20th of December. I&rsquo;d say that&rsquo;s a pretty good spread of data, and I think we&rsquo;ll be able to capture some interesting trends that I already expect. Last year, I talked a lot about information aesthetics, and I think that applied even more so this year. I know I had less time to read starting in the fall, so I gravitated more heavily towards existing sources of cool writing and avoided more exploration.</p>
+<p>So, without further ado - I present to you, A Year Of Articles; or, as I like to call it, Kewbish Wrapped.</p>
+<h2 id="the-hypotheses">The Hypotheses</h2>
+<p>As all good experiments do, I started by considering some of my hypotheses. In January, I&rsquo;d found that towards the end of the month, I ended up reading less (which was sort of my goal back then - I wanted to reduce mindless clicking and content consumption). With regards to time, I usually had a couple big spikes in reading during the very beginning and ends of my day. I also found that I tended to read more on weekends - reasonable, as I usually had lots more time to scroll HN or Lobste.rs on the weekends. I liked that I was able to build up a notetaking system and a library around what content I&rsquo;d read, and also that I&rsquo;d be able to find interesting articles that I&rsquo;d picked up over the last month.</p>
+<p>Over the past year&rsquo;s data, I expected I&rsquo;d keep finding most of these trends. Most of the above findings, I reasoned, would apply until at least summer, which was when I kind of both fell off tracking and started reading more casual articles (i.e. ones I didn&rsquo;t track) a bit more. Around September, I started really dialling in instead on optimizing my learning workflow for university, and really didn&rsquo;t have the time to read much anymore. My Matter<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> backlog started growing quite a bit, which I suppose would speak to the fact that it&rsquo;s easy to use, and became my consumption &lsquo;source of truth&rsquo;. That&rsquo;s good, and what I intended. However, I just wasn&rsquo;t finding the time to regularly process it, and I remember that starting a bit of a feedback loop of intimidation of going through it. As such, I probably expect that around the beginning of the school year - when I remember my backlog starting to pile up - there&rsquo;d be a sharp decrease in reading.</p>
+<p>I won&rsquo;t be discussing each and every URL I read the past year here, but in terms of more meta-analysis, I expect to see a bunch more articles about tools for thought, planning, and meta-productivity in general. I still expect that my content &lsquo;diet&rsquo;, as people apparently put it, will be largely composed of the same Twitter-adjacent people I follow: tools for thought leaders, indie makers, and a rather niche subset of the larger SWE industry.</p>
+<h2 id="the-data">The Data</h2>
+<p>In total, in 2021 (minus a week or so in December), I read <em>535</em> articles. (174 of these were from the initial January experiment). That averages out to 1.54 articles a day - a rather reasonable number, and roughly what I expected given my binge-reading during the beginning of the year and my lack of reading towards the latter half. This graph shows the spread of the articles over the day of the year, with a rolling three-day average:</p>
+<figure><img src="https://i.imgur.com/B993l2F.png?1"
+         alt="Figure 1. A graph showing articles read per day"/><figcaption>
+            <p><em>Figure 1. Articles read per day.</em></p>
+        </figcaption>
+</figure>
+
+<p>You can see a very sharp spike near the beginning of the experiment in January - my running average then was about 6.69 articles per day, according to my previous writeup. The reading activity sort of bottoms out around around June and July, where the articles read a day became more consistent (when averaged). As I expected, and as I observed in January, there&rsquo;s still obvious spikes within each month, which I expect are from my weekend reading sprees. I&rsquo;m sort of surprised that come August and September, I tended to read <em>more</em> articles than in the early summer, even though I&rsquo;d have expected that I was spending more time adapting to university work. This &lsquo;second spike&rsquo; might have lined up when I started to write brief summary notes again on the articles I&rsquo;d read - a habit that didn&rsquo;t quite continue through to October or November.</p>
+<p>I also crunched the time data for each article read and came up with a graph showing the most frequent times I&rsquo;d read articles:</p>
+<figure><img src="https://i.imgur.com/CCK9hvP.png?1"
+         alt="Figure 2. A graph showing time distribution for article readings per day."/><figcaption>
+            <p><em>Figure 2. Time distribution for article readings per day.</em></p>
+        </figcaption>
+</figure>
+
+<p>In the beginning of the graph, you can see a very heavy trend of morning reading sometime between 0800-0900. This persisted, though to a lessening extent, throughout the year. There&rsquo;s also a decently frequent trend of night-time reading around 2000-2100, which stopped somewhere in mid-March, according to the graph. I think this graph shows some of the changes in my reading habits well: during the beginning of the year, after the initial January spike, I was quite systematic and rigorous about what I was reading and when. Through the summer and into the school year, however, I ended up fitting articles in during my breaks and other in-between time, so there&rsquo;s not as clear of a trend later in the year.</p>
+<p>I also thought it&rsquo;d be interesting to briefly look at the most frequent websites that I read from. The most frequently read URLs and their number of occurences were:</p>
+<ul>
+<li><a href="https://thesephist.com">thesephist.com</a>, at 16 articles</li>
+<li><a href="https://paulgraham.com">paulgraham.com</a>, at 13 articles</li>
+<li><a href="https://every.to">every.to</a>, at 11 articles</li>
+<li><a href="https://lesswrong.com">lesswrong.com</a>, at 8 articles</li>
+<li><a href="https://ben-evans.com">ben-evans.com</a>, at 7 articles</li>
+<li><a href="https://bulletjournal.com">bulletjournal.com</a>, at 5 articles</li>
+<li><a href="https://nesslabs.com">nesslabs.com</a>, at 5 articles</li>
+<li><a href="https://evantravers.com">evantravers.com</a>, at 4 articles
+Medium and Nitter links weren&rsquo;t included in the above, though they rounded out to 8 articles each. I also did a bit of manual checking to get rid of the unique-URL problem with Paul Graham&rsquo;s blog, where I was somehow tracking both <code>www</code> and non-<code>www</code> versions of the URL. There were lots of other creators in the list with 2-3 posts each as well, but those were my top 10 URLs. I&rsquo;m pretty unsurprised with this list: I would have likely been able to name at least the larger blogs in this list. It&rsquo;s actually interesting to note that the majority of the list (not listed) has only 1-2 posts, reflecting a more indie / niche posting streak that I didn&rsquo;t return to as frequently.</li>
+</ul>
+<h2 id="the-findings">The Findings</h2>
+<p>I think the trend that I overall spent much less time reading throughout the year is very obvious, but I&rsquo;d like to dive into a couple possibilities besides &lsquo;school stress; no time&rsquo; that could have contributed to that. One, Findka, a now defunct service that worked to automatically crowdsource recommendations for essays and articles to read, shut down sometime early this year. I shouldn&rsquo;t say shut down - just pivoted to their new work with email newsletters instead (more about that later). Previously, before using Findka, I&rsquo;d relied on the front page of HN or CS Reddits or Twitter communities. With Findka, I was able to pretty consistently find interesting new content, without doing much searching myself. As Findka&rsquo;s recommendations died down, I simply didn&rsquo;t have many recommendations for articles to read, and the friction of going to find new ones just to satisfy my article cravings was too much. Two, I started shifting the time that I&rsquo;d previously allocated to reading long or short-form articles towards exploring communities and individuals on Twitter. I started using Nitter much more, and I think that this new stream of information somewhat replaced what I was getting from Findka. As a result, I ended up consuming more short-form tweets and exploring thoughts there. Of course, I didn&rsquo;t track individual tweets, just occasionally long threads that I&rsquo;d come across, but this is what I&rsquo;d suspect from what I remember over the past year.</p>
+<p>I don&rsquo;t feel like there&rsquo;s anything really to change about these reading habits. I&rsquo;d like to perhaps dedicate more time in the coming year to read long-form articles and tackle some of the backlog that&rsquo;s built up over finals season again. One of my main blockers was that I didn&rsquo;t have easy access to my backlog while on my phone or anywhere not on my laptop: Matter tracks everything through a GitHub issue system, and I&rsquo;m usually not logged in on mobile. Maybe a feature I&rsquo;ll start working on is a custom URL just for me that links to my GitHub token and would let me access my backlog through Matter when on mobile, but there&rsquo;re some security things that I&rsquo;d probably want to iron out better before I go live with that. Being able to spend too much more time on reading is probably wishful thinking, but hopefully since I&rsquo;ll keep it mind more I&rsquo;ll also end up doing it more.</p>
+<p>Some other changes I&rsquo;d like to consider next year are expanding my content sources a bit, with regards to both creators and in topic. Right now, as you can see with my top few URLs, I end up returning to the same couple creators and the same few areas of content: productivity, HCI, and theoretical CS if I feel intellectual. It might be nice to move away from overall content aggregators like HN or Lobste.rs, and revisit Findka&rsquo;s new offering of a newsletter forwarder called <a href="https://thesample.ai/">The Sample</a>. I found that Findka gave me a decently nice breadth of articles that were all tailored to my general preferences for voice, tone, and topic. One of my friends is working on something really cool in this recommendation / discovery space as well, and I&rsquo;ve been pestering them every so often to see what their work&rsquo;s looking like. Another system I&rsquo;m following is Paul Bricman&rsquo;s <a href="https://paulbricman.com/thoughtware/lexiscore">Lexiscore</a>, which aims to combat information overload and tweak your digital content &lsquo;diet&rsquo;. Tools like that provide content that&rsquo;s more immediately interesting to me, and I end up spending less time scrolling endlessly looking for interesting things. I&rsquo;m cognizant of possible echo chamber effects if I rely too heavily on recommenders that are tuned directly to my liking, but if I only have so much time for reading, I may as well enjoy it.</p>
+<p>And lastly, I had a system early in the year where I&rsquo;d pull all the articles from my reading tracker at the end of each week and briefly summarize it. I&rsquo;d built up a list til about the middle of the year of annotated links - noting anything interesting about the post, specific quotes or lines that I thought were interesting, or keywords that I might be able to link to when chatting with friends about similar topics. I ended up not doing that over the latter half of the year, mainly due to time constraints again. If possible, I think that annotation process made my reading a lot more active and meaningful, so I&rsquo;d like to get back into it. I liked looking back over a week&rsquo;s worth of reading and seeing what I tended towards and what interesting ideas others had around me, so perhaps I&rsquo;ll pick this up again in the New Year.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I think this was a pretty fun self-experiment to run over the past year, so I&rsquo;ll likely refresh my spreadsheet and form architecture and run it again next year as well. It&rsquo;s like a Year In Review retrospective that some developers do crossed with the data analysis and whimsy of Spotify Wrapped. I personally like meta-analysis content like this, so look forward to the possibility of a Kewbish Wrapped 2022 late next year. And while today, I mostly discussed the consumption of content, I&rsquo;ll be writing up a post about my content creation processes and how those have changed sometime in February<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
+<p>I&rsquo;m writing this late on Christmas Day, so happy holidays, for those of you who are reading. I&rsquo;m excited to finally have a break from formal, structured school, and some time for myself to tinker around with some dev stuff as well as pre-read for the next term. I&rsquo;m still waiting for some of my grades to come out, which isn&rsquo;t particularly fun, but I think I&rsquo;ve mentally disengaged with my grades, at least for this term. What&rsquo;s done is done, and I may as well focus on how I can make the next term as efficient and satisfying as possible instead. I&rsquo;ve finally finished up <a href="https://adventofcode.com">AOC</a> earlier today, so I plan to use that chunk of time that I&rsquo;d previously dedicated to bodging my way through solutions each morning to maybe doing some more writing. I enjoy sitting here and brain-dumping all of the musings I have sometimes, so hopefully I&rsquo;ll have some more articles and thoughts to share in the New Year.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>The tool I use to track all my &lsquo;to-reads&rsquo; and RSS feeds, more about it <a href="https://kewbi.sh/blog/posts/210207/">here</a>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>The first blog post ever on YK was published on Valentine&rsquo;s Day around two years ago - this was mostly a personal joke à la &lsquo;haha look at me I&rsquo;m so lonely and nerdy that I wrote about my open source instead of touching grass and having fun what a cs kid&rsquo;. But I think that time of year&rsquo;s actually a bit better for retrospective / new-year&rsquo;s content, since by then any resolutions you&rsquo;ve stuck to have had enough time to sink in and develop, and any that you haven&rsquo;t managed to keep up have long been ditched.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+]]></content:encoded>
+    </item>
     
     <item>
       <title>Least Common Denominators</title>
@@ -524,80 +589,6 @@ A demo of my notetaking system, built around Vim, FZF (and FZF.vim), and rg, fol
 <ol>
 <li id="fn:1" role="doc-endnote">
 <p>I&rsquo;m fully aware I sound insanely obsessive over literal lists, but I promise I&rsquo;m fine, and that this whole introduction is meant to be a segue into the main post.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</section>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>CPSC 110: Week 11</title>
-      <link>https://kewbi.sh/blog/posts/210718/</link>
-      <pubDate>18 Jul 2021</pubDate>
-      <author>Emilie Ma ◦ Kewbish</author>
-      <description>On graphs and the course as a whole.</description>
-      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
-<p>Last summer, I wrote a series of posts about my <a href="https://kewbi.sh/blog/posts/200621/">experience with Harvard&rsquo;s CS50</a> course, and this spring, I worked through the majority of another series of notes, this time on <a href="https://kewbi.sh/blog/posts/201213/">UBC&rsquo;s CPSC 110</a> course. Over this summer, I&rsquo;ve decided to finally spend some time just developing whatever I feel like, and self-studying topics that I find interesting, one of those topics being reviewing CPSC 110 for the upcoming winter session<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. While I was going through the course for a second round and looking through the notes I took the first time, I realized I never posted the final week&rsquo;s worth of notes for CPSC 110.</p>
-<p>So here they are, along with an overview of the course, my likes and dislikes, strategies I&rsquo;m using in order to prepare, and my feelings about the course as whole. The notes that follow were written as I went through the course the first time, and while there&rsquo;s a lot of conceptual understanding that&rsquo;s changed since then, I think the module summary&rsquo;s decent as it is. I&rsquo;ll save the more introspective musing and thoughts on the course for the latter sections of this post.</p>
-<p>Like the other posts in the CPSC 110 saga, these notes probably won&rsquo;t be useful for you, unless you&rsquo;re also taking the course, or have decided to implement some sort of cyclic data structure in Racket as well. If you belong to one of those two sets of people, you&rsquo;ll probably want to start <a href="https://kewbi.sh/blog/posts/201213/">at the beginning</a>, and if not, you might want to check out my other posts: I like rambling about CS, personal knowledge management, and vaguely tech-oriented things.</p>
-<h2 id="notes---week-11">Notes - Week 11</h2>
-<p>This week covers graph structures, including those that have self-referential loops through the introduction of the <code>(shared)</code> expression.</p>
-<ul>
-<li>information naturally forms a graph when there are multiple connections to other nodes
-<ul>
-<li>directed graph =&gt; arrows only go in one direction</li>
-<li>cyclic =&gt; cycles (or loops) can exist in the graph</li>
-<li>unlike lists, there isn&rsquo;t a natural order of sorts, and unlike arbitrary-arity trees, there isn&rsquo;t a direct or unique one-to-one mapping and cycles can appear</li>
-</ul>
-</li>
-<li>HtDD for graphs is similar to other HtDD recipes
-<ul>
-<li>define a struct for the room, and include a field for a list of other nodes to link to</li>
-<li>cannot define variables normally as there can be cycles in graph</li>
-</ul>
-</li>
-<li>use <code>(shared)</code> to define looping variables
-<ul>
-<li>only available in ASL =&gt; check if correct language used</li>
-<li>same structure as <code>(local)</code> with the square brackets for definitions and the final expression</li>
-<li>similar scoping as <code>(local)</code> where variables are only valid within the expression</li>
-<li>define each <code>-X-</code> variable and use the same variable in the list of linking nodes =&gt; numbers are convention, letters are preferred</li>
-<li>i.e.</li>
-</ul>
-<pre tabindex="0"><code>(shared ((-A- (make-room &quot;A&quot; -B-))
-        (-B- (make-room &quot;B&quot; -A-)))
-        -A-)
-</code></pre></li>
-<li>use accumulators (visited accumulator) to check that you&rsquo;re not in a cyclic loop
-<ul>
-<li>HtDF for graphs combines the local and accumulators modules extensively
-<ul>
-<li>also make use of the worklist and context preserving accumulators when necessary (depends on problem)</li>
-</ul>
-</li>
-<li>remember that variables that don&rsquo;t change over the evaluation of a function don&rsquo;t need to be set as an accumulator (!)</li>
-</ul>
-</li>
-</ul>
-<h2 id="self-study">Self-Study</h2>
-<p>Somewhere through the first module of the course, Kiczales (the professor) points out that just following along with the video lectures, and even taking meticulous notes, isn&rsquo;t enough to learn the material in CPSC 110. A large part of the learning comes from the practice: be it through problem sets, labs, or the extensive problem bank. I agree - though maybe with a caveat. I found practicing all the concepts to be pretty straightforward the first time round, but coming back this summer to re-attempt many of the problems was a decent challenge. I wanted to see how much I could remember in terms of design recipes and function calls without having the lectures to hold my hand through everything, so I&rsquo;ve just been jumping straight into each module&rsquo;s practice problems.</p>
-<p>I&rsquo;ve been trying to choose problems that are marked at least a blue square, though I will sometimes go through the shorter green circles if I&rsquo;d like to rebuild my understanding of a topic. CPSC 110 was designed to be an introductory CS course, so besides the first couple weeks of learning design templates and familiarizing myself with the language, the theory behind topics isn&rsquo;t that difficult. I didn&rsquo;t really see a point in grinding through easy problems to falsely feel productive, so I thought I&rsquo;d try to tackle some of the more difficult problems. Another point about CPSC 110 being designed for beginners: there&rsquo;ll be a lot of tedious template syntax and repetition in the beginning. I sort of ignored this my first time round, completely forgoing the <code>spd/tags</code> expressions and copy-pasting trivial tests. In hindsight, that wasn&rsquo;t a good idea - going through all the templates, though very tedious and boring, drills them into muscle memory, and is good practice for further modules. The bit about tests and monotony also goes into my last overall goal: not relying on solution sets or videos for help. In the exam, I won&rsquo;t have these resources at hand, so since I&rsquo;ve sort of got the basics down, I want to ensure that I actually do understand what I&rsquo;m doing. That&rsquo;s also part of the reason I like the labs so much - there&rsquo;s no answer key, so even if you&rsquo;re tempted to go check and see if your tests and function design is formed correctly, you can&rsquo;t. Coming back to Kiczales' point, I think practice is certainly an important part of the process, but so is choosing practice at a difficult enough level, persisting through the tedium, and teaching yourself through it without opening solutions or even watching the lectures, if you&rsquo;ve gotten to that point<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>Altogether, CPSC 110&rsquo;s been an insightful learning experience, and one that&rsquo;s been pretty positive. One of my favourite parts of the course was by far <a href="https://kewbi.sh/blog/posts/210411/">module 8, on abstraction</a>, though the <code>(local)</code> expressions covered in module 7 would be a close second. There was something about the way creating fold functions obviated the need for a lot of repetitive function design that somehow clicked with me. I found everything about encapsulating templates into abstract functions, and using built-in functions very intuitive. Composing built-in abstract functions was like putting together a puzzle, and I had a lot of fun working out where I&rsquo;d need a <code>(filter)</code> as opposed to a <code>(map)</code>, and so on. It was also interesting to see the role abstract functions played in functional programming, and I&rsquo;m beginning to see why developers in Javascript or Python sometimes tend to this sort of paradigm.</p>
-<p>On the other hand, one of the things I didn&rsquo;t quite like was <a href="https://kewbi.sh/blog/posts/210418/">module 9, on generative recursion</a> - or at least, I didn&rsquo;t like it the first time round. The module was a lengthy series of videos playing off one central problem set, and while I&rsquo;m happy it was explained in great detail, it was honestly a bit boring to sit through. Maybe it&rsquo;s just my brain not being used to recursion, but the concepts of backtracking and generative recursion as opposed to structural recursion didn&rsquo;t really stick. Oh well - here&rsquo;s to hoping it&rsquo;ll be more manageable this time round.</p>
-<p>My opinion on CPSC 110&rsquo;s definitely changed since I first looked into the course late last year. In the beginning, I was definitely very skeptical about Racket and the whole design recipe system - I was one of those &ldquo;oh, but Racket isn&rsquo;t used in the &lsquo;real world&rsquo;&rdquo; people. At first, I thought the unique (to me, at the time) syntax was a bit constraining, but after going through a good chunk of things a second time, I think I&rsquo;ve gained more of an appreciation for how structured and logical everything is. For example, the first couple weeks of trudging through HtDD and HtDF recipes sort of turned me off them: I thought they were tedious, repetitive, and annoying. Looking back, I appreciate how orderly everything is presented: the course certainly lives up to its moniker of &ldquo;Systematic Program Design&rdquo;. Having a bit of hindsight&rsquo;s made me more appreciative of the theory and concepts that were taught in the course, and besides just understanding them better, knowing where each topic&rsquo;ll be used again in the course gives me an overview and a map<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> of sorts to guide me through my studying.</p>
-<p>I&rsquo;m still working through my second run of the course - I&rsquo;m currently somewhere around module 9 (which, as an aside, I sort of hated the first time, but we&rsquo;ll see how it is this time). For the rest of the summer, I&rsquo;ll likely be spending some time here and there to continue reviewing, and start attempting practice exams soon. Successfully challenging the course means I won&rsquo;t have to suffer through six courses in my first term, so that&rsquo;s an excellent motivator for me to do my absolute best. Besides CPSC 110, I&rsquo;ve been looking into some maths and some CS theory - spending a bit of time researching and looking into topics that I&rsquo;m interested in. It&rsquo;s been really nice to have the freedom to finally cross some of the learning I&rsquo;ve wanted to do for ages off my todo list, and I&rsquo;m looking forward to what the rest of the summer holds.</p>
-<section class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1" role="doc-endnote">
-<p>Speaking of which, I now understand why most university students I&rsquo;ve spoken to loathe course registration. My timetable was most certainly a work in progress, all the way up til thirty seconds before my registration time. (A special thank you to that CPSC 121 tutorial that decided to restrict itself.) But it was all fine in the end, and I did manage to get the courses I&rsquo;d been originally looking for, so I suppose the stress was a necessary part of the experience.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2" role="doc-endnote">
-<p>An aside: part of what made me even bother writing up formal notes and doing the amount of practice I did was because there was an external motivator present: the challenge exam, sometime in September. While it wasn&rsquo;t really a major push when I went through CPSC 110 this spring, I&rsquo;ve been taking it a lot more seriously since I started reviewing earlier this summer. I guess that just goes to show the power of structure and well-defined end goals, but then again, isn&rsquo;t that the whole point of CPSC 110?&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3" role="doc-endnote">
-<p>Please laugh now to validate my terrible abstract function puns.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
