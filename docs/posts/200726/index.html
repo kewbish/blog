@@ -1,36 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CS50: Weeks 6 / 7</title>
+        <meta name="description" content="On Python and selects, inserts, and wheres." />
+        <meta property="og:title" content="CS50: Weeks 6 / 7" />
+        <meta property="og:description" content="On Python and selects, inserts, and wheres." />
+        <meta property="og:url" content="https://kewbi.sh/blog/posts/200726/" />
+        <meta property="twitter:title" content="CS50: Weeks 6 / 7" />
+        <meta property="twitter:description" content="On Python and selects, inserts, and wheres." />
+        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
+        <link rel="stylesheet" href="../../css/main.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            rel="stylesheet"
+        />
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
+        />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CS50: Weeks 6 / 7</title>
-    <meta name="description" content="On Python and selects, inserts, and wheres.">
-    <meta property="og:title" content="CS50: Weeks 6 / 7">
-    <meta property="og:description" content="On Python and selects, inserts, and wheres.">
-    <meta property="og:image" content="https://i.imgur.com/QxvZ9Tv.png">
-    <meta property="og:url" content="https://kewbi.sh/blog/posts/200726/">
-    <meta property="twitter:title" content="CS50: Weeks 6 / 7">
-    <meta property="twitter:description" content="On Python and selects, inserts, and wheres.">
-    <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
-    <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
-    <link rel="stylesheet" href="../../css/main.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
-</head>
-
-<body class="cont page">
-    <section class="b-main-2">
-        <p><a href="../">&lt; More Posts</a></p>
-        <h1 class="b-subtitle">CS50: Weeks 6 / 7</h1>
-        <p>Published 26 July 2020 at <a href="https://kewbi.sh/blog/posts/200726/">Yours, Kewbish</a>. 1239 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
-        
-        <p>Also published on <a href="https://dev.to/kewbish/cs50-weeks-6-7-python-and-sql-bjd">Dev.to</a>.</p>
-        
-        <hr style="margin-bottom:-1%;">
-        <div class="b-writing">
-            <h2 id="introduction">Introduction</h2>
+    <body class="cont page">
+        <section class="b-main-2">
+            <p><a href="../">&lt; More Posts</a></p>
+            <h1 class="b-subtitle">CS50: Weeks 6 / 7</h1>
+            <p>
+                Published 26 July 2020 at
+                <a href="https://kewbi.sh/blog/posts/200726/">Yours, Kewbish</a>. 1239
+                words. Subscribe via <a href="../../index.xml">RSS</a>.
+            </p>
+            
+            <p>Also published on <a href="https://dev.to/kewbish/cs50-weeks-6-7-python-and-sql-bjd">Dev.to</a>.</p>
+            
+            <hr style="margin-bottom: -1%" />
+            <div class="b-writing">
+                <h2 id="introduction">Introduction</h2>
 <p>Finally, we&rsquo;re getting into the more &lsquo;application&rsquo; side on things - also known as the part where I&rsquo;m more comfortable with. With my <a href="https://kewbish.github.io/blog/posts/200621/">initial predictions</a>, I&rsquo;d predicted that Week 6 (where we are now) was where it&rsquo;d get slightly easier. And I was right - Week 6 was a welcome week, an introduction to Python. I&rsquo;m already somewhat decent at Python, so this week wasn&rsquo;t such a struggle, and Week 7 was a great mix of new tech / familiar tech.</p>
 <p>I was actually pretty surprised how &lsquo;natural&rsquo; C already felt, and I caught myself trying to <code>printf(&quot;&quot;)</code> instead of <code>print(&quot;&quot;)</code>. I guess I haven&rsquo;t been writing as much Python in the past few weeks - mainly focusing on C and some Javascript side things. Hopefully, this&rsquo;ll change - I have plans for some CLI projects that I might pursue after the final project.</p>
 <p>I was also pleasantly surprised how intuitive SQL was to write - nearly like plain English<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. SQL was one of those &lsquo;I&rsquo;ll learn it later eventually&rsquo; things that I used to keep putting off, but I&rsquo;m happy I finally took the time to learn it. For database-y things in my projects that have required a backend, I&rsquo;ve mostly used Firebase (and Mongo once, but that didn&rsquo;t pan out very well), so <em>relational</em> databases were a refreshing new experience.</p>
@@ -215,12 +226,11 @@ There&rsquo;s no correlation between lines of code and personal opinion, of cour
 </ol>
 </section>
 
-            <p>- Yours, Kewbish</p>
-        </div>
-        <br><p><a href="../">&lt; More Posts</a></p>
-        <br><br>
-    </section>
-    
-</body>
-
+                <p>- Yours, Kewbish</p>
+            </div>
+            <br />
+            <p><a href="../">&lt; More Posts</a></p>
+            <br /><br />
+        </section>
+    </body>
 </html>

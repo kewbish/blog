@@ -17,7 +17,7 @@
     <link>{{ .Permalink }}</link>
     <description>Latest Yours, Kewbish posts</description>
     <managingEditor>{{ with .Site.Author.name }}({{.}}){{end}}</managingEditor>
-    <lastBuildDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+    <lastBuildDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
     {{ with .OutputFormats.Get "RSS" }}
 	{{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
     {{ end }}
@@ -25,7 +25,7 @@
     <item>
       <title>{{ .Title }}</title>
       <link>{{ .Permalink }}</link>
-      <pubDate>{{ .Date.Format "02 Jan 2006" | safeHTML }}</pubDate>
+      <pubDate>{{ .PublishDate.Format "02 Jan 2006" | safeHTML }}</pubDate>
       {{ with .Site.Author.name }}<author>{{.}}</author>{{end}}
       <description>{{ .Description | html }}</description>
       <content:encoded>{{ `<![CDATA[` | safeHTML }}{{ .Content | safeHTML }}{{ `]]>` | safeHTML }}</content:encoded>

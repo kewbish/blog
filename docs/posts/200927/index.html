@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Creating a Vim plugin</title>
+        <meta name="description" content="On playing with a little Vimscript." />
+        <meta property="og:title" content="Creating a Vim plugin" />
+        <meta property="og:description" content="On playing with a little Vimscript." />
+        <meta property="og:url" content="https://kewbi.sh/blog/posts/200927/" />
+        <meta property="twitter:title" content="Creating a Vim plugin" />
+        <meta property="twitter:description" content="On playing with a little Vimscript." />
+        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
+        <link rel="stylesheet" href="../../css/main.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            rel="stylesheet"
+        />
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
+        />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creating a Vim plugin</title>
-    <meta name="description" content="On playing with a little Vimscript.">
-    <meta property="og:title" content="Creating a Vim plugin">
-    <meta property="og:description" content="On playing with a little Vimscript.">
-    <meta property="og:image" content="https://i.imgur.com/QxvZ9Tv.png">
-    <meta property="og:url" content="https://kewbi.sh/blog/posts/200927/">
-    <meta property="twitter:title" content="Creating a Vim plugin">
-    <meta property="twitter:description" content="On playing with a little Vimscript.">
-    <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
-    <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
-    <link rel="stylesheet" href="../../css/main.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
-</head>
-
-<body class="cont page">
-    <section class="b-main-2">
-        <p><a href="../">&lt; More Posts</a></p>
-        <h1 class="b-subtitle">Creating a Vim plugin</h1>
-        <p>Published 27 September 2020 at <a href="https://kewbi.sh/blog/posts/200927/">Yours, Kewbish</a>. 1327 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
-        
-        <hr style="margin-bottom:-1%;">
-        <div class="b-writing">
-            <h2 id="introduction">Introduction</h2>
+    <body class="cont page">
+        <section class="b-main-2">
+            <p><a href="../">&lt; More Posts</a></p>
+            <h1 class="b-subtitle">Creating a Vim plugin</h1>
+            <p>
+                Published 27 September 2020 at
+                <a href="https://kewbi.sh/blog/posts/200927/">Yours, Kewbish</a>. 1327
+                words. Subscribe via <a href="../../index.xml">RSS</a>.
+            </p>
+            
+            <hr style="margin-bottom: -1%" />
+            <div class="b-writing">
+                <h2 id="introduction">Introduction</h2>
 <p>This week, we had our first proper English class, and our teacher happened to [re]introduce a series of issues and common phrases that should be replaced for better, more concise writing. This checklist is called <a href="http://web.uvic.ca/~gkblank/Blank's%20Writing%20Quirk%20List.pdf">Dr. Blank&rsquo;s Quirk List</a>, apparently. If you go through the PDF, it&rsquo;s a huge list of things like &lsquo;delete aforementioned&rsquo; and &lsquo;change economically deprived to poor&rsquo;. The thing is, we&rsquo;re going to be <em>graded</em> on how well we conform and utilize this list, so I&quot;m going to have to pay a lot of attention to this list.</p>
 <p>But with all my problems, I decided to overengineer and automate a solution to a problem that didn&rsquo;t really exist.</p>
 <p>Usually, I write my assignments in Markdown in Vim, and later use Pandoc to convert to a Word file if needed for the assignment. Therefore, I thought it&rsquo;d be nice to have a Vim plugin that could highlight and remind me of all the rules, so I wouldn&rsquo;t have to remember each of them. I also kind of just wanted to learn a bit of VimScript (or VimL. I still haven&rsquo;t figured out what it&rsquo;s supposed to be named.), and I thought that a simple highlighting plugin might be a nice, relatively easy introduction to the language<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
@@ -101,12 +112,11 @@
 </ol>
 </section>
 
-            <p>- Yours, Kewbish</p>
-        </div>
-        <br><p><a href="../">&lt; More Posts</a></p>
-        <br><br>
-    </section>
-    
-</body>
-
+                <p>- Yours, Kewbish</p>
+            </div>
+            <br />
+            <p><a href="../">&lt; More Posts</a></p>
+            <br /><br />
+        </section>
+    </body>
 </html>

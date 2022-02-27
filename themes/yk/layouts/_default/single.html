@@ -1,42 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{{ .Title }}</title>
+        <meta name="description" content="{{ .Description }}" />
+        <meta property="og:title" content="{{ .Title }}" />
+        <meta property="og:description" content="{{ .Description }}" />
+        <meta property="og:url" content="{{ .Permalink }}" />
+        <meta property="twitter:title" content="{{ .Title }}" />
+        <meta property="twitter:description" content="{{ .Description }}" />
+        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
+        <link rel="stylesheet" href="/css/main.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            rel="stylesheet"
+        />
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
+        />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ .Title }}</title>
-    <meta name="description" content="{{ .Description }}">
-    <meta property="og:title" content="{{ .Title }}">
-    <meta property="og:description" content="{{ .Description }}">
-    <meta property="og:image" content="https://i.imgur.com/QxvZ9Tv.png">
-    <meta property="og:url" content="{{ .Permalink }}">
-    <meta property="twitter:title" content="{{ .Title }}">
-    <meta property="twitter:description" content="{{ .Description }}">
-    <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
-    <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
-</head>
-
-<body class="cont page">
-    <section class="b-main-2">
-        <p><a href="../">&lt; More Posts</a></p>
-        <h1 class="b-subtitle">{{ .Title }}</h1>
-        <p>Published {{ .PublishDate.Format "02 January 2006" }} at <a href="{{ .Permalink }}">Yours, Kewbish</a>. {{ .WordCount }} words. Subscribe via <a href="/index.xml">RSS</a>.</p>
-        {{ if .Params.Dev }}
-        <p>Also published on <a href="{{ .Params.Dev }}">Dev.to</a>.</p>
-        {{ end }}
-        <hr style="margin-bottom:-1%;">
-        <div class="b-writing">
-            {{ .Content }}
-            <p>- Yours, Kewbish</p>
-        </div>
-        <br><p><a href="../">&lt; More Posts</a></p>
-        <br><br>
-    </section>
-    
-</body>
-
+    <body class="cont page">
+        <section class="b-main-2">
+            <p><a href="../">&lt; More Posts</a></p>
+            <h1 class="b-subtitle">{{ .Title }}</h1>
+            <p>
+                Published {{ .PublishDate.Format "02 January 2006" }} at
+                <a href="{{ .Permalink }}">Yours, Kewbish</a>. {{ .WordCount }}
+                words. Subscribe via <a href="/index.xml">RSS</a>.
+            </p>
+            {{ if .Params.Dev }}
+            <p>Also published on <a href="{{ .Params.Dev }}">Dev.to</a>.</p>
+            {{ end }}
+            <hr style="margin-bottom: -1%" />
+            <div class="b-writing">
+                {{ .Content }}
+                <p>- Yours, Kewbish</p>
+            </div>
+            <br />
+            <p><a href="../">&lt; More Posts</a></p>
+            <br /><br />
+        </section>
+    </body>
 </html>

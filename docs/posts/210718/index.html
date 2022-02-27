@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CPSC 110: Week 11</title>
+        <meta name="description" content="On graphs and the course as a whole." />
+        <meta property="og:title" content="CPSC 110: Week 11" />
+        <meta property="og:description" content="On graphs and the course as a whole." />
+        <meta property="og:url" content="https://kewbi.sh/blog/posts/210718/" />
+        <meta property="twitter:title" content="CPSC 110: Week 11" />
+        <meta property="twitter:description" content="On graphs and the course as a whole." />
+        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
+        <link rel="stylesheet" href="../../css/main.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            rel="stylesheet"
+        />
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
+        />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CPSC 110: Week 11</title>
-    <meta name="description" content="On graphs and the course as a whole.">
-    <meta property="og:title" content="CPSC 110: Week 11">
-    <meta property="og:description" content="On graphs and the course as a whole.">
-    <meta property="og:image" content="https://i.imgur.com/QxvZ9Tv.png">
-    <meta property="og:url" content="https://kewbi.sh/blog/posts/210718/">
-    <meta property="twitter:title" content="CPSC 110: Week 11">
-    <meta property="twitter:description" content="On graphs and the course as a whole.">
-    <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
-    <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
-    <link rel="stylesheet" href="../../css/main.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
-</head>
-
-<body class="cont page">
-    <section class="b-main-2">
-        <p><a href="../">&lt; More Posts</a></p>
-        <h1 class="b-subtitle">CPSC 110: Week 11</h1>
-        <p>Published 18 July 2021 at <a href="https://kewbi.sh/blog/posts/210718/">Yours, Kewbish</a>. 1738 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
-        
-        <hr style="margin-bottom:-1%;">
-        <div class="b-writing">
-            <h2 id="introduction">Introduction</h2>
+    <body class="cont page">
+        <section class="b-main-2">
+            <p><a href="../">&lt; More Posts</a></p>
+            <h1 class="b-subtitle">CPSC 110: Week 11</h1>
+            <p>
+                Published 18 July 2021 at
+                <a href="https://kewbi.sh/blog/posts/210718/">Yours, Kewbish</a>. 1738
+                words. Subscribe via <a href="../../index.xml">RSS</a>.
+            </p>
+            
+            <hr style="margin-bottom: -1%" />
+            <div class="b-writing">
+                <h2 id="introduction">Introduction</h2>
 <p>Last summer, I wrote a series of posts about my <a href="https://kewbi.sh/blog/posts/200621/">experience with Harvard&rsquo;s CS50</a> course, and this spring, I worked through the majority of another series of notes, this time on <a href="https://kewbi.sh/blog/posts/201213/">UBC&rsquo;s CPSC 110</a> course. Over this summer, I&rsquo;ve decided to finally spend some time just developing whatever I feel like, and self-studying topics that I find interesting, one of those topics being reviewing CPSC 110 for the upcoming winter session<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. While I was going through the course for a second round and looking through the notes I took the first time, I realized I never posted the final week&rsquo;s worth of notes for CPSC 110.</p>
 <p>So here they are, along with an overview of the course, my likes and dislikes, strategies I&rsquo;m using in order to prepare, and my feelings about the course as whole. The notes that follow were written as I went through the course the first time, and while there&rsquo;s a lot of conceptual understanding that&rsquo;s changed since then, I think the module summary&rsquo;s decent as it is. I&rsquo;ll save the more introspective musing and thoughts on the course for the latter sections of this post.</p>
 <p>Like the other posts in the CPSC 110 saga, these notes probably won&rsquo;t be useful for you, unless you&rsquo;re also taking the course, or have decided to implement some sort of cyclic data structure in Racket as well. If you belong to one of those two sets of people, you&rsquo;ll probably want to start <a href="https://kewbi.sh/blog/posts/201213/">at the beginning</a>, and if not, you might want to check out my other posts: I like rambling about CS, personal knowledge management, and vaguely tech-oriented things.</p>
@@ -94,12 +105,11 @@
 </ol>
 </section>
 
-            <p>- Yours, Kewbish</p>
-        </div>
-        <br><p><a href="../">&lt; More Posts</a></p>
-        <br><br>
-    </section>
-    
-</body>
-
+                <p>- Yours, Kewbish</p>
+            </div>
+            <br />
+            <p><a href="../">&lt; More Posts</a></p>
+            <br /><br />
+        </section>
+    </body>
 </html>

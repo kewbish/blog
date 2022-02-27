@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Spaced Repetition in Vim</title>
+        <meta name="description" content="On active learning combined with Vim." />
+        <meta property="og:title" content="Spaced Repetition in Vim" />
+        <meta property="og:description" content="On active learning combined with Vim." />
+        <meta property="og:url" content="https://kewbi.sh/blog/posts/201025/" />
+        <meta property="twitter:title" content="Spaced Repetition in Vim" />
+        <meta property="twitter:description" content="On active learning combined with Vim." />
+        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
+        <link rel="stylesheet" href="../../css/main.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            rel="stylesheet"
+        />
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
+        />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spaced Repetition in Vim</title>
-    <meta name="description" content="On active learning combined with Vim.">
-    <meta property="og:title" content="Spaced Repetition in Vim">
-    <meta property="og:description" content="On active learning combined with Vim.">
-    <meta property="og:image" content="https://i.imgur.com/QxvZ9Tv.png">
-    <meta property="og:url" content="https://kewbi.sh/blog/posts/201025/">
-    <meta property="twitter:title" content="Spaced Repetition in Vim">
-    <meta property="twitter:description" content="On active learning combined with Vim.">
-    <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
-    <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
-    <link rel="stylesheet" href="../../css/main.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
-</head>
-
-<body class="cont page">
-    <section class="b-main-2">
-        <p><a href="../">&lt; More Posts</a></p>
-        <h1 class="b-subtitle">Spaced Repetition in Vim</h1>
-        <p>Published 25 October 2020 at <a href="https://kewbi.sh/blog/posts/201025/">Yours, Kewbish</a>. 1602 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
-        
-        <hr style="margin-bottom:-1%;">
-        <div class="b-writing">
-            <h2 id="introduction">Introduction</h2>
+    <body class="cont page">
+        <section class="b-main-2">
+            <p><a href="../">&lt; More Posts</a></p>
+            <h1 class="b-subtitle">Spaced Repetition in Vim</h1>
+            <p>
+                Published 25 October 2020 at
+                <a href="https://kewbi.sh/blog/posts/201025/">Yours, Kewbish</a>. 1602
+                words. Subscribe via <a href="../../index.xml">RSS</a>.
+            </p>
+            
+            <hr style="margin-bottom: -1%" />
+            <div class="b-writing">
+                <h2 id="introduction">Introduction</h2>
 <p>Even though we don&rsquo;t really have midterms, and quizzes and tests flow pretty regularly throughout the year, it&rsquo;s <em>that</em> time of year again - when it all starts sinking in that, no, it&rsquo;s not just an unexpected spike in homework: it&rsquo;s just that this is the baseline of homework, and this is how it&rsquo;ll be for the rest of the year. Fun! In addition to that, I also have to worry about UBC applications and other things, but those aren&rsquo;t strictly academic matters. In essence, it&rsquo;s been a very busy couple of weeks, and it&rsquo;s likely not to be much less busy for a while. That probably also explains why I&rsquo;m focusing on writing a lot more about productivity and studying and general learning things - I&rsquo;m trying to force myself to remember these things as well.</p>
 <p>Studying is, admittedly, rather fun for me. (This was probably why people still call me a nerd.) It makes one feel rather productive, even though it&rsquo;s essentially just regurgitating facts and informations, and trying to force your brain to understand. I feel like no one really teaches people how to study - it&rsquo;s one of those things that you figure out as you go along.</p>
 <p>However, there&rsquo;s recently (I say &lsquo;recently&rsquo; because that&rsquo;s when it started taking over productivity forums, but it&rsquo;s been around for a whle) been a bit of a focus on the magical thing that seems to be spaced repetition. Though it&rsquo;s not entirely magical either.It&rsquo;s a way to reinforce learning at specific intervals when the information is beginning to sink itself into oblivion in the back of your mind, and keep the material fresh.</p>
@@ -72,12 +83,11 @@ nnoremap &lt;leader&gt;rl :s/\[l\zs\d/\=submatch(0)+1/ &lt;CR&gt;
 </ol>
 </section>
 
-            <p>- Yours, Kewbish</p>
-        </div>
-        <br><p><a href="../">&lt; More Posts</a></p>
-        <br><br>
-    </section>
-    
-</body>
-
+                <p>- Yours, Kewbish</p>
+            </div>
+            <br />
+            <p><a href="../">&lt; More Posts</a></p>
+            <br /><br />
+        </section>
+    </body>
 </html>

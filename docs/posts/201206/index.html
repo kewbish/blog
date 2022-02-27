@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Morse Code Context</title>
+        <meta name="description" content="On dots, dashes, and annotations." />
+        <meta property="og:title" content="Morse Code Context" />
+        <meta property="og:description" content="On dots, dashes, and annotations." />
+        <meta property="og:url" content="https://kewbi.sh/blog/posts/201206/" />
+        <meta property="twitter:title" content="Morse Code Context" />
+        <meta property="twitter:description" content="On dots, dashes, and annotations." />
+        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
+        <link rel="stylesheet" href="../../css/main.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            rel="stylesheet"
+        />
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
+        />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Morse Code Context</title>
-    <meta name="description" content="On dots, dashes, and annotations.">
-    <meta property="og:title" content="Morse Code Context">
-    <meta property="og:description" content="On dots, dashes, and annotations.">
-    <meta property="og:image" content="https://i.imgur.com/QxvZ9Tv.png">
-    <meta property="og:url" content="https://kewbi.sh/blog/posts/201206/">
-    <meta property="twitter:title" content="Morse Code Context">
-    <meta property="twitter:description" content="On dots, dashes, and annotations.">
-    <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
-    <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
-    <link rel="stylesheet" href="../../css/main.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
-</head>
-
-<body class="cont page">
-    <section class="b-main-2">
-        <p><a href="../">&lt; More Posts</a></p>
-        <h1 class="b-subtitle">Morse Code Context</h1>
-        <p>Published 06 December 2020 at <a href="https://kewbi.sh/blog/posts/201206/">Yours, Kewbish</a>. 1988 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
-        
-        <hr style="margin-bottom:-1%;">
-        <div class="b-writing">
-            <h2 id="introduction">Introduction</h2>
+    <body class="cont page">
+        <section class="b-main-2">
+            <p><a href="../">&lt; More Posts</a></p>
+            <h1 class="b-subtitle">Morse Code Context</h1>
+            <p>
+                Published 06 December 2020 at
+                <a href="https://kewbi.sh/blog/posts/201206/">Yours, Kewbish</a>. 1988
+                words. Subscribe via <a href="../../index.xml">RSS</a>.
+            </p>
+            
+            <hr style="margin-bottom: -1%" />
+            <div class="b-writing">
+                <h2 id="introduction">Introduction</h2>
 <p>Hello, and welcome to another episode of <em>Kewbish talks about notes and knowledge for no reason whatsoever</em>. I&rsquo;ve somehow fallen into the corner of the interwebs vaguely describable as &lsquo;knowledge twt&rsquo;<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Reading papers, especially CS-ish design (read: not entirely incomprehensible) ones, is kind of nice. Perhaps this habit stems from the lab reports we constantly have to write, but I find reading through them therapeutic, in a way.</p>
 <p>These papers have a host of ideas spanning many disciplines and areas of thought. That&rsquo;s something I kind of like, as someone very inexperienced in the field. HCI, as I think it&rsquo;s properly called, spans a large breadth of thought. Luckily, most of it is the sort of thing that balances yet complements the science-focused learning I do for school. I find it fun to read papers (yes, I&rsquo;m a massive nerd), especially these, where I don&rsquo;t have to constantly do math or think about theory (though that can also be fun).</p>
 <p>One of the ideas I&rsquo;ve seen over the last couple weeks was the concept of context, and either persisting or deleting it. How does one encapsulate the context of a moment, be it <a href="https://twitter.com/szymon_k/status/1289942401318977537">branching browser history</a> or <a href="https://zettelkasten.de/posts/bookmark-breadcrumbs/">leaving a trail of thoughts between processing sessions</a>? The concept is striking: when looking through things I&rsquo;ve written even just a year ago, there&rsquo;s often a question of why I even thought it was a good idea. Re-entering, or even getting a glimpse into, the frame of mind I was in then would be very interesting for reflection<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
@@ -69,12 +80,11 @@
 </ol>
 </section>
 
-            <p>- Yours, Kewbish</p>
-        </div>
-        <br><p><a href="../">&lt; More Posts</a></p>
-        <br><br>
-    </section>
-    
-</body>
-
+                <p>- Yours, Kewbish</p>
+            </div>
+            <br />
+            <p><a href="../">&lt; More Posts</a></p>
+            <br /><br />
+        </section>
+    </body>
 </html>

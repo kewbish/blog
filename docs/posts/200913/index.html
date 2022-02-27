@@ -1,36 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vim Colourschemes</title>
+        <meta name="description" content="On my decision to go monochrome." />
+        <meta property="og:title" content="Vim Colourschemes" />
+        <meta property="og:description" content="On my decision to go monochrome." />
+        <meta property="og:url" content="https://kewbi.sh/blog/posts/200913/" />
+        <meta property="twitter:title" content="Vim Colourschemes" />
+        <meta property="twitter:description" content="On my decision to go monochrome." />
+        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
+        <link rel="stylesheet" href="../../css/main.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            rel="stylesheet"
+        />
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
+        />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vim Colourschemes</title>
-    <meta name="description" content="On my decision to go monochrome.">
-    <meta property="og:title" content="Vim Colourschemes">
-    <meta property="og:description" content="On my decision to go monochrome.">
-    <meta property="og:image" content="https://i.imgur.com/QxvZ9Tv.png">
-    <meta property="og:url" content="https://kewbi.sh/blog/posts/200913/">
-    <meta property="twitter:title" content="Vim Colourschemes">
-    <meta property="twitter:description" content="On my decision to go monochrome.">
-    <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
-    <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
-    <link rel="stylesheet" href="../../css/main.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
-</head>
-
-<body class="cont page">
-    <section class="b-main-2">
-        <p><a href="../">&lt; More Posts</a></p>
-        <h1 class="b-subtitle">Vim Colourschemes</h1>
-        <p>Published 13 September 2020 at <a href="https://kewbi.sh/blog/posts/200913/">Yours, Kewbish</a>. 1029 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
-        
-        <p>Also published on <a href="https://dev.to/kewbish/making-a-vim-colorscheme-2dm1">Dev.to</a>.</p>
-        
-        <hr style="margin-bottom:-1%;">
-        <div class="b-writing">
-            <h2 id="introduction">Introduction</h2>
+    <body class="cont page">
+        <section class="b-main-2">
+            <p><a href="../">&lt; More Posts</a></p>
+            <h1 class="b-subtitle">Vim Colourschemes</h1>
+            <p>
+                Published 13 September 2020 at
+                <a href="https://kewbi.sh/blog/posts/200913/">Yours, Kewbish</a>. 1029
+                words. Subscribe via <a href="../../index.xml">RSS</a>.
+            </p>
+            
+            <p>Also published on <a href="https://dev.to/kewbish/making-a-vim-colorscheme-2dm1">Dev.to</a>.</p>
+            
+            <hr style="margin-bottom: -1%" />
+            <div class="b-writing">
+                <h2 id="introduction">Introduction</h2>
 <p>In the middle of getting back to school and trying to redesign my website<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, I&rsquo;ve also been spending quite a bit of time in Vim. Since installing Manjaro a couple weeks ago (has it really been that long?), I&rsquo;ve decided to experiment with only programming and doing homework in Vim, instead of VSCode, which was my main text editor before.</p>
 <p>Despite me having to forego several of the nice, housekeeping features of VSCode like linting and autoformat<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, I actually kind of like having such a minimalist environment. I didn&rsquo;t have autocomplete until yesterday (as of time of writing), so that forced me to actually type out every single snippet, instead of just scrolling through VSCode autocomplete popups. I&rsquo;d used Vim before, but not as a main editor. It&rsquo;s been a fun experiment, really.</p>
 <p>With spending 100% of my writing and editing time in Vim also came a slight obsession<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> with customizing things. Looking up random settings to put into my <code>.vimrc</code> was quite fun - I&rsquo;ve managed to do most of what I usually rely on in VSCode anyhow. The Vim wiki really does happen to have everything.</p>
@@ -80,12 +91,11 @@
 </ol>
 </section>
 
-            <p>- Yours, Kewbish</p>
-        </div>
-        <br><p><a href="../">&lt; More Posts</a></p>
-        <br><br>
-    </section>
-    
-</body>
-
+                <p>- Yours, Kewbish</p>
+            </div>
+            <br />
+            <p><a href="../">&lt; More Posts</a></p>
+            <br /><br />
+        </section>
+    </body>
 </html>

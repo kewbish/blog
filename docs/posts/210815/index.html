@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>A Plaintext Zettelkasten</title>
+        <meta name="description" content="On speaking at Augment Minds 2021 and my notetaking system." />
+        <meta property="og:title" content="A Plaintext Zettelkasten" />
+        <meta property="og:description" content="On speaking at Augment Minds 2021 and my notetaking system." />
+        <meta property="og:url" content="https://kewbi.sh/blog/posts/210815/" />
+        <meta property="twitter:title" content="A Plaintext Zettelkasten" />
+        <meta property="twitter:description" content="On speaking at Augment Minds 2021 and my notetaking system." />
+        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
+        <link rel="stylesheet" href="../../css/main.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            rel="stylesheet"
+        />
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
+        />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Plaintext Zettelkasten</title>
-    <meta name="description" content="On speaking at Augment Minds 2021 and my notetaking system.">
-    <meta property="og:title" content="A Plaintext Zettelkasten">
-    <meta property="og:description" content="On speaking at Augment Minds 2021 and my notetaking system.">
-    <meta property="og:image" content="https://i.imgur.com/QxvZ9Tv.png">
-    <meta property="og:url" content="https://kewbi.sh/blog/posts/210815/">
-    <meta property="twitter:title" content="A Plaintext Zettelkasten">
-    <meta property="twitter:description" content="On speaking at Augment Minds 2021 and my notetaking system.">
-    <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
-    <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
-    <link rel="stylesheet" href="../../css/main.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
-</head>
-
-<body class="cont page">
-    <section class="b-main-2">
-        <p><a href="../">&lt; More Posts</a></p>
-        <h1 class="b-subtitle">A Plaintext Zettelkasten</h1>
-        <p>Published 15 August 2021 at <a href="https://kewbi.sh/blog/posts/210815/">Yours, Kewbish</a>. 3210 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
-        
-        <hr style="margin-bottom:-1%;">
-        <div class="b-writing">
-            <h2 id="introduction">Introduction</h2>
+    <body class="cont page">
+        <section class="b-main-2">
+            <p><a href="../">&lt; More Posts</a></p>
+            <h1 class="b-subtitle">A Plaintext Zettelkasten</h1>
+            <p>
+                Published 15 August 2021 at
+                <a href="https://kewbi.sh/blog/posts/210815/">Yours, Kewbish</a>. 3210
+                words. Subscribe via <a href="../../index.xml">RSS</a>.
+            </p>
+            
+            <hr style="margin-bottom: -1%" />
+            <div class="b-writing">
+                <h2 id="introduction">Introduction</h2>
 <p>With my notetaking workflow, I enjoy working on the meta-flow, building tools, integrations, and new features for myself, just as much as I enjoy actually writing and filling out the content there. I&rsquo;ve recently been fiddling a bit more with my system, integrating additional principles of the wildly popular Zettelkasten system, and having tonnes of fun messing around with command-line tools and Vimscript. In fact, a couple weeks ago, I sat down and worked through my existing notetaking system wishlist: searching within files, jumping to files from outside of Vim, finally integrating tags and intra-note navigation, and more. I&rsquo;ve wanted to implement these for a while now, so finally getting them integrated with my Vim setup was a very satisfying weekend accomplishment.</p>
 <p>As I finished up my setup, I also learned about <a href="https://kewbi.sh/blog/posts/210801/">Augmented Minds 2021</a>, a short unconference that took place a couple weeks ago. Prominent speakers in the HCI space (well, in layman&rsquo;s terms, cool people on Twitter) and a morning of discussion about tools for thought? That sounded like a dream come true - so I spontaneously registered for a ticket. While scanning the OpenCollective page, I noted that they were taking proposals for shorter talks throughout the conference: in fact, the entire unconference was built around these smaller breakout sessions. It seemed like a casual, fun way to share on a topic I&rsquo;m passionate about, and giving lightning talks at other conferences was something I was considering in the future anyways. Long story short, I impulsively signed up to deliver a talk on my Zettelkasten-in-progress, the first topic I could think of off the top of my head. So, among much more qualified speakers and more engaging presentation topics:</p>
 <blockquote>
@@ -115,12 +126,11 @@ A demo of my notetaking system, built around Vim, FZF (and FZF.vim), and rg, fol
 </ol>
 </section>
 
-            <p>- Yours, Kewbish</p>
-        </div>
-        <br><p><a href="../">&lt; More Posts</a></p>
-        <br><br>
-    </section>
-    
-</body>
-
+                <p>- Yours, Kewbish</p>
+            </div>
+            <br />
+            <p><a href="../">&lt; More Posts</a></p>
+            <br /><br />
+        </section>
+    </body>
 </html>

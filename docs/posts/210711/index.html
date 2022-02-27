@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>XFCE Monitor &#43; Bluetooth Setup</title>
+        <meta name="description" content="On my workarounds for my laptop setup." />
+        <meta property="og:title" content="XFCE Monitor &#43; Bluetooth Setup" />
+        <meta property="og:description" content="On my workarounds for my laptop setup." />
+        <meta property="og:url" content="https://kewbi.sh/blog/posts/210711/" />
+        <meta property="twitter:title" content="XFCE Monitor &#43; Bluetooth Setup" />
+        <meta property="twitter:description" content="On my workarounds for my laptop setup." />
+        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
+        <link rel="stylesheet" href="../../css/main.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            rel="stylesheet"
+        />
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
+        />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XFCE Monitor &#43; Bluetooth Setup</title>
-    <meta name="description" content="On my workarounds for my laptop setup.">
-    <meta property="og:title" content="XFCE Monitor &#43; Bluetooth Setup">
-    <meta property="og:description" content="On my workarounds for my laptop setup.">
-    <meta property="og:image" content="https://i.imgur.com/QxvZ9Tv.png">
-    <meta property="og:url" content="https://kewbi.sh/blog/posts/210711/">
-    <meta property="twitter:title" content="XFCE Monitor &#43; Bluetooth Setup">
-    <meta property="twitter:description" content="On my workarounds for my laptop setup.">
-    <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
-    <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
-    <link rel="stylesheet" href="../../css/main.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
-</head>
-
-<body class="cont page">
-    <section class="b-main-2">
-        <p><a href="../">&lt; More Posts</a></p>
-        <h1 class="b-subtitle">XFCE Monitor &#43; Bluetooth Setup</h1>
-        <p>Published 11 July 2021 at <a href="https://kewbi.sh/blog/posts/210711/">Yours, Kewbish</a>. 2057 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
-        
-        <hr style="margin-bottom:-1%;">
-        <div class="b-writing">
-            <h2 id="introduction">Introduction</h2>
+    <body class="cont page">
+        <section class="b-main-2">
+            <p><a href="../">&lt; More Posts</a></p>
+            <h1 class="b-subtitle">XFCE Monitor &#43; Bluetooth Setup</h1>
+            <p>
+                Published 11 July 2021 at
+                <a href="https://kewbi.sh/blog/posts/210711/">Yours, Kewbish</a>. 2057
+                words. Subscribe via <a href="../../index.xml">RSS</a>.
+            </p>
+            
+            <hr style="margin-bottom: -1%" />
+            <div class="b-writing">
+                <h2 id="introduction">Introduction</h2>
 <p>I suppose it wasn&rsquo;t particularly &lsquo;recently&rsquo; anymore, but I quote-unquote &lsquo;recently&rsquo; redid my laptop setup. (It&rsquo;s been at least three months now, but I&rsquo;ve been procrastinating on the writeup for unknown reasons.) My previous setup, if you can even call it that, was the typical hunching over my laptop, staring into the depths of a 15&quot; screen for hours on end situation. Not very good for posture, and probably not very good for my eyesight either. I went through the better part of the pandemic Zooming from there, but my parents and I decided it was probably not a great idea to continue like this. So, I acquired a monitor, a clamshell stand, a Bluetooth keyboard and mouse, a webcam, and off I went.</p>
 <p>Setting all of this up probably would have been easier on Ubuntu with the normal DE and everything, but when I <a href="https://kewbi.sh/blog/posts/200906/">got into Linux</a>, I went with <a href="https://manjaro.org/">Manjaro</a> + <a href="https://xfce.org">XFCE</a> as a DE + <a href="https://i3wm.org/">i3</a> for a WM. Most of the tutorials I found for setting up display profiles on monitor connect, pairing Bluetooth peripherals, and wrangling the power manager to avoid suspending on lid close were mostly for GNOME Ubuntu. The few I found for Manjaro were quite convoluted, and would be using a different DE or device. I was left to trawl my way through the Arch Linux wiki and bodge together pieces of different writeups for what fit my system - it wasn&rsquo;t a very straightforward process. Since I don&rsquo;t want to bother having to figure everything out from scratch if I reinstall, I&rsquo;ve decided to put together what I remember doing to Make Everything Just Work™. If you&rsquo;re looking for a tutorial that&rsquo;ll go through how to replicate a system where:</p>
 <ul>
@@ -94,12 +105,11 @@ First, let&rsquo;s pair the mouse. Once in Blueman, click &lsquo;setup&rsquo; to
 </ol>
 </section>
 
-            <p>- Yours, Kewbish</p>
-        </div>
-        <br><p><a href="../">&lt; More Posts</a></p>
-        <br><br>
-    </section>
-    
-</body>
-
+                <p>- Yours, Kewbish</p>
+            </div>
+            <br />
+            <p><a href="../">&lt; More Posts</a></p>
+            <br /><br />
+        </section>
+    </body>
 </html>

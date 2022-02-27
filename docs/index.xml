@@ -4,8 +4,8 @@
     <title>Yours, Kewbish - a collection of </title>
     <link>https://kewbi.sh/blog/</link>
     <description>Latest Yours, Kewbish posts</description>
-    <managingEditor>(Emilie Ma ◦ Kewbish)</managingEditor>
-    <lastBuildDate>Mon, 14 Feb 2022 19:15:42 -0800</lastBuildDate>
+    <managingEditor>(Emilie Ma ⇋ Kewbish)</managingEditor>
+    <lastBuildDate>Mon, 01 Jan 0001 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://kewbi.sh/blog/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
       <title>Post Code-in: Yours, Kewbish</title>
       <link>https://kewbi.sh/blog/posts/220214/</link>
       <pubDate>14 Feb 2022</pubDate>
-      <author>Emilie Ma ◦ Kewbish</author>
+      <author>Emilie Ma ⇋ Kewbish</author>
       <description>On running this blog for the past two years.</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>On this day, two years ago, I started this blog. The purpose? Nothing, other than to flex that I&rsquo;d just won <a href="https://g.co/gci">Google Code-in 2019</a>, and humblebrag about my tribulations along the way. I really didn&rsquo;t have anything to say back then, other than highlighting projects I&rsquo;d started, or sharing new announcements about cool things that I&rsquo;d participated in. I did a couple series early on about <a href="https://kewbi.sh/blog/posts/200621/">CS50 (Harvard&rsquo;s introductory CS course)</a> and later, <a href="https://kewbi.sh/blog/posts/201213/">CPSC110 (UBC&rsquo;s introductory CS course)</a>. I wrote in a very direct yet rambly and overly verbose tone. I wasn&rsquo;t sure what my voice was, and neither did I know what I really had to communicate.</p>
@@ -71,7 +71,7 @@
       <title>The Secret Garden</title>
       <link>https://kewbi.sh/blog/posts/220130/</link>
       <pubDate>30 Jan 2022</pubDate>
-      <author>Emilie Ma ◦ Kewbish</author>
+      <author>Emilie Ma ⇋ Kewbish</author>
       <description>On public and private thought cultivation.</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>In the field of personal knowledge management, a popular term&rsquo;s popped up to describe knowledge bases: digital gardens. It&rsquo;s cute and endearly quaint - perhaps it reflects a sort of <a href="https://en.wikipedia.org/wiki/Walden">Walden-esque</a> desire to step away from the hustle of grind culture and bustle of digital life and returning to a humbler life of tending one&rsquo;s knowledge garden. There&rsquo;s a growing trend of publishing your personal wikis online, often complete with little Sprout / Sapling / Tree / Evergreen labels to denote the state of thoughts. The quintessential example I see linked the most is <a href="https://notes.andymatuschak.org/About_these_notes">Andy Matuschak&rsquo;s notes</a>. My good friend <a href="https://knowledge.uzpg.me/">Uzay Girit&rsquo;s</a> started one with his tool <a href="https://github.com/archivy/archivy">Archivy</a>. And many, many more - <a href="https://maggieappleton.com/garden">Maggie Appleton&rsquo;s</a>, <a href="https://www.mentalnodes.com/">Anne-Laure Le Cunff&rsquo;s</a>, and <a href="https://jzhao.xyz/thoughts/">Jacky Zhao&rsquo;s</a>, just to name a few.</p>
@@ -110,7 +110,7 @@
       <title>Time in Writing</title>
       <link>https://kewbi.sh/blog/posts/220116/</link>
       <pubDate>16 Jan 2022</pubDate>
-      <author>Emilie Ma ◦ Kewbish</author>
+      <author>Emilie Ma ⇋ Kewbish</author>
       <description>On the role of time in iterative writing.</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>Over my break between my fall and spring terms of university, I&rsquo;d been writing a lot - mostly thinking of new article ideas for this blog. I&rsquo;d finally had more time to read through the huge backlog of interesting articles I&rsquo;d found for myself, so I spent some time riffing off of concepts that I&rsquo;d encountered and wanted to discuss. It was very peaceful to be able to sit down, unencumbered by the prospect of having to grind through endless maths problems, and just write. I honestly felt like I did a lot of good thinking over that break - it was like all the noise finally quieted down, and my brain decided to overcompensate for not doing much concrete work by coming up with a lot of thoughts. I decided to transform some of those thoughtchains into articles, and some into personal notes for myself. Bottom line - I spent a lot of time reading, writing, and musing this break: it was very enjoyable, and a good mental rest before I was thrown back into term two.</p>
@@ -156,7 +156,7 @@
       <title>Buzzwords To Come</title>
       <link>https://kewbi.sh/blog/posts/220102/</link>
       <pubDate>02 Jan 2022</pubDate>
-      <author>Emilie Ma ◦ Kewbish</author>
+      <author>Emilie Ma ⇋ Kewbish</author>
       <description>On my far-fetched plans for 2022.</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>I was speaking with some friends who&rsquo;d read a <a href="https://kewbi.sh/blog/posts/211219/">previous blog post</a> earlier - we were talking about the balance of trying new things out to learn and explore versus continuing down paths that we were already on. He mentioned that this was how reinforcement learning works, which was a very interesting analogy that I hadn&rsquo;t thought of. Generally most of the time, the model / agent does whatever it thinks will result in the best outcome, but for some <code>x%</code> of the time, it takes a random action that&rsquo;s not in the set of &lsquo;possibly beneficial paths&rsquo;. That <code>x%</code> is how it discovers new opportunities for potentially good paths, perhaps finding shorter or more efficient routes to solve a problem.</p>
@@ -210,7 +210,7 @@
       <title>A Year of Articles</title>
       <link>https://kewbi.sh/blog/posts/211226/</link>
       <pubDate>26 Dec 2021</pubDate>
-      <author>Emilie Ma ◦ Kewbish</author>
+      <author>Emilie Ma ⇋ Kewbish</author>
       <description>On tracking (almost) every article I read this year.</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>Early in January this year, I had a bit of a realization I was spending too much time reading blog posts. That, combined with a typical New-Year&rsquo;s resolution-y mood, resulted in me <a href="https://kewbi.sh/blog/posts/210207/">tracking every single article I read that month</a>. I&rsquo;d been reading a bit about the whole <a href="https://reddit.com/r/QuantifiedSelf">Quantified Self</a> community, and thought that while I wouldn&rsquo;t go as hardcore with collecting data on myself, I&rsquo;d take a stab at recording and rationalizing my leisure content consumption. Armed with a shabbily-patched-together Chrome extension and a hacky Google Form, I sorted out a system where I&rsquo;d hit a keybind to record the URL and timestamp of any post I was reading. This experiment mostly aimed to give me a sense of what my reading habits were like, and give me a fun data visualization at the end. Well, I guess my muscle memory of hitting Alt-T every time I stumbled across anything interesting on Twitter persisted, because I ended up continuing this experiment for the whole year.</p>
@@ -275,7 +275,7 @@
       <title>Least Common Denominators</title>
       <link>https://kewbi.sh/blog/posts/211219/</link>
       <pubDate>19 Dec 2021</pubDate>
-      <author>Emilie Ma ◦ Kewbish</author>
+      <author>Emilie Ma ⇋ Kewbish</author>
       <description>On an atomicized software culture.</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>A while ago, I finally bit the bullet and picked up a copy of <a href="https://www.calnewport.com/books/digital-minimalism/"><em>Digital Minimalism</em></a> at the library. It&rsquo;s a hugely famous book by Cal Newport, a popular (and for decently good reason) productivity author and CS professor. If you haven&rsquo;t heard of his philosophies surrounding technology usage and mindful technologism, you might want to go take a look at his work yourself. <em>Digital Minimalism</em> specifically focuses about social media and connecting with others virtually. A quick summary of <em>Digital Minimalism</em>: social media is often used for things that aren&rsquo;t useful, but &lsquo;could be&rsquo; - and that &lsquo;could&rsquo; is what hooks us to our devices in spite of ostensibly more productive and meaningful activities. The book centers around how to be more intentional about your digital footprint, media consumption, and online interactions with others.</p>
@@ -314,7 +314,7 @@
       <title>Metadata and You</title>
       <link>https://kewbi.sh/blog/posts/211114/</link>
       <pubDate>14 Nov 2021</pubDate>
-      <author>Emilie Ma ◦ Kewbish</author>
+      <author>Emilie Ma ⇋ Kewbish</author>
       <description>On metadata, its dimensions, and its impacts.</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>Recently, I&rsquo;ve started pondering the tools-for-thought phenomena again, but perhaps in a more meta way. From what I&rsquo;ve noticed on Twitter (at least for the short amount of time that I&rsquo;ve been checking content from it), there&rsquo;s been a trend over the past couple years with the explosion of popularity of apps like <a href="https://roamresearch.com/">Roam Research</a>, <a href="https://obsidian.md/">Obsidian</a>, <a href="https://logseq.com/">Logseq</a>, <a href="https://www.notion.so/">Notion</a>, <a href="https://workflowy.com/b/">Workflowy</a>, <a href="https://ankiweb.net/">Anki</a>, or the myriad of other apps that solve a major pain point for a lot of people: the management, and meta-management of knowledge. Here, I&rsquo;d like to focus on the meta-management aspect of this a bit. I&rsquo;ve noticed a lot of the tools rapidly gaining popularity and (appear to be) pushing the forefront of human-computing interfaces have a shared trait in common: they&rsquo;re all in essence ways to manipulate metadata.</p>
@@ -355,7 +355,7 @@
       <title>Starting Anki</title>
       <link>https://kewbi.sh/blog/posts/211031/</link>
       <pubDate>31 Oct 2021</pubDate>
-      <author>Emilie Ma ◦ Kewbish</author>
+      <author>Emilie Ma ⇋ Kewbish</author>
       <description>On proper SRS, GTK hacks, and the Leitner system.</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>Something that I&rsquo;ve realized throughout my first month and a half at university, is the sheer volume of information and responsibility placed on a student&rsquo;s shoulders. I love it. Being able to manage myself and have full(-ish) control of my courses, my performance, and the rest of my life has been great. I like being immersed in content that I truly don&rsquo;t understand, and that challenges me a bit to actually understand and make sense of the material. However, there&rsquo;s a balance: I like that there&rsquo;s exciting and decently interesting information, but it&rsquo;s, of course, annoying that there&rsquo;s a lot of it. I&rsquo;ve had to, and am still in the process of, figure out how to get through all of this material, and get through it decently well. My courses are very spread out in terms of specialization, and some are quite memorization focused. Improving and optimizing my recall and comprehension are now starting to become interests and priorities of mine.</p>
@@ -411,7 +411,7 @@ mw.app.setStyle(QStyleFactory.create(&quot;gtk2&quot;))
       <title>More Linux Tweaks</title>
       <link>https://kewbi.sh/blog/posts/211003/</link>
       <pubDate>03 Oct 2021</pubDate>
-      <author>Emilie Ma ◦ Kewbish</author>
+      <author>Emilie Ma ⇋ Kewbish</author>
       <description>On troubleshooting many Linux-related issues.</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>It&rsquo;s been a while since I had the time to write anything for YK - I&rsquo;ve been getting settled into the quintessential university freshman experience at UBC, and loving it so far. Every upper-year I meet keeps telling me about the rose-coloured glasses apparently all freshmen have, with something along the lines of &lsquo;well, I hope you can keep that mindset up!&rsquo;. It&rsquo;s not particularly encouraging, but to be fair, I&rsquo;ve only been here a month, and haven&rsquo;t had any major quizzes or midterms yet, so maybe I do still have my pink spectacles quite firmly on. More on this some other time: this isn&rsquo;t some university reflection, after all, it&rsquo;s a tech blog!</p>
@@ -540,7 +540,7 @@ EndSection
       <title>The Process Matters</title>
       <link>https://kewbi.sh/blog/posts/210905/</link>
       <pubDate>05 Sep 2021</pubDate>
-      <author>Emilie Ma ◦ Kewbish</author>
+      <author>Emilie Ma ⇋ Kewbish</author>
       <description>On the journey as an end, not a means.</description>
       <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>I feel like I start a lot of these blog posts with stories from when I was little, but here&rsquo;s another: when I was in elementary school, I used to be fascinated by stop-motion animation<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. A very niche thing to be into - but then again, aren&rsquo;t all my hobbies? I watched hours of <a href="https://en.wikipedia.org/wiki/Shaun_the_Sheep">Shawn the Sheep</a>, some of the <a href="https://en.wikipedia.org/wiki/Wallace_and_Gromit">Wallace and Gromit</a> shorts, and tonnes of the little claymation (stop-animations created with clay) shorts on YouTube. I didn&rsquo;t have the access to, or the patience for, the extensive sets and equipment used by professional studios, so I settled for tinkering with my little Lego Friends sets. There was a book at my favourite library branch called <a href="https://www.amazon.ca/Brick-Flicks-Comprehensive-Making-Stop-Motion/dp/1629146498">Brick Flicks</a> that I must have read and reread cover to cover at least a couple times. I made some half decent animations in Windows Movie Maker (the old version packaged with Windows 7, if that means anything to you) just by importing hundreds of photos taken on the family point and shoot, and setting the duration of the slideshow as something like 0.05 seconds. All of a sudden, I could weave together stories about whatever took place in my imagination and act them out with little plastic people - it was nothing short of magical.</p>

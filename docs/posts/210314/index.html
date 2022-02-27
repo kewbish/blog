@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CPSC 110: Weeks 3 and 4</title>
+        <meta name="description" content="On trusting the natural recursion." />
+        <meta property="og:title" content="CPSC 110: Weeks 3 and 4" />
+        <meta property="og:description" content="On trusting the natural recursion." />
+        <meta property="og:url" content="https://kewbi.sh/blog/posts/210314/" />
+        <meta property="twitter:title" content="CPSC 110: Weeks 3 and 4" />
+        <meta property="twitter:description" content="On trusting the natural recursion." />
+        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
+        <link rel="stylesheet" href="../../css/main.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            rel="stylesheet"
+        />
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
+        />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CPSC 110: Weeks 3 and 4</title>
-    <meta name="description" content="On trusting the natural recursion.">
-    <meta property="og:title" content="CPSC 110: Weeks 3 and 4">
-    <meta property="og:description" content="On trusting the natural recursion.">
-    <meta property="og:image" content="https://i.imgur.com/QxvZ9Tv.png">
-    <meta property="og:url" content="https://kewbi.sh/blog/posts/210314/">
-    <meta property="twitter:title" content="CPSC 110: Weeks 3 and 4">
-    <meta property="twitter:description" content="On trusting the natural recursion.">
-    <meta property="twitter:image" content="https://i.imgur.com/QxvZ9Tv.png">
-    <link rel="stylesheet" href="https://kewbi.sh/css/main.css">
-    <link rel="stylesheet" href="../../css/main.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" rel="stylesheet">
-</head>
-
-<body class="cont page">
-    <section class="b-main-2">
-        <p><a href="../">&lt; More Posts</a></p>
-        <h1 class="b-subtitle">CPSC 110: Weeks 3 and 4</h1>
-        <p>Published 14 March 2021 at <a href="https://kewbi.sh/blog/posts/210314/">Yours, Kewbish</a>. 1236 words. Subscribe via <a href="../../index.xml">RSS</a>.</p>
-        
-        <hr style="margin-bottom:-1%;">
-        <div class="b-writing">
-            <h2 id="introduction">Introduction</h2>
+    <body class="cont page">
+        <section class="b-main-2">
+            <p><a href="../">&lt; More Posts</a></p>
+            <h1 class="b-subtitle">CPSC 110: Weeks 3 and 4</h1>
+            <p>
+                Published 14 March 2021 at
+                <a href="https://kewbi.sh/blog/posts/210314/">Yours, Kewbish</a>. 1236
+                words. Subscribe via <a href="../../index.xml">RSS</a>.
+            </p>
+            
+            <hr style="margin-bottom: -1%" />
+            <div class="b-writing">
+                <h2 id="introduction">Introduction</h2>
 <p>Spring break has just begun, and I&rsquo;ve decided to devote some more significant time to CPSC 110. It helps that I&rsquo;m sort of floating between projects and want a bit of bland coursework to churn through at the moment, so I&rsquo;ve been spending my leisure time listening to Kiczales go on about data and recursion. I&rsquo;ve been ramping up my progress with CPSC 110 for the last couple weeks, and I&rsquo;ve managed to do a couple &lsquo;weeks&rsquo;, or modules, since I last published a set of notes. Regarding my old end date goal, I&rsquo;ve decided to shift my goal more towards a September challenge (of the exam), to give myself time over the summer to cram and practise with old papers. (Ironically, I&rsquo;d also decided at the beginning of the year that I&rsquo;d take this summer to rest and relax before university, but I suppose that&rsquo;s gone out the window in lieu of some hopefully more engaging plans. And hey, if I choose to relax that way, I guess it&rsquo;s a perfectly fine thing to do.)</p>
 <p>After getting back in the swing of Racket and relearning the templates and design recipes, these couple modules haven&rsquo;t been too challenging. Adding systematically onto the recipes makes the logical jumps between concepts less sharp, and makes the course much less intimidating. Having a repository and tracking my progress with the course has definitely motivated me to work on it more. So, here&rsquo;s a couple modules' worth of notes - but as always, if you&rsquo;re not following along with CPSC 110 or have no interest in learning about compound and arbitrarily long data, you might want to go off and read a <a href="https://kewbi.sh/blog/posts/210307/">different post</a>.</p>
 <h2 id="notes---week-3">Notes - Week 3</h2>
@@ -138,12 +149,11 @@
 </ol>
 </section>
 
-            <p>- Yours, Kewbish</p>
-        </div>
-        <br><p><a href="../">&lt; More Posts</a></p>
-        <br><br>
-    </section>
-    
-</body>
-
+                <p>- Yours, Kewbish</p>
+            </div>
+            <br />
+            <p><a href="../">&lt; More Posts</a></p>
+            <br /><br />
+        </section>
+    </body>
 </html>
