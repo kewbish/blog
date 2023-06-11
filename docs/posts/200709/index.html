@@ -1,47 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>CS50: Week 2</title>
-        <meta name="description" content="On my cryptographic attempts in C." />
-        <meta property="og:title" content="CS50: Week 2" />
-        <meta property="og:description" content="On my cryptographic attempts in C." />
-        <meta property="og:url" content="https://kewbi.sh/blog/posts/200709/" />
-        <meta property="twitter:title" content="CS50: Week 2" />
-        <meta property="twitter:description" content="On my cryptographic attempts in C." />
-        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
-        <link rel="stylesheet" href="../../css/main.css" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-            rel="stylesheet"
-        />
-        <link
-            rel="icon"
-            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
-        />
-    </head>
-
-    <body class="cont page">
-        <section class="b-main-2">
-            <p><a href="../">&lt; More Posts</a></p>
-            <h1 class="b-subtitle">CS50: Week 2</h1>
-            <p>
-                Published 09 July 2020 at
-                <a href="https://kewbi.sh/blog/posts/200709/">Yours, Kewbish</a>. 1064
-                words. Subscribe via <a href="../../index.xml">RSS</a>.
-            </p>
-            
-            <p>Also published on <a href="https://dev.to/kewbish/cs50-week-2-arrays-in-c-3j7p">Dev.to</a>.</p>
-            
-            <hr style="margin-bottom: -1%" />
-            <div class="b-writing">
-                <h2 id="introduction">Introduction</h2>
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>CS50: Week 2</title><meta name=description content="On my cryptographic attempts in C."><meta property=og:title content="CS50: Week 2"><meta property=og:description content="On my cryptographic attempts in C."><meta property=og:url content="https://kewbi.sh/blog/posts/200709/"><meta property=twitter:title content="CS50: Week 2"><meta property=twitter:description content="On my cryptographic attempts in C."><link rel=icon href=https://kewbi.sh/small-logo.png><link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-italic.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-700.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
+/>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=../../css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=../ >‹ go back</a><div class=b-post><h1 class=display-title>CS50: Week 2.</h1><p style=text-indent:0>Published 09 July 2020 at <a href="https://kewbi.sh/blog/posts/200709/">Yours, Kewbish</a>.  Also published on <a href="https://dev.to/kewbish/cs50-week-2-arrays-in-c-3j7p">Dev.to</a>.  1064 words. Subscribe via <a href=../../index.xml>RSS</a>.<hr><div class=grid-element><p style=text-indent:0;margin-bottom:0>This post is unlisted and has been archived. This doesn't represent my best work; please check out the posts listed <a href=../../posts>here</a> instead.</div><div class=b-writing><h2 id="introduction">Introduction</h2>
 <p>And now, our <em>third</em> week of CS50!<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> This week, we went over arrays, but also spent a lot of time on CLI / terminal things, and debugging tools used by CS50. I&rsquo;m starting to get more familiar with the CS50 system, and how I can do problem sets and debug on my <em>local</em> system, instead of <em>the cloud IDE</em>. (Again, remember how I hate it?) This was our introduction to proper command line arguments, and how to use function arguments in <code>main</code> too.</p>
 <h2 id="notes">Notes</h2>
 <p>Some of this references the video and the problem set, so you might want to check out the <a href="https://cs50.harvard.edu/x/2020/notes/2/">notes here</a>.</p>
@@ -126,7 +98,7 @@
 </li>
 </ul>
 <h2 id="problem-sets">Problem Sets</h2>
-<p>Last week, I mentioned how I prefer doing both of the &lsquo;more and less&rsquo; problems in the problem set for a week, noting that the &lsquo;more&rsquo; usually builds off the &lsquo;less&rsquo;. This week was a great example of that.</p>
+<p>Last week, I mentioned how I prefer doing both of the &lsquo;more and less&rsquo; problems in the problem set for a week, noting that the &lsquo;more&rsquo; usually builds off the &rsquo;less&rsquo;. This week was a great example of that.</p>
 <p>Readability doesn&rsquo;t really count, that was more an introduction to looping (? I didn&rsquo;t use an array at all so I&rsquo;m not sure what they&rsquo;re on about), but Caesar and Substitution were super fun. Caesar is, what you might think, a caesar cipher implementation. Substitution implements a simple substitution cipher. While working through Caesar, I found a bunch of information about character codes and validating command line arguments, as well as working with aforementioned character codes and CLI arguments. For example, I was super confused about a Segmentation Fault that was thrown while attempting Caesar because I&rsquo;d forgotten to check that the argument actually existed. As well, I learned that you could :gasp: subtract characters, instead of just using the character code. These two morsels of information were super helpful in solving Substitution. Both ciphers deal with some sort of &lsquo;distance from something else and then add key&rsquo; algorithm, and I found that figuring Caesar out let me speedrun through Substitution so much more quickly.</p>
 <h2 id="setting-up-cs50-locally">Setting up CS50 locally</h2>
 <p>I&rsquo;ve finally finished setting up CS50&rsquo;s development tools on my own system - since last week, I&rsquo;ve been trying to tweak a couple commands and things to make everything <em>just work</em>.</p>
@@ -151,30 +123,22 @@
 </li>
 <li>in the WSL <code>.bashrc</code>, add a function that has the following command:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cs50make<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> 
-    <span style="color:#75715e"># command copied from running make in ide.cs50.io</span>
-    <span style="color:#75715e"># replace the [whatever].c with &#34;$1&#34;.c, and same for the output</span>
-<span style="color:#f92672">}</span> 
-export -f cs50make
-</code></pre></div><p>which will let you run <code>cs50make</code> in terminal and run the equivalent <code>make</code> command</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cs50make<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># command copied from running make in ide.cs50.io</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># replace the [whatever].c with &#34;$1&#34;.c, and same for the output</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>export -f cs50make
+</span></span></code></pre></div><p>which will let you run <code>cs50make</code> in terminal and run the equivalent <code>make</code> command</p>
 <p>See - it&rsquo;s not <em>that</em> hard. Even easier on Linux, probably. And now, you can CS50 in VSCode, and have beautiful syntax highlighting and snippets. <del>God, I hate that IDE.</del></p>
 <h2 id="conclusion">Conclusion</h2>
 <p>Apologized for the extremely strange blogging schedule - expect another post on Sunday as well. I&rsquo;d finished a couple of problem sets and weeks in one week, while my writing schedule was supposed to run at one post per week. I&rsquo;ve had to spend a bunch of time writing, so please appreciate me-</p>
 <p>I&rsquo;ve been working on some random scripts - nothing on GitHub, just little automation things. Been doing a little maintenance on <a href="https://diveintoht.ml">diveintoht.ml</a> as well. Hopefully I&rsquo;ll start a bigger project soon, looking forward to the final project of CS50!</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>Undoubtedly one of the more difficult weeks.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
-
-                <p>- Yours, Kewbish</p>
-            </div>
-            <br />
-            <p><a href="../">&lt; More Posts</a></p>
-            <br /><br />
-        </section>
-    </body>
-</html>
+</div>
+</div><br></div><p><a href=../ >‹ go back</a></main>

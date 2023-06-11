@@ -1,49 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Racket and Chip-8</title>
-        <meta name="description" content="On contemplating opcodes." />
-        <meta property="og:title" content="Racket and Chip-8" />
-        <meta property="og:description" content="On contemplating opcodes." />
-        <meta property="og:url" content="https://kewbi.sh/blog/posts/201115/" />
-        <meta property="twitter:title" content="Racket and Chip-8" />
-        <meta property="twitter:description" content="On contemplating opcodes." />
-        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
-        <link rel="stylesheet" href="../../css/main.css" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-            rel="stylesheet"
-        />
-        <link
-            rel="icon"
-            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
-        />
-    </head>
-
-    <body class="cont page">
-        <section class="b-main-2">
-            <p><a href="../">&lt; More Posts</a></p>
-            <h1 class="b-subtitle">Racket and Chip-8</h1>
-            <p>
-                Published 15 November 2020 at
-                <a href="https://kewbi.sh/blog/posts/201115/">Yours, Kewbish</a>. 1503
-                words. Subscribe via <a href="../../index.xml">RSS</a>.
-            </p>
-            
-            <hr style="margin-bottom: -1%" />
-            <div class="b-writing">
-                <h2 id="introduction">Introduction</h2>
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Racket and Chip-8</title><meta name=description content="On contemplating opcodes."><meta property=og:title content="Racket and Chip-8"><meta property=og:description content="On contemplating opcodes."><meta property=og:url content="https://kewbi.sh/blog/posts/201115/"><meta property=twitter:title content="Racket and Chip-8"><meta property=twitter:description content="On contemplating opcodes."><link rel=icon href=https://kewbi.sh/small-logo.png><link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-italic.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-700.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
+/>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=../../css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=../ >‹ go back</a><div class=b-post><h1 class=display-title>Racket and Chip-8.</h1><p style=text-indent:0>Published 15 November 2020 at <a href="https://kewbi.sh/blog/posts/201115/">Yours, Kewbish</a>.  1503 words. Subscribe via <a href=../../index.xml>RSS</a>.<hr><div class=b-writing><h2 id="introduction">Introduction</h2>
 <p>If all goes well, I will hopefully be attending the University of British Columbia this coming September - probably for computer science. As a first year, I&rsquo;m going to end up taking <a href="https://sites.google.com/site/ubccpsc110/">CPSC 110</a>. Unfortunately, CPSC 110 happens to be firmly entrenched in the language of Racket. Because I&rsquo;m also plan on challenging (credit by exam, they call it apparently) the course, and was thinking of getting some preliminary practise with Racket. It also seems like an interesting language overall, and I was a bit bored after adding an <a href="https://diveintoht.ml">editor to diveintoht.ml</a>. So, I decided to try something in Racket.</p>
 <p>That something is currently the skeleton of a <a href="https://en.wikipedia.org/wiki/CHIP-8">Chip-8 emulator</a>. Chip-8 was apparently historically used on the COSMAC VIP and run on the Chip-8 virtual machine, a sentence which I am not entirely sure I understand myself. I&rsquo;ve had about zero experience with trying to emulate or do anything lower level than <a href="https://kewbi.sh/blog/posts/200712/">CS50&rsquo;s C sections</a>. So, I thought this would be a fun challenge.</p>
 <p>Was trying to juggle learning a new programming language, the syntax of which was completely unlike anything I&rsquo;d worked with before, and wrapping my brain around hexadecimal and opcoes at the same time a good idea? Probably not, but I&rsquo;ve managed to do a decent chunk of work, and I thought I&rsquo;d write about it today.</p>
-<h2 id="printf-so-racket">(printf &ldquo;So, Racket.&quot;)</h2>
+<h2 id="printf-so-racket">(printf &ldquo;So, Racket.&rdquo;)</h2>
 <p>After blundering through some install instructions, I had Racket. And just because I decided to, I didn&rsquo;t install DrRacket either. I originally had the contents of above printf as &lsquo;Hello World&rsquo;. I don&rsquo;t think I&rsquo;ve ever done a proper Hello World program<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, and hey, there was no time like the present. So began my stumbling into Racket.</p>
 <p>The Racket language docs are rather complicated for a complete beginner, which I was. I also had the misfortune of only finding <a href="https://cs.uwaterloo.ca/~plragde/flaneries/TYR/">Teach Yourself Racket</a> and <a href="https://docs.racket-lang.org/guide/">The Racket Guide</a> just after muddling my way through too many Stack Overflow pages.</p>
 <p>Racket is apparently &lsquo;functional programming&rsquo; (oh look - a buzzword!), so that was another challenge I had to deal with. Most lines are something like <code>([function] a b)</code>. This is extremely different from what I&rsquo;ve worked with before. This means it took me a solid couple minutes while trying my first Pythagorean&rsquo;s project to even realize that I was unconsciously doing <code>(a + b)</code>. The proper <code>(+ a b)</code>. The constant parenthesis matching is something that <a href="https://github.com/neoclide/coc-pairs">coc-pairs</a> really helped with, so I&rsquo;m happy I didn&rsquo;t have to deal with constantly reaching around. Also, something else that was interesting - no semicolons! The whole wrapping expressions and definitions concept wasn&rsquo;t too bad either.</p>
@@ -60,26 +34,18 @@
 <p>I should also point out that most of my emulator has been based, or at least somewhat referenced from <a href="https://github.com/Bourg/chip8">Austin Bourgerie&rsquo;s emulator</a>. It seemed to be the only emulator in Racket I was able to find that wasn&rsquo;t too incomplete. [edit: also found <a href="https://github.com/theo-lw/chip8">theo-lw&rsquo;s</a> recently. Was helpful.] It pointed me in the right direction in several tricky places. My approaches for getting specific bytes and positions for specific opcodes and the general program was heavily inspired by it. I&rsquo;d also like to recommend <a href="http://devernay.free.fr/hacks/chip8/C8TECH10.HTM">Thomas Greene&rsquo;s, aka Cowgod&rsquo;s, reference on Chip-8</a>. Clear and concise, and was helpful when I encountered new concepts.</p>
 <p>I&rsquo;m nowhere near done with my emulator. As of writing this, I have the reading of the ROM and the beginnings of the opcode processing for codes starting with characters 0 through 7. I hope to finish the opcodes sometime this week and see where I can get myself with graphics and input. From preliminary research, graphics doesn&rsquo;t seem too bad - I can probably just do those in terminal with half blocks ASCII characters for each row. Input, though, looks a bit tricky. Apparently, Chip-8 itself has a bunch of inconsistencies with how implementations handle input. Besides, I&rsquo;m not entirely sure how to tackle input in the terminal without messing up display at the same time.<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
 <p>It&rsquo;s been a fun detour from web and tinkering with NPM though, and while I&rsquo;ve been trying to learn the basics of Racket and Chip-8, I&rsquo;m also learning a lot.</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>At this point, I feel like Hello World programs are kind of the baseline of programming one needs to know. Similar to the &lsquo;vast knowledge of web design&rsquo; lines people slap on their resume, maybe Hello Worlds are also part of that extremely limited but perhaps resume-able set of things people first learn to program.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
+<li id="fn:2">
 <p>Instead of just copy-pasting code, which would have been the easiest way to get a working emulator up, but also the most useless.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:3" role="doc-endnote">
+<li id="fn:3">
 <p>Though I <em>was</em> looking at Curses for Python, and that seems relatively painless. Doesn&rsquo;t seem to be a proper Curses library for Racket that I&rsquo;ve found ye. However, I&rsquo;m also entirely unsure how package management in Racket even works. A problem for later. [edit: I found <a href="https://github.com/dys-bigwig/racket-ncurses">racket-ncurses</a>, which looks like it should work!]&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
-
-                <p>- Yours, Kewbish</p>
-            </div>
-            <br />
-            <p><a href="../">&lt; More Posts</a></p>
-            <br /><br />
-        </section>
-    </body>
-</html>
+</div>
+</div><br></div><p><a href=../ >‹ go back</a></main>

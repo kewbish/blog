@@ -1,47 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Webdev in Vim</title>
-        <meta name="description" content="On Vim for web development." />
-        <meta property="og:title" content="Webdev in Vim" />
-        <meta property="og:description" content="On Vim for web development." />
-        <meta property="og:url" content="https://kewbi.sh/blog/posts/200920/" />
-        <meta property="twitter:title" content="Webdev in Vim" />
-        <meta property="twitter:description" content="On Vim for web development." />
-        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
-        <link rel="stylesheet" href="../../css/main.css" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-            rel="stylesheet"
-        />
-        <link
-            rel="icon"
-            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
-        />
-    </head>
-
-    <body class="cont page">
-        <section class="b-main-2">
-            <p><a href="../">&lt; More Posts</a></p>
-            <h1 class="b-subtitle">Webdev in Vim</h1>
-            <p>
-                Published 20 September 2020 at
-                <a href="https://kewbi.sh/blog/posts/200920/">Yours, Kewbish</a>. 1548
-                words. Subscribe via <a href="../../index.xml">RSS</a>.
-            </p>
-            
-            <p>Also published on <a href="https://dev.to/kewbish/webdev-in-vim-18d1">Dev.to</a>.</p>
-            
-            <hr style="margin-bottom: -1%" />
-            <div class="b-writing">
-                <h2 id="introduction">Introduction</h2>
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Webdev in Vim</title><meta name=description content="On Vim for web development."><meta property=og:title content="Webdev in Vim"><meta property=og:description content="On Vim for web development."><meta property=og:url content="https://kewbi.sh/blog/posts/200920/"><meta property=twitter:title content="Webdev in Vim"><meta property=twitter:description content="On Vim for web development."><link rel=icon href=https://kewbi.sh/small-logo.png><link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-italic.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-700.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
+/>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=../../css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=../ >‹ go back</a><div class=b-post><h1 class=display-title>Webdev in Vim.</h1><p style=text-indent:0>Published 20 September 2020 at <a href="https://kewbi.sh/blog/posts/200920/">Yours, Kewbish</a>.  Also published on <a href="https://dev.to/kewbish/webdev-in-vim-18d1">Dev.to</a>.  1548 words. Subscribe via <a href=../../index.xml>RSS</a>.<hr><div class=b-writing><h2 id="introduction">Introduction</h2>
 <p>As you may have noticed from my <a href="https://kewbi.sh/blog/posts/200913/">last post</a>, I&rsquo;ve been doing a lot of editing and writing in Vim. I mostly used VSCode before this, which came with a lot of nice housekeeping features, such as integrated git menus, and lots of autoformatting and intellisense options. When moving to Vim, the lack of these quality of life features was pretty sorely missed - I remember the first day I was properly on Linux trying to edit scripts for <a href="https://github.com/kewbish/revshare-gh">revshare-gh</a>, I was very annoyed by having to type out both the beginning and ending bracket in arrow functions. I was definitely missing the autoformat on save setting, and the nice indenting that was automatically in place.</p>
 <p>Then again, Vim definitely can be made to do all these things. The thing is, configuring Vim to do something that VSCode does by default usually takes <em>time</em>. If I was in the middle of a school week when I&rsquo;d tried to get Vim set up, I definitely wouldn&rsquo;t have the time (or mental energy) to research language servers or autocompletion. I can see why this might be a reason that people&rsquo;d prefer just going with an IDE and clicking for one theme change rather than trawl through the Vim Wiki for the solution to a problem that doesn&rsquo;t exist. However, I do also like the customizability of Vim - I can change every colour, snippet, expansion, and keybinding, among many, many other configuration options.</p>
 <p>This post will serve as a sort of journal during my first couple weeks doing webdev in Vim, which isn&rsquo;t something I&rsquo;ve seen a lot of resources and blog posts for (that being said, I didn&rsquo;t go much further than the first couple pages of Google). For context, these couple weeks I&rsquo;ve mostly been finishing revshare-gh and redesigning my website<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> - so I&rsquo;ve mostly been working in Javascript (yes, <em>JS</em>), HTML / CSS, and then a bit of YAML.</p>
@@ -63,26 +35,18 @@
 <p>If you&rsquo;d like to see my final configuration files, they&rsquo;re over at my <a href="https://github.com/kewbish/dotfiles">dotfiles repo</a>. I&rsquo;ve removed AutoComplPop - don&rsquo;t need it with Coc&rsquo;s autocompletion menu. Also took out the auto-pairs extension, which can also be done with <code>coc-pairs</code>.</p>
 <p>While Vim&rsquo;s certainly a lot more minimal than VSCode, I don&rsquo;t really see a point in going back to VSCode and a Vim extension, for example. I&rsquo;ve managed to make my Vim work well enough for me at the moment, and I&rsquo;m not working on large Vue projects at the moment, so for now, it&rsquo;ll be great. I really like the setup right now - it feels very Emilie™.</p>
 <p>Anyway, the school year&rsquo;s starting in exactly an hour and 4 minutes as of writing (yes, I prewrite these articles), so I&rsquo;m looking forward to the things I have lined up. Hopefully, I hear back from a couple interviews I have, and I&rsquo;ll have enough time to balance homework and my personal projects. This time of year is always a flood of emails, new responsibilities, and metric tonnes of assignments, but here&rsquo;s to hoping it&rsquo;ll be a great year.</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>Still very much a work in progress - I also still need to port styles back over to this blog, so please forgive if this blog remains looking sort of ugly and blocky for a few weeks.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
+<li id="fn:2">
 <p>I was very much confused to find out that people actually hid their completion menu and just went from <code>&lt;C-Space&gt;</code>, even in normal IDEs. I&rsquo;d always had the autocompletion prompt open at all times - didn&rsquo;t even know it was an option to turn it off.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:3" role="doc-endnote">
+<li id="fn:3">
 <p>The git integration was probably the thing I missed the least. It wasn&rsquo;t that hard to run <code>git add .</code> and <code>git commit -m</code>, and I&rsquo;m probably going to benefit more from having to interact with Git in the terminal instead of using a UI for everything.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
-
-                <p>- Yours, Kewbish</p>
-            </div>
-            <br />
-            <p><a href="../">&lt; More Posts</a></p>
-            <br /><br />
-        </section>
-    </body>
-</html>
+</div>
+</div><br></div><p><a href=../ >‹ go back</a></main>

@@ -1,45 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>XFCE Monitor &#43; Bluetooth Setup</title>
-        <meta name="description" content="On my workarounds for my laptop setup." />
-        <meta property="og:title" content="XFCE Monitor &#43; Bluetooth Setup" />
-        <meta property="og:description" content="On my workarounds for my laptop setup." />
-        <meta property="og:url" content="https://kewbi.sh/blog/posts/210711/" />
-        <meta property="twitter:title" content="XFCE Monitor &#43; Bluetooth Setup" />
-        <meta property="twitter:description" content="On my workarounds for my laptop setup." />
-        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
-        <link rel="stylesheet" href="../../css/main.css" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-            rel="stylesheet"
-        />
-        <link
-            rel="icon"
-            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
-        />
-    </head>
-
-    <body class="cont page">
-        <section class="b-main-2">
-            <p><a href="../">&lt; More Posts</a></p>
-            <h1 class="b-subtitle">XFCE Monitor &#43; Bluetooth Setup</h1>
-            <p>
-                Published 11 July 2021 at
-                <a href="https://kewbi.sh/blog/posts/210711/">Yours, Kewbish</a>. 2057
-                words. Subscribe via <a href="../../index.xml">RSS</a>.
-            </p>
-            
-            <hr style="margin-bottom: -1%" />
-            <div class="b-writing">
-                <h2 id="introduction">Introduction</h2>
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>XFCE Monitor &#43; Bluetooth Setup</title><meta name=description content="On my workarounds for my laptop setup."><meta property=og:title content="XFCE Monitor &#43; Bluetooth Setup"><meta property=og:description content="On my workarounds for my laptop setup."><meta property=og:url content="https://kewbi.sh/blog/posts/210711/"><meta property=twitter:title content="XFCE Monitor &#43; Bluetooth Setup"><meta property=twitter:description content="On my workarounds for my laptop setup."><link rel=icon href=https://kewbi.sh/small-logo.png><link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-italic.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-700.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
+/>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=../../css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=../ >‹ go back</a><div class=b-post><h1 class=display-title>XFCE Monitor &#43; Bluetooth Setup.</h1><p style=text-indent:0>Published 11 July 2021 at <a href="https://kewbi.sh/blog/posts/210711/">Yours, Kewbish</a>.  2057 words. Subscribe via <a href=../../index.xml>RSS</a>.<hr><div class=b-writing><h2 id="introduction">Introduction</h2>
 <p>I suppose it wasn&rsquo;t particularly &lsquo;recently&rsquo; anymore, but I quote-unquote &lsquo;recently&rsquo; redid my laptop setup. (It&rsquo;s been at least three months now, but I&rsquo;ve been procrastinating on the writeup for unknown reasons.) My previous setup, if you can even call it that, was the typical hunching over my laptop, staring into the depths of a 15&quot; screen for hours on end situation. Not very good for posture, and probably not very good for my eyesight either. I went through the better part of the pandemic Zooming from there, but my parents and I decided it was probably not a great idea to continue like this. So, I acquired a monitor, a clamshell stand, a Bluetooth keyboard and mouse, a webcam, and off I went.</p>
 <p>Setting all of this up probably would have been easier on Ubuntu with the normal DE and everything, but when I <a href="https://kewbi.sh/blog/posts/200906/">got into Linux</a>, I went with <a href="https://manjaro.org/">Manjaro</a> + <a href="https://xfce.org">XFCE</a> as a DE + <a href="https://i3wm.org/">i3</a> for a WM. Most of the tutorials I found for setting up display profiles on monitor connect, pairing Bluetooth peripherals, and wrangling the power manager to avoid suspending on lid close were mostly for GNOME Ubuntu. The few I found for Manjaro were quite convoluted, and would be using a different DE or device. I was left to trawl my way through the Arch Linux wiki and bodge together pieces of different writeups for what fit my system - it wasn&rsquo;t a very straightforward process. Since I don&rsquo;t want to bother having to figure everything out from scratch if I reinstall, I&rsquo;ve decided to put together what I remember doing to Make Everything Just Work™. If you&rsquo;re looking for a tutorial that&rsquo;ll go through how to replicate a system where:</p>
 <ul>
@@ -53,7 +27,7 @@ you&rsquo;re in the right place.</li>
 <h2 id="monitor-displays">Monitor Displays</h2>
 <p>Now that we&rsquo;ve got that out of the way, let&rsquo;s start with the monitor setup itself. I have a Dell monitor - I don&rsquo;t think the model number is relevant at all, since I just plugged the monitor in via HDMI. (I&rsquo;m fairly certain this should be roughly the same for most other monitors.) What&rsquo;s a bit tricky, however, is the monitor display setup. It took a while for me to get how to turn on and off displays, since I just wanted my monitor on, and not have my laptop screen mirroring it.</p>
 <p>Plug in your monitor to your laptop and open <code>xfce4-display-settings</code>, or just search for Display. You should have something like this:
-<figure><img src="https://i.imgur.com/DSRtQQO.png"
+<figure><img src="../../img/210711/DSRtQQO.png"
          alt="Figure 1. When you first open Display."/><figcaption>
             <p><em>Figure 1. When you first open Display.</em></p>
         </figcaption>
@@ -62,7 +36,7 @@ you&rsquo;re in the right place.</li>
 The little toggle next to laptop will likely be green instead - toggle it off (and toggle off &lsquo;primary display&rsquo; for good measure). This will turn off the laptop display, and leave you with your monitor on. (You&rsquo;ll still have to leave your laptop open and use it for keyboard and mouse controls though, at least until we get to the Bluetooth pairing.)</p>
 <p>Click the dropdown that currently reads &lsquo;1 - Laptop&rsquo;, and switch to &lsquo;2 - Dell Inc.&rsquo;, followed by the screen size of your monitor. Have fun playing with any of the bottom settings, but once you&rsquo;re done, toggle &lsquo;primary display&rsquo; to on, and ensure the toggle beside the monitor name is still on. At this point, you can go ahead and drag the monitor displays on the left side of the screen around, but nothing should happen.</p>
 <p>If you want to set up display profiles, so that your laptop automatically switches between monitor and laptop screen as primary display (for example, when you&rsquo;re on the go and your monitor&rsquo;s not plugged in), you&rsquo;ll have to tab over to the Advanced menu.
-<figure><img src="https://i.imgur.com/d6AOrmA.png"
+<figure><img src="../../img/210711/d6AOrmA.png"
          alt="Figure 2. The Advanced Display menu."/><figcaption>
             <p><em>Figure 2. The Advanced Display menu.</em></p>
         </figcaption>
@@ -83,7 +57,7 @@ LidSwitchIgnoreInhibited=no
 <p>I docked my laptop vertically in one of those clamshell holders off Amazon. When suspended, my laptop automatically wakes if I open the lid, so whenever I want to turn on my laptop, I crack it open a bit in the dock. (I had to widen the holder a bit so I could open my laptop enough for the magnetic switch to disengage and detect my laptop was open.)</p>
 <h2 id="bluetooth-peripherals">Bluetooth Peripherals</h2>
 <p>Since your laptop will mostly now be docked, you&rsquo;ll still need some way to control it - I opted for a <a href="https://www.microsoft.com/en-my/accessories/products/keyboards/designer-bluetooth-desktop?activetab=overview%3aprimaryr2">Bluetooth keyboard and mouse</a>. I won&rsquo;t go into starting Bluetooth services and autoenabling controllers on startup, but I&rsquo;ll go over how I managed to get my mouse and keyboard both working. Pairing Bluetooth devices is generally pretty easy with blueman&rsquo;s <code>blueman-manager</code>, so I thought that this&rsquo;d be the simplest part of the entire process. (And hey, I was only half wrong.)</p>
-<p><figure><img src="https://i.imgur.com/d6AOrmA.png"
+<p><figure><img src="../../img/210711/NIgAAzw.png"
          alt="Figure 3. Blueman pairing."/><figcaption>
             <p><em>Figure 3. Blueman pairing.</em></p>
         </figcaption>
@@ -96,20 +70,12 @@ First, let&rsquo;s pair the mouse. Once in Blueman, click &lsquo;setup&rsquo; to
 <h2 id="conclusion">Conclusion</h2>
 <p>Congratulations! You should now, in theory and with a tablespoon or two of good luck, have an aesthetic laptop setup with a nice comfortable monitor and a very satisfying keyboard<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Future me, if you&rsquo;re reading this: try not to mess up whatever you&rsquo;ve just done to warrant a reset now again. I doubt anyone&rsquo;ll properly need this guide, but hey, it at least will help me when I unexpectedly break everything sometime in the future.</p>
 <p>It doesn&rsquo;t particularly feel like it, but I suppose it&rsquo;s summer vacation now. I&rsquo;ve been spending maybe a bit too much time in the same old routines of studying things that I&rsquo;m sure I&rsquo;ll do fine in even if I didn&rsquo;t bother previewing. It&rsquo;s nice to have a lot more freedom in what, when, and how I&rsquo;m learning, however - having this much time to dive into topics I&rsquo;m interested in and self-study has been something I&rsquo;ve been looking forward to for a long time. I&rsquo;ve also been trying to do more creative things, and spend more time writing, so hopefully I&rsquo;ll be more consistent with this blog as well. (I know I append some version of this to each post, but I&rsquo;ve gone and made a backlog of ideas, and it&rsquo;s something I&rsquo;ve really decided I need to devote more time to in the future.) I&rsquo;m pretty sure writing about vaguely technical topics and slaving away over online courses probably isn&rsquo;t everyone&rsquo;s idea of an ideal summer, but to me, it really is the perfect transition to university.</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>I genuinely like the feel of this keyboard. I&rsquo;ve never tried mechanical keyboards, and they seem a bit clunky; the original keyboard built into my laptop is a bit too soft. This keyboard is a really nice balanace between easy to type on without a rather flimsy feeling - and it sounds pretty aesthetic as well, if that&rsquo;s somewhere on your criteria.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
-
-                <p>- Yours, Kewbish</p>
-            </div>
-            <br />
-            <p><a href="../">&lt; More Posts</a></p>
-            <br /><br />
-        </section>
-    </body>
-</html>
+</div>
+</div><br></div><p><a href=../ >‹ go back</a></main>

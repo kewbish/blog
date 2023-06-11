@@ -1,47 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>CPSC 110: Weeks 3 and 4</title>
-        <meta name="description" content="On trusting the natural recursion." />
-        <meta property="og:title" content="CPSC 110: Weeks 3 and 4" />
-        <meta property="og:description" content="On trusting the natural recursion." />
-        <meta property="og:url" content="https://kewbi.sh/blog/posts/210314/" />
-        <meta property="twitter:title" content="CPSC 110: Weeks 3 and 4" />
-        <meta property="twitter:description" content="On trusting the natural recursion." />
-        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
-        <link rel="stylesheet" href="../../css/main.css" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-            rel="stylesheet"
-        />
-        <link
-            rel="icon"
-            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
-        />
-    </head>
-
-    <body class="cont page">
-        <section class="b-main-2">
-            <p><a href="../">&lt; More Posts</a></p>
-            <h1 class="b-subtitle">CPSC 110: Weeks 3 and 4</h1>
-            <p>
-                Published 14 March 2021 at
-                <a href="https://kewbi.sh/blog/posts/210314/">Yours, Kewbish</a>. 1236
-                words. Subscribe via <a href="../../index.xml">RSS</a>.
-            </p>
-            
-            <hr style="margin-bottom: -1%" />
-            <div class="b-writing">
-                <h2 id="introduction">Introduction</h2>
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>CPSC 110: Weeks 3 and 4</title><meta name=description content="On trusting the natural recursion."><meta property=og:title content="CPSC 110: Weeks 3 and 4"><meta property=og:description content="On trusting the natural recursion."><meta property=og:url content="https://kewbi.sh/blog/posts/210314/"><meta property=twitter:title content="CPSC 110: Weeks 3 and 4"><meta property=twitter:description content="On trusting the natural recursion."><link rel=icon href=https://kewbi.sh/small-logo.png><link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-italic.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-700.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
+/>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=../../css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=../ >‹ go back</a><div class=b-post><h1 class=display-title>CPSC 110: Weeks 3 and 4.</h1><p style=text-indent:0>Published 14 March 2021 at <a href="https://kewbi.sh/blog/posts/210314/">Yours, Kewbish</a>.  1236 words. Subscribe via <a href=../../index.xml>RSS</a>.<hr><div class=grid-element><p style=text-indent:0;margin-bottom:0>This post is unlisted and has been archived. This doesn't represent my best work; please check out the posts listed <a href=../../posts>here</a> instead.</div><div class=b-writing><h2 id="introduction">Introduction</h2>
 <p>Spring break has just begun, and I&rsquo;ve decided to devote some more significant time to CPSC 110. It helps that I&rsquo;m sort of floating between projects and want a bit of bland coursework to churn through at the moment, so I&rsquo;ve been spending my leisure time listening to Kiczales go on about data and recursion. I&rsquo;ve been ramping up my progress with CPSC 110 for the last couple weeks, and I&rsquo;ve managed to do a couple &lsquo;weeks&rsquo;, or modules, since I last published a set of notes. Regarding my old end date goal, I&rsquo;ve decided to shift my goal more towards a September challenge (of the exam), to give myself time over the summer to cram and practise with old papers. (Ironically, I&rsquo;d also decided at the beginning of the year that I&rsquo;d take this summer to rest and relax before university, but I suppose that&rsquo;s gone out the window in lieu of some hopefully more engaging plans. And hey, if I choose to relax that way, I guess it&rsquo;s a perfectly fine thing to do.)</p>
-<p>After getting back in the swing of Racket and relearning the templates and design recipes, these couple modules haven&rsquo;t been too challenging. Adding systematically onto the recipes makes the logical jumps between concepts less sharp, and makes the course much less intimidating. Having a repository and tracking my progress with the course has definitely motivated me to work on it more. So, here&rsquo;s a couple modules' worth of notes - but as always, if you&rsquo;re not following along with CPSC 110 or have no interest in learning about compound and arbitrarily long data, you might want to go off and read a <a href="https://kewbi.sh/blog/posts/210307/">different post</a>.</p>
+<p>After getting back in the swing of Racket and relearning the templates and design recipes, these couple modules haven&rsquo;t been too challenging. Adding systematically onto the recipes makes the logical jumps between concepts less sharp, and makes the course much less intimidating. Having a repository and tracking my progress with the course has definitely motivated me to work on it more. So, here&rsquo;s a couple modules&rsquo; worth of notes - but as always, if you&rsquo;re not following along with CPSC 110 or have no interest in learning about compound and arbitrarily long data, you might want to go off and read a <a href="https://kewbi.sh/blog/posts/210307/">different post</a>.</p>
 <h2 id="notes---week-3">Notes - Week 3</h2>
 <p>Week 3 goes over how to define compound data (essentially adding structs to the data definition recipe), and integrates that data in building &lsquo;worlds&rsquo;, or GUI programs. Having a proper definition for data simplifies things in future weeks, and makes the data definitions seem more solid or &lsquo;real&rsquo;, in my opinion.</p>
 <ul>
@@ -139,21 +113,13 @@
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <p>As I write this, I&rsquo;m actually halfway through week 5, but it&rsquo;ll take me a good while to write up that double module&rsquo;s notes properly, and I&rsquo;d rather not extend this post too much. I&rsquo;m also almost at the halfway mark of the whole course (yay me!), but I&rsquo;ve noticed that most of the next modules are broken up into a and b sections, so I expect it&rsquo;ll probably be more work than the first couple weeks. I&rsquo;ve heard that the later weeks heavily build on the beginning weeks, so I might come back and update my notes posts every so often. I hope I&rsquo;ll be able to at least go through another couple weeks before spring break ends, but I also want to take enough time to relax and recharge<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
-<p>I have no big plans with regards to projects at the moment - I&rsquo;m just trying to keep everything stable before I graduate, and continue to explore opportunities I might like to take after I enter university. It&rsquo;s rather scary that I&rsquo;ll be an actual university student in a couple months, and that my quintessential &lsquo;high school experience&rsquo; is nearly over. A post about Racket is probably not the best place to digress into all the amazing experiences that&rsquo;ve filled the last couple years, but I will say it feels a bit strange to consider that I&rsquo;ll be one of &lsquo;them&rsquo; (an actual student) in the fall, and that I have no idea what I have time for left in the last three (well, two and a half, if we&rsquo;re going to be precise) months. Well, we&rsquo;ll figure it out eventually (and finish CPSC 110 somewhere in the process too).</p>
-<section class="footnotes" role="doc-endnotes">
+<p>I have no big plans with regards to projects at the moment - I&rsquo;m just trying to keep everything stable before I graduate, and continue to explore opportunities I might like to take after I enter university. It&rsquo;s rather scary that I&rsquo;ll be an actual university student in a couple months, and that my quintessential &lsquo;high school experience&rsquo; is nearly over. A post about Racket is probably not the best place to digress into all the amazing experiences that&rsquo;ve filled the last couple years, but I will say it feels a bit strange to consider that I&rsquo;ll be one of &rsquo;them&rsquo; (an actual student) in the fall, and that I have no idea what I have time for left in the last three (well, two and a half, if we&rsquo;re going to be precise) months. Well, we&rsquo;ll figure it out eventually (and finish CPSC 110 somewhere in the process too).</p>
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>I suppose you can start laughing now, but I&rsquo;m trying, alright?&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
-
-                <p>- Yours, Kewbish</p>
-            </div>
-            <br />
-            <p><a href="../">&lt; More Posts</a></p>
-            <br /><br />
-        </section>
-    </body>
-</html>
+</div>
+</div><br></div><p><a href=../ >‹ go back</a></main>

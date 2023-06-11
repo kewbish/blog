@@ -1,45 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>CPSC 110: Weeks 5 and 6</title>
-        <meta name="description" content="On helpers and binary search trees." />
-        <meta property="og:title" content="CPSC 110: Weeks 5 and 6" />
-        <meta property="og:description" content="On helpers and binary search trees." />
-        <meta property="og:url" content="https://kewbi.sh/blog/posts/210328/" />
-        <meta property="twitter:title" content="CPSC 110: Weeks 5 and 6" />
-        <meta property="twitter:description" content="On helpers and binary search trees." />
-        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
-        <link rel="stylesheet" href="../../css/main.css" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-            rel="stylesheet"
-        />
-        <link
-            rel="icon"
-            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
-        />
-    </head>
-
-    <body class="cont page">
-        <section class="b-main-2">
-            <p><a href="../">&lt; More Posts</a></p>
-            <h1 class="b-subtitle">CPSC 110: Weeks 5 and 6</h1>
-            <p>
-                Published 28 March 2021 at
-                <a href="https://kewbi.sh/blog/posts/210328/">Yours, Kewbish</a>. 1542
-                words. Subscribe via <a href="../../index.xml">RSS</a>.
-            </p>
-            
-            <hr style="margin-bottom: -1%" />
-            <div class="b-writing">
-                <h2 id="introduction">Introduction</h2>
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>CPSC 110: Weeks 5 and 6</title><meta name=description content="On helpers and binary search trees."><meta property=og:title content="CPSC 110: Weeks 5 and 6"><meta property=og:description content="On helpers and binary search trees."><meta property=og:url content="https://kewbi.sh/blog/posts/210328/"><meta property=twitter:title content="CPSC 110: Weeks 5 and 6"><meta property=twitter:description content="On helpers and binary search trees."><link rel=icon href=https://kewbi.sh/small-logo.png><link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-italic.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-700.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
+/>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=../../css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=../ >‹ go back</a><div class=b-post><h1 class=display-title>CPSC 110: Weeks 5 and 6.</h1><p style=text-indent:0>Published 28 March 2021 at <a href="https://kewbi.sh/blog/posts/210328/">Yours, Kewbish</a>.  1542 words. Subscribe via <a href=../../index.xml>RSS</a>.<hr><div class=grid-element><p style=text-indent:0;margin-bottom:0>This post is unlisted and has been archived. This doesn't represent my best work; please check out the posts listed <a href=../../posts>here</a> instead.</div><div class=b-writing><h2 id="introduction">Introduction</h2>
 <p>Spring break is almost over, and perhaps so is my CPSC 110 sprint. For a lack of creative inspiration to work on anything other than practise problems, I&rsquo;ve been spending a good amount of my remaining break on very routine homework, including CPSC 110. The course&rsquo;s started to delve further into the theory side of things this couple weeks, and it&rsquo;s been very interesting to see how my methods for designing things in Racket have evolved with each successive module.</p>
 <p>Part of me being able to complete a rather surprising (to me, at least) number of weeks over a short amount of calendar weeks was conveniently forgetting to do both the problem sets or labs for the past couple weeks. I&rsquo;d become part of my habit to do those after writing up a week&rsquo;s set of notes, but I think I got a bit too carried away somewhere in between weeks. In the process of having to go back and do said problem sets and labs, it was interesting to see how difficult it was to remember what techniques I was &lsquo;allowed&rsquo; to use. Somewhere between 6 and 7, some template rules get changed, and some shorthand is now added, which I almost reflexively tried to use before realizing I was supposed to operate in on a past set of guidelines while looking at problem set solutions. It&rsquo;s remarkable that I even forgot that there was a change in shorthand allowed - I think that&rsquo;s part of what makes CPSC 110 one of those fundamental courses: it encourages you to look at things very systematically, and builds on what you&rsquo;re supposed to do systematically, systematically. (In other words, the addition of new parts of information follows nicely from past weeks, and everything is consistent.)</p>
 <p>As always, you&rsquo;re probably uninterested in the contents of this post unless you&rsquo;re taking CPSC 110 yourself or have the very niche interest of learning how to program in Racket. Feel free to check out some of my other posts (I promise I don&rsquo;t blather on about Racket this frequently usually, but Spring Break sort of encouraged me to do as much CPSC 110 as I could).</p>
@@ -118,7 +92,7 @@
 </li>
 <li>however, faster on average to use a binary search tree, where elements are ordered on branches
 <ul>
-<li>middle value goes on the &lsquo;top&rsquo; of any given fractal part of the tree</li>
+<li>middle value goes on the &rsquo;top&rsquo; of any given fractal part of the tree</li>
 <li>smaller values go on the left, larger values go on the right =&gt; of a given element</li>
 <li>balance the tree (shift things around) if it&rsquo;s looking sort of like a list =&gt; at that point you have no advantage</li>
 </ul>
@@ -186,20 +160,12 @@
 <h2 id="conclusion">Conclusion</h2>
 <p>I&rsquo;ll save the notes for Week 7 for the next week I&rsquo;m looking for something share - I&rsquo;d rather keep the amount of double-weeks to a minimum. (I also doubt there&rsquo;ll be many more double weeks, since school&rsquo;s started again.) I&rsquo;m now past the midway point and on a good streak of work, so I hope I&rsquo;ll be able to finish the course well before school ends in June. I plan to spend some of the summer revising for the challenge before I actually take it, which I hope will be enough time. I&rsquo;ve looked at past exam papers, and they don&rsquo;t seem too bad at first glance, so let&rsquo;s hope a couple months of review is enough.</p>
 <p>In other news, I helped run a hackathon this weekend, which was an amazing experience. <a href="https://vhhacks.ca">vhHacks 2021</a> was a super fun event to organize, mentor, judge, and run workshops for, and I was incredibly impressed at everything that was submitted (so congrats!). The majority of hackathon-esque events I&rsquo;ve been to have been online, which is usually something people label as &lsquo;unfortunate&rsquo;, but to be honest, there&rsquo;s something sort of nice about async hackathons and weekends spent grinding away alone at a project in the comfort of your office. I hope some of the wholesome hacker vibe that I personally got at my first online hackathon was successfully transmitted somewhere in the process, and that, most of all, it was fun<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. I might write a bit about organizing the hackathon (not that I know what to write about regarding the entire event) in the future, but for now, I&rsquo;ll go back to catching up on problem sets and labs.</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>Preliminary survey results with people I know has been positive, but I&rsquo;m entirely sure they&rsquo;re biased and at least 50% trying to validate me, which is still much appreciated.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
-
-                <p>- Yours, Kewbish</p>
-            </div>
-            <br />
-            <p><a href="../">&lt; More Posts</a></p>
-            <br /><br />
-        </section>
-    </body>
-</html>
+</div>
+</div><br></div><p><a href=../ >‹ go back</a></main>

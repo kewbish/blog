@@ -1,45 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>CPSC 110: 1b</title>
-        <meta name="description" content="On designing functions with HtDF." />
-        <meta property="og:title" content="CPSC 110: 1b" />
-        <meta property="og:description" content="On designing functions with HtDF." />
-        <meta property="og:url" content="https://kewbi.sh/blog/posts/201227/" />
-        <meta property="twitter:title" content="CPSC 110: 1b" />
-        <meta property="twitter:description" content="On designing functions with HtDF." />
-        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
-        <link rel="stylesheet" href="../../css/main.css" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-            rel="stylesheet"
-        />
-        <link
-            rel="icon"
-            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
-        />
-    </head>
-
-    <body class="cont page">
-        <section class="b-main-2">
-            <p><a href="../">&lt; More Posts</a></p>
-            <h1 class="b-subtitle">CPSC 110: 1b</h1>
-            <p>
-                Published 27 December 2020 at
-                <a href="https://kewbi.sh/blog/posts/201227/">Yours, Kewbish</a>. 1011
-                words. Subscribe via <a href="../../index.xml">RSS</a>.
-            </p>
-            
-            <hr style="margin-bottom: -1%" />
-            <div class="b-writing">
-                <h2 id="introduction">Introduction</h2>
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>CPSC 110: 1b</title><meta name=description content="On designing functions with HtDF."><meta property=og:title content="CPSC 110: 1b"><meta property=og:description content="On designing functions with HtDF."><meta property=og:url content="https://kewbi.sh/blog/posts/201227/"><meta property=twitter:title content="CPSC 110: 1b"><meta property=twitter:description content="On designing functions with HtDF."><link rel=icon href=https://kewbi.sh/small-logo.png><link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-italic.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-700.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
+/>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=../../css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=../ >‹ go back</a><div class=b-post><h1 class=display-title>CPSC 110: 1b.</h1><p style=text-indent:0>Published 27 December 2020 at <a href="https://kewbi.sh/blog/posts/201227/">Yours, Kewbish</a>.  1011 words. Subscribe via <a href=../../index.xml>RSS</a>.<hr><div class=grid-element><p style=text-indent:0;margin-bottom:0>This post is unlisted and has been archived. This doesn't represent my best work; please check out the posts listed <a href=../../posts>here</a> instead.</div><div class=b-writing><h2 id="introduction">Introduction</h2>
 <p>Why I felt the need to <del>ruin</del> augment my Christmas week with some Racket, I don&rsquo;t know. It was fun to go through some HtDF material with CPSC 110 this week, however - surprisingly, it wasn&rsquo;t as tedious or repetitive as it seemed.</p>
 <p>For non-Racketers (Racketeers?), the HtDF recipe, or guide, I suppose, is a method essentially detailing <strong>H</strong>ow <strong>T</strong>o <strong>D</strong>esign <strong>F</strong>unctions. You write a signature (the types expected), the stub (the minimal function needed to get the function to run), the <code>check-expect</code>s (unit tests, basically), the template (the stub, but a little bit more), and the final function. While it does get slightly boring to do the same things for each function (and a bit annoying for small, one-line functions), Kiczales does remind people that it&rsquo;s not a must-follow for everything, but it&rsquo;s good guidelines.</p>
 <p>I also finally acquiesced and have started using DrRacket - I needed the stepper for the problem set checking. Besides, some of the distribution files that contain images are in some vaguely newline-filled format that doesn&rsquo;t read nicely in Vim. However, I managed to get vi-like keybindings via <a href="https://github.com/takikawa/drracket-vim-tool">this package</a>, which still works nicely. It&rsquo;s a lot easier to try things out in the REPL, and I can run check-expects aside.</p>
@@ -107,20 +81,12 @@
 <h2 id="conclusion">Conclusion</h2>
 <p>I&rsquo;ve recently found out I do have a possible chance at changing my student status to properly enroll in the course, but it&rsquo;s a bit late to do that for second semester. I&rsquo;d ideally like to challenge in the summer, but I also have several other plans. We&rsquo;ll see. In the meantime, I&rsquo;ve realized that CPSC 110 has a lot more modules than I&rsquo;ve expected, so I think finishing the course will take a lot longer, especially with work after winter break. Hopefully I&rsquo;ll be able to still preview before the April close date, and finish preparing for the summer.</p>
 <p>Happy holidays, and we&rsquo;ll see what I decide to write about in the new year. I&rsquo;ve got a lot more HCI topics to think through before I write about them, but I think they&rsquo;re interesting enough.</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>[later edit]: Upon further inspection, I&rsquo;m pretty sure each week number corresponds to one complete module number. It probably makes more sense that (the hypothetical) week 1, problem set 1, lab 1, and module 1 (containing both module 1a and 1b) are supposed to be done together. I&rsquo;ll probably leave 1a and 1b as separate posts, but combine them in the future.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
-
-                <p>- Yours, Kewbish</p>
-            </div>
-            <br />
-            <p><a href="../">&lt; More Posts</a></p>
-            <br /><br />
-        </section>
-    </body>
-</html>
+</div>
+</div><br></div><p><a href=../ >‹ go back</a></main>

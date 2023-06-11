@@ -1,47 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>CS50: Week 5</title>
-        <meta name="description" content="On my final encounters with C." />
-        <meta property="og:title" content="CS50: Week 5" />
-        <meta property="og:description" content="On my final encounters with C." />
-        <meta property="og:url" content="https://kewbi.sh/blog/posts/200719/" />
-        <meta property="twitter:title" content="CS50: Week 5" />
-        <meta property="twitter:description" content="On my final encounters with C." />
-        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
-        <link rel="stylesheet" href="../../css/main.css" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-            rel="stylesheet"
-        />
-        <link
-            rel="icon"
-            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
-        />
-    </head>
-
-    <body class="cont page">
-        <section class="b-main-2">
-            <p><a href="../">&lt; More Posts</a></p>
-            <h1 class="b-subtitle">CS50: Week 5</h1>
-            <p>
-                Published 19 July 2020 at
-                <a href="https://kewbi.sh/blog/posts/200719/">Yours, Kewbish</a>. 1263
-                words. Subscribe via <a href="../../index.xml">RSS</a>.
-            </p>
-            
-            <p>Also published on <a href="https://dev.to/kewbish/cs50-week-5-113g">Dev.to</a>.</p>
-            
-            <hr style="margin-bottom: -1%" />
-            <div class="b-writing">
-                <h2 id="introduction">Introduction</h2>
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>CS50: Week 5</title><meta name=description content="On my final encounters with C."><meta property=og:title content="CS50: Week 5"><meta property=og:description content="On my final encounters with C."><meta property=og:url content="https://kewbi.sh/blog/posts/200719/"><meta property=twitter:title content="CS50: Week 5"><meta property=twitter:description content="On my final encounters with C."><link rel=icon href=https://kewbi.sh/small-logo.png><link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-italic.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-700.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
+/>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=../../css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=../ >‹ go back</a><div class=b-post><h1 class=display-title>CS50: Week 5.</h1><p style=text-indent:0>Published 19 July 2020 at <a href="https://kewbi.sh/blog/posts/200719/">Yours, Kewbish</a>.  Also published on <a href="https://dev.to/kewbish/cs50-week-5-113g">Dev.to</a>.  1263 words. Subscribe via <a href=../../index.xml>RSS</a>.<hr><div class=grid-element><p style=text-indent:0;margin-bottom:0>This post is unlisted and has been archived. This doesn't represent my best work; please check out the posts listed <a href=../../posts>here</a> instead.</div><div class=b-writing><h2 id="introduction">Introduction</h2>
 <p>Finally, we&rsquo;re over the worst of CS50 (in my opinion, at least). Week 5 was a bit of a difficult lesson and problem set, but in the end, it <em>actually</em> wasn&rsquo;t as hard as I thought it&rsquo;d be.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> Week 5 covers data structures - detailing hash tables, linked lists, and tries, which are a combination of both! Speller was a decent challenge, and for once, I really felt that I was applying what I learned in lecture to the problem. This is the week I was looking the most forward to (my original purpose for taking CS50 was for data structures and algorithms after all), and dreading as well.</p>
 <h2 id="notes">Notes</h2>
 <p>Alright, here are my notes:</p>
@@ -159,7 +131,7 @@
 <li>these data structures can be implemented with arrays, linked lists, hashtables, and other structures</li>
 </ul>
 <h2 id="problem-set">Problem Set</h2>
-<p>This week wasn&rsquo;t much of a problem <em>set</em> - we only had Speller to work through. But don&rsquo;t underestimate it either - it took two consecutive days of work to finish out. The logic wasn&rsquo;t too hard to implement, actually. 
+<p>This week wasn&rsquo;t much of a problem <em>set</em> - we only had Speller to work through. But don&rsquo;t underestimate it either - it took two consecutive days of work to finish out. The logic wasn&rsquo;t too hard to implement, actually.
 First, I split up the problem in its subparts</p>
 <ul>
 <li><code>hash</code> -&gt; I decided to use the simplest hash function - just the first character. Could this be optimized? Yes, but I just wanted to try the data structure out first, and not have to worry about copying a hash function that I didn&rsquo;t completely understand either.</li>
@@ -174,20 +146,12 @@ First, I split up the problem in its subparts</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>Am I going to continue with C? I doubt it, unless I&rsquo;m just making a toy thing, or <em>really</em> want performance for something. Would I have ignored C if I were to take some version of CS50 where I didn&rsquo;t need CS50? Probably not. I&rsquo;ve learned a lot about lower level things, like memory management and bytes, as well as getting a glimpse into how easy-to-use features in Python were really implemented. As other people have said, working with C makes one really appreciate how nice higher level languages like Python are to work with, and it was a great experience.</p>
 <p>That said, I still can&rsquo;t wait to get into the later half of CS50 - Python, SQL, and web? Yes, thank you very much. I guess this would be the more <em>application</em> side of CS50, and I&rsquo;m excited to get learning.</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>The CS50 Reddit and my initial lack of experience with data structures were pretty scary. But I&rsquo;d rate this problem set lower than Tideman in difficulty, honestly.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
-
-                <p>- Yours, Kewbish</p>
-            </div>
-            <br />
-            <p><a href="../">&lt; More Posts</a></p>
-            <br /><br />
-        </section>
-    </body>
-</html>
+</div>
+</div><br></div><p><a href=../ >‹ go back</a></main>

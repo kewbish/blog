@@ -1,47 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>A Manjaro Installation</title>
-        <meta name="description" content="On my shiny new dual-boot system." />
-        <meta property="og:title" content="A Manjaro Installation" />
-        <meta property="og:description" content="On my shiny new dual-boot system." />
-        <meta property="og:url" content="https://kewbi.sh/blog/posts/200906/" />
-        <meta property="twitter:title" content="A Manjaro Installation" />
-        <meta property="twitter:description" content="On my shiny new dual-boot system." />
-        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
-        <link rel="stylesheet" href="../../css/main.css" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-            rel="stylesheet"
-        />
-        <link
-            rel="icon"
-            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
-        />
-    </head>
-
-    <body class="cont page">
-        <section class="b-main-2">
-            <p><a href="../">&lt; More Posts</a></p>
-            <h1 class="b-subtitle">A Manjaro Installation</h1>
-            <p>
-                Published 06 September 2020 at
-                <a href="https://kewbi.sh/blog/posts/200906/">Yours, Kewbish</a>. 1916
-                words. Subscribe via <a href="../../index.xml">RSS</a>.
-            </p>
-            
-            <p>Also published on <a href="https://dev.to/kewbish/switching-to-linux-da0">Dev.to</a>.</p>
-            
-            <hr style="margin-bottom: -1%" />
-            <div class="b-writing">
-                <h2 id="introduction">Introduction</h2>
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>A Manjaro Installation</title><meta name=description content="On my shiny new dual-boot system."><meta property=og:title content="A Manjaro Installation"><meta property=og:description content="On my shiny new dual-boot system."><meta property=og:url content="https://kewbi.sh/blog/posts/200906/"><meta property=twitter:title content="A Manjaro Installation"><meta property=twitter:description content="On my shiny new dual-boot system."><link rel=icon href=https://kewbi.sh/small-logo.png><link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-italic.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-700.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
+/>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=../../css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=../ >‹ go back</a><div class=b-post><h1 class=display-title>A Manjaro Installation.</h1><p style=text-indent:0>Published 06 September 2020 at <a href="https://kewbi.sh/blog/posts/200906/">Yours, Kewbish</a>.  Also published on <a href="https://dev.to/kewbish/switching-to-linux-da0">Dev.to</a>.  1916 words. Subscribe via <a href=../../index.xml>RSS</a>.<hr><div class=b-writing><h2 id="introduction">Introduction</h2>
 <p>As you may have guessed from the title of this blog post, I have switched to Linux. And no, not Arch Linux - though I guess Manjaro is close. Specifically, XFCE Manjaro (and I&rsquo;ve also been experimenting with i3).</p>
 <p>Before this, I was on Windows (yes, Windows, no need to pull all the &lsquo;but development&rsquo; cards) and WSL. I had a very strange split where most of my development things (like Python packages, programs, scripts) would be on the Windows side, and then only the programs that I absolutely <em>needed</em> from Bash and WSL (like C compilers for <a href="https://kewbish.github.io/blog/posts/200621/">CS50</a> and vim) on WSL. However, I&rsquo;ve been recently having to lean more on the WSL side, and having dependencies on both sides was a little annoying to manage. For example, I wanted to try Vim and configuring autocomplete with Python there, but the problem was, I needed the packages to be on the WSL side.</p>
 <p>As well, I find myself surrounded by a lot of people who use Linux (specifically Arch evangelists), and their constant harping on about this super cool program and that interesting configuration made me curious. I wanted to see what it was like, and I&rsquo;d been spending a lot of time browsing <a href="https://reddit.com/r/unixporn">shiny rices on Reddit</a>. I don&rsquo;t think Windows has a proper tiling manager, and I didn&rsquo;t feel like trying to set up X sessions on Windows. While it&rsquo;s possible, I felt that it&rsquo;d be easier (and more fun besides) to just try installing Linux.</p>
@@ -55,10 +27,10 @@
 <p>For the remainder of today, I mostly messed around with terminal settings, and trying to explore XFCE settings. I managed to import my Chrome history and also set up a theme. I did a bit of terminal theming tweaking, and messing around with LightDM backgrounds. Didn&rsquo;t really do much to mess things up, just a lot of installing. I was also pleasantly surprised how fast things and packages download on Linux, and how relatively easy pacman was to use.<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
 <h2 id="day-2">Day 2</h2>
 <p>In the morning, I did a bit of schoolwork, and in the background, tried to install more packages. In the meantime though, I also realized that I would really be on Windows much, given that Linux seemed to be alright for everything except an office suite (which I have now but not at the time). So - I tried to resize partitions. (This is where the bit about partitions from last section comes into play). This is what my partitions approximately looked like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">||| windows things ||| linux things + + |
-</code></pre></div><p>The Linux side had about half, and I wanted to make it more like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">||| win ||| lots of linux space         |
-</code></pre></div><p>Essentially, more space. The problem was, I didn&rsquo;t know how to rearrange the space after shrinking Windows to move capacity to the home directory. I realize now that I could probably have just formatted the other directories and kept home, but I didn&rsquo;t know that then. In my defense, I hadn&rsquo;t realized that yet. So, I got the trusty Manjaro USB out again - and reinstalled. This unfortunately wiped a lot of my packages, so I had to reinstall things yet again. Unfortunate.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>||| windows things ||| linux things + + |
+</span></span></code></pre></div><p>The Linux side had about half, and I wanted to make it more like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>||| win ||| lots of linux space         |
+</span></span></code></pre></div><p>Essentially, more space. The problem was, I didn&rsquo;t know how to rearrange the space after shrinking Windows to move capacity to the home directory. I realize now that I could probably have just formatted the other directories and kept home, but I didn&rsquo;t know that then. In my defense, I hadn&rsquo;t realized that yet. So, I got the trusty Manjaro USB out again - and reinstalled. This unfortunately wiped a lot of my packages, so I had to reinstall things yet again. Unfortunate.</p>
 <p>At least this time round, it was a lot easier to get things set up the way I&rsquo;d like - I knew where each of the relevant settings were, and I even set up OneDrive properly this time. It was very tedious to reinstall everything <em>yet again</em>, but in the grand scheme of things, I spent more time configuring each and removing unneeded packages.</p>
 <h2 id="day-3">Day 3</h2>
 <p>Today, I was messing around with power settings and things, and I found that normal Chrome was using a bunch of resources relative to the other programs, at least according to powertop. I did some research, and apparently it was due to YouTube and GPU decoding videos. It wasn&rsquo;t really enough to be noticeable, but I was interested in trying to tweak it anyway. So, I (tried to) download Chromium from pamac. I thought it wouldn&rsquo;t do anything major - just another install. (Spoiler alert: I was wrong.)</p>
@@ -69,38 +41,30 @@
 <h2 id="conclusion">Conclusion</h2>
 <p>In the future, I&rsquo;m going to continue configuring i3 (which I also installed, just to see what a tiling manager was like) and try to set this up just as I like it. I&rsquo;d like to fix the status bar to be not <em>quite</em> so colourful and information-full, and make the window tabs a different colour and design. I&rsquo;m still lurking a lot on various ricing subreddits, and it&rsquo;s quite inspiring to see how creative people are. I don&rsquo;t want to invest <em>too</em> much time into ricing, but I can tell I&rsquo;m going to be spending a while on it already. In addition, I&rsquo;d like to make all my colourschemes nice and greyscale, and maybe properly set up my dotfiles.</p>
 <p>In case you wanted a screenshot, here&rsquo;s how my desktop looks at the moment (yes, this is a metascreenshot):</p>
-<p><img src="https://i.imgur.com/ylo8NCl.png" alt="My desktop at the moment">
+<p><img src="../../img/200906/ylo8NCl.png" alt="My desktop at the moment">
 <em>My desktop at the moment</em></p>
 <p>I&rsquo;m actually pretty pleased with what I&rsquo;ve managed to learn and create in the past week or so. It&rsquo;s quite bare - mostly just the default i3 config. I&rsquo;d like to &lsquo;rice&rsquo; it some more (apparently that&rsquo;s what it&rsquo;s called), and I feel like I&rsquo;ve learned a lot from repeatedly breaking my system three times in as many days. I can definitely see why Linux users get so superiorist about it - it&rsquo;s very easy to customize and I think I&rsquo;ll be trying to make this system as bespoke and shiny as I possibly can.</p>
 <h2 id="currently">Currently</h2>
 <p>I&rsquo;ve been finishing up a lot of small projects recently, and I&rsquo;d like to finally get to a more long-term project. I&rsquo;m thinking about creating a Chip-8 emulator, just to learn about CPUs and virtual machines / emulator development and things of that sort. I have an old Kano Pixel kit that I honestly haven&rsquo;t touched in roundabout 2 years, but they&rsquo;ve come up with a community SDK that I can probably use to write the Chip-8 graphics to. I haven&rsquo;t written a lot of Python recently either, so perhaps I&rsquo;ll look into making this as a learning project.</p>
 <p>I&rsquo;m also going to be rewriting my website (yes, again), so please forgive any strange bugs that may occur on this site as I try my best to get it a little more modern. I&rsquo;ll be writing a post about this. Hopefully. If I remember. I have a lot of post ideas, and I&rsquo;m trying to get a couple weeks of backlog before I go back to school, so time to write!</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>Liquid Galaxy VM configuration flashbacks&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
+<li id="fn:2">
 <p>Funnily enough this was my first time actually burning a USB (besides Raspberry Pi but that doesn&rsquo;t really count) - my prior Linux experience was just messing around in VMs hoping for things to not break.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:3" role="doc-endnote">
+<li id="fn:3">
 <p>Life pro tip, when googling around the Manjaro forum, the links aren&rsquo;t broken, just add <code>archived.</code> in front of the forum link. This would have saved a lot of time for me. <em>sigh</em>.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:4" role="doc-endnote">
+<li id="fn:4">
 <p>To be fair, most of this was just me being very surprised that Linux wasn&rsquo;t as difficult as I thought it was. Very interesting.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:5" role="doc-endnote">
+<li id="fn:5">
 <p>I swear, the Manjaro forum has everything. And if it doesn&rsquo;t, the Arch Wiki definitely does. Linux and open source debugging is now forever mapped with wiki browsing in my mind.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
-
-                <p>- Yours, Kewbish</p>
-            </div>
-            <br />
-            <p><a href="../">&lt; More Posts</a></p>
-            <br /><br />
-        </section>
-    </body>
-</html>
+</div>
+</div><br></div><p><a href=../ >‹ go back</a></main>

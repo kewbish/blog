@@ -1,45 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Spaced Repetition in Vim</title>
-        <meta name="description" content="On active learning combined with Vim." />
-        <meta property="og:title" content="Spaced Repetition in Vim" />
-        <meta property="og:description" content="On active learning combined with Vim." />
-        <meta property="og:url" content="https://kewbi.sh/blog/posts/201025/" />
-        <meta property="twitter:title" content="Spaced Repetition in Vim" />
-        <meta property="twitter:description" content="On active learning combined with Vim." />
-        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
-        <link rel="stylesheet" href="../../css/main.css" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-            rel="stylesheet"
-        />
-        <link
-            rel="icon"
-            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
-        />
-    </head>
-
-    <body class="cont page">
-        <section class="b-main-2">
-            <p><a href="../">&lt; More Posts</a></p>
-            <h1 class="b-subtitle">Spaced Repetition in Vim</h1>
-            <p>
-                Published 25 October 2020 at
-                <a href="https://kewbi.sh/blog/posts/201025/">Yours, Kewbish</a>. 1602
-                words. Subscribe via <a href="../../index.xml">RSS</a>.
-            </p>
-            
-            <hr style="margin-bottom: -1%" />
-            <div class="b-writing">
-                <h2 id="introduction">Introduction</h2>
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Spaced Repetition in Vim</title><meta name=description content="On active learning combined with Vim."><meta property=og:title content="Spaced Repetition in Vim"><meta property=og:description content="On active learning combined with Vim."><meta property=og:url content="https://kewbi.sh/blog/posts/201025/"><meta property=twitter:title content="Spaced Repetition in Vim"><meta property=twitter:description content="On active learning combined with Vim."><link rel=icon href=https://kewbi.sh/small-logo.png><link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-italic.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-700.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
+/>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=../../css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=../ >‹ go back</a><div class=b-post><h1 class=display-title>Spaced Repetition in Vim.</h1><p style=text-indent:0>Published 25 October 2020 at <a href="https://kewbi.sh/blog/posts/201025/">Yours, Kewbish</a>.  1602 words. Subscribe via <a href=../../index.xml>RSS</a>.<hr><div class=b-writing><h2 id="introduction">Introduction</h2>
 <p>Even though we don&rsquo;t really have midterms, and quizzes and tests flow pretty regularly throughout the year, it&rsquo;s <em>that</em> time of year again - when it all starts sinking in that, no, it&rsquo;s not just an unexpected spike in homework: it&rsquo;s just that this is the baseline of homework, and this is how it&rsquo;ll be for the rest of the year. Fun! In addition to that, I also have to worry about UBC applications and other things, but those aren&rsquo;t strictly academic matters. In essence, it&rsquo;s been a very busy couple of weeks, and it&rsquo;s likely not to be much less busy for a while. That probably also explains why I&rsquo;m focusing on writing a lot more about productivity and studying and general learning things - I&rsquo;m trying to force myself to remember these things as well.</p>
 <p>Studying is, admittedly, rather fun for me. (This was probably why people still call me a nerd.) It makes one feel rather productive, even though it&rsquo;s essentially just regurgitating facts and informations, and trying to force your brain to understand. I feel like no one really teaches people how to study - it&rsquo;s one of those things that you figure out as you go along.</p>
 <p>However, there&rsquo;s recently (I say &lsquo;recently&rsquo; because that&rsquo;s when it started taking over productivity forums, but it&rsquo;s been around for a whle) been a bit of a focus on the magical thing that seems to be spaced repetition. Though it&rsquo;s not entirely magical either.It&rsquo;s a way to reinforce learning at specific intervals when the information is beginning to sink itself into oblivion in the back of your mind, and keep the material fresh.</p>
@@ -57,7 +31,7 @@
 <pre tabindex="0"><code>- Serbian terrorists [Black Hand + Young Bosnia] =&gt; Gavrilo Princip shot Franz Ferdinand [l2]
 </code></pre><p>That little <code>[l2]</code> indicates that that point, and all its subpoints, are at level 2 in the spaced repetition framework. <code>[l2]</code> isn&rsquo;t something I&rsquo;d ever need to write as an identifier for anything else, or write as part of my notes, so it&rsquo;s pretty safe to just use that format and grep for it overall. When I&rsquo;d do a repetition or active recall study session, I&rsquo;d go through each of the top-level points, and try to remember and regurgitate everything from the subpoints. This brings together both active recall and spaced repetition systems, which I found worked really well.</p>
 <p>Now, to Vim-ify the testing method, instead of doing things manually, I modified what&rsquo;s in <a href="https://www.edwinwenink.xyz/posts/50-quiz_yourself_in_vim/">Edwin Wenink&rsquo;s article on studying in Vim</a> to get this command, which I added to my .vimrc:</p>
-<pre tabindex="0"><code>nnoremap &lt;expr&gt; &lt;leader&gt;nq ':vimgrep /\[l' .nr2char(getchar()). '\]/ %&lt;CR&gt;'
+<pre tabindex="0"><code>nnoremap &lt;expr&gt; &lt;leader&gt;nq &#39;:vimgrep /\[l&#39; .nr2char(getchar()). &#39;\]/ %&lt;CR&gt;&#39;
 </code></pre><p>This remaps the <code>\nq</code> command in Normal mode to look for all occurances of the levels. I originally used a <code>\d</code> regex for just any level, but I found the getchar() bit, which lets me use something like <code>\nq1</code> to start a session for level one. This starts a vimgrep session<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> in the current file, which is fine, as I have all my notes for one topic in the same file. I can move between questions with <code>:cn</code> and <code>:cp</code>, and since the questions show up at the bottom of the screen, I can&rsquo;t look at the subpoints.</p>
 <p>To raise and lower levels for each group of subpoints, I&rsquo;ve come up with two commands:</p>
 <pre tabindex="0"><code>nnoremap &lt;leader&gt;ll :s/\[l\d\]/\[l1\]/ &lt;CR&gt;
@@ -68,26 +42,18 @@ nnoremap &lt;leader&gt;rl :s/\[l\zs\d/\=submatch(0)+1/ &lt;CR&gt;
 <h2 id="conclusion">Conclusion</h2>
 <p>Is this slightly overcomplicated? Could I not have just copy pasted questions from Quizlet or something into a file and just attempted to solve mock tests instead? Should I have just used Anki instead of spending roughly fifteen minutes Googling as to why the remap wasn&rsquo;t working when I accidentally used <code>/nq</code> instead of <code>\nq</code>? Yes, probably wouldn&rsquo;t be as fun, and maybe. Anyway, it&rsquo;s been a fun area of memory work to explore, and in the process of attempting to improve my study work, I&rsquo;ve gone through more papers than I&rsquo;d have expected to, which probably sounds boring, but I promise, it&rsquo;s rather engaging, in fact.</p>
 <p>On an extremely unrelated note, I&rsquo;m not far off my goal of 50k words this year on this blog, and this post itself has contributed its weekly total towards that. I hope to be able to properly get everything done and maybe do a bit of editing for the rather cringe posts that may or may not have appeared in the spring of this year when (or if, I should say) I get some time over winter break. It&rsquo;s almost the holidays, and that&rsquo;s probably something nice to look forward to amongst all the work and studying that needs to be done. Well, off to edit a lab.</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>They made for fun productive procrastination readings, where I didn&rsquo;t want to properly rework something, so instead, I read these. Yes, I read for fun, and generally, I learn something, so that&rsquo;s that.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
+<li id="fn:2">
 <p>Not entirely sure what to call it, but I&rsquo;ll assume session is the term.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:3" role="doc-endnote">
+<li id="fn:3">
 <p>See, the time I spent playing <a href="https://regexcrossword.com/">Regex Crosswords</a> wasn&rsquo;t wasted. Maybe it was, because without it, I wouldn&rsquo;t have decided to make this complicated remapping scheme, but here we are.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
-
-                <p>- Yours, Kewbish</p>
-            </div>
-            <br />
-            <p><a href="../">&lt; More Posts</a></p>
-            <br /><br />
-        </section>
-    </body>
-</html>
+</div>
+</div><br></div><p><a href=../ >‹ go back</a></main>

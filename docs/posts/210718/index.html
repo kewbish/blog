@@ -1,45 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>CPSC 110: Week 11</title>
-        <meta name="description" content="On graphs and the course as a whole." />
-        <meta property="og:title" content="CPSC 110: Week 11" />
-        <meta property="og:description" content="On graphs and the course as a whole." />
-        <meta property="og:url" content="https://kewbi.sh/blog/posts/210718/" />
-        <meta property="twitter:title" content="CPSC 110: Week 11" />
-        <meta property="twitter:description" content="On graphs and the course as a whole." />
-        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
-        <link rel="stylesheet" href="../../css/main.css" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-            rel="stylesheet"
-        />
-        <link
-            rel="icon"
-            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
-        />
-    </head>
-
-    <body class="cont page">
-        <section class="b-main-2">
-            <p><a href="../">&lt; More Posts</a></p>
-            <h1 class="b-subtitle">CPSC 110: Week 11</h1>
-            <p>
-                Published 18 July 2021 at
-                <a href="https://kewbi.sh/blog/posts/210718/">Yours, Kewbish</a>. 1738
-                words. Subscribe via <a href="../../index.xml">RSS</a>.
-            </p>
-            
-            <hr style="margin-bottom: -1%" />
-            <div class="b-writing">
-                <h2 id="introduction">Introduction</h2>
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>CPSC 110: Week 11</title><meta name=description content="On graphs and the course as a whole."><meta property=og:title content="CPSC 110: Week 11"><meta property=og:description content="On graphs and the course as a whole."><meta property=og:url content="https://kewbi.sh/blog/posts/210718/"><meta property=twitter:title content="CPSC 110: Week 11"><meta property=twitter:description content="On graphs and the course as a whole."><link rel=icon href=https://kewbi.sh/small-logo.png><link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-italic.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-700.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
+/>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=../../css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=../ >‹ go back</a><div class=b-post><h1 class=display-title>CPSC 110: Week 11.</h1><p style=text-indent:0>Published 18 July 2021 at <a href="https://kewbi.sh/blog/posts/210718/">Yours, Kewbish</a>.  1738 words. Subscribe via <a href=../../index.xml>RSS</a>.<hr><div class=grid-element><p style=text-indent:0;margin-bottom:0>This post is unlisted and has been archived. This doesn't represent my best work; please check out the posts listed <a href=../../posts>here</a> instead.</div><div class=b-writing><h2 id="introduction">Introduction</h2>
 <p>Last summer, I wrote a series of posts about my <a href="https://kewbi.sh/blog/posts/200621/">experience with Harvard&rsquo;s CS50</a> course, and this spring, I worked through the majority of another series of notes, this time on <a href="https://kewbi.sh/blog/posts/201213/">UBC&rsquo;s CPSC 110</a> course. Over this summer, I&rsquo;ve decided to finally spend some time just developing whatever I feel like, and self-studying topics that I find interesting, one of those topics being reviewing CPSC 110 for the upcoming winter session<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. While I was going through the course for a second round and looking through the notes I took the first time, I realized I never posted the final week&rsquo;s worth of notes for CPSC 110.</p>
 <p>So here they are, along with an overview of the course, my likes and dislikes, strategies I&rsquo;m using in order to prepare, and my feelings about the course as whole. The notes that follow were written as I went through the course the first time, and while there&rsquo;s a lot of conceptual understanding that&rsquo;s changed since then, I think the module summary&rsquo;s decent as it is. I&rsquo;ll save the more introspective musing and thoughts on the course for the latter sections of this post.</p>
 <p>Like the other posts in the CPSC 110 saga, these notes probably won&rsquo;t be useful for you, unless you&rsquo;re also taking the course, or have decided to implement some sort of cyclic data structure in Racket as well. If you belong to one of those two sets of people, you&rsquo;ll probably want to start <a href="https://kewbi.sh/blog/posts/201213/">at the beginning</a>, and if not, you might want to check out my other posts: I like rambling about CS, personal knowledge management, and vaguely tech-oriented things.</p>
@@ -65,12 +39,13 @@
 <li>same structure as <code>(local)</code> with the square brackets for definitions and the final expression</li>
 <li>similar scoping as <code>(local)</code> where variables are only valid within the expression</li>
 <li>define each <code>-X-</code> variable and use the same variable in the list of linking nodes =&gt; numbers are convention, letters are preferred</li>
-<li>i.e.</li>
-</ul>
-<pre tabindex="0"><code>(shared ((-A- (make-room &quot;A&quot; -B-))
-        (-B- (make-room &quot;B&quot; -A-)))
+<li>i.e.
+<pre tabindex="0"><code>(shared ((-A- (make-room &#34;A&#34; -B-))
+        (-B- (make-room &#34;B&#34; -A-)))
         -A-)
 </code></pre></li>
+</ul>
+</li>
 <li>use accumulators (visited accumulator) to check that you&rsquo;re not in a cyclic loop
 <ul>
 <li>HtDF for graphs combines the local and accumulators modules extensively
@@ -84,32 +59,24 @@
 </ul>
 <h2 id="self-study">Self-Study</h2>
 <p>Somewhere through the first module of the course, Kiczales (the professor) points out that just following along with the video lectures, and even taking meticulous notes, isn&rsquo;t enough to learn the material in CPSC 110. A large part of the learning comes from the practice: be it through problem sets, labs, or the extensive problem bank. I agree - though maybe with a caveat. I found practicing all the concepts to be pretty straightforward the first time round, but coming back this summer to re-attempt many of the problems was a decent challenge. I wanted to see how much I could remember in terms of design recipes and function calls without having the lectures to hold my hand through everything, so I&rsquo;ve just been jumping straight into each module&rsquo;s practice problems.</p>
-<p>I&rsquo;ve been trying to choose problems that are marked at least a blue square, though I will sometimes go through the shorter green circles if I&rsquo;d like to rebuild my understanding of a topic. CPSC 110 was designed to be an introductory CS course, so besides the first couple weeks of learning design templates and familiarizing myself with the language, the theory behind topics isn&rsquo;t that difficult. I didn&rsquo;t really see a point in grinding through easy problems to falsely feel productive, so I thought I&rsquo;d try to tackle some of the more difficult problems. Another point about CPSC 110 being designed for beginners: there&rsquo;ll be a lot of tedious template syntax and repetition in the beginning. I sort of ignored this my first time round, completely forgoing the <code>spd/tags</code> expressions and copy-pasting trivial tests. In hindsight, that wasn&rsquo;t a good idea - going through all the templates, though very tedious and boring, drills them into muscle memory, and is good practice for further modules. The bit about tests and monotony also goes into my last overall goal: not relying on solution sets or videos for help. In the exam, I won&rsquo;t have these resources at hand, so since I&rsquo;ve sort of got the basics down, I want to ensure that I actually do understand what I&rsquo;m doing. That&rsquo;s also part of the reason I like the labs so much - there&rsquo;s no answer key, so even if you&rsquo;re tempted to go check and see if your tests and function design is formed correctly, you can&rsquo;t. Coming back to Kiczales' point, I think practice is certainly an important part of the process, but so is choosing practice at a difficult enough level, persisting through the tedium, and teaching yourself through it without opening solutions or even watching the lectures, if you&rsquo;ve gotten to that point<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
+<p>I&rsquo;ve been trying to choose problems that are marked at least a blue square, though I will sometimes go through the shorter green circles if I&rsquo;d like to rebuild my understanding of a topic. CPSC 110 was designed to be an introductory CS course, so besides the first couple weeks of learning design templates and familiarizing myself with the language, the theory behind topics isn&rsquo;t that difficult. I didn&rsquo;t really see a point in grinding through easy problems to falsely feel productive, so I thought I&rsquo;d try to tackle some of the more difficult problems. Another point about CPSC 110 being designed for beginners: there&rsquo;ll be a lot of tedious template syntax and repetition in the beginning. I sort of ignored this my first time round, completely forgoing the <code>spd/tags</code> expressions and copy-pasting trivial tests. In hindsight, that wasn&rsquo;t a good idea - going through all the templates, though very tedious and boring, drills them into muscle memory, and is good practice for further modules. The bit about tests and monotony also goes into my last overall goal: not relying on solution sets or videos for help. In the exam, I won&rsquo;t have these resources at hand, so since I&rsquo;ve sort of got the basics down, I want to ensure that I actually do understand what I&rsquo;m doing. That&rsquo;s also part of the reason I like the labs so much - there&rsquo;s no answer key, so even if you&rsquo;re tempted to go check and see if your tests and function design is formed correctly, you can&rsquo;t. Coming back to Kiczales&rsquo; point, I think practice is certainly an important part of the process, but so is choosing practice at a difficult enough level, persisting through the tedium, and teaching yourself through it without opening solutions or even watching the lectures, if you&rsquo;ve gotten to that point<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>Altogether, CPSC 110&rsquo;s been an insightful learning experience, and one that&rsquo;s been pretty positive. One of my favourite parts of the course was by far <a href="https://kewbi.sh/blog/posts/210411/">module 8, on abstraction</a>, though the <code>(local)</code> expressions covered in module 7 would be a close second. There was something about the way creating fold functions obviated the need for a lot of repetitive function design that somehow clicked with me. I found everything about encapsulating templates into abstract functions, and using built-in functions very intuitive. Composing built-in abstract functions was like putting together a puzzle, and I had a lot of fun working out where I&rsquo;d need a <code>(filter)</code> as opposed to a <code>(map)</code>, and so on. It was also interesting to see the role abstract functions played in functional programming, and I&rsquo;m beginning to see why developers in Javascript or Python sometimes tend to this sort of paradigm.</p>
 <p>On the other hand, one of the things I didn&rsquo;t quite like was <a href="https://kewbi.sh/blog/posts/210418/">module 9, on generative recursion</a> - or at least, I didn&rsquo;t like it the first time round. The module was a lengthy series of videos playing off one central problem set, and while I&rsquo;m happy it was explained in great detail, it was honestly a bit boring to sit through. Maybe it&rsquo;s just my brain not being used to recursion, but the concepts of backtracking and generative recursion as opposed to structural recursion didn&rsquo;t really stick. Oh well - here&rsquo;s to hoping it&rsquo;ll be more manageable this time round.</p>
 <p>My opinion on CPSC 110&rsquo;s definitely changed since I first looked into the course late last year. In the beginning, I was definitely very skeptical about Racket and the whole design recipe system - I was one of those &ldquo;oh, but Racket isn&rsquo;t used in the &lsquo;real world&rsquo;&rdquo; people. At first, I thought the unique (to me, at the time) syntax was a bit constraining, but after going through a good chunk of things a second time, I think I&rsquo;ve gained more of an appreciation for how structured and logical everything is. For example, the first couple weeks of trudging through HtDD and HtDF recipes sort of turned me off them: I thought they were tedious, repetitive, and annoying. Looking back, I appreciate how orderly everything is presented: the course certainly lives up to its moniker of &ldquo;Systematic Program Design&rdquo;. Having a bit of hindsight&rsquo;s made me more appreciative of the theory and concepts that were taught in the course, and besides just understanding them better, knowing where each topic&rsquo;ll be used again in the course gives me an overview and a map<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> of sorts to guide me through my studying.</p>
 <p>I&rsquo;m still working through my second run of the course - I&rsquo;m currently somewhere around module 9 (which, as an aside, I sort of hated the first time, but we&rsquo;ll see how it is this time). For the rest of the summer, I&rsquo;ll likely be spending some time here and there to continue reviewing, and start attempting practice exams soon. Successfully challenging the course means I won&rsquo;t have to suffer through six courses in my first term, so that&rsquo;s an excellent motivator for me to do my absolute best. Besides CPSC 110, I&rsquo;ve been looking into some maths and some CS theory - spending a bit of time researching and looking into topics that I&rsquo;m interested in. It&rsquo;s been really nice to have the freedom to finally cross some of the learning I&rsquo;ve wanted to do for ages off my todo list, and I&rsquo;m looking forward to what the rest of the summer holds.</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>Speaking of which, I now understand why most university students I&rsquo;ve spoken to loathe course registration. My timetable was most certainly a work in progress, all the way up til thirty seconds before my registration time. (A special thank you to that CPSC 121 tutorial that decided to restrict itself.) But it was all fine in the end, and I did manage to get the courses I&rsquo;d been originally looking for, so I suppose the stress was a necessary part of the experience.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
+<li id="fn:2">
 <p>An aside: part of what made me even bother writing up formal notes and doing the amount of practice I did was because there was an external motivator present: the challenge exam, sometime in September. While it wasn&rsquo;t really a major push when I went through CPSC 110 this spring, I&rsquo;ve been taking it a lot more seriously since I started reviewing earlier this summer. I guess that just goes to show the power of structure and well-defined end goals, but then again, isn&rsquo;t that the whole point of CPSC 110?&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:3" role="doc-endnote">
+<li id="fn:3">
 <p>Please laugh now to validate my terrible abstract function puns.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
-
-                <p>- Yours, Kewbish</p>
-            </div>
-            <br />
-            <p><a href="../">&lt; More Posts</a></p>
-            <br /><br />
-        </section>
-    </body>
-</html>
+</div>
+</div><br></div><p><a href=../ >‹ go back</a></main>

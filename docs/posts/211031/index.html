@@ -1,45 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Starting Anki</title>
-        <meta name="description" content="On proper SRS, GTK hacks, and the Leitner system." />
-        <meta property="og:title" content="Starting Anki" />
-        <meta property="og:description" content="On proper SRS, GTK hacks, and the Leitner system." />
-        <meta property="og:url" content="https://kewbi.sh/blog/posts/211031/" />
-        <meta property="twitter:title" content="Starting Anki" />
-        <meta property="twitter:description" content="On proper SRS, GTK hacks, and the Leitner system." />
-        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
-        <link rel="stylesheet" href="../../css/main.css" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-            rel="stylesheet"
-        />
-        <link
-            rel="icon"
-            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
-        />
-    </head>
-
-    <body class="cont page">
-        <section class="b-main-2">
-            <p><a href="../">&lt; More Posts</a></p>
-            <h1 class="b-subtitle">Starting Anki</h1>
-            <p>
-                Published 31 October 2021 at
-                <a href="https://kewbi.sh/blog/posts/211031/">Yours, Kewbish</a>. 2394
-                words. Subscribe via <a href="../../index.xml">RSS</a>.
-            </p>
-            
-            <hr style="margin-bottom: -1%" />
-            <div class="b-writing">
-                <h2 id="introduction">Introduction</h2>
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Starting Anki</title><meta name=description content="On proper SRS, GTK hacks, and the Leitner system."><meta property=og:title content="Starting Anki"><meta property=og:description content="On proper SRS, GTK hacks, and the Leitner system."><meta property=og:url content="https://kewbi.sh/blog/posts/211031/"><meta property=twitter:title content="Starting Anki"><meta property=twitter:description content="On proper SRS, GTK hacks, and the Leitner system."><link rel=icon href=https://kewbi.sh/small-logo.png><link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-italic.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-700.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
+/>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=../../css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=../ >‹ go back</a><div class=b-post><h1 class=display-title>Starting Anki.</h1><p style=text-indent:0>Published 31 October 2021 at <a href="https://kewbi.sh/blog/posts/211031/">Yours, Kewbish</a>.  2325 words. Subscribe via <a href=../../index.xml>RSS</a>.<hr><div class=b-writing><h2 id="introduction">Introduction</h2>
 <p>Something that I&rsquo;ve realized throughout my first month and a half at university, is the sheer volume of information and responsibility placed on a student&rsquo;s shoulders. I love it. Being able to manage myself and have full(-ish) control of my courses, my performance, and the rest of my life has been great. I like being immersed in content that I truly don&rsquo;t understand, and that challenges me a bit to actually understand and make sense of the material. However, there&rsquo;s a balance: I like that there&rsquo;s exciting and decently interesting information, but it&rsquo;s, of course, annoying that there&rsquo;s a lot of it. I&rsquo;ve had to, and am still in the process of, figure out how to get through all of this material, and get through it decently well. My courses are very spread out in terms of specialization, and some are quite memorization focused. Improving and optimizing my recall and comprehension are now starting to become interests and priorities of mine.</p>
 <p>Well, it&rsquo;s Halloween, and I don&rsquo;t know how spooky flashcards and memory management are, but here I am to discuss <a href="https://en.wikipedia.org/wiki/Spaced_repetition">spaced repetition software</a> and <a href="https://apps.ankiweb.net/">Anki</a> in particular. (I won&rsquo;t go into what these are right now, but go ahead and take a look at those resources if you&rsquo;re interested.) I&rsquo;ve been dabbling with <a href="https://kewbi.sh/blog/posts/201025/">a variation of SRS</a> for a while now, and have recently even been working on a <a href="https://github.com/kewbish/liberty">free-response version of the philosophy</a>. I&rsquo;ve tried both <a href="https://quizlet.com">Quizlet</a> and terminal UI versions of flashcard apps, like <a href="https://github.com/proycon/vocage">vocage</a> and <a href="https://github.com/Yvee1/hascard">hascard</a>. I&rsquo;ve known about Anki for a long while now, but I&rsquo;ve never really looked into it. I&rsquo;d always discounted their SuperMemo2 algorithm, and thought its applications didn&rsquo;t overlap with my needs.</p>
 <p>However, what finally pushed me over the edge was taking ATSC113 at UBC. It&rsquo;s a course about atmospheric sciences, and goes into the weather in relation to flying, snow sports, and sailing. It&rsquo;s a course with lots of vocabulary and concepts that I&rsquo;d never thought about or learned about before: plenty of memorization heavy work in areas that I&rsquo;m completely unfamiliar with. I&rsquo;d tried to review notes on a regular basis, and made my own flashcards in an attempt to test myself. However, I kept needing to schedule review sessions and assess my level of comprehension myself, which introduced a lot of mental friction. I knew that I was probably going to start looking for something new to try, so I decided to be proactive and take a look at Anki.</p>
@@ -49,49 +23,27 @@
 <p>I&rsquo;d like to inject a short interlude about SRS and the SRS community in general here - I think there&rsquo;s a lot of comparisons to be drawn here between Anki and #roamcult, and maybe the knowledge management community too. There&rsquo;s a lot of similarly passionate people, and people who&rsquo;ve kind of attached a large part of their identity to the app. There&rsquo;s absolutely nothing wrong with it - I guess people have an intrinsic desire to know and particularly magically know all the things they want to do. Anki is a bit of a stopgap to the be-all and end-all of understanding, and I think it has something to do with the idealization and romanticization of knowledge in general. Maybe this is because I&rsquo;ve been spending a decent amount of time in circles where discussing knowledge management is a normal and interesting thing to do, but I see that people keep trying to reinvent themselves and keep searching for the one silver bullet to their knowledge needs. And I suppose I&rsquo;ve succumbed to that a bit as well - look at my Zettelkasten series and the amount of time I spend tweaking my various configs in an attempt to become that student. However, I guess I&rsquo;ll just leave this in here - SRS is lightly glamourized. There&rsquo;s nothing wrong with that, but in my opinion, it is. Perhaps my opinion as to the magnitude of glorification will change as time goes on, and I, too, become An Anki User, but we&rsquo;ll see.</p>
 <h2 id="a-diy-night-mode">A DIY Night Mode</h2>
 <p>Something interesting I&rsquo;d like to also touch on is getting themes to work properly in Anki. One of the main issues I ran into when trying to set Anki up was getting my GTK theme to work with Anki night mode. I currently use <a href="https://github.com/ddnexus/equilux-theme">Equilux</a> as my GTK theme, which I really like for its flat grey design and nice integration with my boring, monochrome aesthetic. Anki, however, works on QT, which I&rsquo;m not entirely familiar with, but it&rsquo;s a different theming and development engine than GTK. Unfortunately, Anki night mode by default doesn&rsquo;t take the GTK theme as a QT theme, so I apparently had to do some <code>/etc/environment</code> magic to set <code>QT_QPA_PLATFORMTHEME</code> to <code>qt5ct</code> and within that, <code>gtk2</code>. Spoiler alert: Don&rsquo;t bother looking into that, because if your GTK theme is already a dark mode and you&rsquo;d prefer a night mode within Anki, it won&rsquo;t work out. It <em>does</em> work with light mode, but then the entire reviewing interface is by default light and blinding.</p>
-<p>For example, below, that&rsquo;s Anki with night mode enabled, and with the ‘wrong’ theme. Interface elements are light on dark as desired.
-<figure><img src="https://aws1.discourse-cdn.com/standard11/uploads/anki2/optimized/2X/5/53dcf9695c4f8ab399d2434d8b1c491f0e848dc6_2_690x197.png"
-         alt="Figure 1. Anki: wrong GTK theme, right interface."/><figcaption>
-            <p>Figure 1. Anki: wrong GTK theme, right interface.</p>
-        </figcaption>
-</figure>
-</p>
-<p>With night mode off (ignore that the Deck and New are white, I went and edited the CSS in /usr/lib/python3.9/site-packages/aqt/data/web/css/). Interface elements are dark on dark, but the correct theme applied.
-<figure><img src="https://aws1.discourse-cdn.com/standard11/uploads/anki2/optimized/2X/0/05d87b1f60668003cb3c5d861dc3776c756ac58a_2_690x214.png"
-         alt="Figure 2. Anki: right GTK theme, wrong interface."/><figcaption>
-            <p>Figure 2. Anki: right GTK theme, wrong interface.</p>
-        </figcaption>
-</figure>
-</p>
-<p>What happens is that <a href="https://forums.ankiweb.net/t/toggling-night-mode-appears-to-change-qt-gtk-theme/14404">Anki uses their own QT theme</a> when night mode is toggled, since &ldquo;not all themes will work correctly with dark colors&rdquo;. Entirely fair, but that meant I had to do some serious CSS styling edits in order to simulate night mode within &lsquo;light mode&rsquo; Anki. To save you a lot of work, my edits to apply night mode colours (lightly edited to use Equilux colours where appropriate) to light mode Anki are available on my dotfiles, at <a href="https://github.com/kewbish/dotfiles">kewbish/dotfiles</a>. The key directories to look in are <code>/usr/lib/python3.9/site-packages/aqt/data/web/</code>, and <code>~/.local/share/Anki2/addons21</code>, if you want to edit any addons. This might differ due to installation method (I used <code>anki-bin</code> from the AUR), but this is what worked for me.</p>
+<p>What happens is that <a href="https://forums.ankiweb.net/t/toggling-night-mode-appears-to-change-qt-gtk-theme/14404">Anki uses their own QT theme</a> when night mode is toggled, since &ldquo;not all themes will work correctly with dark colors&rdquo;. Entirely fair, but that meant I had to do some serious CSS styling edits in order to simulate night mode within &rsquo;light mode&rsquo; Anki. To save you a lot of work, my edits to apply night mode colours (lightly edited to use Equilux colours where appropriate) to light mode Anki are available on my dotfiles, at <a href="https://github.com/kewbish/dotfiles">kewbish/dotfiles</a>. The key directories to look in are <code>/usr/lib/python3.9/site-packages/aqt/data/web/</code>, and <code>~/.local/share/Anki2/addons21</code>, if you want to edit any addons. This might differ due to installation method (I used <code>anki-bin</code> from the AUR), but this is what worked for me.</p>
 <p>A more universal fix is creating an addon in the <code>~/.local/share/Anki2/addons21</code> directory, which is as easy as making a directory and creating an <code>__init__.py</code>. Alternatively, edit an existing addon. As long as you include:</p>
 <pre tabindex="0"><code>from aqt import mw
 from PyQt5.Qt import QStyleFactory
 
-mw.app.setStyle(QStyleFactory.create(&quot;gtk2&quot;))
+mw.app.setStyle(QStyleFactory.create(&#34;gtk2&#34;))
 </code></pre><p>somewhere, you&rsquo;ll correctly force the GTK theme into any theme of Anki. This way, you can switch to dark mode within the Anki settings, as well as using a proper GTK theme that integrates with the rest of your desktop environment.</p>
 <h2 id="my-settings">My Settings</h2>
 <p>I don&rsquo;t think I really did much research as to what settings were idea for use with Anki - my config at the moment is some mix of <a href="https://chuff.wordpress.com/2018/01/08/article-how-to-use-anki-as-a-leitner-box-game/">this Anki Leitner setup</a> and the <a href="https://refold.la/roadmap/stage-1/a/anki-setup#Low-key-Anki">Lowkey Anki setup</a>. The two things I knew going into configuration was that I somewhat unconventionally wanted to partially integrate the <a href="https://ncase.me/remember/">Leitner system</a> in my learning steps, and that I wanted a Quizlet-like pass / fail option. Yes, people have gone on about how you should just trust the algorithm (à la the natural recursion), and how it&rsquo;s not really that much cognitive friction and that it really helps with the ease settings and how cards are tuned to your level of memory. But I don&rsquo;t like it - I now have to build a mental model of what differentiates hard from good cards, and likewise for good / easy, again / hard. This might be something I revisit later on in my SRS journey, but I&rsquo;d rather keep things simple and close to the softwares I&rsquo;ve used in the past for now.</p>
 <p>I have my settings at 20 new cards a day - a bit much for now, but I&rsquo;d like to quickly get back up to pace with some of my class cards. I&rsquo;ve set my learning steps to <code>1d 2d 4d 8d 16d 32d</code>, which might seem inordinately long for the quick <code>5m 25m 1440m</code> people, but I&rsquo;ve found the Leitner system works quite well for me, so I kept it. My graduating and easy intervals are both at 32d, and my insertion order&rsquo;s random. Similarly to the &lsquo;harsh&rsquo; Leitner system, I have my lapses at 1d with a minimum interval of 1d. My leech threshold&rsquo;s at 8, and I&rsquo;ve set this to tag only. It&rsquo;ll be some time before I even get all my cards out of learning, but I hope that this&rsquo;ll work well enough for me. I bury related siblings and review siblings, which reduces redundant review time. My maximum interval&rsquo;s at 100 years, which is a bit long now that I think about it, but oh well. My starting ease is where it starts to get interesting - I&rsquo;ve set it to 2.50, with my easy bonus, interval modifier, and hard interval all at 1.00. This essentially disables the easy and hard buttons, which is nice, since I can&rsquo;t see them visually anyway.</p>
 <p>Speaking of the pass / fail setup proposed by Refold&rsquo;s Lowkey Anki, I use this <a href="https://github.com/lambdadog/passfail2">Pass Fail addon</a>, updated for use with Anki 2.1. I resonate with the goals of the addon, and so far, I&rsquo;d say I definitely recommend it. Keep in mind that this all is just a snapshot for future reference, and that I&rsquo;m still very much tweaking everything around.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>With Anki, I&rsquo;m looking forward to learning more fluently, and taking away the friction of review. I like that I have one place to return to and one place to manage all the things I should review now, and that that one place is something I can turn to daily. I think this daily habit, while much less focused than specific sprints every other couple days, is more sustainable in maintaining and always brushing up on knowledge. I&rsquo;m still figuring out how to best use Anki to recall and more deeply learn new information. I&rsquo;d like to find, for example, a way to review cards in advance without them piling up in the future. I know I can custom study and toggle off the &rsquo;re-date cards' or whatever, but I think my purpose right now is trying to get ahead of reviews, so I don&rsquo;t think there&rsquo;s really a way to review without pushing more cards together in the future. As well, I&rsquo;d like to learn the card and note management windows better. As of now, I&rsquo;ve just figured out how to do what I need to do (which, prior to <a href="https://ankiweb.net/shared/info/385888438">Edit Field During Review (Cloze)</a> was just editing cards and tagging them), and haven&rsquo;t explored much else. Maybe that&rsquo;s alright - maybe I shouldn&rsquo;t overcomplicate things for myself before I&rsquo;ve even gotten started.</p>
+<p>With Anki, I&rsquo;m looking forward to learning more fluently, and taking away the friction of review. I like that I have one place to return to and one place to manage all the things I should review now, and that that one place is something I can turn to daily. I think this daily habit, while much less focused than specific sprints every other couple days, is more sustainable in maintaining and always brushing up on knowledge. I&rsquo;m still figuring out how to best use Anki to recall and more deeply learn new information. I&rsquo;d like to find, for example, a way to review cards in advance without them piling up in the future. I know I can custom study and toggle off the &rsquo;re-date cards&rsquo; or whatever, but I think my purpose right now is trying to get ahead of reviews, so I don&rsquo;t think there&rsquo;s really a way to review without pushing more cards together in the future. As well, I&rsquo;d like to learn the card and note management windows better. As of now, I&rsquo;ve just figured out how to do what I need to do (which, prior to <a href="https://ankiweb.net/shared/info/385888438">Edit Field During Review (Cloze)</a> was just editing cards and tagging them), and haven&rsquo;t explored much else. Maybe that&rsquo;s alright - maybe I shouldn&rsquo;t overcomplicate things for myself before I&rsquo;ve even gotten started.</p>
 <p>In other news, I&rsquo;m currently in the process of overly studying for midterm wave number two. I&rsquo;m glad that I made it through the first wave, and while I&rsquo;m not too ecstatic about some of what I&rsquo;ve been able to do, I&rsquo;ve learned a couple lessons that I&rsquo;ll try to apply in the future. It is what it is. As well, I&rsquo;ve been meaning to start looking into internships and applying to some, but I feel like I&rsquo;ve hit a wall. The imposter syndrome, particularly with the interview side of things, is definitely kicking in. I don&rsquo;t know how I feel describing myself as a &lsquo;web developer&rsquo; while looking at some of those DSA questions, or even web framework questions, and not really having a clue with how to approach them. But it&rsquo;s something that I&rsquo;ve also decided that I need to work on, so I&rsquo;m looking into that CS handbook<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> and trying to figure out a way to systematically learn and improve.</p>
 <p>As well, I&rsquo;ve been working through <a href="https://fullstackopen.com/">Full Stack Open</a>, which is an open source course about web development, and React / Typescript / Express / MongoDB in particular. I&rsquo;ve realized that I&rsquo;ve kind of let my Vue experience go a bit, and that, looking through interviews and such, people tend to look for React more. I&rsquo;ve never really systematically learned any part of web development, and I think FSO has been a good introduction to this whole curriculum thing. It also helps that Typescript and the React design patterns are topics that I&rsquo;ve never really covered before. Part of what makes me demotivated and pushes me to stop working on something is that I feel that I know half of whatever a course is teaching, but I don&rsquo;t know the other half: I end up skimming most of the material, and retain not a lot of new information. I&rsquo;m on the third module at the moment, and while I don&rsquo;t have a lot of time to tackle their exercises, I do really enjoy the examples they&rsquo;ve set up and how the problems apply the material super well. I&rsquo;ve found working through the course really informative and honestly fun, and would recommend the course so far. I&rsquo;m excited to see what the rest of the course ends up being like, and hopefully, I&rsquo;ll report back with more progress soon.</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>Ironically, I very vividly remember making fun of my friends for printing out their own copy and putting it together into a binder and reading it every chance they got in class. At this point, <em>I&rsquo;ve</em> become that kid, but hey, maybe I should have listened to their CS fanboy ramblings the first time around.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
-
-                <p>- Yours, Kewbish</p>
-            </div>
-            <br />
-            <p><a href="../">&lt; More Posts</a></p>
-            <br /><br />
-        </section>
-    </body>
-</html>
+</div>
+</div><br></div><p><a href=../ >‹ go back</a></main>

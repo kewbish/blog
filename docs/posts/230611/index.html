@@ -1,0 +1,86 @@
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Everything I Know About Stacked PRs</title><meta name=description content="On a summer of shipping in stacks."><meta property=og:title content="Everything I Know About Stacked PRs"><meta property=og:description content="On a summer of shipping in stacks."><meta property=og:url content="https://kewbi.sh/blog/posts/230611/"><meta property=twitter:title content="Everything I Know About Stacked PRs"><meta property=twitter:description content="On a summer of shipping in stacks."><link rel=icon href=https://kewbi.sh/small-logo.png><link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-italic.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-700.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
+/>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=../../css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=../ >‹ go back</a><div class=b-post><h1 class=display-title>Everything I Know About Stacked PRs.</h1><p style=text-indent:0>Published 11 June 2023 at <a href="https://kewbi.sh/blog/posts/230611/">Yours, Kewbish</a>.  2082 words. Subscribe via <a href=../../index.xml>RSS</a>.<hr><div class=b-writing><h2 id="introduction">Introduction</h2>
+<p>I spent last summer interning at <a href="https://replit.com">Repl.it</a>, the browser-based coding platform that makes it easy to build and collaborate. I interned on their Workspace team, and primarily worked on <a href="https://blog.replit.com/nix-github-imports">porting their GitHub import flow to Nix</a> (and another super-secret project that hasn&rsquo;t been shipped yet). It was an incredible learning experience – I was mentored by insanely smart people and granted the autonomy to own development of an improved product flow. Check their platform out if you haven&rsquo;t already: it&rsquo;s just as amazing as the team behind it!</p>
+<p>It&rsquo;s ironic that while working on GitHub imports to support Replit users&rsquo; dev workflows, a major technical challenge would be wrangling GitHub to support <em>my</em> dev workflow. While Replit&rsquo;s engineering team has no prescribed pull request submission process, I quickly learned that the most efficient way to get PRs reviewed quickly was to make them small. But when you&rsquo;re working on adding a new feature or flow, the amount of code changes needed is generally big. How do you split up a huge PR into smaller ones while making sure that they&rsquo;ll get merged in order and that they make sense as smaller units?</p>
+<p>The solution was stacked pull requests. Instead of making a larger PR, split the PRs up into logical working chunks and stack them on top of each other. Let&rsquo;s say you&rsquo;re working on adding a new modal dialog for some flow. Inside, there&rsquo;s some interaction that calls out to a new API that you also implement, and some interaction that uses an existing API in a new way. Instead of submitting this all as one big PR, you can create a base PR with just the UI changes (<code>git checkout -b add_modal_ui</code> from <code>main</code>). Then, you can create another PR on a new branch off of the base PR with an implementation of the new API and hooking it up to the UI (<code>git checkout -b add_new_api</code> from <code>add_modal_ui</code>). After that, you can branch off this second PR again to integrate the existing API (<code>git checkout -b add_existing_api</code> from <code>add_new_api</code>).</p>
+<p>The PR stack ends up looking like this:</p>
+<pre tabindex="0"><code>main
+└── add_modal_ui
+    └── add_new_api
+        └── add_existing_api
+</code></pre><p>GitHub has a good UI for submitting stacked PRs that you might not have ever noticed. When submitting a new PR on a branch, you can choose the base branch that you submit your PR to. For example, when submitting the PR on the <code>add_new_api</code> branch, choose <code>add_modal_ui</code>. If you daisy-chain these, GitHub will automatically update the base branch of each PR in the stack as they get merged.</p>
+<figure><img src="../../img/230611/base-changes.png"
+         alt="Figure 1. GitHub automatically changing a PR&#39;s base branch."/><figcaption>
+            <p><em>Figure 1. GitHub automatically changing a PR&rsquo;s base branch.</em></p>
+        </figcaption>
+</figure>
+
+<p>Because each individual PR builds on the previous one, but is a logically coherent and small addition, each PR can be reviewed individually. This speeds up PR review since reviewers don&rsquo;t have to comb through a hundred changed files trying to make sense of what affects what. It&rsquo;s easier to articulate intention with smaller PRs too, leading to better communication.</p>
+<p>A PR stack typically gets merged from the leaf back down to the root PR (in the example, from <code>add_existing_api</code> to <code>add_modal_ui</code>) and back to the main development branch<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. This means that all your changes can still end up on the main branch as a single unit, as in the &ldquo;good ol&rsquo; Big PR&rdquo; approach, but they&rsquo;ve likely been easier to review and work on.</p>
+<p>Sometimes the PRs can even be as small as a single commit, and the PR stack is essentially a PR of smaller PRs. Think of stacked PRs like an extension of the commit history feature within the GitHub code review pane. When reviewing big PRs, you can look through commit history to see how things were put together. Stacked PRs operate on the same principle: they isolate changes to their smallest logical units, but just do so more explicitly than with multiple commits.</p>
+<p>Stacked PRs also kept me unblocked during the summer, even when I had lots of changes on the go that depended on each other. I didn&rsquo;t have to wait for a feature submitted as a large PR to be reviewed before working on something that built on top of it. This is especially nice when I submitted the base PRs for review before starting to work on PRs that build on it, since this way you can keep the stack small but keep the momentum of feature development going.</p>
+<p>Stacked PR workflows aren&rsquo;t perfect. I spent a lot of time painstakingly resolving branch conflicts this summer<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>, especially after PRs lower in the stack had significant changes requested. When you&rsquo;re working on many different features within a feature, your PR stack can also turn into a gnarly PR tree. With more complicated changes to base PRs and inter-PR stack dependencies, we ran into what was lovingly known as &lsquo;rebase hell&rsquo;. As well, because PRs get merged into their parent PRs, the root PR still lands a big diff on the main branch, so take care to review changes in staging carefully before merging down. With stacked PRs, you also can&rsquo;t test individual PRs in production (unlike in short-lived branch workflows) which might be a deal-breaker if your local environment is limited.</p>
+<p>In spite of all this, I still think stacked PRs are a useful tool in managing large PRs efficiently. This post covers everything I&rsquo;ve learned about working with stacked PRs, so you can skip the rebase hell and take advantage of some hard-learned workflows.</p>
+<h2 id="merging-upstream-changes">Merging Upstream Changes</h2>
+<p>Let&rsquo;s say you&rsquo;ve branched off main like so:</p>
+<pre tabindex="0"><code>main
+└── branch1
+    └── branch2
+</code></pre><p>You&rsquo;ve made some changes in <code>branch1</code> that you also want to incorporate into your changes in <code>branch2</code>: for example, <code>branch1</code> was reviewed and someone requested changes on underlying code that was developed in <code>branch1</code> but also depended on in <code>branch2</code>. Or perhaps <code>main</code> has had some significant updates that change your development environment, and you want to get those into your <code>branch2</code> as well.</p>
+<p>The typical solution for this is while in <code>branch2</code>, run <code>git merge branch1</code> to get the new commits of <code>branch1</code> into <code>branch2</code>. Alternatively<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>, you can <code>git rebase branch1</code> on <code>branch2</code>, resolve merge conflicts, then <code>git push -f</code> onto <code>branch2</code>.</p>
+<p>Another strategy is to run <code>git rebase --onto=main branch1 branch2</code> on any branch, then <code>git push -f</code>. If <code>branch1</code> has already been merged, you might need to find the <code>merge-base</code>, or the &lsquo;common ancestor&rsquo; between <code>main</code> and <code>branch2</code> with <code>git merge-base branch1 branch2</code> and run <code>git rebase --onto=main [merge-base-result] branch2</code>.</p>
+<h2 id="avoiding-squashed-upstream-changes-in-bottom-of-stack">Avoiding Squashed Upstream Changes in Bottom of Stack</h2>
+<p>In this footnote<sup id="fnref1:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, I said to avoid merging from the bottom of the stack up since this usually leaves a bunch of duplicate commits in the branches on the top of the stack as the commit hashes change on merge. But let&rsquo;s say you&rsquo;ve gone ahead and done this anyway, resulting in:</p>
+<pre tabindex="0"><code>main (with branch1 changes)
+└── branch2 (now with duplicate commits)
+</code></pre><p>This gets tricky. My strategy was to try to keep a list of commits from <code>branch1</code> somewhere pre-merge, so that these commit messages can be compared then against <code>branch2</code>. Run <code>git rebase -i HEAD~x</code>, where <code>x</code> is the point at which you branched off <code>branch1</code> to <code>branch2</code>. Then in the interactive menu, drop all <code>branch1</code> commits. After running <code>git rebase main</code> and resolving merge conflicts, <code>branch2</code> should now only contain the changes unique to <code>branch2</code>. Run <code>git push -f</code> and you should be good to go! Phew.</p>
+<h2 id="cherry-picking">Cherry-picking</h2>
+<p>Another alternative fix for the above situation relies on careful cherry-picking. Let&rsquo;s say you&rsquo;ve branched off of <code>main</code> like the previous example but have merged down <code>branch1</code>:</p>
+<pre tabindex="0"><code>main (with branch1 changes)
+└── branch2
+</code></pre><p>And you&rsquo;re in the same scenario: you need to get rid of duplicate commits in the new base PRs of the stack. Sometimes, when there are a few commits, it&rsquo;s easier to build a new branch with cherry-picked changes from the old <code>branch2</code>.</p>
+<p>Run <code>git checkout main</code> and <code>git checkout -b branch2-new</code> to create a new branch incorporating the <code>branch1</code> changes with their new commit hashes. Then as with the previous section, note commit hashes of changes on <code>branch2</code> and cherry-pick them over with <code>git cherry-pick [commit_hash]</code>. You&rsquo;ll have to resolve conflicts along the way, but with smaller branches this can result in less resolution work than dropping commits and rebasing.</p>
+<p>If all your <code>branch2</code> commits are consecutive, you can cherry-pick a range of commits all in one go. Run <code>git cherry-pick commit_hash_start^..commit_hash_end</code>. The <code>^</code> denotes to include the first hash, and the <code>..</code> denotes a continuous range between those two commits, inclusive.</p>
+<h2 id="merging-changes-from-downstream">Merging Changes From Downstream</h2>
+<p>Finally, let&rsquo;s cover how to merge changes down properly. Let&rsquo;s go back to the first example, and let&rsquo;s say you&rsquo;ve branched off main like so:</p>
+<pre tabindex="0"><code>main
+└── branch1
+    └── branch2 ✓
+</code></pre><p><code>branch2</code> has been approved. (Maybe <code>branch1</code> has as well, exciting!) The easiest way to merge things down to main from here is to go from the top of the stack (i.e. to go from <code>branch2</code>). This maintains commit hashes and avoids the complex rebasing strategies in the section above.</p>
+<p>However, this results in larger diffs being applied <em>all at once</em> to main, so this may not be ideal for continually deploying environments where you&rsquo;d like to test incrementally. This also might not be a great idea if <code>main</code> is significantly ahead of <code>branch1</code> or <code>branch2</code>, which means there&rsquo;s more opportunities for untested breakage due to new <code>main</code> updates. My strategy was to merge down into the second-to-last PR on the stack (<code>branch1</code>), and rebase <code>main</code> into that so I&rsquo;d only have to resolve conflicts once. Then I&rsquo;d test, and once I was sure things were working, I&rsquo;d merge everything into main.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>These strategies should be enough to cover most stacked PR workflows - the commands are relatively straightforward, and carried me through a successful internship. However, I&rsquo;ve neglected to mention that there are tools out there that automate most of this workflow for you. While I haven&rsquo;t used it, many of my coworkers at Replit were playing around with <a href="https://graphite.dev/">Graphite.dev</a> at the time. It&rsquo;s a CLI that builds on top of git to handle this lower-level rebasing for you, and automates creating stacked PRs complete with a stack summary message in each PR. It looked useful, especially for the automatic rebasing, but I didn&rsquo;t want to bother migrating my workflow and learning new Git commands just then. I might check it out in the future though - if it can help me avoid rebase hell, I&rsquo;m all for it.</p>
+<p>There are also some Git plugins that don&rsquo;t go quite to the extent of automating PR creation as Graphite does, but helps facilitate the details. I&rsquo;ve seen <a href="https://github.com/gitext-rs/git-stack">git-stack</a> and <a href="https://github.com/VirtusLab/git-machete">git-machete</a> mentioned before, as well as <a href="https://github.com/ezyang/ghstack/">ghstack</a> as a lightweight Graphite alternative.</p>
+<p>Despite all the intricacies of a stacked PR workflow, I&rsquo;m still strongly convinced that these smaller PRs lead to more efficient PR review and faster development-feedback-ship loops. With it, I was able to ship features consistently and quickly last summer, and am still applying the same workflows at <a href="https://cloudflare.com">Cloudflare</a> this summer. I&rsquo;m sure this&rsquo;ll also be the case in future projects and work. The tooling supporting stacked PR workflows is becoming more robust and mature, and I&rsquo;m betting stacked PRs will become more and more prevalent in the coming years.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>This leads to the caveat that the base few PRs must be approved before the leaf PRs can be merged in. It&rsquo;s good to communicate that to your team when working with stacked PRs! Several times during my summer, my fellow intern and I made slow progress because we were constantly waiting for the base PRs to be approved and shipped before we could build on them again. Also try to avoid merging from the base up - this leads to a bunch of duplicated commits especially if your team uses the &lsquo;squash and merge&rsquo; strategy.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>It got so bad that at one point my fellow intern and I Slack huddled for a couple hours just picking through rebase conflicts. We called it a rebase party (complete with :partyparrot:s). Near the end of my internship, &lsquo;rebase hell&rsquo; became a running joke with my manager and some of my team.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>I recently learned about <code>git rerere</code>, which can help with the repeated rebase conflicts that can arise with stacked PRs. <code>git rerere</code> persists conflict resolutions and automatically tries to re-apply them if the same conflict comes up again later on in the rebase process.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>My preferred strategy, because it didn&rsquo;t leave merge commits in the history.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+</div><br></div><p><a href=../ >‹ go back</a></main>

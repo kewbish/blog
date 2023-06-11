@@ -1,45 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Conversational Notetaking</title>
-        <meta name="description" content="On my Zettelkasten derivative system." />
-        <meta property="og:title" content="Conversational Notetaking" />
-        <meta property="og:description" content="On my Zettelkasten derivative system." />
-        <meta property="og:url" content="https://kewbi.sh/blog/posts/200607/" />
-        <meta property="twitter:title" content="Conversational Notetaking" />
-        <meta property="twitter:description" content="On my Zettelkasten derivative system." />
-        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
-        <link rel="stylesheet" href="../../css/main.css" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-            rel="stylesheet"
-        />
-        <link
-            rel="icon"
-            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
-        />
-    </head>
-
-    <body class="cont page">
-        <section class="b-main-2">
-            <p><a href="../">&lt; More Posts</a></p>
-            <h1 class="b-subtitle">Conversational Notetaking</h1>
-            <p>
-                Published 07 June 2020 at
-                <a href="https://kewbi.sh/blog/posts/200607/">Yours, Kewbish</a>. 1747
-                words. Subscribe via <a href="../../index.xml">RSS</a>.
-            </p>
-            
-            <hr style="margin-bottom: -1%" />
-            <div class="b-writing">
-                <h2 id="introduction">Introduction</h2>
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Conversational Notetaking</title><meta name=description content="On my Zettelkasten derivative system."><meta property=og:title content="Conversational Notetaking"><meta property=og:description content="On my Zettelkasten derivative system."><meta property=og:url content="https://kewbi.sh/blog/posts/200607/"><meta property=twitter:title content="Conversational Notetaking"><meta property=twitter:description content="On my Zettelkasten derivative system."><link rel=icon href=https://kewbi.sh/small-logo.png><link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-italic.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-700.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
+/>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=../../css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=../ >‹ go back</a><div class=b-post><h1 class=display-title>Conversational Notetaking.</h1><p style=text-indent:0>Published 07 June 2020 at <a href="https://kewbi.sh/blog/posts/200607/">Yours, Kewbish</a>.  1747 words. Subscribe via <a href=../../index.xml>RSS</a>.<hr><div class=b-writing><h2 id="introduction">Introduction</h2>
 <p>I&rsquo;ve started seeing a whole trend around <a href="https://zettelkasten.de/">Zettelkasten</a> with a lot of developers online, especially those who are into <a href="https://plaintextproject.online/">plaintext notetaking</a>. I was interested in how I&rsquo;d tweak the system, so I decided to try it out for a while. (It&rsquo;s been like 2mo, nothing extreme).</p>
 <p>Going to school online has allowed me to begin porting a lot of my normally physical notes to a digital platform, especially as I predict my senior (damn, I&rsquo;m really about to become a senior in a couple months) year will be mostly online as well. I&rsquo;m also planning on doing a lot of online learning over the summer (and during the school year as well), and I&rsquo;d rather not have to jump between primarily paper / physical notes and primarily online notes for different subjects.</p>
 <p>(I know they say it&rsquo;s better to write it out by hand to remember, but I have a <em>quirky</em> way of doing things that works for me, and that&rsquo;s my choice. Y&rsquo;all best not try to <em>scronch</em> me. And in the end, I <em>do</em> write my hand some of the time before I transcribe to digital, so I really don&rsquo;t know why I wrote this.)</p>
@@ -48,7 +22,7 @@
 <h2 id="migrating-from-onenote">Migrating from OneNote</h2>
 <p>My first step in this journey was to migrate all my previous notes and schoolwork from OneNote. Previously, all my schoolwork, blog posts, and development notes were collated into one large binder. This way, I wouldn&rsquo;t have to fumble around with different binders, especially when inevitably, one piece of writing or work would fall between two or more categories.</p>
 <p>First, I began by creating a OneDrive (yes, I&rsquo;m still going to use OneDrive simply because I don&rsquo;t want to deal with setting up DropBox or whatever right now) folder. Then, for each section in my binder, I&rsquo;d create a folder.</p>
-<p>This was the hard part: copying all my information over. For each page in each section, I&rsquo;d <code>touch</code> a new file with the same name. (As another aside, my naming convention is usually &lsquo;[topic] - [subtopic / class]&rsquo;. For things like blog posts, I use a &lsquo;yymmdd&rsquo; convention.) OneNote has the capabilities to embed rich text and formatting and things like that, which I lost during the process. I know there&rsquo;s a couple of hacky ways to preserve formatting with pandoc and Azure conversions, but the way I did it was simply with good ol' Ctrl-C, Ctrl-V.</p>
+<p>This was the hard part: copying all my information over. For each page in each section, I&rsquo;d <code>touch</code> a new file with the same name. (As another aside, my naming convention is usually &lsquo;[topic] - [subtopic / class]&rsquo;. For things like blog posts, I use a &lsquo;yymmdd&rsquo; convention.) OneNote has the capabilities to embed rich text and formatting and things like that, which I lost during the process. I know there&rsquo;s a couple of hacky ways to preserve formatting with pandoc and Azure conversions, but the way I did it was simply with good ol&rsquo; Ctrl-C, Ctrl-V.</p>
 <p>Yes, for each of my 100ish files, I manually copy pasted everything in. When I&rsquo;d looked at navigating the OneNote API, I honestly didn&rsquo;t want to go through the file conversions and spend ages writing an automation script. <a href="https://imgs.xkcd.com/comics/is_it_worth_the_time.png">Relevant XKCD</a>.</p>
 <p>One other thing I did was to set up my files so they&rsquo;d display in order of creation date. This let me have my files in roughly the same order as before in OneNote.</p>
 <h2 id="zettelkasten-and-its-problems">Zettelkasten and its Problems</h2>
@@ -81,26 +55,18 @@
 <h2 id="currently">Currently</h2>
 <p>I&rsquo;ve been writing the backend of my <a href="https://github.com/kewbish/opus">Opus</a> rewrite, but for the last while I&rsquo;ve been feeling a little burnt out regarding development. I plan on doing a lot of development learning over the summer, so I might rest up and take a short break between now and then. I might have overspent my creativity for the last bit - I&rsquo;ve made nearly exactly 4 commits a day on projects for the last couple months. During this break, I might want to take some time to explore algorithms via <a href="https://www.khanacademy.org/computing/computer-science/algorithms">Khan Academy</a>. It doesn&rsquo;t require much creativity, just learning and using my notetaking system. Besides, I think I&rsquo;ll need it for what I&rsquo;m doing over the summer.</p>
 <p>Another thing I&rsquo;d like to do is continue writing blog posts, which requires slightly less creativity<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> or mental thinking. I&rsquo;ve been enjoying it so far, so we&rsquo;ll see what comes up in the future!</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>A Zettelkewbish, perhaps. <em>badumchh 🥁</em>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
+<li id="fn:2">
 <p>Which is another reason why I&rsquo;m contemplating remaining solely on Windows. I don&rsquo;t see how efficient it is to write and do work in Manjaro, or Linux in general, and have to boot into Windows each time I&rsquo;d like to reformat a file and check that it&rsquo;s done it properly. I could use Word Online, but it lacks many of the features that native Word uses. And again, I <em>could</em> use LibreOffice, but I&rsquo;m not familiar with it yet. We&rsquo;ll see what I invest time into using.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:3" role="doc-endnote">
+<li id="fn:3">
 <p>It probably doesn&rsquo;t, but I feel more motivated to write right now rather than to code and I really don&rsquo;t know why.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
-
-                <p>- Yours, Kewbish</p>
-            </div>
-            <br />
-            <p><a href="../">&lt; More Posts</a></p>
-            <br /><br />
-        </section>
-    </body>
-</html>
+</div>
+</div><br></div><p><a href=../ >‹ go back</a></main>

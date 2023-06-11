@@ -1,47 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>A Continuation of rack8</title>
-        <meta name="description" content="On Racket and Chip-8, part 2." />
-        <meta property="og:title" content="A Continuation of rack8" />
-        <meta property="og:description" content="On Racket and Chip-8, part 2." />
-        <meta property="og:url" content="https://kewbi.sh/blog/posts/201129/" />
-        <meta property="twitter:title" content="A Continuation of rack8" />
-        <meta property="twitter:description" content="On Racket and Chip-8, part 2." />
-        <link rel="stylesheet" href="https://kewbi.sh/css/main.css" />
-        <link rel="stylesheet" href="../../css/main.css" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-            rel="stylesheet"
-        />
-        <link
-            rel="icon"
-            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><style>text{filter: grayscale(1) brightness(80%) contrast(200%);}</style><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>"
-        />
-    </head>
-
-    <body class="cont page">
-        <section class="b-main-2">
-            <p><a href="../">&lt; More Posts</a></p>
-            <h1 class="b-subtitle">A Continuation of rack8</h1>
-            <p>
-                Published 29 November 2020 at
-                <a href="https://kewbi.sh/blog/posts/201129/">Yours, Kewbish</a>. 1544
-                words. Subscribe via <a href="../../index.xml">RSS</a>.
-            </p>
-            
-            <hr style="margin-bottom: -1%" />
-            <div class="b-writing">
-                <h2 id="introduction">Introduction</h2>
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>A Continuation of rack8</title><meta name=description content="On Racket and Chip-8, part 2."><meta property=og:title content="A Continuation of rack8"><meta property=og:description content="On Racket and Chip-8, part 2."><meta property=og:url content="https://kewbi.sh/blog/posts/201129/"><meta property=twitter:title content="A Continuation of rack8"><meta property=twitter:description content="On Racket and Chip-8, part 2."><link rel=icon href=https://kewbi.sh/small-logo.png><link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-italic.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-700.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
+/>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=../../css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=../ >‹ go back</a><div class=b-post><h1 class=display-title>A Continuation of rack8.</h1><p style=text-indent:0>Published 29 November 2020 at <a href="https://kewbi.sh/blog/posts/201129/">Yours, Kewbish</a>.  1544 words. Subscribe via <a href=../../index.xml>RSS</a>.<hr><div class=b-writing><h2 id="introduction">Introduction</h2>
 <p>After maybe a month of intermittent work, it works!</p>
-<figure><img src="https://i.imgur.com/7n4DQhL.png"
+<figure><img src="../../img/201129/7n4DQhL.png"
          alt="Figure 1. A singleplayer game of Connect 4."/><figcaption>
             <p><em>A singleplayer game of Connect 4</em></p>
         </figcaption>
@@ -84,32 +58,24 @@
 <p>So is the state of my journey with Racket. I&rsquo;m probably not going to tinker with rack8 much more, though I plan on loading some more ROMs up and testing if all my opcodes are sound. I&rsquo;ll also make the repo public on GitHub at some point, if anyone is interested in perusing my very badly written Racket. When I become slightly more familiar with Racket, I might write a short guide on how to make a Chip-8 interpreter in it: the only articles I can find for writing Chip-8 emulators in anything remotely similar is &lsquo;Chicken Scheme&rsquo;. I have no idea what that is, but perhaps making a Racket guide may be useful, both for others and for my own learning. (The Feynman technique is a thing, right?)</p>
 <p>In making rack8, I&rsquo;ve also managed to steer myself entirely off the track of my original plan for CPSC 110 review. The material&rsquo;s still there on edX, so I should probably take the time to do the course properly. However, I think this little side excursion has been a valuable experience, both in terms of learning Racket, and having some fun with emulators. Overall, I find when I start with a hands-on project, and the higher-level details of a concept, I learn things better. I suppose rack8 can serve as my introduction to Racket syntax (so when I start properly studying, it won&rsquo;t be as jarring) and some of its concepts.</p>
 <p>My next steps, in this analogy of projects, would probably to do more theory and &lsquo;dictionary-definition&rsquo; work. I was planning on doing more algorithms (essentially just the coursework of the various CPSC courses UBC has publicly available) anyway, so I think tackling that will be my next step. Racket has been surprisingly not that painful, and rack8&rsquo;s been a charming little project to tinker with. It might be interesting, once I have more time / finish the never-ending list of things I want to program, to investigate more emulator development, but who knows what I&rsquo;ll end up doing.</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>The experience of finally getting display to properly work was somewhat akin to getting the Liquid Galaxy system set up: I had no idea what I was doing, no documentation (that I could understand), and there were no clear pointers as to where I was going wrong.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
+<li id="fn:2">
 <p>An interesting story &ndash; I was originally very confused as to why the Chip-8 was printing just blocks of 8 characters, instead of one at a time. I tried everything, including completely rewriting the DRAW opcode implementation, copy-pasting things around. In the end, the issue was that I had <code>bitwise-and</code>ed something I should have <code>bitwise-xor</code>ed. It&rsquo;s interesting how three letters can waste so much time, but I suppose this is the essence of debugging.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:3" role="doc-endnote">
+<li id="fn:3">
 <p>Actually, now that I think about it, it might be possible to set a zero-second blocking timeout. I&rsquo;ll try this and edit the post a bit later with how it&rsquo;s gone.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:4" role="doc-endnote">
+<li id="fn:4">
 <p>Well, unique to us, I suppose. Apparently, these were quite common &lsquo;back in the day&rsquo;, and I see a lot of 16-key keypads around, so they must be useful for something (?)&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:5" role="doc-endnote">
+<li id="fn:5">
 <p>As an aside, Racket hashmaps (or dictionaries, I&rsquo;m unsure of the technically correct description) and their syntax are very unique. I&rsquo;m used to the <code>[key]: [value]</code> representation, but Racket just puts a <code>.</code> in between, and surrounds keys with parentheses. Though I suppose the parentheses are very on-brand for Racket.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
-
-                <p>- Yours, Kewbish</p>
-            </div>
-            <br />
-            <p><a href="../">&lt; More Posts</a></p>
-            <br /><br />
-        </section>
-    </body>
-</html>
+</div>
+</div><br></div><p><a href=../ >‹ go back</a></main>
