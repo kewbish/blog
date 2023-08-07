@@ -1,0 +1,122 @@
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Highlighting Text in Vim</title><meta name=description content="On highlighting (the Sharpie and Hi-Liter kind)."><meta property=og:title content="Highlighting Text in Vim"><meta property=og:description content="On highlighting (the Sharpie and Hi-Liter kind)."><meta property=og:url content="https://kewbi.sh/blog/posts/230807/"><meta property=twitter:title content="Highlighting Text in Vim"><meta property=twitter:description content="On highlighting (the Sharpie and Hi-Liter kind)."><link rel=icon href=https://kewbi.sh/small-logo.png><link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-italic.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-700.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
+/>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=../../css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=../ >‹ go back</a><div class=b-post><h1 class=display-title>Highlighting Text in Vim.</h1><p style=text-indent:0>Published 07 August 2023 at <a href="https://kewbi.sh/blog/posts/230807/">Yours, Kewbish</a>.  1984 words. Subscribe via <a href=../../index.xml>RSS</a>.<hr><div class=b-writing><h2 id="introduction">Introduction</h2>
+<p>I&rsquo;ve always liked text-based interfaces like TUIs and interactive CLIs. They&rsquo;re consistent, familiar, and themeable (since they&rsquo;re just text). I associate TUIs and text-based interfaces in general with a bit of an initial learning curve but also with a conceptual simplicity and most importantly, a lot of power. Interfaces like these are easy to make your own and to slip into.</p>
+<p>Take Vim, for example. It&rsquo;s infamous for its comparatively esoteric keybinds - how do you quit again? But once you take a moment to learn its modes and its keybind &lsquo;vocabulary&rsquo;, you&rsquo;ll find that it&rsquo;s predictable and dependable. I won&rsquo;t go far as to say the keybinds are intuitive, but they <em>can</em> be reasonably added to your intuition model.</p>
+<p>I started using Vim around 2020, when I was transfering all my notes from OneNote to Markdown. I was still in high school, so I had the liberty of not being as serious about my notes. I had grand ideals of being efficient and learning a new skill, and I&rsquo;d heard about Vim from all the jokes online. It seemed like a fun challenge to learn. For a while, I used Vim bindings within VSCode, but when I switched to Linux in 2021, I made Vim my daily-driver editor.</p>
+<p>I recently ported my configuration files over to NeoVim, since I&rsquo;ve been seeing more and more plugins that rely on some NeoVim-specific features. Take the <a href="https://github.com/giusgad/pets.nvim">pets.nvim</a> extension for example. Most plugins also limit support to NeoVim for some nice QOL features. <a href="https://github.com/neoclide/coc.nvim">COC.nvim</a> type annotations display better and don&rsquo;t break on NeoVim, and the <a href="https://github.com/iamcco/coc-spell-checker">spelling plugin</a> I use underlines better. Most of my config has stayed the same - it&rsquo;s been a super easy port, and that says a lot about the level of care to maintain Vim interop.</p>
+<p>I&rsquo;ve also started adding more personal touches to my notetaking Vim config. I thought it&rsquo;d be cool to add some color to my setup, which is currently extremely grey, and added some snippets for colouring text in my notes. I&rsquo;ve always wondered if it&rsquo;d be possible to replicate the OneNote / typical word processor features of highlighting. I&rsquo;ve thought about replicating the ease of use of text colouring in OneNote via a visual selection → highlight mechanism in Vim, and I&rsquo;ve just lately figured out how to do it.</p>
+<figure><img src="../../img/230807/my-highlighting-setup.png"
+         alt="Figure 1. My current highlighting setup."/><figcaption>
+            <p><em>Figure 1. My current highlighting setup.</em></p>
+        </figcaption>
+</figure>
+
+<p>This is a post about implementing a reasonably usable text highlighting feature in Vim, and the other fun Vim features I discovered along the way.</p>
+<h2 id="snippet-expansions">Snippet Expansions</h2>
+<p>There are loads of Vim plugins for inserting snippets, like <a href="https://github.com/honza/vim-snippets">vim-snippets</a> or <a href="https://github.com/SirVer/ultisnips">Ultisnips</a>. However, for the simple text highlighting that I use in my notes, I&rsquo;ve found it easier to just use insert mode level remappings natively in Vim.</p>
+<p>For my insert mode remaps, I tend to map combinations starting with my leader key, <!-- raw HTML omitted -->&lt;/kbd&gt;. Starting combos with your leader avoids the situation where you really do want to type a sequence of keys instead of execute your keymap. My leader key&rsquo;s not something that I&rsquo;d typically type in writing, so the short delay Vim imposes when I want to type the single character is bearable.</p>
+<p>Here&rsquo;s the basic form of one of my native snippet expansions:</p>
+<pre tabindex="0"><code>inoremap &lt;leader&gt;[shortcut] [text to insert]
+</code></pre><ul>
+<li><code>i-</code> denotes that it&rsquo;s a remapping that only applies in insert mode.</li>
+<li><code>-no-</code> denotes that we shouldn&rsquo;t substitute any of the following characters for remapped versions, effectively making it non-recursive. For example, if we&rsquo;d defined &rsquo;s&rsquo; elsewhere to insert &lsquo;ß&rsquo; in insert mode, adding <code>-no-</code> makes the remap insert &rsquo;s&rsquo; if the remap itself contains &rsquo;s&rsquo;.</li>
+<li><code>-remap</code> denotes the remap.</li>
+<li>The second bit here is the keymap to press. I use my leader key (<code>\</code>) followed by a quick shortcut.</li>
+<li>The third part is the text to insert.</li>
+</ul>
+<p>For example, to insert <code>(CN)</code> in a note, I use the following keybind.</p>
+<pre tabindex="0"><code>inoremap &lt;leader&gt;cn (CN)
+</code></pre><p>I only make a snippet mapping when I find myself having to repeatedly type long or physically awkward phrases. These types of snippets are useful for movements that would otherwise require shifting and wrapping and generally more finger movement than desired. Instead of holding <code>shift</code> and pressing <code>9-c-n</code>, I can just tap <code>leader-c-n</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+<h2 id="text-styling">Text Styling</h2>
+<p>Onto the fun part - text styling. In Vim, you can recreate text highlights (changing the background colour of text), font colour changes (changing the foreground colour of text), bolding, italicizing, underlining, and striking through text. There&rsquo;s probably more to this list - there are a <em>lot</em> of terminal escape sequences.</p>
+<p>To do this, you can add <code>autogroup</code>s in your <code>.vimrc</code> or <code>init.vim</code>. If you want, you can also <a href="https://web.archive.org/web/20230130221652/http://learnvimscriptthehardway.stevelosh.com/">create your own Vim plugin</a> to keep things organized, and so you can more easily distribute your updates.</p>
+<p>Here&rsquo;s a basic skeleton for how to change the colour of text:</p>
+<pre tabindex="0"><code>augroup notes
+    autocmd!
+    autocmd FileType markdown syntax match CorrodeClassmateNote /\v\(CN\)/
+    autocmd FileType markdown hi CorrodeClassmateNote ctermfg=152 guifg=#afd7d7
+augroup END
+</code></pre><p>This renders to:</p>
+<figure><img src="../../img/230807/highlighting-example.png"
+         alt="Figure 2. An example of highlighting (CN) in light blue."/><figcaption>
+            <p><em>Figure 2. An example of highlighting (CN) in light blue.</em></p>
+        </figcaption>
+</figure>
+
+<p>The first <a href="https://blog.sidebits.tech/vim-autocommands/"><code>autocmd</code></a> line creates a syntax match &lsquo;class&rsquo;, and the second <code>autocmd</code> <code>hi</code>ghlights the text. The syntax match class is a regex - you can use the <code>\v</code> escape option to avoid escaping all the regex special characters manually. Here, I&rsquo;m matching the literal <code>(CN)</code><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
+<p>Each match can be added to a group (<code>CorrodeClassmateNote</code> is a match group, for example), and the name of the match group is the identifier you&rsquo;ll use to style it. Avoid using <a href="https://jordanelver.co.uk/blog/2015/05/27/working-with-vim-colorschemes/">common group names</a> so you don&rsquo;t override your existing theme. The <code>FileType markdown</code> also makes this match group only apply in Markdown files, though you can use filename globs or choose another Vim filetype.</p>
+<p>The second line highlights the <code>CorrodeClassmateNote</code> group with the given <code>ctermfg</code> (foreground colour used in the terminal) or <code>guifg</code> (colour used if you use GUI Vim instead). <code>guifg</code> can be in hex, but <code>ctermfg</code> needs to be one of the Xterm prompt colours <a href="https://www.ditig.com/256-colors-cheat-sheet">supported by your terminal</a>.</p>
+<p>You can change <code>ctermfg</code> and <code>guifg</code> to <code>ctermbg</code> and <code>guibg</code> respectively to change the <em>background</em> colour used in the terminal or GUI. This gets you a typical &lsquo;highlighter&rsquo; functionality.</p>
+<figure><img src="../../img/230807/background-highlighting-example.png"
+         alt="Figure 3. Highlighting (CN)&#39;s background in light blue."/><figcaption>
+            <p><em>Figure 3. Highlighting (CN)&rsquo;s background in light blue.</em></p>
+        </figcaption>
+</figure>
+
+<p>If you want to bold or italicize text, just add <code>cterm=bold gui=bold</code> or <code>cterm=italic gui=italic</code> to the end of the <code>hi</code> <code>autocmd</code>. And if you&rsquo;d like to apply both, <code>cterm=bold,italic gui=bold,italic</code> will do the trick. See <a href="https://vimdoc.sourceforge.net/htmldoc/syntax.html#attr-list"><code>:help attr-list</code></a> for more information on the attributes you can use to style text here.</p>
+<h2 id="ctrl-shift-c-or-changing-font-colour">Ctrl-Shift-C (or, Changing Font Colour)</h2>
+<p>If you want to colour not just specific text, but replicate a general &lsquo;change colour&rsquo; functionality in Vim, define a match group like so:</p>
+<pre tabindex="0"><code>autocmd FileType markdown syntax match GreenHighlight /\v\(\#G(.*)\)/
+autocmd FileType markdown hi GreenHighlight ctermfg=121 guifg=#88ff88
+</code></pre><p>This highlights all matches of <code>(#G text)</code> a special shade of green. In Vim, it renders to this:</p>
+<figure><img src="../../img/230807/green-highlighting-example.png"
+         alt="Figure 4. Highlighting some text in WebWork green."/><figcaption>
+            <p><em>Figure 4. Highlighting some text in WebWork green.</em></p>
+        </figcaption>
+</figure>
+
+<p>You can define multiple match groups with different prefixes - say, <code>(#Y text)</code> for yellow instead of green - for whatever you want to use. You can also define a remap in visual mode to wrap the current selection with the appropriate syntax to highlight it:</p>
+<pre tabindex="0"><code>vnoremap &lt;leader&gt;hg c(#G &lt;C-r&gt;&#34;)&lt;C-c&gt;
+</code></pre><p>Select some text in visual mode, then hit <code>&lt;leader&gt;hg</code> to add the highlighting markup. This makes use of vim&rsquo;s default register with the &lsquo;c&rsquo; command to replace text selected in visual mode with the wrapper <code>(#G ... )</code>, and uses <code>&lt;C-r&gt;&quot;</code> (Ctrl-r) to paste the contents that you just selected back into the wrapper. The final <code>&lt;C-c&gt;</code> exits insert mode for you for convenience.</p>
+<p>The issue with this approach is that you&rsquo;ll have to add markup to your text to get it to highlight. While it&rsquo;ll still be there in the raw file contents, let&rsquo;s address the visual aspect and hide the <code>(#G ... )</code> wrapper in-editor.</p>
+<h2 id="a-cleaner-look-with-conceal">A Cleaner Look with <code>conceal</code></h2>
+<p>This&rsquo;ll make use of Vim&rsquo;s <a href="https://vimdoc.sourceforge.net/htmldoc/syntax.html#conceal">conceal</a> feature. It leverages match groups, similarly to text highlighting, to hide text that matches some pattern until you move your cursor to that line. People typically use this to replace syntax with more aesthetically pleasing characters, like replacing <code>lambda x: </code> with <code>λ x:</code>. It can also be used to hide comments that aren&rsquo;t distracting, make inline flashcards that only preview when you hover on a line, and prettifies Markdown markup and <a href="https://github.com/jalvesaq/zotcite">Zotcite</a> citations.</p>
+<p>To hide the highlighting wrapper markup:</p>
+<pre tabindex="0"><code>autocmd FileType markdown syntax match GreenHLConceal /\v(\(\#G\s)/ conceal
+autocmd FileType markdown syntax match GreenHLConceal /\v(\(\#G\s(.*))@&lt;=\)/ conceal
+autocmd FileType markdown syntax match GreenHighlight /\v(\(\#G\s)@&lt;=([^\)]*)\)@=/
+autocmd FileType markdown setlocal conceallevel=3
+</code></pre><p>The first <code>syntax match</code> line matches the first part of the wrapper, <code>(#G</code>, and the second uses Vim&rsquo;s lookback syntax to match any <code>)</code> preceded by a <code>(#G</code>. The <code>GreenHighlight</code> line has been extended a bit to deal with multiple markups per line too.</p>
+<p>The fourth line sets the file&rsquo;s <code>concealllevel</code> to 3. Concealled groups have &rsquo;levels&rsquo; of display, which can be controlled on a buffer-level basis. The default <code>conceallevel=0</code> means that all concealled text is still shown in-editor. <code>conceallevel=3</code>, what we&rsquo;re using, means that all concealled text is completely hidden until you move your cursor to that line. In between, <code>conceallevel</code> 1 and 2 can also display a single character replacement for the hidden text. For example, you can add <code>cchar=🟩</code> to the first syntax match to replace the concealled text (the <code>(#G</code>) with a green square emoji.</p>
+<p>If you&rsquo;re adding multiple highlighting syntax matches, you can hide all their markup prefixes in one command by replacing the <code>G</code> in each of the first three <code>syntax match</code> lines to something like <code>[RGB]</code>. This will hide the markup for all <code>(#G ...)</code>, <code>(#B ...)</code>, and <code>(#R ...)</code> highlight groups.</p>
+<p>This renders to this:</p>
+<figure><img src="../../img/230807/conceallevel.gif"
+         alt="Figure 5. Hiding the highlighting markup on cursor move."/><figcaption>
+            <p><em>Figure 5. Hiding the highlighting markup on cursor move.</em></p>
+        </figcaption>
+</figure>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>These highlighting features have helped me keep track of class discussions more easily and make my terminal-based notetaking system a little more fun. I only have two of these highlighting shortcuts set up (for &ldquo;my notes&rdquo; and &ldquo;classmate&rsquo;s note&rdquo;), but I use them fairly frequently during classes.</p>
+<p>There are probably plugins to automate the creation of snippets and of highlighting commands, but I don&rsquo;t create new highlighting groups often enough to make it worth understanding them. Vim is known for its steep learning curve and batteries-not-included approach: I think the fact that the &lsquo;proper&rsquo; approach to this custom highlighting is a couple of plugins or quite a few lines of Vimscript is a testament to that. But I think learning to make custom highlighting groups and learning a bit more about Vim&rsquo;s syntax matching is a great way to get started with Vimscript. For those with a bit of regex knowledge, the syntax is relatively clear and the <code>autocmd</code>s are a starting point for <a href="https://learnvimscriptthehardway.stevelosh.com/chapters/12.html">adding plenty of custom behaviour</a>.</p>
+<p>Another feature I&rsquo;d like to explore now since I&rsquo;m using NeoVim is <a href="https://neovim.io/doc/user/api.html#api-extmark">virtual text, officially known as extmarks</a>. I first learned about this when the GitHub Copilot Vim plugin came out and I realized it wouldn&rsquo;t work with vanilla Vim<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>. While Vim 9 <a href="https://vimhelp.org/textprop.txt.html#virtual-text">supports this feature</a>, there were a good few other reasons to switch to NeoVim, so I never tried it out in vanilla Vim.</p>
+<p>I&rsquo;d like to continue to explore more Vim quirks on this blog - it&rsquo;s amusing to see how far I can push things. For a while, I tried to replicate a basic flashcard system in Vim, and I also have a couple updates to my <a href="https://kewbi.sh/blog/posts/210815/">FZF + RG</a> setup, specifically for for development. Recently, I even saw an interesting <a href="https://github.com/sigpwny/UIUCTF-2023-Public/tree/main/challenges/misc/vimjail1">CTF challenge</a> written in Vim. I&rsquo;ve been thinking of covering these, perhaps in a shorter format, but we&rsquo;ll see when I&rsquo;ll get around to it.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Not having to hold down shift makes adding these annotations in my notes a lot faster.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>I use this to denote &lsquo;classmate&rsquo;s note&rsquo; in discussion-heavy classes.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>I have yet to seriously try the plugin, even with virtual text support.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+</div><br></div><p><a href=../ >‹ go back</a></main>
