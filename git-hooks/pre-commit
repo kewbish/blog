@@ -1,0 +1,5 @@
+#!/bin/bash
+
+hugo
+git add .
+exit 0
