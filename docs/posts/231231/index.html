@@ -1,0 +1,91 @@
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Presenting in Figma</title><meta name=description content="On NeovimConf 2023 and making slides in Figma."><meta property=og:title content="Presenting in Figma"><meta property=og:description content="On NeovimConf 2023 and making slides in Figma."><meta property=og:url content="https://kewbi.sh/blog/posts/231231/"><meta property=twitter:title content="Presenting in Figma"><meta property=twitter:description content="On NeovimConf 2023 and making slides in Figma."><link rel=icon href=https://kewbi.sh/small-logo.png><link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-italic.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-700.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
+/>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=../../css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=../ >‹ go back</a><div class=b-post><h1 class=display-title>Presenting in Figma.</h1><p style=text-indent:0>Published 31 December 2023 at <a href="https://kewbi.sh/blog/posts/231231/">Yours, Kewbish</a>.  1358 words. Subscribe via <a href=../../index.xml>RSS</a>.<hr><div class=b-writing><p>I gave a lightning talk recently at <a href="https://neovimconf.live/">NeovimConf 2023</a>, sharing a bit about my personal notetaking system in Vim. The content of the talk was similar to my previous <a href="https://kewbi.sh/blog/posts/210815/">A Plaintext Zettelkasten</a> post, with less Zettelkasten theory and more Vim keybinds. The conference was streamed live on Twitch, and I got to chat a bit with folks while watching my (prerecorded) talk. Here&rsquo;s the embed:</p>
+
+
+<div style="display: flex; justify-content: center; margin-bottom: 1em">
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/1a6AEJxH_Dk?si=KuoX7d_z8oiCxX96" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
+
+<p>I&rsquo;d highly recommend checking out some of the other talks — the talk playlist will be updated <a href="https://www.youtube.com/playlist?list=PLhlaLyAlbLlr-usEauWLPy4O2ggAvZuKl">here</a>.</p>
+<p>People seemed to like my setup and appreciate how I nerded out over it, which was heartwarming<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. I also got some good feedback on my slides&rsquo; aesthetic (you can see them in the video) and a few questions on how I made them.</p>
+<p>This is a short post on creating presentations in Figma, with a few links to resources I&rsquo;ve used that might make your design experience a little easier.</p>
+<h2 id="why-figma">Why Figma?</h2>
+<p>I designed and exported them all in Figma, which I think is a fairly unconventional use for the tool. I&rsquo;ve previously done my Directed Studies (a research course) <a href="https://gist.github.com/kewbish/fcf9f3e4b919a3cb1fa3c889611ce9e2">slides in Figma</a><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> and had good experience doing so. Figma is already the defacto design tool for many web developers, so it&rsquo;s a good choice for presentations too if you have Figma components or libraries you want to reuse.</p>
+<p>I don&rsquo;t use traditional presentation tools like Powerpoint or LibreOffice Impress, since I find it hard to get started with a blank (or very generic) slate. In the past, I&rsquo;ve used Canva for small presentations like these since it has such a vast library of templates — the little things like extra clip art or background assets really makes slides look polished.</p>
+<p>I tried Figma for slides recently, first for my Directed Studies slides, then for this lightning talk, because I&rsquo;ve had pre-existing assets in Figma that I wanted to reuse in high quality in my presentations. For my Directed Studies project, I had diagrams from our paper; for my lightning talk, I wanted to use the branding elements from my website, like my gradient and sparkles. Figma makes it easier to design things more precisely than Canva with autolayout, and it&rsquo;s nice to be able to pull from my Figma library without converting to a flat-file image format and back.</p>
+<h2 id="workflow">Workflow</h2>
+<p>Throughout this post, I&rsquo;ll be using my Directed Studies slides as a running example. Here&rsquo;s what my Figma file looked like:</p>
+<figure><img src="../../img/231231/figma-overview.png"
+         alt="Figure 1. Slides overview"/><figcaption>
+            <p><em>Figure 1. Slides overview</em></p>
+        </figcaption>
+</figure>
+
+<p>You can create slides with Frames in Figma. Click the grid Frame icon, or press <!-- raw HTML omitted -->F<!-- raw HTML omitted -->. Select <code>Presentation &gt; Slide 16:9</code>.</p>
+<p>I like to create a base frame for my slides, so I can have a consistent background. Once you&rsquo;ve designed this, you can select frames and <code>Ctrl-C</code> / <code>Ctrl-V</code> to place them in series. Figma lays them out automatically in a nice line, which makes scrolling through a presentation easier. Creating slides out-of-order is a little more annoying, since you&rsquo;ll have to drag all the frames into line, so I tend to work through my slides in-order.</p>
+<p>After I&rsquo;m done with my slides, I use Figma&rsquo;s Prototype tool to wire the transitions up. You can create a new Flow by clicking on your title slide frame, then right-clicking and selecting &lsquo;Add Starting Point&rsquo;. Then, in Prototype mode, you can hover over the side of a frame to wire it to the next slide. I set each transition to &lsquo;On click, navigate to [frame for next slide], instant&rsquo;. There are some animation options available though, like wipes, dissolves, and notably, Smart Animate, which smoothly animates between objects duplicated across frames. This part is a little tedious, but I haven&rsquo;t found a plugin that&rsquo;ll do it for me yet.</p>
+<figure><img src="../../img/231231/slide-transition.png"
+         alt="Figure 2. Transitioning between slides"/><figcaption>
+            <p><em>Figure 2. Transitioning between slides</em></p>
+        </figcaption>
+</figure>
+
+<p>Finally, you can present with the Play button in the upper-right hand corner. You can move between slides with the arrow keys, as in Powerpoint.</p>
+<figure><img src="../../img/231231/press-play.gif"
+         alt="Figure 3. Demoing the presentation"/><figcaption>
+            <p><em>Figure 3. Demoing the presentation</em></p>
+        </figcaption>
+</figure>
+
+<p>You can also export each slide as a PNG by selecting all your frames and heading to <code>Design &gt; Export &gt; PNG &gt; Export X layers</code>. I used this in my NeovimConf talk, as I recorded my webcam separately from my slides.</p>
+<h2 id="miscellaneous-tips">Miscellaneous Tips</h2>
+<p>For in-slide animations, I duplicated a slide multiple times and added Prototype transitions between each subpart of the slide. I used this for animating bullet points that appeared on each keypress. You might be able to implement this more efficiently with Variables, but I typically only have at most three subparts per slide, so I haven&rsquo;t explored this yet.</p>
+<figure><img src="../../img/231231/inslide-transition.png"
+         alt="Figure 4. Not a very DRY presentation"/><figcaption>
+            <p><em>Figure 4. Not a very DRY presentation</em></p>
+        </figcaption>
+</figure>
+
+<p>For page numbering, I&rsquo;ve used <a href="https://www.hypermatic.com/pitchdeck/">Pitchdeck</a>, a Figma plugin, in the past. You can add the plugin normally via the Figma Components menu, but beware some features like PDF export and such are paywalled. Pitchdeck is quite fully-featured and appears to do the in-slide animations I&rsquo;d be looking for, but I found their interface unintuitive and a little overpowered for my needs.</p>
+<p>To add slide numbering, open Pitchdeck and click the Page icon in the upper-left of the plugin window. Toggle &lsquo;Enable auto slide numbers&rsquo; to on. You can customize slide numbering styling here as well, which I think is a nice way to tie into the rest of your presentation branding. If you&rsquo;re using my janky method of duplicating slides for in-slide animations, Pitchdeck will see each individual frame as a new slide to number, so I resorted to deleting everything except the last subpart of my animation, running the auto-slide numbers, then recreating my animation. Try to add slide numbers once at the very end if you forsee this happening.</p>
+<figure><img src="../../img/231231/pitchdeck-numbering.png"
+         alt="Figure 5. Adding slide numbering in Pitchdeck"/><figcaption>
+            <p><em>Figure 5. Adding slide numbering in Pitchdeck</em></p>
+        </figcaption>
+</figure>
+
+<p>A parting tip I&rsquo;d give is that it really helps if little things like asset theming ties in well together. I was able to reuse the metallic gradient I use for titles on this blog (see this article header) for my titles as well as for my webcam frame and its decorations<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I&rsquo;m far from a Figma power user, but it&rsquo;s fairly easy to create cohesive presentations in Figma even with basic tools. I&rsquo;d love to reuse my NeovimConf template for future talks (with different content, of course!)</p>
+<p>Speaking of speaking, I&rsquo;d like to apply for more opportunities in 2024. Writing and rehearsing my NeovimConf talk was a great learning experience in terms of Vim content, even though I&rsquo;d already done quite a bit of tinkering myself, not to mention very validating to get to chat with other Neovim-adjacent folks and be able to share a bit about my unique workflows. I have a lot to learn in terms of storytelling and talk structure — I got feedback from a friend mentioning how they thought I was listing off keymaps without showing how they fit together well in a system. Figuring out how to explain things you&rsquo;re passionate about in an accessible way is trickier than it seems, especially since you have all the pictures and mental models in your head and it&rsquo;s easy to assume others do too. Public speaking is also far out of my comfort zone. This was a pre-recorded talk, but I&rsquo;d like to challenge myself to give something live if I have the opportunity.</p>
+<p>Thank you again to the NeovimConf team for putting together and hosting such a fun conference! I met plenty of fellow Vim nerds and learned many fun tricks, and all in all had a great time. Can&rsquo;t wait to rewatch the talks and see what NeovimConf 2024 holds!</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>I will try not to fangirl too hard over the fact that the <a href="https://www.youtube.com/c/theprimeagen">Primeagen</a> said, and I quote: &ldquo;this notetaking stuff is pretty dang cool&rdquo;.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>Did you know that Gists on GitHub are just like full repositories? You can <code>git clone</code>, commit other files, and push to them. The default Gist web UI doesn&rsquo;t allow for uploading binary files, so I used this workaround to host my slides in a Gist repo.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>You can click any element, go to <code>Fill &gt; Styles [the four dots icon] &gt; +</code> to copy an element&rsquo;s fill for reuse. This saved a lot of time compared to having to copy-paste fills between everything.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+</div><br></div><p><a href=../ >‹ go back</a></main>
