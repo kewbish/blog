@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+  </head>
+  <body style="display: flex; justify-content: center">
+    <div style="width: 60%">
+      <header>
+        <marquee behavior="scroll" direction="right"
+          >1pt bar&lt;number&gt;'s travelling circus: html element freak
+          show</marquee
+        >
+        <h1>happy html day !!</h1>
+        <div>
+          <p>step right up</p>
+          <p style="float: right">step right up</p>
+          <div style="clear: both"></div>
+        </div>
+        <p>yes, you, right there!</p>
+        <p>come one, come all, to the most amazing show you’ve ever seen!</p>
+        <p>
+          step inside and prepare to be astounded by the wonders of the big top!
+        </p>
+      </header>
+      <!--ASCII art adapted from http://www.ascii-art.de/ascii/c/circus.txt-->
+      <div style="display: flex; justify-content: center">
+        <pre>
+    |   |    |    |    |    |    |    |    |    |   |    |    |    |    |    |    |    |    | 
+    `-.-'`-.-'`-.-'`-.-'`-.-'`-.-'`-.-'`-.-'`-.-`-.-'`-.-'`-.-'`-.-'`-.-'`-.-'`-.-'`-.-'`-.-'
+                                     \    \            /    /
+                                      `->>-`    <<    '----'
+                                        ()     _()
+                                        /O\     /o
+                      
+                                _
+                              _[_]_
+                              _(_)______.-'`-.
+                             /, >< ,----'     `-._.-'*
+                             \\|::|  
+                               |/\|  
+                               ||||  
+                               ||||  
+                            __(_/\_)                                 o
+                           /`-..__.,-'\           ,;'                   `;,
+                          /   __/\__   \         /__\___________________/__\   
+                          `._ \    / _.'
+                             ``|/\|-'
+       </pre>
+      </div>
+      <center><p>
+      welcome to 1pt bar<number>'s magical circus!<br/>
+      we've mastered the art of reincarnation...<br/>
+      today, we've got a very special show:<br/>
+      timeworn tags, brought back from the lands of caniuse deprecation!<br/>
+      can you match their freak??                                             </p></center>
+      <h2>the ever blinking eye</h2>
+      <p>the <a href="https://en.wikipedia.org/wiki/Blink_element">blink element</a> used to blink text. no longer supported in chrome, despite being a staple of what I think of when I imagine the 90s internet aesthetic</p>
+      <!--taken from https://github.com/nmap/nmap/blob/master/docs/leet-nmap-ascii-art-eye.txt-->
+      <blink>
+      <pre>
+                        ___.-------.___
+                    _.-' ___.--;--.___ `-._
+                 .-' _.-'  /  .+.  \  `-._ `-.
+               .' .-'      |-|-o-|-|      `-. `.
+              (_ «O__      \  `+'  /      __O» _)
+                `--._``-..__`._|_.'__..-''_.--'
+                      ``--._________.--''
+      </pre>
+      </blink>
+      <h2>the biggest small and the smallest big</h2>
+        <p>the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/big">big</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/small">small</a>elements still work in chrome, but they've been marked as deprecated. these two tags right here could be the last of their kind...</p>
+        <p>curiously, we've also managed to find the biggest small and the smallest big you've ever seen!</p>
+        <small>웃</small> <big>웃</big>
+        <p>(no, your screen isn't dirty — the big is on the right and it's that tiny smudge!)</p>
+      <h2>the broken record key generator</h2>
+      <p>the <a href="https://www.geeksforgeeks.org/html-keygen-tag/">keygen</a> tag used to be used to generate a public/private keypair to auth users, but as you might imagine no one really wants to deal with that, not the least your uncle bob who just wants to send auntie alice some postcards from his trip.</p>
+      <p>we've found a keygen in miraculous condition though: while no other keygens survive, this one can still consistently produce keys</p>
+      <p>although it only makes one, so it's not very secure</p>
+      <a href="#keygen" style="text-decoration: none; color: black;">
+          <keygen>ye olde &lt;keygen&gt; 3000</keygen><span id="keygen">⚷</span>
+      </a>
+      <h2>bonus: failed experiments</h2>
+      <p>there are yet some tags that we have failed to revive... though supported by modern browsers, these tags have curiously stopped working. presenting: an underline that, well, does not line, alongside a strikethrough that's struck out.</p>
+      <p>we've also found remnants of other elements to round out the alphabet a bit. t seems to be a tag that would trim text, and v a tag that would vandalize it? and, well, the html designers must've thought it necessary to make a red tag r as well.</p>
+      <r>&lt;r&gt;</r> &amp; <s>&lt;s&gt;</s> &amp;<t>&lt;t&gt;</t> &amp; <u>&lt;u&gt;</u> &amp; <v>&lt;v&gt;</v>
+      <p>I wonder if we'll find the other 21 missing alphabet tags?</p>
+      <br>
+      <hr>
+      <div style="display: flex; justify-content: center">
+          <pre>
+             ___ .-. c    )
+            /   ( ]+\))   \o
+          *'| )__\/`-'     (\
+      _____ |,|\ ).\ _____ JL________a:f__
+          </pre>
+      </div>
+      <center>
+      <p>we hope that by coming to this most curious exhibit, you'll keep in mind some of the forgotten antiquities and marvels of html even as we keep hurtling forward in react, svelte, and the new hote new framework du jour</p>
+      <p>go forth and html on!</p>
+      <p><i>made by <a href="https://kewbi.sh">emilie ma</a> for html day 2024</i></p>
+      </center>
+        <marquee behavior="scroll" direction="right"
+          >
+thank you for coming to 1pt bar&lt;number&gt;'s circus: the greatest html freak show on earth!
+    </marquee
+        >
+    </div>
+  </body>
+</html>
+
+<!--ok maybe using css/js is not in the spirit of html day but at this point I was in too deep-->
+<style>
+blink {
+  animation: blink-animation 1s steps(5, start) infinite;
+  -webkit-animation: blink-animation 1s steps(5, start) infinite;
+}
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+u {
+    text-decoration: none;
+}
+s {
+    text-decoration: none;
+}
+r {
+color: red;
+}
+t {
+    display: inline-block;
+    vertical-align: middle;
+    width: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+v {
+    position: relative;
+}
+v:before {
+    left: 0;
+    position: absolute;
+    content: "1337";
+    font-family: cursive;
+    color: blue;
+    width: 100%;
+    height: 100%;
+    transform: rotate(25deg);
+}
+#keygen {
+    display: none;
+}
+
+#keygen:target {
+display: block;
+}
+small {
+font-size: 100px;
+}
+big {
+    font-size: 5px;
+}
+</style>
