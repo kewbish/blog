@@ -2,13 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://kewbi.sh/blog/posts/</loc>
-    <lastmod>2024-10-06T12:38:21+01:00</lastmod>
+    <loc>https://kewbi.sh/blog/posts/241020/</loc>
+    <lastmod>2024-10-20T22:26:37+01:00</lastmod>
   </url><url>
-    <loc>https://kewbi.sh/blog/posts/241006/</loc>
-    <lastmod>2024-10-06T12:38:21+01:00</lastmod>
+    <loc>https://kewbi.sh/blog/posts/</loc>
+    <lastmod>2024-10-20T22:26:37+01:00</lastmod>
   </url><url>
     <loc>https://kewbi.sh/blog/</loc>
+    <lastmod>2024-10-20T22:26:37+01:00</lastmod>
+  </url><url>
+    <loc>https://kewbi.sh/blog/posts/241006/</loc>
     <lastmod>2024-10-06T12:38:21+01:00</lastmod>
   </url><url>
     <loc>https://kewbi.sh/blog/posts/240825/</loc>
