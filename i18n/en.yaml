@@ -1,0 +1,8 @@
+- id: goback
+  translation: "go back"
+- id: published
+  translation: "Published {{ .date }} at <a href='{{ .Permalink }}'>Yours, Kewbish</a>."
+- id: words
+  translation: "words"
+- id: rss
+  translation: "Subscribe via <a href=/index.xml>RSS</a>."
