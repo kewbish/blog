@@ -13,7 +13,7 @@
   as="text/woff2"
   href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
 />
-<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=../../css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=../../posts >‹ go back</a><div class=b-post><h1 class=display-title>Presenting in Figma.</h1><p style=text-indent:0>Published 31 December 2023 at <a href='https://kewbi.sh/blog/posts/231231/'>Yours, Kewbish</a>.  1,358 words. Subscribe via <a href=../../index.xml>RSS</a>.<hr><div class=b-writing><p>I gave a lightning talk recently at <a href="https://neovimconf.live/">NeovimConf 2023</a>, sharing a bit about my personal notetaking system in Vim. The content of the talk was similar to my previous <a href="https://kewbi.sh/blog/posts/210815/">A Plaintext Zettelkasten</a> post, with less Zettelkasten theory and more Vim keybinds. The conference was streamed live on Twitch, and I got to chat a bit with folks while watching my (prerecorded) talk. Here&rsquo;s the embed:</p>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=https://kewbi.sh/blog/css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=https://kewbi.sh/blog/posts >‹ go back</a><div class=b-post><h1 class=display-title>Presenting in Figma.</h1><p style=text-indent:0>Published 31 December 2023 at <a href='https://kewbi.sh/blog/posts/231231/'>Yours, Kewbish</a>.  1,358 words. Subscribe via <a href='https://kewbi.sh/blog/index.xml'>RSS</a>.<hr><div class=b-writing><p>I gave a lightning talk recently at <a href="https://neovimconf.live/">NeovimConf 2023</a>, sharing a bit about my personal notetaking system in Vim. The content of the talk was similar to my previous <a href="https://kewbi.sh/blog/posts/210815/">A Plaintext Zettelkasten</a> post, with less Zettelkasten theory and more Vim keybinds. The conference was streamed live on Twitch, and I got to chat a bit with folks while watching my (prerecorded) talk. Here&rsquo;s the embed:</p>
 
 
 <div style="display: flex; justify-content: center; margin-bottom: 1em">
@@ -30,7 +30,7 @@
 <p>I tried Figma for slides recently, first for my Directed Studies slides, then for this lightning talk, because I&rsquo;ve had pre-existing assets in Figma that I wanted to reuse in high quality in my presentations. For my Directed Studies project, I had diagrams from our paper; for my lightning talk, I wanted to use the branding elements from my website, like my gradient and sparkles. Figma makes it easier to design things more precisely than Canva with autolayout, and it&rsquo;s nice to be able to pull from my Figma library without converting to a flat-file image format and back.</p>
 <h2 id="workflow">Workflow</h2>
 <p>Throughout this post, I&rsquo;ll be using my Directed Studies slides as a running example. Here&rsquo;s what my Figma file looked like:</p>
-<figure><img src="../../img/231231/figma-overview.png"
+<figure><img src="https://kewbi.sh/blog/img/231231/figma-overview.png"
          alt="Figure 1. Slides overview"/><figcaption>
             <p><em>Figure 1. Slides overview</em></p>
         </figcaption>
@@ -39,14 +39,14 @@
 <p>You can create slides with Frames in Figma. Click the grid Frame icon, or press <!-- raw HTML omitted -->F<!-- raw HTML omitted -->. Select <code>Presentation &gt; Slide 16:9</code>.</p>
 <p>I like to create a base frame for my slides, so I can have a consistent background. Once you&rsquo;ve designed this, you can select frames and <code>Ctrl-C</code> / <code>Ctrl-V</code> to place them in series. Figma lays them out automatically in a nice line, which makes scrolling through a presentation easier. Creating slides out-of-order is a little more annoying, since you&rsquo;ll have to drag all the frames into line, so I tend to work through my slides in-order.</p>
 <p>After I&rsquo;m done with my slides, I use Figma&rsquo;s Prototype tool to wire the transitions up. You can create a new Flow by clicking on your title slide frame, then right-clicking and selecting &lsquo;Add Starting Point&rsquo;. Then, in Prototype mode, you can hover over the side of a frame to wire it to the next slide. I set each transition to &lsquo;On click, navigate to [frame for next slide], instant&rsquo;. There are some animation options available though, like wipes, dissolves, and notably, Smart Animate, which smoothly animates between objects duplicated across frames. This part is a little tedious, but I haven&rsquo;t found a plugin that&rsquo;ll do it for me yet.</p>
-<figure><img src="../../img/231231/slide-transition.png"
+<figure><img src="https://kewbi.sh/blog/img/231231/slide-transition.png"
          alt="Figure 2. Transitioning between slides"/><figcaption>
             <p><em>Figure 2. Transitioning between slides</em></p>
         </figcaption>
 </figure>
 
 <p>Finally, you can present with the Play button in the upper-right hand corner. You can move between slides with the arrow keys, as in Powerpoint.</p>
-<figure><img src="../../img/231231/press-play.gif"
+<figure><img src="https://kewbi.sh/blog/img/231231/press-play.gif"
          alt="Figure 3. Demoing the presentation"/><figcaption>
             <p><em>Figure 3. Demoing the presentation</em></p>
         </figcaption>
@@ -55,7 +55,7 @@
 <p>You can also export each slide as a PNG by selecting all your frames and heading to <code>Design &gt; Export &gt; PNG &gt; Export X layers</code>. I used this in my NeovimConf talk, as I recorded my webcam separately from my slides.</p>
 <h2 id="miscellaneous-tips">Miscellaneous Tips</h2>
 <p>For in-slide animations, I duplicated a slide multiple times and added Prototype transitions between each subpart of the slide. I used this for animating bullet points that appeared on each keypress. You might be able to implement this more efficiently with Variables, but I typically only have at most three subparts per slide, so I haven&rsquo;t explored this yet.</p>
-<figure><img src="../../img/231231/inslide-transition.png"
+<figure><img src="https://kewbi.sh/blog/img/231231/inslide-transition.png"
          alt="Figure 4. Not a very DRY presentation"/><figcaption>
             <p><em>Figure 4. Not a very DRY presentation</em></p>
         </figcaption>
@@ -63,7 +63,7 @@
 
 <p>For page numbering, I&rsquo;ve used <a href="https://www.hypermatic.com/pitchdeck/">Pitchdeck</a>, a Figma plugin, in the past. You can add the plugin normally via the Figma Components menu, but beware some features like PDF export and such are paywalled. Pitchdeck is quite fully-featured and appears to do the in-slide animations I&rsquo;d be looking for, but I found their interface unintuitive and a little overpowered for my needs.</p>
 <p>To add slide numbering, open Pitchdeck and click the Page icon in the upper-left of the plugin window. Toggle &lsquo;Enable auto slide numbers&rsquo; to on. You can customize slide numbering styling here as well, which I think is a nice way to tie into the rest of your presentation branding. If you&rsquo;re using my janky method of duplicating slides for in-slide animations, Pitchdeck will see each individual frame as a new slide to number, so I resorted to deleting everything except the last subpart of my animation, running the auto-slide numbers, then recreating my animation. Try to add slide numbers once at the very end if you forsee this happening.</p>
-<figure><img src="../../img/231231/pitchdeck-numbering.png"
+<figure><img src="https://kewbi.sh/blog/img/231231/pitchdeck-numbering.png"
          alt="Figure 5. Adding slide numbering in Pitchdeck"/><figcaption>
             <p><em>Figure 5. Adding slide numbering in Pitchdeck</em></p>
         </figcaption>
@@ -88,4 +88,4 @@
 </li>
 </ol>
 </div>
-</div><br></div><p><a href=../../posts >‹ go back</a></main><script data-goatcounter="https://yours-kewbish.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</div><br></div><p><a href=https://kewbi.sh/blog/posts >‹ go back</a></main><script data-goatcounter="https://yours-kewbish.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

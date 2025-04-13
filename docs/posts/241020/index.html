@@ -13,7 +13,7 @@
   as="text/woff2"
   href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
 />
-<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=../../css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=../../posts >‹ go back</a><div class=b-post><h1 class=display-title>Making OPAQUE Clear.</h1><p style=text-indent:0>Published 20 October 2024 at <a href='https://kewbi.sh/blog/posts/241020/'>Yours, Kewbish</a>.  4,807 words. Subscribe via <a href=../../index.xml>RSS</a>.<hr><div class=b-writing><h2 id="introduction">Introduction</h2>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=https://kewbi.sh/blog/css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=https://kewbi.sh/blog/posts >‹ go back</a><div class=b-post><h1 class=display-title>Making OPAQUE Clear.</h1><p style=text-indent:0>Published 20 October 2024 at <a href='https://kewbi.sh/blog/posts/241020/'>Yours, Kewbish</a>.  4,807 words. Subscribe via <a href='https://kewbi.sh/blog/index.xml'>RSS</a>.<hr><div class=b-writing><h2 id="introduction">Introduction</h2>
 <p>I am not a cryptographer. I&rsquo;ve participated in enough CTFs to have had the refrain &ldquo;never roll your own crypto&rdquo; drilled into my head. Leave the group-modulo-n wrangling to the professionals, as the undertone went. While I won&rsquo;t encourage you to do so, today I&rsquo;ll give you enough of the basics to implement your own key exchange protocol. I&rsquo;ll leave the deploying it to prod to you.</p>
 <p>To build up some backstory: I recently met someone, who, when I asked to exchange contacts, told me to add them on Signal, instead of Discord or Whatsapp. This was new. A few years earlier, I&rsquo;d had the same reaction when I needed to join some group chats that were hosted on Telegram<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. I&rsquo;ve just finished <a href="https://mitpress.mit.edu/9780262548182/tor/">a book about Tor</a> for a reading group, and attended a couple talks about <a href="https://en.wikipedia.org/wiki/Mix_network">mixnets</a>. While it might have something to do with the fact that my office is in the <a href="https://www.cambridgecybercrime.uk/">Cybercrime Centre</a>, recent news like the <a href="https://en.wikipedia.org/wiki/Pavel_Durov#2024_arrest_and_indictment">arrest of the Telegram founder</a> and the <a href="https://docs.google.com/document/d/1iWCqmaOUKhKjcKSktIwC3NNANoFP7vPsRvcbOIup_BA/edit?tab=t.0">viral AR I-XRAY glasses</a> have been bringing up topics around privacy and security.</p>
 <p>To me, a core thread running through these concerns is the question of who we can trust with our data. There are growing movements to <a href="https://en.wikipedia.org/wiki/DeGoogle">abandon big-tech platforms</a> and use dumb phones without internet. Folks hop between the secure messaging platforms de jour, or at least onto the incumbent, which appears to be Signal. Signal, Protonmail, even something as familiar as Whatsapp: they&rsquo;re all end-to-end encrypted. This means the servers that run these platforms only store encrypted copies of your data, and the only people who can read your funnier-in-your-head texts are you and the intended recipient. This encryption usually uses big random numbers instead of passwords, since passwords are lower-entropy. These platforms also (usually) won&rsquo;t store your keys for you, since that&rsquo;d undermine the whole point of end-to-end encryption. You&rsquo;re therefore the only person in the world who can correctly decrypt any messages that are sent — nice and safe. But what happens when you lose your phone? Sure, the app prompted you to save a recovery file, store a twelve-word recovery phrase, or back up your keys somewhere before proceeding, but like most folks, you&rsquo;d probably just skipped past that step.</p>
@@ -27,21 +27,21 @@
 <p>One of the concepts I&rsquo;ll assume some background in is <a href="https://en.wikipedia.org/wiki/Public-key_cryptography">public-key cryptography</a>. The basic idea is that you store two keys: one public and one private. You share your public key with others, and keep your private key to yourself, as the names may suggest. To encrypt something, you take your private key and the public key of the intended recipient together and do some operations on it, which ensures that only the recipient can decrypt your message, since only they have the private key associated with their public key. The idea is that public keys are derived from private keys using some hard-to-reverse operation, and that you can easily derive the public key from the private key, but not vice versa. For example, multiplying numbers is easy, but factoring numbers is hard, so part of what underlies the <a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)">RSA cryptosystem</a> is that you can&rsquo;t easily factor numbers to derive the secrets that are used to create the private key<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
 <p>Elliptic-curve cryptography works on the same principle. The hard-to-reverse operation here is multiplying a point on the curve with a number. Let&rsquo;s build up to multiplying with points on the curve by first adding a point to itself, which we can then repeat <em>n</em> times to get multiplication by <em>n</em>.</p>
 <p>We first have to start with the given point on the curve. The formula of this curve will change depending on the particular curve you use (and there are plenty), so I won&rsquo;t go into detail about it now. Pick a point <code>P</code>. To add the point to itself, you&rsquo;ll need to draw the tangent line to the curve at <code>P</code> — this is the line that follows the shape of the curve at point <code>P</code>. Extend the tangent line far enough, and you&rsquo;ll find that it intersects exactly one point on the curve. Call this point the tangent line intersection.</p>
-<figure><img src="../../img/241020/adding-points-1.png"
+<figure><img src="https://kewbi.sh/blog/img/241020/adding-points-1.png"
          alt="Figure 1. Drawing the tangent line to P."/><figcaption>
             <p><em>Figure 1. Drawing the tangent line to P.</em></p>
         </figcaption>
 </figure>
 
 <p>This tangent line intersection point is then reflected in the x-axis to get the doubled point, <code>2P</code>.</p>
-<figure><img src="../../img/241020/adding-points-2.png"
+<figure><img src="https://kewbi.sh/blog/img/241020/adding-points-2.png"
          alt="Figure 2. Reflecting across the x-axis to get 2P."/><figcaption>
             <p><em>Figure 2. Reflecting across the x-axis to get 2P.</em></p>
         </figcaption>
 </figure>
 
 <p>We can then repeat this again, with the tangent line for the point <code>2P</code>, to get <code>3P</code>, and so on. There are several optimizations to do this multiplication faster, including the <a href="https://en.wikipedia.org/wiki/Elliptic_curve_point_multiplication#Double-and-add">double-and-add</a> algorithm.</p>
-<figure><img src="../../img/241020/adding-points-3.png"
+<figure><img src="https://kewbi.sh/blog/img/241020/adding-points-3.png"
          alt="Figure 3. Repeating to find 3P."/><figcaption>
             <p><em>Figure 3. Repeating to find 3P.</em></p>
         </figcaption>
@@ -59,7 +59,7 @@
 </ul>
 <p>More concretely, let&rsquo;s describe the two people as a client and a server and define an OPRF as a function <code>F(server_input, client_input)</code> such that the client never learns the server input, and the server never learns the client input nor even the final result of the function. I think <a href="https://en.wikipedia.org/wiki/Oblivious_pseudorandom_function">Wikipedia</a> and other resources do a terrible job of explaining how this is possible, because intuitively, it isn&rsquo;t. How can the server, who&rsquo;s evaluating the function, not know its own output? How can the server also not know the client&rsquo;s input, if it was required as part of the function&rsquo;s inputs in the first place?</p>
 <p>The answer lies in the elliptic-curve operations I touched on before. Here&rsquo;s how the OPRF actually works:</p>
-<figure><img src="../../img/241020/oprf-exchange.png"
+<figure><img src="https://kewbi.sh/blog/img/241020/oprf-exchange.png"
          alt="Figure 4. The full OPRF exchange."/><figcaption>
             <p><em>Figure 4. The full OPRF exchange.</em></p>
         </figcaption>
@@ -80,7 +80,7 @@
 <h2 id="registration">Registration</h2>
 <p>That&rsquo;s actually all the hard crypto out of the way! Let&rsquo;s now cover the three main phases of OPAQUE: the registration, login, and key exchange. The first phase is registration, where the user will use their password (a string) in an OPRF exchange to get an encryption key that only they know that they then can use to encrypt their keypair data.</p>
 <p>The registration revolves around an OPRF exchange.</p>
-<figure><img src="../../img/241020/opaque-registration.png"
+<figure><img src="https://kewbi.sh/blog/img/241020/opaque-registration.png"
          alt="Figure 5. OPAQUE registration."/><figcaption>
             <p><em>Figure 5. OPAQUE registration.</em></p>
         </figcaption>
@@ -114,7 +114,7 @@ My supervisor pointed this out in my initial implementation of OPAQUE, and I was
 
 <h2 id="logging-in">Logging in</h2>
 <p>Logging in also relies on a similar OPRF exchange. This time, the user needs to recover <code>rwd</code> so it can decrypt the encrypted envelope that the server returns.</p>
-<figure><img src="../../img/241020/opaque-login.png"
+<figure><img src="https://kewbi.sh/blog/img/241020/opaque-login.png"
          alt="Figure 6. OPAQUE login."/><figcaption>
             <p><em>Figure 6. OPAQUE login.</em></p>
         </figcaption>
@@ -165,4 +165,4 @@ My supervisor pointed this out in my initial implementation of OPAQUE, and I was
 </li>
 </ol>
 </div>
-</div><br></div><p><a href=../../posts >‹ go back</a></main><script data-goatcounter="https://yours-kewbish.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</div><br></div><p><a href=https://kewbi.sh/blog/posts >‹ go back</a></main><script data-goatcounter="https://yours-kewbish.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

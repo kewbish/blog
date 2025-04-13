@@ -5,4 +5,4 @@
 - id: words
   translation: "mots"
 - id: rss
-  translation: "Abonnez-vous au flux <a href=/index.xml>RSS</a>."
+  translation: "Abonnez-vous au flux <a href='{{.rss}}'>RSS</a>."

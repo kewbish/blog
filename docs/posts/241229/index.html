@@ -13,13 +13,13 @@
   as="text/woff2"
   href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
 />
-<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=../../css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=../../posts >‹ go back</a><div class=b-post><h1 class=display-title>Snakes and Lagrangian Ladders.</h1><p style=text-indent:0>Published 29 December 2024 at <a href='https://kewbi.sh/blog/posts/241229/'>Yours, Kewbish</a>.  4,779 words. Subscribe via <a href=../../index.xml>RSS</a>.<hr><div class=b-writing><h2 id="introduction">Introduction</h2>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=https://kewbi.sh/blog/css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=https://kewbi.sh/blog/posts >‹ go back</a><div class=b-post><h1 class=display-title>Snakes and Lagrangian Ladders.</h1><p style=text-indent:0>Published 29 December 2024 at <a href='https://kewbi.sh/blog/posts/241229/'>Yours, Kewbish</a>.  4,779 words. Subscribe via <a href='https://kewbi.sh/blog/index.xml'>RSS</a>.<hr><div class=b-writing><h2 id="introduction">Introduction</h2>
 <p>I recently had the pleasure of reading a dense crypto paper, emailing the corresponding author in frustration to ask questions, then double emailing two hours later to say I&rsquo;d figured it out. The paper in question was Yurek et al.&rsquo;s <a href="https://eprint.iacr.org/2022/971">&ldquo;Long Live The Honey Badger: Robust Asynchronous DPSS and its Applications&rdquo;</a>: it describes how to split up a secret into shares that can be distributed among a set of people and how to change the set of people and refresh shares while keeping the original secret intact. Secret sharing is important for sensitive but critical information: information that no single party should be able to read on their own, but that we can&rsquo;t afford to lose — think nuclear launch codes and encryption keys.</p>
 <p>The problem I was emailing with was me not being able to understand the refresh process. Algorithm 3 in the paper opaquely says a few times to &ldquo;interpolate&rdquo; the desired new secrets. I&rsquo;m sure seasoned cryptographers can recalculate secrets from shares in their sleep, but detangling these three lines took more time than reading the entire rest of the paper. Typical secret sharing via <a href="https://en.wikipedia.org/wiki/Shamir%27s_secret_sharing">Shamir secret sharing</a> is very cleverly constructed already, and as I mentioned in <a href="https://kewbi.sh/blog/posts/241020/">my previous post</a>, crypto papers generally don&rsquo;t do a good job of explaining the basics in favour of just laying down novel material. This is great for brevity and conciseness in academia, but not so great for beginners to the field.</p>
 <p>Once I&rsquo;d gotten more background on the very finicky math, the actual interpolation and refreshing wasn&rsquo;t hard to understand and implement. Still, I wish they&rsquo;d linked to a layman&rsquo;s explainer, although from a few cursory searches, none quite seems to exist. This post is the explainer I wish I&rsquo;d had before tackling this paper. I&rsquo;ll cover the very basics of Shamir secret sharing before summarizing the Honey Badger protocol&rsquo;s use of interpolation, explaining the key three lines of Algorithm 3 in the scheme, so you can hopefully save yourself the three hours of puzzling.</p>
 <h2 id="eating-the-frog">Eating the Frog</h2>
 <p>In my opinion, the hardest part of Shamir Secret Sharing is the Lagrange interpolation, so I&rsquo;m going to put it up front here while your brains are still fresh. Lagrange interpolation is a way of estimating the value of a polynomial at some input, given some points on the polynomial. Let&rsquo;s consider a bog-standard function: <code>f(x) = x^2 + 2</code>.</p>
-<figure><img src="../../img/241229/interpolation-1.png"
+<figure><img src="https://kewbi.sh/blog/img/241229/interpolation-1.png"
          alt="Figure 1. f(x) = x² &#43; 2."/><figcaption>
             <p><em>Figure 1. f(x) = x² + 2</em></p>
         </figcaption>
@@ -32,7 +32,7 @@ y_2 = a * x_2^2 + b * x_2 + c
 y_3 = a * x_3^2 + b * x_3 + c
 </code></pre><p>In this case, we know three values of <code>x</code>, and their associated <code>y</code> values, and we&rsquo;re solving for <code>a</code>, <code>b</code>, and <code>c</code>. Because we have three unknown coefficients, we&rsquo;ll need a system of three equations, based on three evaluated points. In general, for a polynomial of degree <code>t</code>, you&rsquo;ll need <code>t+1</code> points to solve for the polynomial — the extra <code>+1</code> comes from the unknown value of the constant term itself.</p>
 <p>To figure out how to reconstruct the polynomial, let&rsquo;s start with a slightly easier function, <code>f(x) = 2x</code>. Let&rsquo;s say we know that <code>f(1) = 2</code> and <code>f(3) = 6</code>.</p>
-<figure><img src="../../img/241229/interpolation-2.png"
+<figure><img src="https://kewbi.sh/blog/img/241229/interpolation-2.png"
          alt="Figure 2. f(x) = 2x."/><figcaption>
             <p><em>Figure 2. f(x) = 2x</em></p>
         </figcaption>
@@ -47,7 +47,7 @@ y_3 = a * x_3^2 + b * x_3 + c
   = 2x
 </code></pre><p>So we can recover our original function! As another example, let&rsquo;s take our original function <code>f(x) = x^2 + 2</code>. Because this polynomial is of degree 2, we&rsquo;ll need 3 points to reconstruct it. Let&rsquo;s take <code>f(1) = 3</code>, <code>f(2) = 6</code>, and <code>f(3) = 11</code>.</p>
 <p>Let&rsquo;s look at the form of our fractional coefficients. We want each fraction to evaluate to 1 at the associated x-value, so the overall term evaluates to the right y-value. We also want the fraction to evaluate to 0 anywhere else. The general form of such a term (let&rsquo;s say, for the point <code>(x_i, y_i)</code>) is to have the numerator of the fraction be a product of <code>(x - x_m)</code>, and the denominator be <code>(x_i - x_n)</code>, for all of the other <code>x_m</code>. We exclude the <code>(x - x_i)/(x_i - x_i)</code> fraction, because when this is evaluated at <code>x_i</code>, we&rsquo;d get <code>0/0</code>, which is undefined. When we evaluate this fraction at <code>x_i</code>, the terms in the numerator all cancel with the terms in the denominator, so we get 1, as desired. When we evaluate this fraction at any of the other input x-values, however, one of the numerator terms <code>(x - x_m)</code> will be 0, preventing this particular y-value from affecting the overall polynomial&rsquo;s value. This fractional coefficient is also called the <a href="https://en.wikipedia.org/wiki/Lagrange_polynomial#Definition">Lagrange basis polynomial</a>, and we&rsquo;ll denote it <code>λ_i(x)</code>. Each y-value is multiplied by a different Lagrange basis polynomial, since the x-value changes, so the <code>i</code> in the basis polynomial also has to change.</p>
-<figure><img src="../../img/241229/interpolation-3.png"
+<figure><img src="https://kewbi.sh/blog/img/241229/interpolation-3.png"
          alt="Figure 3. Form of the Lagrange basis polynomial."/><figcaption>
             <p><em>Figure 3. Form of the Lagrange basis polynomial.</em></p>
         </figcaption>
@@ -152,4 +152,4 @@ y_3 = a * x_3^2 + b * x_3 + c
 </li>
 </ol>
 </div>
-</div><br></div><p><a href=../../posts >‹ go back</a></main><script data-goatcounter="https://yours-kewbish.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</div><br></div><p><a href=https://kewbi.sh/blog/posts >‹ go back</a></main><script data-goatcounter="https://yours-kewbish.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

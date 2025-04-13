@@ -1,33 +1,32 @@
-baseUrl: "https://kewbi.sh/blog"
-title: "Yours, Kewbish"
+baseURL: https://kewbi.sh/blog
+title: Yours, Kewbish
 defaultContentLanguage: en
+theme: yk
+disableKinds:
+  - taxonomy
+publishDir: docs
 languages:
   en:
+    languageCode: en-ES
     languageName: English
     weight: 1
-    params:
-      lang: en
   fr:
+    languageCode: fr-FR
     languageName: Français
     weight: 2
-    params:
-      lang: fr
-      disabledKinds: ["home", "section", "taxonomy", "404"]
-MetaDataFormat: "yaml"
-theme: "yk"
-relativeUrls: true
-disableKinds: ["taxonomy"]
-publishDir: "docs"
+    disableKinds:
+      - home
+      - section
+      - taxonomy
+      - "404"
 outputs:
   home:
-    - HTML
-    - RSS
+    - html
+    - rss
   section:
-    - HTML
-Author:
-  name: "Emilie Ma (Kewbish)"
-Params:
-  cssLink: "https://kewbi.sh/css/main.css"
+    - html
+params:
+  cssLink: https://kewbi.sh/css/main.css
   fontLinks: |
     <link
       rel="preload"
@@ -44,3 +43,4 @@ Params:
       as="text/woff2"
       href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
     />
+canonifyURLs: true
