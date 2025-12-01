@@ -1,0 +1,199 @@
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>An Advent CAPlendar</title><meta name=description content="On my Christmas-y systems-y countdown."><meta property=og:title content="An Advent CAPlendar"><meta property=og:description content="On my Christmas-y systems-y countdown."><meta property=og:url content="https://kewbi.sh/blog/posts/251201/"><meta property=twitter:title content="An Advent CAPlendar"><meta property=twitter:description content="On my Christmas-y systems-y countdown."><link rel=icon href=https://kewbi.sh/small-logo.png><link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-italic.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-700.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
+/>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=https://kewbi.sh/blog/css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=https://kewbi.sh/blog/posts >‹ go back</a><div class=b-post><h1 class=display-title>An Advent CAPlendar.</h1><p style=text-indent:0>Published 01 December 2025 at <a href='https://kewbi.sh/blog/posts/251201/'>Yours, Kewbish</a>.  1,080 words. Subscribe via <a href='https://kewbi.sh/blog/index.xml'>RSS</a>.<hr><div class=b-writing><h2 id="introduction">Introduction</h2>
+<p>For a couple years in high school, I dedicated my Decembers to Wastl&rsquo;s <a href="https://adventofcode.com/">Advent of Code</a>, a daily series of Christmas-themed programming puzzles. The regular cadence of problems kept the completionist in me hooked, and the problems were satisfyingly challenging beyond my ability. I lacked the background to make it through most days after the first week or two on my own, so I&rsquo;d sheepishly poke around the subreddit the next morning for hints. Through AOC, I learned a lot of Python builtins like counters, zips, and list comprehensions, and it was always a fun activity to look forward to during December.</p>
+<p>Last year, I found out about a similar project called <a href="https://aods.cryingpotato.com/">Advent of Distributed Systems</a>. AODS breaks up the <a href="https://fly.io/dist-sys/">Fly.io Distributed Systems</a> challenges into weekly miniprojects, aiming to get you through to the final Raft KV store by the end of the month.</p>
+<p>This fall, I realized I had a growing paper backlog and a bucket list of startups and technologies I&rsquo;d like to get around to reading someday, but never made the time for. Inspired by the subject matter of AODS and the cadence of AOC, I&rsquo;m putting together my own holiday countdown.</p>
+<p>This post is my 2025 Advent CAPlendar, exploring topics in distributed systems (hence the <a href="https://en.wikipedia.org/wiki/CAP_theorem">title pun</a>), databases, formal verification, and security. I&rsquo;m planning to read some foundational papers like DynamoDB and Zookeeper as well as some newer works out of <a href="https://pdos.csail.mit.edu/">MIT PDOS</a> and <a href="https://sky.cs.berkeley.edu/">Berkeley SkyLab</a>. There are also some neat systems startups and protocols that I keep hearing about, so I&rsquo;m also planning to glean what I can about how they work from their documentation. You can see a calendar of topics below<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+
+
+<p style="font-size: 30px;font-family:'Playfair Display';text-align:center;font-style:italic">2025 Advent CAPlendar</p>
+<div class="flex" style="border-radius: 8px;background-color: var(--sub-colour)">
+<div id="calendar-grid">
+<div class="date-blocker"></div>
+</div>
+</div>
+
+<style>
+#calendar-grid {
+display: grid;
+grid-template-columns: repeat(7, minmax(0, 1fr));
+grid-template-rows: repeat(4, minmax(0, 1fr));
+gap: 8px;
+padding: 12px;
+}
+.date-blocker {
+opacity: 0;
+}
+.date {
+grid-column: auto !important;
+font-size: 18px;
+padding: 0.5rem;
+position: relative;
+cursor: pointer;
+ flex: 1;
+  min-height: 0;
+  overflow: auto;
+  align-self: stretch;
+}
+@media (max-width: 1500px) {
+.date {
+font-size: 16px;
+}
+}
+@media (max-width: 1370px) {
+.date-blocker {
+display: none;
+}
+#calendar-grid {
+grid-template-columns: 1fr;
+grid-template-rows: repeat(auto-fit, minmax(0, 1fr));
+}
+.date {
+font-size: 18px;
+}
+}
+.date p {
+line-height: normal !important;
+margin-bottom: auto !important;
+text-indent: 0 !important;
+}
+.date > .date-number{
+position: absolute;
+top: .5rem;
+right: .5rem;
+font-size: 14px;
+}
+.date-mystery {
+background: hsl(from var(--dark-accent-colour) h s l / 0.5);
+color: var(--muted-accent-colour);
+cursor: not-allowed !important;
+}
+a.date {
+display: block;
+}
+.date-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  a {
+	display: flex;
+  flex-direction: column;
+  flex: 1;
+  }
+}
+form {
+display: flex;
+gap: .5em;
+width: 100%;
+}
+#email:disabled, #email-submit:disabled {
+cursor: not-allowed;
+}
+</style>
+
+
+<p>I&rsquo;m also trying something new and starting a <a href="https://craigmod.com/essays/popup_newsletters/">popup newsletter</a> to accompany this series. Signing up will get you a short weekend roundup list of the posts that week. To assuage the privacy-conscious: I&rsquo;ll only use this for Advent CAPlendar-related posts, I&rsquo;ll be running this by hand (no external data processors, etc.), and I promise I&rsquo;ll be too busy studying for finals to think about spamming you otherwise!</p>
+
+
+<form id="email-form"
+>
+  <input type="email" name="email" required id="email" />
+  <button type="submit" id="email-submit">Sign Up</button>
+</form>
+
+<h2 id="day-1-CAP-and-CAL-Theorems">1. The CAP and CAL Theorems</h2>
+<p>I figured it&rsquo;d be most fitting to start this calendar by referencing the titular pun itself. The <a href="https://en.wikipedia.org/wiki/CAP_theorem">CAP theorem</a> is idea that a distributed system can only satisfy two of the following three guarantees:</p>
+<ul>
+<li><strong>C</strong>onsistency: reads return the most recently written value. This behaviour is also known as the <a href="https://en.wikipedia.org/wiki/Linearizability">linearizability</a> consistency level.</li>
+<li><strong>A</strong>vailability: every request by a non-failing node receives a response. Note that this doesn&rsquo;t mean every request receives a response, which I think is the typical definition of uptime via high availability; it&rsquo;s predicated here on being received by a non-failing node.</li>
+<li><strong>P</strong>artition tolerance: the system keeps behaving as-is even as arbitrary nodes fail.</li>
+</ul>
+<p>The idea is that if you have a network partition, you can decide to either eschew consistency and just return responses, even if they&rsquo;re not the latest values, or stick to your guns and not respond to requests, sacrificing availability.</p>
+<p>The CAP theorem got <a href="https://arxiv.org/abs/1509.05393">picked on</a> <a href="https://blog.dtornow.com/the-cap-theorem.-the-bad-the-bad-the-ugly/">a bunch</a>. The most obvious argument is that the pithy &ldquo;pick 2 out of 3&rdquo; framing conveniently sidesteps that you can&rsquo;t ignore partition tolerance, or that you might end up with less than two properties. As well, if your system doesn&rsquo;t fit the definitions of consistency (e.g. isn&rsquo;t linearizable), the CAP theorem shrugs its shoulders and gives up — it won&rsquo;t really tell you anything. <a href="https://arxiv.org/abs/1509.05393">Martin Kleppmann&rsquo;s paper</a> also highlights some vagueness in definitions in the original CAP proof. This is summarized in <a href="https://blog.dtornow.com/the-cap-theorem.-the-bad-the-bad-the-ugly/">Dominik Tornow&rsquo;s blog post</a>, which illustrates how the conjecture and proof are a bit like passing ships in the night given their definitions are a bit off.</p>
+<p>The CAP theorem could be a good rule of thumb, but I think its variants that focus on latency instead are far more interesting. <a href="https://en.wikipedia.org/wiki/PACELC_design_principle">PACELC</a> is an extension of CAP, stating that under <strong>P</strong>artitioning, you have to choose between <strong>A</strong>vailability and <strong>C</strong>onsistency, <strong>E</strong>lse you&rsquo;ll have to make the tradeoff between <strong>L</strong>atency and <strong>C</strong>onsistency. This makes sense, since in the absence of partitions stronger consistency models will still impose more acknowledgements and latency.</p>
+<p>Kleppmann&rsquo;s paper goes further, modelling availability in terms of operation latency to match more industry-standard intuitions of uptime SLAs. &ldquo;If a service can sustain low operation latency, even as network delay increases dramatically, it is more tolerant of network problems than a service whose latency increases.&rdquo; sounds easier to compare to real systems. He also defines some operation latency lower bounds in term of network latency at different consistency levels which clearly match intuition.</p>
+<p>Almost a decade later, Edward Lee takes this even further, defining the <a href="https://arxiv.org/pdf/2109.07771">CAL theorem</a>. This trades off against <strong>C</strong>onsistency, <strong>A</strong>vailability, and network <strong>L</strong>atency, but at a more gradual level than the all-or-nothing assumptions of the CAP theorem. The CAL theorem subsumes the CAP theorem, which is defined as a special case. It&rsquo;s a pity this isn&rsquo;t more widely known, otherwise I&rsquo;d have a cleaner title for this Advent series.</p>
+<p>I think the neatest part of Lee&rsquo;s paper is the <a href="https://github.com/lf-lang/lingua-franca/">Lingua Franca</a> framework he introduces. It&rsquo;s a coordination language for distributed, realtime software for cyber-physical systems like autonomous vehicles. The key feature I picked up on was the fault handlers that trigger when you hit some apparent latency bounds, in which you can specify callbacks and explicitly define whether you&rsquo;d like to relax your consistency or availability properties. If you choose to sacrifice availability, it provides centralized coordination primitives; if not it provides decentralized coordination with error bounds on clock synchronization to relax consistency. Lee has a video tutorial for how to do so <a href="https://www.youtube.com/watch?v=3lHmiWOedHM">here</a>. It looks like a nice abstraction layer to keep the CAL theorem top of mind while developing a distributed system.</p>
+<p>I think the most valuable part of the CAP/CAL theorems for me is the quick gut check mental model. The CAP theorem appeals to instinctive sense. I also had the opportunity to attend Lee&rsquo;s Distinguished Lecture at UBC, and it was just as clearly laid out and intuitive. Writing this up has highlighted some of the caveats of each model, though, which I&rsquo;ll need to remember to keep in mind.</p>
+
+
+<script>
+for (let i = 1; i <= 25; i++) {
+	const posts = document.querySelectorAll(`[id^=day-${i}]`);
+	let isMystery = false;
+	let title = "";
+	let id = "";
+	if (posts.length == 0) {
+		isMystery = true;
+		title = "—";
+	} else {
+		const post = posts[0];
+		id = post.id;
+		title = post.id.replace(`day-${i}-`, '').replaceAll("-", ' ', );
+	}
+	const element = document.createElement("div");
+	element.classList.add("date");
+	element.classList.add("grid-element");
+	if (isMystery) {
+		element.classList.add("date-mystery");
+	}
+	const number = document.createElement("p");
+	number.classList.add("date-number")
+	number.textContent = i;
+	element.appendChild(number);
+	const titleEl = document.createElement("p");
+	titleEl.textContent = title;
+	element.appendChild(titleEl);
+	const parentWrapper = document.createElement("div");
+	parentWrapper.classList.add("date-wrapper");
+	if (!isMystery) {
+		const wrapper = document.createElement("a");
+		wrapper.href = "#" + id;
+		wrapper.appendChild(element);
+		parentWrapper.appendChild(wrapper);
+		document.getElementById("calendar-grid").appendChild(parentWrapper);
+	} else {
+		parentWrapper.appendChild(element);
+		document.getElementById("calendar-grid").appendChild(parentWrapper);
+	}
+}
+
+document.getElementById('email-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+	const formEl = document.getElementById("email-form");
+	const form = new FormData(formEl);
+
+	fetch("https://courriel.kewbish.workers.dev/campaign/advent25/signup", {
+	  method: "POST",
+	  body: form
+	});
+	alert('Signed up!');
+	document.getElementById('email').disabled = true;
+	document.getElementById('email-submit').disabled = true;
+});
+</script>
+
+
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>After spending a while doing infra work, it was refreshing to go back to my frontend roots and put this together! I learned some new tricks: did you know <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_counter_styles/Using_CSS_counters">CSS has counters</a>? Did you know you can <a href="https://www.markdownguide.org/extended-syntax/#heading-ids">set a separate header ID</a> or that you can <a href="https://stackoverflow.com/questions/27255591/using-forward-slash-as-id-attribute">have slashes in them</a>?&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+</div><br></div><p><a href=https://kewbi.sh/blog/posts >‹ go back</a></main><script data-goatcounter="https://yours-kewbish.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
