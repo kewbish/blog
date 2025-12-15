@@ -13,7 +13,7 @@
   as="text/woff2"
   href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
 />
-<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=https://kewbi.sh/blog/css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=https://kewbi.sh/blog/posts >‹ go back</a><div class=b-post><h1 class=display-title>An Advent CAPlendar.</h1><p style=text-indent:0>Published 01 December 2025 at <a href='https://kewbi.sh/blog/posts/251201/'>Yours, Kewbish</a>.  10,080 words. Subscribe via <a href='https://kewbi.sh/blog/index.xml'>RSS</a>.<hr><div class=b-writing><h2 id="introduction">Introduction</h2>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=https://kewbi.sh/blog/css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=https://kewbi.sh/blog/posts >‹ go back</a><div class=b-post><h1 class=display-title>An Advent CAPlendar.</h1><p style=text-indent:0>Published 01 December 2025 at <a href='https://kewbi.sh/blog/posts/251201/'>Yours, Kewbish</a>.  10,678 words. Subscribe via <a href='https://kewbi.sh/blog/index.xml'>RSS</a>.<hr><div class=b-writing><h2 id="introduction">Introduction</h2>
 <p>For a couple years in high school, I dedicated my Decembers to Wastl&rsquo;s <a href="https://adventofcode.com/">Advent of Code</a>, a daily series of Christmas-themed programming puzzles. The regular cadence of problems kept the completionist in me hooked, and the problems were satisfyingly challenging beyond my ability. I lacked the background to make it through most days after the first week or two on my own, so I&rsquo;d sheepishly poke around the subreddit the next morning for hints. Through AOC, I learned a lot of Python builtins like counters, zips, and list comprehensions, and it was always a fun activity to look forward to during December.</p>
 <p>Last year, I found out about a similar project called <a href="https://aods.cryingpotato.com/">Advent of Distributed Systems</a>. AODS breaks up the <a href="https://fly.io/dist-sys/">Fly.io Distributed Systems</a> challenges into weekly miniprojects, aiming to get you through to the final Raft KV store by the end of the month.</p>
 <p>This fall, I realized I had a growing paper backlog and a bucket list of startups and technologies I&rsquo;d like to get around to reading someday, but never made the time for. Inspired by the subject matter of AODS and the cadence of AOC, I&rsquo;m putting together my own holiday countdown.</p>
@@ -277,6 +277,55 @@ Once it receives responses from a majority of acceptors, it can issue its own pr
 <p>The implementation has three components: a request coordinator, membership and failure detection protocol, and a local DB engine. I thought it was interesting the underlying DB architecture was pluggable, which enables different engines according to application workloads. It seems perhaps feasible to use more traditional relational DBMSes and replicate tables instead of just keys, and I&rsquo;m wondering if they ever tried this or if the overhead of running a DBMS was contrary to the high-availability and performance angle.</p>
 <p>Anyways, I thought I was done with Paxos-based systems, but it turns out I wasn&rsquo;t. Amazon came out with another paper on Dynamo<strong>DB</strong> at <a href="https://www.usenix.org/system/files/atc22-elhemali.pdf">ATC 2022</a>, which describes DynamoDB as we know it today in its AWS form. The design draws on the principles of Dynamo, but all of the architecture today is different. It now supports indexes, full tables, and a single-leader multi-Paxos replication strategy instead of the leaderless ring-based/Merkle tree approach in Dynamo. There are now microservices in the microservices: DynamoDB is itself built in small components with a centralized administration service. This paper contains much less actual architecture discussion than the first — I can&rsquo;t help but wonder if this is due to the increasing corporatisation and legal clampdown I&rsquo;d expect at today&rsquo;s scale. Unfortunately, this second paper contained much fewer iconic company-culture statements (I found none in my brief skim), so I wasn&rsquo;t motivated to read it in its entirety.</p>
 <p>It was a bit disappointing to read a paper then find out it&rsquo;d been completely dismantled in current deployments, but it&rsquo;s also quite exciting that there&rsquo;s been so much change and progress. I think there&rsquo;s still plenty of value in reading the original Dynamo whitepaper, particularly as it surveys so many design techniques. I&rsquo;ll try to keep the practical optimizations mentioned in mind: they&rsquo;re smaller adjustments that might be easier to slot into existing systems I&rsquo;ll work on developing but may still make a big impact.</p>
+<h2 id="day-15-Redis">15. I Mean No (Redis)respect</h2>
+<p>Inspired by the <a href="https://notes.ekzhang.com/events/nysrg#:~:text=Jul%207%2C%202024-,Code%20reading%3A%20Redis,-We%E2%80%99ll%20read%20the">NYSRG</a>, a good friend and I spent a couple hours reading through the Redis 1.3.6 codebase. It was much more tractable then than now: as part of paper writing for my formally-verified databases project in Paris, my supervisor asked me to compute the LoC of the Redis core, and the whole project now stands at ~100K LoC of C, with the core at ~25K LoC. However, back in 1.3.6, its core was a single 9K LoC file, <a href="https://github.com/redis/redis/blob/1.3.6/redis.c"><code>redis.c</code></a>. Two hours was enough to learn the <a href="https://architecturenotes.co/p/redis">basics of what Redis does</a>, skim through the code and pick out the key helper libraries, and explore some of its current enterprise extensions.</p>
+<p>The big <code>redis.c</code> file is loosely structured as follows:</p>
+<ul>
+<li><a href="https://github.com/redis/redis/blob/1.3.6/redis.c#L1">L1</a>: Definitions, prototypes, globals</li>
+<li><a href="https://github.com/redis/redis/blob/1.3.6/redis.c#L802">L802</a>: Utility functions
+<ul>
+<li><a href="https://github.com/redis/redis/blob/1.3.6/redis.c#L1118">L1118</a>: Server networking utilities</li>
+<li><a href="https://github.com/redis/redis/blob/1.3.6/redis.c#L1427">L1427</a>: Shared object creation to avoid repeated allocations</li>
+<li><a href="https://github.com/redis/redis/blob/1.3.6/redis.c#L1532">L1532</a>: Server initialization and config parsing</li>
+<li><a href="https://github.com/redis/redis/blob/1.3.6/redis.c#L2072">L2072</a>: Command processing</li>
+<li><a href="https://github.com/redis/redis/blob/1.3.6/redis.c#L2429">L2429</a>: Client creation</li>
+</ul>
+</li>
+<li><a href="https://github.com/redis/redis/blob/1.3.6/redis.c#L2587">L2587</a>: Redis object creation, like strings and zsets (ordered sets)</li>
+<li><a href="https://github.com/redis/redis/blob/1.3.6/redis.c#L2981">L2981</a>: RDB (snapshotting) saving and loading
+<ul>
+<li>This is a high-performance way to ensure durable backups.</li>
+</ul>
+</li>
+<li><a href="https://github.com/redis/redis/blob/1.3.6/redis.c#L3703">L3703</a>: Command implementations
+<ul>
+<li>Redis supports a lot of data types so there are a lot of commands to walk through here! They&rsquo;re all quite intuitive.</li>
+<li><a href="https://github.com/redis/redis/blob/1.3.6/redis.c#L6712">L6712</a>: Batch command implementations, a bit further down the file</li>
+</ul>
+</li>
+<li><a href="https://github.com/redis/redis/blob/1.3.6/redis.c#L6608">L6608</a>: Cache expiry and removal
+<ul>
+<li>There&rsquo;s separate functions for <a href="https://github.com/redis/redis/blob/1.3.6/redis.c#L6638">expiring keys due to TTL</a> and <a href="https://github.com/redis/redis/blob/1.3.6/redis.c#L6655">due to memory pressure</a>.</li>
+</ul>
+</li>
+<li><a href="https://github.com/redis/redis/blob/1.3.6/redis.c#L6981">L6981</a>: Replication helpers
+<ul>
+<li>Redis replication is eventually consistent and has both full and partial synchronization steps. There&rsquo;re some neat resynchronization helpers here.</li>
+<li>Redis replicas are read-only, unless you use Enterprise and get into their Active-Active setup (more below)</li>
+</ul>
+</li>
+<li><a href="https://github.com/redis/redis/blob/1.3.6/redis.c#L7412">L7412</a>: AOF (write-ahead logging) implementation
+<ul>
+<li>This can allow full reconstruction of data given a crash, so supports better durability and crash corruption avoidance, but has performance overheads</li>
+</ul>
+</li>
+<li><a href="https://github.com/redis/redis/blob/1.3.6/redis.c#L7950">L7950</a>: Virtual memory, a now deprecated feature for <a href="https://redis.io/docs/latest/operate/oss_and_stack/reference/internals/internals-vm/">swapping objects to disk</a></li>
+<li><a href="https://github.com/redis/redis/blob/1.3.6/redis.c#L9076">L9076</a>: Main function</li>
+</ul>
+<p>There are also two other main files: the custom <a href="https://github.com/redis/redis/blob/1.3.6/ae.c">event loop</a> and the backing <a href="https://github.com/redis/redis/blob/1.3.6/dict.c">hash table</a>. Neither is very tricky to read through but they&rsquo;re very clean implementation examples.</p>
+<p>A neat thing I learned about the event loop was that it&rsquo;s single threaded. This still admits some <a href="https://redis.io/glossary/redis-race-condition/">race conditions from clients</a> but ensures atomicity for individual commands and makes Redis behaviour easier to reason about. There&rsquo;s some asynchronous I/O for background RDB/AOF file saving, but this is handled by <a href="https://github.com/redis/redis/blob/1.3.6/redis.c#L3355">forking a child process</a> and I assume this is excluded from the &ldquo;single-threaded&rdquo; considerations.</p>
+<p>On a whim, I looked up &ldquo;Redis CRDTs&rdquo;, wondering if they might have some experimental datatype support, but I was surprised to find a <a href="https://redis.io/resources/under-the-hood/">whole whitepaper</a>. I didn&rsquo;t read it as it was behind an email paywall, but from <a href="https://redis.io/docs/latest/operate/rs/databases/active-active/">their docs</a>, it seems that they&rsquo;re used to support the geo-distributed replication features for the Enterprise (!) product, allowing clients to both read and write from anywhere in the cluster. The whitepaper page is a bit plastered over with marketing-speak (&ldquo;intelligently resolving conflicts&rdquo;, &ldquo;unprecedented advantages&rdquo;, &ldquo;other techniques such as LWW&rdquo;, which is also a CRDT…) but it&rsquo;d be interesting to learn more about what their implementation looks like sometime.</p>
+<p>I didn&rsquo;t get too into the weeds into the details of Redis during my foray, but what struck me was how simple, elegant, and approachable everything was. The most interesting areas for me were the two durability features (RDB vs AOF files) as well as the replication system. I haven&rsquo;t yet had the chance to work with Redis in an internship (surprising given its ubiquity) but I think this initial look will be a good foundation for when the time comes.</p>
 
 
 <script>
