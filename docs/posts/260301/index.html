@@ -1,0 +1,267 @@
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Monkey See, Monkey Prove</title><meta name=description content="On the Tamarin security prover."><meta property=og:title content="Monkey See, Monkey Prove"><meta property=og:description content="On the Tamarin security prover."><meta property=og:url content="https://kewbi.sh/blog/posts/260301/"><meta property=twitter:title content="Monkey See, Monkey Prove"><meta property=twitter:description content="On the Tamarin security prover."><link rel=icon href=https://kewbi.sh/small-logo.png><link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-italic.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-700.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
+/>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=https://kewbi.sh/blog/css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=https://kewbi.sh/blog/posts >‹ go back</a><div class=b-post><h1 class=display-title>Monkey See, Monkey Prove.</h1><p style=text-indent:0>Published 01 March 2026 at <a href='https://kewbi.sh/blog/posts/260301/'>Yours, Kewbish</a>.  4,385 words. Subscribe via <a href='https://kewbi.sh/blog/index.xml'>RSS</a>.<hr><div class=b-writing><p>As I was winding down active work on my <a href="https://kewbi.sh/blog/posts/250223/">Kintsugi</a> project last year, I asked my supervisor what good next steps would be. One proposed avenue was to formally verify Kintsugi&rsquo;s security, since <a href="https://arxiv.org/abs/2507.21122">the paper</a> relies only on pen-and-paper intuition. This is how I learned about <a href="https://tamarin-prover.com/">Tamarin</a>, a prover for security protocols.</p>
+<p>I&rsquo;m enamoured by this idea of <em>guaranteeing</em> the safety of systems. There&rsquo;s something incredibly satisfying about knowing a protocol is formally, mathematically, and exhaustively impassable. Providing this level of confidence is rare. Tamarin is especially interesting because it can untangle cryptography primitives like symmetric encryption and Diffie-Hellman. This means it can precisely track what an adversary can derive, finding issues with delicate interaction chains that are difficult to come up with otherwise. The invariant proving is also (mostly) automatic after writing the protocol model, so no need to do the math manually.</p>
+<p>This automatic bit is important, because I lack enough experience to make much progress otherwise. My work with formal methods so far has mostly managed to sidestep the actual specification process. It was never in the scope of past projects, and part of it was also just pure intimidation by arcane syntax and principles. I think it&rsquo;s a little embarrassing to call myself a researcher interested in formal verification if I haven&rsquo;t done any of said verification, though, so I wanted to address this year. As we rang in the New Year, I set a resolution to learn Tamarin and take a stab at modelling something non-trivial.</p>
+<p>My goal was to model basic <a href="https://kewbi.sh/blog/posts/241229/">Shamir Secret Sharing</a> and <a href="https://kewbi.sh/blog/posts/241020/">Oblivious Pseudo-Random Functions</a>, before moving onto Dynamic Proactive Secret Sharing and Threshold OPRFs. Finally, I would Frankenstein the models together to get a Kintsugi proof. Going further, there&rsquo;s a similar protocol <a href="https://juicebox.xyz/">Juicebox</a> that&rsquo;s more or less Kintsugi-but-production-ready, so I thought I&rsquo;d be able to contribute towards a formal model of that as well.</p>
+<p>You&rsquo;ll see in the rest of this post how lofty those goals were. I&rsquo;ll cover the progress I&rsquo;ve been able to make so far, including a brief explainer of Tamarin and the WIP models as they stand. Along the way, I&rsquo;ll point out some of the obstacles and limitations I&rsquo;ve encountered. Overall, I don&rsquo;t think I had the right approach for Tamarin, nor perhaps was it the right fit for the job, but it was a great chance to learn a new tool regardless.</p>
+<h2 id="a-whirlwind-intro">A Whirlwind Intro</h2>
+<p>It&rsquo;s a bit hard to understand a post about learning Tamarin if I don&rsquo;t explain its features. To start off, Tamarin is a tool for <em>symbolic</em> verification of security protocols. Symbolic means that no code is really being run. Instead, Tamarin works on abstract states. It&rsquo;s a bit like those <a href="https://knowyourmeme.com/memes/fruit-math-math-with-fruit">bad Facebook IQ game ads</a> where they replace the numbers in an equation with pictures and symbols. In code, you might imperatively generate a message and hash it. From Tamarin&rsquo;s perspective, it sees the message and the sender&rsquo;s state as just some given circumstances. To continue the Facebook ad metaphor, say the message is a banana. Hashing it turns the banana into an apple: another state that doesn&rsquo;t intrinsically mean anything to Tamarin. How do I relate my bananas and apples to get anything sensible?</p>
+<p>99.999% of people can&rsquo;t solve that puzzle, but Tamarin sure can. It does so by defining rules that dictate how to transition between these states. Some of these rules are built-in: for instance, rules for how encryption and Diffie-Hellman work. Others are user-defined: I can define that from a &ldquo;haven&rsquo;t sent anything&rdquo; state, I can generate a random value and transition to a &ldquo;have sent message X and now waiting for response&rdquo; state. Humans do okay with defining their protocol&rsquo;s happy path as a sequence of these state transitions, but we struggle with thinking of more roundabout attacks. Tamarin helps with figuring out if there&rsquo;s combinations of states and extra computation that an attacker can do that can lead to unintended leaks. For example, while my protocol might assume a hashed message always came from an authenticated party, Tamarin&rsquo;s built-in rules can derive that the attacker might also know the hashed version of a message. Tamarin really shines in more complicated interleavings of protocols where partial information from one run can benefit an attacker in another.</p>
+<p>Tamarin uses the <a href="https://en.wikipedia.org/wiki/Dolev%E2%80%93Yao_model">Dolev-Yao</a> adversary model. This means the adversary can eavesdrop on, intercept, and interfere with messages sent over the network. It can also derive its own messages to send. However, it doesn&rsquo;t have access to the internal computation within a state transition: it can grab the first banana message, and also the apple at the end, but doesn&rsquo;t understand how the fruit metamorphed.</p>
+<p>Enough of the abstract math with fruit, alas<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Here&rsquo;s an example of Tamarin syntax. The following example is my solution to the last of <a href="https://github.com/benjaminkiesl/tamarin_toy_protocol">these Tamarin exercices</a>. There are two parties, Alex and Blake. We&rsquo;re getting Alex to generate a <a href="https://en.wikipedia.org/wiki/Cryptographic_nonce">nonce</a> and send it to Blake, who responds with their own nonce. Then, Alex generates a session key based on the two nonces and sends it to Blake. Bear with me:</p>
+<pre tabindex="0"><code>theory ToyProtocol
+begin
+
+functions: kdf/3, mac/2
+
+rule Init:
+    [ Fr(~mk), Fr(~aid), Fr(~bid) ]--[ Init(~aid, ~bid, ~mk) ]-&gt;[ AState(~aid, &#39;INIT&#39;, ~mk), BState(~bid, &#39;INIT&#39;, ~mk) ]
+
+rule AlexSendNonce:
+    [ AState(~aid, &#39;INIT&#39;, ~mk), Fr(~anonce) ]--[ AlexSendNonce(~aid, ~mk, ~anonce) ]-&gt;[ AState(~aid, &#39;SENT_NONCE&#39;, &lt;~mk, ~anonce&gt;), Out(~anonce) ]
+
+rule AlexSendNonceAgain:
+    [ AState(~aid, &#39;SENT_NONCE&#39;, &lt;~mk, ~anonce&gt;) ]--[ AlexSendNonceAgain(~aid, ~mk, ~anonce) ]-&gt;[ AState(~aid, &#39;SENT_NONCE&#39;, &lt;~mk, ~anonce&gt;), Out(~anonce) ]
+
+rule BlakeSendNonce:
+    [ BState(~bid, &#39;INIT&#39;, ~mk), Fr(~bnonce), In(ANonce) ]--[ BlakeSendNonce(~bid, ~mk, ~bnonce) ]-&gt;[ BState(~bid, &#39;SENT_NONCE&#39;, &lt;~mk, ANonce, ~bnonce&gt;), Out(~bnonce) ]
+
+rule AlexComputeSK:
+    let
+        SK = kdf(~mk, ~anonce, BNonce)
+    in
+    [ AState(~aid, &#39;SENT_NONCE&#39;, &lt;~mk, ~anonce&gt;), In(BNonce) ]--[ AlexComputeSK(~aid, ~mk, ~anonce, BNonce, SK) ]-&gt;[ AState(~aid, &#39;DONE&#39;, &lt;~mk, ~anonce, BNonce, SK&gt;), Out(mac(SK, &#39;ACK&#39;)) ]
+
+rule BlakeComputeSK:
+    let
+        SK = kdf(~mk, Anonce, ~bnonce)
+    in
+    [ BState(~bid, &#39;SENT_NONCE&#39;, &lt;~mk, Anonce, ~bnonce&gt;), In(mac(SK, &#39;ACK&#39;)) ]--[ BlakeComputeSK(~bid, ~mk, Anonce, ~bnonce, SK) ]-&gt;[ BState(~bid, &#39;DONE&#39;, &lt;~mk, Anonce, ~bnonce, SK&gt;) ]
+
+lemma HelperInitialNonce [reuse, use_induction]:
+    &#34;All mk aid anonce #i . AlexSendNonceAgain(aid, mk, anonce) @ #i ==&gt; Ex #j . AlexSendNonce(aid, mk, anonce) @ #j &amp; j &lt; i&#34;
+
+lemma ProtocolCanComplete:
+    exists-trace
+        &#34;Ex mk aid bid anonce bnonce sk #i #j . AlexComputeSK(aid, mk, anonce, bnonce, sk) @ #i &amp; BlakeComputeSK(bid, mk, anonce, bnonce, sk) @ #j&#34;
+
+lemma AttackerCannotKnowBlake:
+    &#34;All mk bid anonce bnonce sk #i . BlakeComputeSK(bid, mk, anonce, bnonce, sk) @ #i ==&gt; not (Ex #j. K(sk) @ #j)&#34;
+
+lemma AttackerCannotKnowAlex:
+    &#34;All mk aid anonce bnonce sk #i . AlexComputeSK(aid, mk, anonce, bnonce, sk) @ #i ==&gt; not (Ex #j. K(sk) @ #j)&#34;
+
+lemma BlakeAfterAlex:
+    &#34;All mk bid anonce bnonce sk #i . BlakeComputeSK(bid, mk, anonce, bnonce, sk) @ #i ==&gt; Ex aid #j . AlexComputeSK(aid, mk, anonce, bnonce, sk) @ #j &amp; j &lt; i&#34;
+
+end
+</code></pre><p>Let&rsquo;s first go over the protocol definition:</p>
+<ul>
+<li>The intended happy path is <code>Init → AlexSendNonce → BlakeSendNonce → AlexComputeSK → BlakeComputeSK</code>. If the network drops, we might need <code>AlexSendNonceAgain</code> to retry.</li>
+<li>The <code>rule</code>s are the user-defined state transitions. They&rsquo;re formatted like <code>[Consumes]--[ActionDescription]-&gt;[Produces]</code>. In the first rule, <code>Init</code>, I&rsquo;m generating some random IDs and a master key with <code>Fr()</code> (&ldquo;fresh&rdquo;, which can be consumed immediately). I&rsquo;m also producing the states <code>AState</code> and <code>BState</code>. These new states can only be consumed once — it&rsquo;s like real-life bananas<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</li>
+<li>The next rule, <code>AlexSendNonce</code> consumes the original <code>AState</code> and produces a new fresh nonce. It then creates another new <code>AState</code> — note that this is symbolically distinct from the first from Tamarin&rsquo;s perspective. The <code>&lt;&gt;</code> indicates concatenation. <code>Out()</code> sends the nonce over the network. Importantly, in Tamarin&rsquo;s attack model this means the attacker now has access to it.</li>
+<li>The <code>BlakeSendNonce</code> rule requires both the second <code>AState</code> after Alex&rsquo;s sent his nonce and an initialized <code>BState</code>. Again, Blake sends his nonce via <code>Out()</code>, so the attacker also has access to this.</li>
+<li><code>AlexComputeSK</code> uses a user-defined <code>kdf</code> function. In Tamarin, these <a href="https://tamarin-prover.com/manual/master/book/004_cryptographic-messages.html#function-symbols">functions</a> are used to abstract computation. By default, these functions can also be executed by the adversary. Think general well-known operations like a hash: I (or an adversary) can use sha256 from any computer, but unless I know the underlying text I won&rsquo;t learn anything new. Here, even though <code>anonce</code> and <code>bnonce</code> were exposed on the network, the adversary doesn&rsquo;t know <code>mk</code>, so being able to apply the <code>kdf</code> isn&rsquo;t helpful. Likewise, Alex sends his ACK message wrapped in a <code>mac</code> function. Otherwise, Tamarin&rsquo;s adversary would be able to forge their own ACK messages.</li>
+<li><code>BlakeComputeSK</code> checks Blake&rsquo;s <code>BState</code> and the incoming message. Tamarin supports pattern matching (e.g. <code>In(mac(SK, 'ACK'))</code>) that lets Blake check the MAC is valid before accepting this state.</li>
+</ul>
+
+
+<div style="padding-top: 1em"></div>
+
+<p>Onto the lemmas:</p>
+<ul>
+<li>These function not on the LHS or RHS of each rule, but on the state transition itself. Lemmas use the <a href="https://tamarin-prover.com/manual/master/book/003_example.html#:~:text=Action%20facts%20are%20just%20like%20facts">action facts</a>: the bit inside the middle group in each rule. These action facts describe transition metadata so we can construct traces of possible executions and prove properties over them.</li>
+<li>Let&rsquo;s skip the first lemma for now and look at <code>ProtocolCanComplete</code>. This is classic first-order logic: there&rsquo;s a trace where there <code>Ex</code>ists some combination of variables such that <code>AlexComputeSK</code> and <code>BlakeComputeSK</code> can be reached. <code>#i</code> and <code>#j</code> are timestamps in Tamarin, and <code>@ #i</code> means some action fact occurred at time <code>i</code>.</li>
+<li><code>AttackerCannotKnowAlex</code> and <code>AttackerCannotKnowBlake</code> are almost identical. They say that for <code>All</code> instances of <code>BlakeComputeSK</code>, there does not <code>Ex</code>ist any timestamp, at any possible point in the execution, where the attacker <code>K</code>nows the secret key.</li>
+<li><code>BlakeAfterAlex</code> says that if <code>BlakeComputeSK</code> happened at time <code>i</code>, then there must have been a previous time <code>j</code> where <code>AlexComputeSK</code> happened, denoted by <code>j &lt; i</code> at the end.</li>
+<li>We now have some properties we think are true. We then need to boot up Tamarin with <code>tamarin-prover --interactive .</code>, click each lemma, and choose one of the methods to prove it. I won&rsquo;t go into more detail how to use the proof system. It&rsquo;s very powerful, but I got by with just spamming <code>a</code> for <code>autoprove</code>. I&rsquo;ve been assuming if Tamarin can&rsquo;t autoprove my basic lemmas that it&rsquo;s a case of <a href="https://en.wikipedia.org/wiki/User_error">PEBKAC</a>.</li>
+</ul>
+
+
+<div style="padding-top: 1em"></div>
+
+<p>We skipped the <code>HelperInitialNonce</code> lemma earlier, but it&rsquo;s very important. Without it, Tamarin won&rsquo;t actually terminate. Notice that we allow Alex to send retries (<code>AlexSendNonceAgain</code>). When Tamarin tries to prove something about the transition between Alex sending his nonce and Blake replying, Tamarin searches through its rules and tries to work backward from what could have happened. Hm, maybe we got to Blake&rsquo;s reply by Alex resending his nonce. And maybe we got to that resend by Alex resending his nonce again. And again — this goes into infinity. We can help Tamarin by adding a small lemma that says we must bottom out this recursion somewhere, and that Alex must have first sent his nonce with the first rule before it was ever resent. We mark this lemma <code>reuse</code> so Tamarin knows to use it in proving other lemmas, and add <code>use_induction</code> because it&rsquo;s a helpful strategy for these &ldquo;infinite recursion&rdquo; situations.</p>
+<h2 id="counting-is-hard">Counting is Hard</h2>
+<p>As my first step to specifying Kintsugi, I wanted to specify the secret sharing (you can read more about it <a href="https://kewbi.sh/blog/posts/241229/">here</a>). I&rsquo;d already cut scope and started with basic SSS instead of DPSS. There are a few Tamarin specs of secret sharing-like protocols out there, and in particular I was inspired by abstractions from <a href="https://github.com/TDI-Lab/Timed-Release-Crypto/blob/main/tamarin-crypto-model/tle-crypto.spthy">this one</a>. However, I couldn&rsquo;t find any that were generic in the number of participants: all of them used hardcoded rules based on three or so nodes. I was expecting something TLA+-like, where I could define a general model, and separately, a config file that set the limits of how many nodes I wanted. Unfortunately, this turns out to be really ugly in Tamarin (if you&rsquo;d like, expand the dropdown to view the theory).</p>
+
+
+<div class="grid-element" style="margin-bottom: 0.5em">
+<details>
+<summary>Tamarin SSS theory</summary>
+<pre>
+theory SSS
+begin
+
+builtins: natural-numbers
+
+functions: gen_share/1 // simulating executing SSS polynomial S(i) on the index i
+
+predicates: LessThan(x,y) <=> x ⊏ y,
+GreaterThan(x,y) <=> y ⊏ x
+
+rule Constants:
+[]-->[ !Nval(%1%+%1%+%1%+%1%+%1), !Kval(%1%+%1%+%1) ] // best way I've found to define numerical constants
+
+rule InitDealer:
+[]--[ InitDealer() ]->[ DealerInit(%1) ]
+
+rule InitOneNode:
+let
+// should really be gen_share(%counter) but functions can't be defined over nats
+share = gen_share(~id)
+in
+[ Fr(~id), !Nval(%n), DealerInit( %counter) ]--[ InitOneNode(~id, %counter), _restrict(LessThan(%counter, %n %+ %1)) ]->[ !NodeState(~id, share), DealerInit( %counter %+ %1), Out(share) ]
+
+rule InitCount:
+[ Fr(~count_token) ]--[ InitCount(~count_token) ]->[ Collector(~count_token, %1) ]
+
+rule DoCount:
+[ Collector(~count_token, %counter), !NodeState(~id, share) ]--[ DoCount(~count_token, %counter), Counted(~count_token, ~id) ]->[ Collector(~count_token, %counter %+ %1) ]
+
+rule DoLastCount:
+[ !Kval(%k), Collector(~count_token, %counter) ]--[ DoLastCount(~count_token, %k %+ %1), _restrict(GreaterThan(%counter, %k)) ]->[ !SSSPoly() ]
+
+rule DeriveSecret:
+// s is supposed to be derived from the polynomial, but can't model the lagrange interpolation
+[ !Kval(%k), !SSSPoly(), Fr(~s) ]--[ DeriveSecret(~s), !Kval(%k) ]->[ !SSSSecret(~s) ]
+
+restriction NoDoubleCount:
+"All count_token id #i #j. Counted(count_token,id)@i & Counted(count_token,id)@j ==> #i = #j"
+
+lemma sss_secret:
+"All s %k ct #i #j #l .
+!Kval(%k) @ #i &
+DoLastCount(ct, %k %+ %1) @ #j &
+DeriveSecret(s) @ #l &
+#i < #j & #j < #l
+==>
+not (Ex #m . K(s) @ #m & #m < #l)" // s is not known before final derivation rule, which requires k threshold values
+
+end
+
+</pre>
+</details>
+</div>
+
+<p>This initial experiment taught me three main things about Tamarin. First, some raw crypto math can&rsquo;t be directly expressed in Tamarin. For example, SSS requires doing division and subtraction, but subtraction isn&rsquo;t supported in Tamarin. Tamarin does have an <code>inv</code> for multiplication (i.e. it supports division, <code>x * inv(x) = 1</code>), but SSS additionally requires an inverse for addition. As such, I had to abstract the math at a much higher level, using a blanket <code>SSSPoly()</code> state and dummy shares.</p>
+<p>Second, writing out raw numbers is really annoying in Tamarin. I wanted to make my model generic in the number of nodes. However, I can&rsquo;t just write <code>%3</code>, it&rsquo;s got to be <code>%1%+%1%+%1%</code>. In some ways this makes sense: to go back to the math with fruit analogy, Tamarin just sees bananas and apples. All rules, like adding up constants from the basic <code>%1</code>, have to be encoded explicitly for it to understand what &ldquo;three&rdquo; means in apple terms. This friction is probably a good sign I&rsquo;m not thinking at the right level of abstraction, but surely I should be allowed to have small constants in my theories? I did find a solution: if you look at the <code>Constants</code> rule in my theory, you&rsquo;ll see that I have persistent facts for <code>Nval</code> and <code>Kval</code> because I got tired of rewriting all the <code>%</code>s. This lets me access the constants using a more comfortable <code>%n</code> and <code>%k</code> syntax in the other rules.</p>
+<p>Third, loops are also unwieldy. In SSS, each node has to collect at least <code>k</code> shares before it can reconstruct the polynomial. In an imperative language, this is a simple loop, but Tamarin is a glorified state machine. In my model, this loop translates to a rule that initializes the count of shares this node has (<code>InitCount</code>), another that increments the count (<code>DoCount</code>), and the final rule that exits the loop to the last state (<code>DoLastCount</code>, which results in the SSS polynomial being revealed). I trigger the <code>DoLastCount</code> with an action restriction (the <code>_restrict</code>) that only enables this rule when we&rsquo;ve counted at least <code>k</code> shares already. I technically think it&rsquo;s possible the <code>DoCount</code> keeps looping, but this didn&rsquo;t cause any problems with Tamarin proving my final lemma. I&rsquo;ll also note that loops in Tamarin necessarily have to count <em>up</em>, since there&rsquo;s no such thing as subtraction!</p>
+<p>All in all, the current SSS proof is quite unsatisfying, as it feels too abstract and relies on the Lagrange/math proofs being encoded elsewhere. The lack of Tamarin natural-numbers operations means the &ldquo;secret&rdquo; is &ldquo;derived&rdquo; very trivially (and is unrelated in Tamarin&rsquo;s universe to the actual polynomial). I wrestled with the math so long last year and had wanted some more solid validation. However, given the hoops I&rsquo;d already had to jump through to specify a basic loop, I didn&rsquo;t think I could figure out how to express the basis polynomials in Tamarin.</p>
+<h2 id="knowledge-is-power">Knowledge is Power</h2>
+<p>I then tried specifying an OPRF (read more about them <a href="https://kewbi.sh/blog/posts/241020/">here</a>). I thought this would be easier, since there&rsquo;s less finicky math and Tamarin has support for the group operations I&rsquo;d need. Also, basic OPRFs have more structured client-server communication, which I thought would align better with Tamarin&rsquo;s abstractions. You can see my final model in the dropdown.</p>
+
+
+<div class="grid-element" style="margin-bottom: 0.5em">
+<details>
+<summary>Tamarin OPRF theory</summary>
+<pre>
+
+theory OPRF
+begin
+
+builtins: diffie-hellman, symmetric-encryption
+
+rule InitClient:
+[ Fr(~id), Fr(~s), Fr(~r) ]--[ InitClient(~id, ~s, ~r) ]->[ CState(~id, ~s, ~r), Out(<'blinded', ('g' ^ ~s) ^ ~r>) ]
+
+rule InitServer:
+[ Fr(~k) ]--[ InitServer(~k), OnlyOnce() ]->[ !SState(~k) ]
+
+rule SendResponse[no_derivcheck]:
+let
+res = 'g' ^ pow
+bk = res ^ ~k
+in
+[ !SState(~k), In(<'blinded', res>) ]--[ DoesNotKnow(pow), SendResponse(~k, res) ]->[ Out(<'blinded_key', bk>) ]
+
+rule ComputeRwd[no_derivcheck]:
+let
+res = 'g' ^ pow
+rwd = res ^ inv(~r)
+ee = senc(~kp, rwd)
+in
+[ Fr(~kp), CState(~id, ~s, ~r), In(<'blinded_key', res>) ]--[ DoesNotKnow(pow), ComputeRwd(~id, ~s, ~r, rwd, ~kp) ]->[ !CStateFinal(~id, ~s, ~kp), Out(<'ee', ~id, ee>) ]
+
+rule StoreEncryptedEnvelope:
+[ In(<'ee', ~id, ee>) ]--[ StoreEncryptedEnvelope(~id, ee) ]->[ !EncryptedEnvelope(~id, ee) ]
+
+restriction only_once:
+"All #i #j . OnlyOnce() @ #i & OnlyOnce() @ #j ==> #i = #j"
+
+restriction does_not_know:
+"All pow #i. DoesNotKnow(pow) @#i ==> not (Ex #j . K(pow) @ #j & #j < #i)"
+
+lemma protocol_can_complete:
+exists-trace
+"Ex id s r ee #i #j . InitClient(id, s, r) @ #i & StoreEncryptedEnvelope(id, ee) @ #j & #i < #j"
+
+lemma oprf_secrecy:
+"
+All id s r k rwd kp ee #a #b #c .
+InitServer(k) @ #a &
+ComputeRwd(id, s, r, rwd, kp) @ #b &
+StoreEncryptedEnvelope(id, ee) @ #c &
+#a < #b & #b < #c
+==>
+not (Ex #d . K(k) @ #d) &
+not (Ex #d . K(s) @ #d) &
+not (Ex #d . K(r) @ #d)
+"
+
+end
+
+</pre>
+</details>
+</div>
+
+<p>The math was indeed easier with this theory: it was straightforward to modify the OPRF to work &ldquo;in the exponent&rdquo; since I only had one operation to invert. Here, I was able to make use of Tamarin&rsquo;s Diffie-Hellman primitives. In all the <code>'g' ^ pow</code> operations above, <code>'g'</code> represents the base and the single quotes denote that <code>'g'</code>&rsquo;s public knowledge.</p>
+<p>While writing this theory, I confronted one of the Tamarin beasts I haven&rsquo;t yet mentioned: <a href="https://tamarin-prover.com/manual/master/book/009_precomputation.html">partial deconstructions</a>. These happen because Tamarin starts processing our theory by looking through all the premises (LHSes) of our rules. Then, Tamarin tries to look back to see what could have caused that rule. Partial deconstructions denotes that it couldn&rsquo;t figure out where something came from. This is due to some of Tamarin&rsquo;s typing limitations, but is usually resolvable. The easy way is to pass <a href="https://tamarin-prover.com/manual/master/book/009_precomputation.html#sec:autosources"><code>--auto-sources</code></a> to <code>tamarin-prover</code>, which will try to generate a <code>sources</code> lemma that describes where facts could have come from. The hard way if autosources isn&rsquo;t sufficient is to write a <code>sources</code> lemma yourself, proving for all occurrences of the problematic action, either an attacker knew the value beforehand or it came from the valid happy path source. The hard way is a bit intimidating, but the manual&rsquo;s guide is helpful enough.</p>
+<p>In my case, the prover could not for the life of it understand that it couldn&rsquo;t just learn <code>res ^ ~k</code> in <code>SendResponse</code>. I spent while trying to write my own sources lemma to combat this, but I was limited in where math can be used. I couldn&rsquo;t use exponents in the sources lemma, nor could I define my own <code>inv</code> function and equational theory (which also couldn&rsquo;t be used in the sources lemma anyways). In theory given the hardness of the DLP I could model exponentiation as an extra secret function to prevent the prover from further exploring that path, but that felt counter to the spirit of specifying the OPRF.</p>
+<p>However, as <a href="https://groups.google.com/g/tamarin-prover/c/V2wVmR74OFo">a maintainer then kindly pointed out</a>, if the partial deconstruction is due to some intermediate combination of variables, like <code>res ^ ~k</code>, it doesn&rsquo;t help to prove a sources lemma on either <code>res</code> or <code>~k</code>. In this case, pattern matching was the solution: instead of receiving some generic variable <code>in</code>, I could force it to, say, <code>'g'^exp</code>. I don&rsquo;t think this is a general fix, but in my case this was enough to get Tamarin to understand where the value was coming from. One slight hitch, though, was that this creates an unbounded variable <code>exp</code>. To prevent Tamarin compiler errors, we need to annotate the rule with <a href="https://tamarin-prover.com/manual/master/book/010_modeling-issues.html#message-derivation-errors"><code>no_derivcheck</code></a>. This disables the check that the attacker cannot gain extra capabilities; namely, that it cannot derive <code>exp</code>. Consider this a <a href="https://en.wikipedia.org/wiki/Chekhov%27s_gun">Chekhov&rsquo;s gun</a> for later (a Chekhov&rsquo;s banana?).</p>
+<h2 id="binary-search-debugging">Binary Search Debugging</h2>
+<p>I was able to prove the final lemma that the OPRF secrets indeed remain secret and was feeling more accomplished at this point. Given that this lemma proves the secrecy of <code>k</code>, <code>s</code>, and <code>r</code>, then, surely it&rsquo;d be easy to also extend the lemma to ensure the secrecy of the shared secret <code>rwd = 'g' ^ k ^ s</code>. So I wrote the following lemma:</p>
+<pre tabindex="0"><code>
+lemma oprf_secrecy_rwd:
+&#34;
+All id s r k rwd kp #a #b .
+InitServer(k) @ #a &amp;
+ComputeRwd(id, s, r, rwd, kp) @ #b &amp;
+#a &lt; #b
+==&gt;
+not (Ex #c . K(rwd) @ #c)
+&#34;
+</code></pre><p>Unfortunately, Chekhov&rsquo;s gun comes back: this fails to prove. It&rsquo;s not that it finds a counterexample, just that it keeps running forever.</p>
+<p>Once upon a time a scholarship mentor taught me about binary-search debugging: if a program fails, take out half of it and see if the failure persists. If not, you&rsquo;ve narrowed it down to the other half, and so on. I tried to apply the same philosophy to this OPRF model, varying the levels of computation and number of messages exchanged as my search criteria. I wrote three other variants of the OPRF model, even cutting down the communication to sending just a single message across and unblinding it with a shared key. So far, I&rsquo;ve come to the conclusion that if I have a single message between client and server, with a single exponentiation and <code>no_derivcheck</code>, I can prove a secrecy lemma. If I send a blinded message, apply an exponent, then receive and unblind the response (two messages between client and server), the prover hangs.</p>
+<p>This probably points at a loop somewhere where the <code>no_derivcheck</code> is allowing for some infinite state to be accumulated. I don&rsquo;t know Tamarin well enough to diagnose this directly, and the in-progress diagrams didn&rsquo;t show any clear loops. I&rsquo;ve tried adding extra action restrictions, but model checking still chewed up all my memory. Maybe my machine isn&rsquo;t beefy enough, maybe (probably) my model is off. It&rsquo;s an unsatisfying result, but this is as far as I got at the end of a month on-and-off and my patience.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I came into this experiment with high expectations of what Tamarin would help me prove, but my takeaway is that it&rsquo;s harder to work with than expected.</p>
+<p>I admit this is a bit of a captious take given my lack of Tamarin experience, but I haven&rsquo;t been able to wrap my mental models into Tamarin&rsquo;s view of how things should work. Maybe it&rsquo;d get better if I stuck with it and tried modelling simpler protocols. Up to now, though, the word that keeps coming to mind is <em>unsatisfying</em>, mostly in terms of the abstractions I&rsquo;m able to use. I think it&rsquo;s valid criticism that a beginner user who puts in an earnest effort into learning a prover should feel more empowered than I did. For example, this is the first time model checking state space explosion has been a real issue, but the manual doesn&rsquo;t have much hand-holding to explain how to debug. Tamarin&rsquo;s walls come up pretty fast, and from there it&rsquo;s hard to figure out how to exit the maze. In general, this also demonstrates to me why formal methods adoption is so low, given how intimidating and opaque it can be.</p>
+<p>I think one thing TLA+ does better in comparison is in onboarding folks used to &ldquo;normal&rdquo; imperative development. There&rsquo;s PlusCal, which provides a conceptual stepping stone, and more examples of how common puzzles a user&rsquo;s likely heard of (Tower of Hanoi, Goats and Cabbages) can be expressed in TLA+. This makes it more comfortable to ease into TLA+&rsquo;s model of states and invariants and so on. The examples in Tamarin&rsquo;s manual are quite advanced protocols — I was expecting more toy Alice and Bob situations rather than Naxos and Needham-Schroeder-Lowe, for example.</p>
+<p>Another interesting point is that Tamarin is not very GPT-able, unlike TLA+. This wipes out an easy source of debugging help. ChatGPT tends to get Tamarin syntax wrong, confusing the action rule arrows, and doesn&rsquo;t understand Tamarin&rsquo;s restricted models any better than I do. Of course, this is expected due to the relative lack of Tamarin examples in the training data, but is still a practical consideration. I once brought Tamarin up with a researcher at a large American AI company, but given its relative lack of popularity, I doubt any official fine-tuning will come of it. From a user&rsquo;s perspective, there are still techniques one might try to get better Tamarin results from stock models, like providing a BNF grammar or loading the manual as docs for an agent to explore. I do think agents&rsquo; reasoning capabilities would be sufficient to help with the core security thinking, but the Tamarin abstractions are just not transparent enough for models to intuit the basic semantics.</p>
+<p>I don&rsquo;t mean to dog on Tamarin: it&rsquo;s a really neat tool and research direction. I plan on going through the <a href="https://tamarin-prover.com/book/index.html">new book</a> sometime, which I suspect will be an enormous help. In the meantime, though, I&rsquo;m thinking of retrying this experiment in another theorem prover to see if Kintsugi and my mental models fit better with another paradigm. I&rsquo;m debating between <a href="https://bblanche.gitlabpages.inria.fr/proverif/">ProVerif</a> and <a href="https://squirrel-prover.github.io/">Squirrel</a>. I&rsquo;m leaning towards the latter as it postdates both Tamarin and ProVerif and because of a nice <a href="https://www.youtube.com/watch?v=n-s_lGe44EM">compelling video</a>. Surely keeping up with the mammalian prover trend will get me somewhere.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>The <a href="https://en.wikipedia.org/wiki/File:Tamarin_Prover_Logo.png">Tamarin monkey</a> ate them all.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>Tamarin also has a way to define persistent state that can be consumed infinitely many times by other rules. Dole hasn&rsquo;t quite figured that one out yet.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+</div><br></div><p><a href=https://kewbi.sh/blog/posts >‹ go back</a></main><script data-goatcounter="https://yours-kewbish.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

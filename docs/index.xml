@@ -10,6 +10,266 @@
     
     
     <item>
+      <title>Monkey See, Monkey Prove</title>
+      <link>https://kewbi.sh/blog/posts/260301/</link>
+      <pubDate>01 Mar 2026</pubDate>
+      
+      <description>On the Tamarin security prover.</description>
+      <content:encoded><![CDATA[<p>As I was winding down active work on my <a href="https://kewbi.sh/blog/posts/250223/">Kintsugi</a> project last year, I asked my supervisor what good next steps would be. One proposed avenue was to formally verify Kintsugi&rsquo;s security, since <a href="https://arxiv.org/abs/2507.21122">the paper</a> relies only on pen-and-paper intuition. This is how I learned about <a href="https://tamarin-prover.com/">Tamarin</a>, a prover for security protocols.</p>
+<p>I&rsquo;m enamoured by this idea of <em>guaranteeing</em> the safety of systems. There&rsquo;s something incredibly satisfying about knowing a protocol is formally, mathematically, and exhaustively impassable. Providing this level of confidence is rare. Tamarin is especially interesting because it can untangle cryptography primitives like symmetric encryption and Diffie-Hellman. This means it can precisely track what an adversary can derive, finding issues with delicate interaction chains that are difficult to come up with otherwise. The invariant proving is also (mostly) automatic after writing the protocol model, so no need to do the math manually.</p>
+<p>This automatic bit is important, because I lack enough experience to make much progress otherwise. My work with formal methods so far has mostly managed to sidestep the actual specification process. It was never in the scope of past projects, and part of it was also just pure intimidation by arcane syntax and principles. I think it&rsquo;s a little embarrassing to call myself a researcher interested in formal verification if I haven&rsquo;t done any of said verification, though, so I wanted to address this year. As we rang in the New Year, I set a resolution to learn Tamarin and take a stab at modelling something non-trivial.</p>
+<p>My goal was to model basic <a href="https://kewbi.sh/blog/posts/241229/">Shamir Secret Sharing</a> and <a href="https://kewbi.sh/blog/posts/241020/">Oblivious Pseudo-Random Functions</a>, before moving onto Dynamic Proactive Secret Sharing and Threshold OPRFs. Finally, I would Frankenstein the models together to get a Kintsugi proof. Going further, there&rsquo;s a similar protocol <a href="https://juicebox.xyz/">Juicebox</a> that&rsquo;s more or less Kintsugi-but-production-ready, so I thought I&rsquo;d be able to contribute towards a formal model of that as well.</p>
+<p>You&rsquo;ll see in the rest of this post how lofty those goals were. I&rsquo;ll cover the progress I&rsquo;ve been able to make so far, including a brief explainer of Tamarin and the WIP models as they stand. Along the way, I&rsquo;ll point out some of the obstacles and limitations I&rsquo;ve encountered. Overall, I don&rsquo;t think I had the right approach for Tamarin, nor perhaps was it the right fit for the job, but it was a great chance to learn a new tool regardless.</p>
+<h2 id="a-whirlwind-intro">A Whirlwind Intro</h2>
+<p>It&rsquo;s a bit hard to understand a post about learning Tamarin if I don&rsquo;t explain its features. To start off, Tamarin is a tool for <em>symbolic</em> verification of security protocols. Symbolic means that no code is really being run. Instead, Tamarin works on abstract states. It&rsquo;s a bit like those <a href="https://knowyourmeme.com/memes/fruit-math-math-with-fruit">bad Facebook IQ game ads</a> where they replace the numbers in an equation with pictures and symbols. In code, you might imperatively generate a message and hash it. From Tamarin&rsquo;s perspective, it sees the message and the sender&rsquo;s state as just some given circumstances. To continue the Facebook ad metaphor, say the message is a banana. Hashing it turns the banana into an apple: another state that doesn&rsquo;t intrinsically mean anything to Tamarin. How do I relate my bananas and apples to get anything sensible?</p>
+<p>99.999% of people can&rsquo;t solve that puzzle, but Tamarin sure can. It does so by defining rules that dictate how to transition between these states. Some of these rules are built-in: for instance, rules for how encryption and Diffie-Hellman work. Others are user-defined: I can define that from a &ldquo;haven&rsquo;t sent anything&rdquo; state, I can generate a random value and transition to a &ldquo;have sent message X and now waiting for response&rdquo; state. Humans do okay with defining their protocol&rsquo;s happy path as a sequence of these state transitions, but we struggle with thinking of more roundabout attacks. Tamarin helps with figuring out if there&rsquo;s combinations of states and extra computation that an attacker can do that can lead to unintended leaks. For example, while my protocol might assume a hashed message always came from an authenticated party, Tamarin&rsquo;s built-in rules can derive that the attacker might also know the hashed version of a message. Tamarin really shines in more complicated interleavings of protocols where partial information from one run can benefit an attacker in another.</p>
+<p>Tamarin uses the <a href="https://en.wikipedia.org/wiki/Dolev%E2%80%93Yao_model">Dolev-Yao</a> adversary model. This means the adversary can eavesdrop on, intercept, and interfere with messages sent over the network. It can also derive its own messages to send. However, it doesn&rsquo;t have access to the internal computation within a state transition: it can grab the first banana message, and also the apple at the end, but doesn&rsquo;t understand how the fruit metamorphed.</p>
+<p>Enough of the abstract math with fruit, alas<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Here&rsquo;s an example of Tamarin syntax. The following example is my solution to the last of <a href="https://github.com/benjaminkiesl/tamarin_toy_protocol">these Tamarin exercices</a>. There are two parties, Alex and Blake. We&rsquo;re getting Alex to generate a <a href="https://en.wikipedia.org/wiki/Cryptographic_nonce">nonce</a> and send it to Blake, who responds with their own nonce. Then, Alex generates a session key based on the two nonces and sends it to Blake. Bear with me:</p>
+<pre tabindex="0"><code>theory ToyProtocol
+begin
+
+functions: kdf/3, mac/2
+
+rule Init:
+    [ Fr(~mk), Fr(~aid), Fr(~bid) ]--[ Init(~aid, ~bid, ~mk) ]-&gt;[ AState(~aid, &#39;INIT&#39;, ~mk), BState(~bid, &#39;INIT&#39;, ~mk) ]
+
+rule AlexSendNonce:
+    [ AState(~aid, &#39;INIT&#39;, ~mk), Fr(~anonce) ]--[ AlexSendNonce(~aid, ~mk, ~anonce) ]-&gt;[ AState(~aid, &#39;SENT_NONCE&#39;, &lt;~mk, ~anonce&gt;), Out(~anonce) ]
+
+rule AlexSendNonceAgain:
+    [ AState(~aid, &#39;SENT_NONCE&#39;, &lt;~mk, ~anonce&gt;) ]--[ AlexSendNonceAgain(~aid, ~mk, ~anonce) ]-&gt;[ AState(~aid, &#39;SENT_NONCE&#39;, &lt;~mk, ~anonce&gt;), Out(~anonce) ]
+
+rule BlakeSendNonce:
+    [ BState(~bid, &#39;INIT&#39;, ~mk), Fr(~bnonce), In(ANonce) ]--[ BlakeSendNonce(~bid, ~mk, ~bnonce) ]-&gt;[ BState(~bid, &#39;SENT_NONCE&#39;, &lt;~mk, ANonce, ~bnonce&gt;), Out(~bnonce) ]
+
+rule AlexComputeSK:
+    let
+        SK = kdf(~mk, ~anonce, BNonce)
+    in
+    [ AState(~aid, &#39;SENT_NONCE&#39;, &lt;~mk, ~anonce&gt;), In(BNonce) ]--[ AlexComputeSK(~aid, ~mk, ~anonce, BNonce, SK) ]-&gt;[ AState(~aid, &#39;DONE&#39;, &lt;~mk, ~anonce, BNonce, SK&gt;), Out(mac(SK, &#39;ACK&#39;)) ]
+
+rule BlakeComputeSK:
+    let
+        SK = kdf(~mk, Anonce, ~bnonce)
+    in
+    [ BState(~bid, &#39;SENT_NONCE&#39;, &lt;~mk, Anonce, ~bnonce&gt;), In(mac(SK, &#39;ACK&#39;)) ]--[ BlakeComputeSK(~bid, ~mk, Anonce, ~bnonce, SK) ]-&gt;[ BState(~bid, &#39;DONE&#39;, &lt;~mk, Anonce, ~bnonce, SK&gt;) ]
+
+lemma HelperInitialNonce [reuse, use_induction]:
+    &#34;All mk aid anonce #i . AlexSendNonceAgain(aid, mk, anonce) @ #i ==&gt; Ex #j . AlexSendNonce(aid, mk, anonce) @ #j &amp; j &lt; i&#34;
+
+lemma ProtocolCanComplete:
+    exists-trace
+        &#34;Ex mk aid bid anonce bnonce sk #i #j . AlexComputeSK(aid, mk, anonce, bnonce, sk) @ #i &amp; BlakeComputeSK(bid, mk, anonce, bnonce, sk) @ #j&#34;
+
+lemma AttackerCannotKnowBlake:
+    &#34;All mk bid anonce bnonce sk #i . BlakeComputeSK(bid, mk, anonce, bnonce, sk) @ #i ==&gt; not (Ex #j. K(sk) @ #j)&#34;
+
+lemma AttackerCannotKnowAlex:
+    &#34;All mk aid anonce bnonce sk #i . AlexComputeSK(aid, mk, anonce, bnonce, sk) @ #i ==&gt; not (Ex #j. K(sk) @ #j)&#34;
+
+lemma BlakeAfterAlex:
+    &#34;All mk bid anonce bnonce sk #i . BlakeComputeSK(bid, mk, anonce, bnonce, sk) @ #i ==&gt; Ex aid #j . AlexComputeSK(aid, mk, anonce, bnonce, sk) @ #j &amp; j &lt; i&#34;
+
+end
+</code></pre><p>Let&rsquo;s first go over the protocol definition:</p>
+<ul>
+<li>The intended happy path is <code>Init → AlexSendNonce → BlakeSendNonce → AlexComputeSK → BlakeComputeSK</code>. If the network drops, we might need <code>AlexSendNonceAgain</code> to retry.</li>
+<li>The <code>rule</code>s are the user-defined state transitions. They&rsquo;re formatted like <code>[Consumes]--[ActionDescription]-&gt;[Produces]</code>. In the first rule, <code>Init</code>, I&rsquo;m generating some random IDs and a master key with <code>Fr()</code> (&ldquo;fresh&rdquo;, which can be consumed immediately). I&rsquo;m also producing the states <code>AState</code> and <code>BState</code>. These new states can only be consumed once — it&rsquo;s like real-life bananas<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</li>
+<li>The next rule, <code>AlexSendNonce</code> consumes the original <code>AState</code> and produces a new fresh nonce. It then creates another new <code>AState</code> — note that this is symbolically distinct from the first from Tamarin&rsquo;s perspective. The <code>&lt;&gt;</code> indicates concatenation. <code>Out()</code> sends the nonce over the network. Importantly, in Tamarin&rsquo;s attack model this means the attacker now has access to it.</li>
+<li>The <code>BlakeSendNonce</code> rule requires both the second <code>AState</code> after Alex&rsquo;s sent his nonce and an initialized <code>BState</code>. Again, Blake sends his nonce via <code>Out()</code>, so the attacker also has access to this.</li>
+<li><code>AlexComputeSK</code> uses a user-defined <code>kdf</code> function. In Tamarin, these <a href="https://tamarin-prover.com/manual/master/book/004_cryptographic-messages.html#function-symbols">functions</a> are used to abstract computation. By default, these functions can also be executed by the adversary. Think general well-known operations like a hash: I (or an adversary) can use sha256 from any computer, but unless I know the underlying text I won&rsquo;t learn anything new. Here, even though <code>anonce</code> and <code>bnonce</code> were exposed on the network, the adversary doesn&rsquo;t know <code>mk</code>, so being able to apply the <code>kdf</code> isn&rsquo;t helpful. Likewise, Alex sends his ACK message wrapped in a <code>mac</code> function. Otherwise, Tamarin&rsquo;s adversary would be able to forge their own ACK messages.</li>
+<li><code>BlakeComputeSK</code> checks Blake&rsquo;s <code>BState</code> and the incoming message. Tamarin supports pattern matching (e.g. <code>In(mac(SK, 'ACK'))</code>) that lets Blake check the MAC is valid before accepting this state.</li>
+</ul>
+
+
+<div style="padding-top: 1em"></div>
+
+<p>Onto the lemmas:</p>
+<ul>
+<li>These function not on the LHS or RHS of each rule, but on the state transition itself. Lemmas use the <a href="https://tamarin-prover.com/manual/master/book/003_example.html#:~:text=Action%20facts%20are%20just%20like%20facts">action facts</a>: the bit inside the middle group in each rule. These action facts describe transition metadata so we can construct traces of possible executions and prove properties over them.</li>
+<li>Let&rsquo;s skip the first lemma for now and look at <code>ProtocolCanComplete</code>. This is classic first-order logic: there&rsquo;s a trace where there <code>Ex</code>ists some combination of variables such that <code>AlexComputeSK</code> and <code>BlakeComputeSK</code> can be reached. <code>#i</code> and <code>#j</code> are timestamps in Tamarin, and <code>@ #i</code> means some action fact occurred at time <code>i</code>.</li>
+<li><code>AttackerCannotKnowAlex</code> and <code>AttackerCannotKnowBlake</code> are almost identical. They say that for <code>All</code> instances of <code>BlakeComputeSK</code>, there does not <code>Ex</code>ist any timestamp, at any possible point in the execution, where the attacker <code>K</code>nows the secret key.</li>
+<li><code>BlakeAfterAlex</code> says that if <code>BlakeComputeSK</code> happened at time <code>i</code>, then there must have been a previous time <code>j</code> where <code>AlexComputeSK</code> happened, denoted by <code>j &lt; i</code> at the end.</li>
+<li>We now have some properties we think are true. We then need to boot up Tamarin with <code>tamarin-prover --interactive .</code>, click each lemma, and choose one of the methods to prove it. I won&rsquo;t go into more detail how to use the proof system. It&rsquo;s very powerful, but I got by with just spamming <code>a</code> for <code>autoprove</code>. I&rsquo;ve been assuming if Tamarin can&rsquo;t autoprove my basic lemmas that it&rsquo;s a case of <a href="https://en.wikipedia.org/wiki/User_error">PEBKAC</a>.</li>
+</ul>
+
+
+<div style="padding-top: 1em"></div>
+
+<p>We skipped the <code>HelperInitialNonce</code> lemma earlier, but it&rsquo;s very important. Without it, Tamarin won&rsquo;t actually terminate. Notice that we allow Alex to send retries (<code>AlexSendNonceAgain</code>). When Tamarin tries to prove something about the transition between Alex sending his nonce and Blake replying, Tamarin searches through its rules and tries to work backward from what could have happened. Hm, maybe we got to Blake&rsquo;s reply by Alex resending his nonce. And maybe we got to that resend by Alex resending his nonce again. And again — this goes into infinity. We can help Tamarin by adding a small lemma that says we must bottom out this recursion somewhere, and that Alex must have first sent his nonce with the first rule before it was ever resent. We mark this lemma <code>reuse</code> so Tamarin knows to use it in proving other lemmas, and add <code>use_induction</code> because it&rsquo;s a helpful strategy for these &ldquo;infinite recursion&rdquo; situations.</p>
+<h2 id="counting-is-hard">Counting is Hard</h2>
+<p>As my first step to specifying Kintsugi, I wanted to specify the secret sharing (you can read more about it <a href="https://kewbi.sh/blog/posts/241229/">here</a>). I&rsquo;d already cut scope and started with basic SSS instead of DPSS. There are a few Tamarin specs of secret sharing-like protocols out there, and in particular I was inspired by abstractions from <a href="https://github.com/TDI-Lab/Timed-Release-Crypto/blob/main/tamarin-crypto-model/tle-crypto.spthy">this one</a>. However, I couldn&rsquo;t find any that were generic in the number of participants: all of them used hardcoded rules based on three or so nodes. I was expecting something TLA+-like, where I could define a general model, and separately, a config file that set the limits of how many nodes I wanted. Unfortunately, this turns out to be really ugly in Tamarin (if you&rsquo;d like, expand the dropdown to view the theory).</p>
+
+
+<div class="grid-element" style="margin-bottom: 0.5em">
+<details>
+<summary>Tamarin SSS theory</summary>
+<pre>
+theory SSS
+begin
+
+builtins: natural-numbers
+
+functions: gen_share/1 // simulating executing SSS polynomial S(i) on the index i
+
+predicates: LessThan(x,y) <=> x ⊏ y,
+GreaterThan(x,y) <=> y ⊏ x
+
+rule Constants:
+[]-->[ !Nval(%1%+%1%+%1%+%1%+%1), !Kval(%1%+%1%+%1) ] // best way I've found to define numerical constants
+
+rule InitDealer:
+[]--[ InitDealer() ]->[ DealerInit(%1) ]
+
+rule InitOneNode:
+let
+// should really be gen_share(%counter) but functions can't be defined over nats
+share = gen_share(~id)
+in
+[ Fr(~id), !Nval(%n), DealerInit( %counter) ]--[ InitOneNode(~id, %counter), _restrict(LessThan(%counter, %n %+ %1)) ]->[ !NodeState(~id, share), DealerInit( %counter %+ %1), Out(share) ]
+
+rule InitCount:
+[ Fr(~count_token) ]--[ InitCount(~count_token) ]->[ Collector(~count_token, %1) ]
+
+rule DoCount:
+[ Collector(~count_token, %counter), !NodeState(~id, share) ]--[ DoCount(~count_token, %counter), Counted(~count_token, ~id) ]->[ Collector(~count_token, %counter %+ %1) ]
+
+rule DoLastCount:
+[ !Kval(%k), Collector(~count_token, %counter) ]--[ DoLastCount(~count_token, %k %+ %1), _restrict(GreaterThan(%counter, %k)) ]->[ !SSSPoly() ]
+
+rule DeriveSecret:
+// s is supposed to be derived from the polynomial, but can't model the lagrange interpolation
+[ !Kval(%k), !SSSPoly(), Fr(~s) ]--[ DeriveSecret(~s), !Kval(%k) ]->[ !SSSSecret(~s) ]
+
+restriction NoDoubleCount:
+"All count_token id #i #j. Counted(count_token,id)@i & Counted(count_token,id)@j ==> #i = #j"
+
+lemma sss_secret:
+"All s %k ct #i #j #l .
+!Kval(%k) @ #i &
+DoLastCount(ct, %k %+ %1) @ #j &
+DeriveSecret(s) @ #l &
+#i < #j & #j < #l
+==>
+not (Ex #m . K(s) @ #m & #m < #l)" // s is not known before final derivation rule, which requires k threshold values
+
+end
+
+</pre>
+</details>
+</div>
+
+<p>This initial experiment taught me three main things about Tamarin. First, some raw crypto math can&rsquo;t be directly expressed in Tamarin. For example, SSS requires doing division and subtraction, but subtraction isn&rsquo;t supported in Tamarin. Tamarin does have an <code>inv</code> for multiplication (i.e. it supports division, <code>x * inv(x) = 1</code>), but SSS additionally requires an inverse for addition. As such, I had to abstract the math at a much higher level, using a blanket <code>SSSPoly()</code> state and dummy shares.</p>
+<p>Second, writing out raw numbers is really annoying in Tamarin. I wanted to make my model generic in the number of nodes. However, I can&rsquo;t just write <code>%3</code>, it&rsquo;s got to be <code>%1%+%1%+%1%</code>. In some ways this makes sense: to go back to the math with fruit analogy, Tamarin just sees bananas and apples. All rules, like adding up constants from the basic <code>%1</code>, have to be encoded explicitly for it to understand what &ldquo;three&rdquo; means in apple terms. This friction is probably a good sign I&rsquo;m not thinking at the right level of abstraction, but surely I should be allowed to have small constants in my theories? I did find a solution: if you look at the <code>Constants</code> rule in my theory, you&rsquo;ll see that I have persistent facts for <code>Nval</code> and <code>Kval</code> because I got tired of rewriting all the <code>%</code>s. This lets me access the constants using a more comfortable <code>%n</code> and <code>%k</code> syntax in the other rules.</p>
+<p>Third, loops are also unwieldy. In SSS, each node has to collect at least <code>k</code> shares before it can reconstruct the polynomial. In an imperative language, this is a simple loop, but Tamarin is a glorified state machine. In my model, this loop translates to a rule that initializes the count of shares this node has (<code>InitCount</code>), another that increments the count (<code>DoCount</code>), and the final rule that exits the loop to the last state (<code>DoLastCount</code>, which results in the SSS polynomial being revealed). I trigger the <code>DoLastCount</code> with an action restriction (the <code>_restrict</code>) that only enables this rule when we&rsquo;ve counted at least <code>k</code> shares already. I technically think it&rsquo;s possible the <code>DoCount</code> keeps looping, but this didn&rsquo;t cause any problems with Tamarin proving my final lemma. I&rsquo;ll also note that loops in Tamarin necessarily have to count <em>up</em>, since there&rsquo;s no such thing as subtraction!</p>
+<p>All in all, the current SSS proof is quite unsatisfying, as it feels too abstract and relies on the Lagrange/math proofs being encoded elsewhere. The lack of Tamarin natural-numbers operations means the &ldquo;secret&rdquo; is &ldquo;derived&rdquo; very trivially (and is unrelated in Tamarin&rsquo;s universe to the actual polynomial). I wrestled with the math so long last year and had wanted some more solid validation. However, given the hoops I&rsquo;d already had to jump through to specify a basic loop, I didn&rsquo;t think I could figure out how to express the basis polynomials in Tamarin.</p>
+<h2 id="knowledge-is-power">Knowledge is Power</h2>
+<p>I then tried specifying an OPRF (read more about them <a href="https://kewbi.sh/blog/posts/241020/">here</a>). I thought this would be easier, since there&rsquo;s less finicky math and Tamarin has support for the group operations I&rsquo;d need. Also, basic OPRFs have more structured client-server communication, which I thought would align better with Tamarin&rsquo;s abstractions. You can see my final model in the dropdown.</p>
+
+
+<div class="grid-element" style="margin-bottom: 0.5em">
+<details>
+<summary>Tamarin OPRF theory</summary>
+<pre>
+
+theory OPRF
+begin
+
+builtins: diffie-hellman, symmetric-encryption
+
+rule InitClient:
+[ Fr(~id), Fr(~s), Fr(~r) ]--[ InitClient(~id, ~s, ~r) ]->[ CState(~id, ~s, ~r), Out(<'blinded', ('g' ^ ~s) ^ ~r>) ]
+
+rule InitServer:
+[ Fr(~k) ]--[ InitServer(~k), OnlyOnce() ]->[ !SState(~k) ]
+
+rule SendResponse[no_derivcheck]:
+let
+res = 'g' ^ pow
+bk = res ^ ~k
+in
+[ !SState(~k), In(<'blinded', res>) ]--[ DoesNotKnow(pow), SendResponse(~k, res) ]->[ Out(<'blinded_key', bk>) ]
+
+rule ComputeRwd[no_derivcheck]:
+let
+res = 'g' ^ pow
+rwd = res ^ inv(~r)
+ee = senc(~kp, rwd)
+in
+[ Fr(~kp), CState(~id, ~s, ~r), In(<'blinded_key', res>) ]--[ DoesNotKnow(pow), ComputeRwd(~id, ~s, ~r, rwd, ~kp) ]->[ !CStateFinal(~id, ~s, ~kp), Out(<'ee', ~id, ee>) ]
+
+rule StoreEncryptedEnvelope:
+[ In(<'ee', ~id, ee>) ]--[ StoreEncryptedEnvelope(~id, ee) ]->[ !EncryptedEnvelope(~id, ee) ]
+
+restriction only_once:
+"All #i #j . OnlyOnce() @ #i & OnlyOnce() @ #j ==> #i = #j"
+
+restriction does_not_know:
+"All pow #i. DoesNotKnow(pow) @#i ==> not (Ex #j . K(pow) @ #j & #j < #i)"
+
+lemma protocol_can_complete:
+exists-trace
+"Ex id s r ee #i #j . InitClient(id, s, r) @ #i & StoreEncryptedEnvelope(id, ee) @ #j & #i < #j"
+
+lemma oprf_secrecy:
+"
+All id s r k rwd kp ee #a #b #c .
+InitServer(k) @ #a &
+ComputeRwd(id, s, r, rwd, kp) @ #b &
+StoreEncryptedEnvelope(id, ee) @ #c &
+#a < #b & #b < #c
+==>
+not (Ex #d . K(k) @ #d) &
+not (Ex #d . K(s) @ #d) &
+not (Ex #d . K(r) @ #d)
+"
+
+end
+
+</pre>
+</details>
+</div>
+
+<p>The math was indeed easier with this theory: it was straightforward to modify the OPRF to work &ldquo;in the exponent&rdquo; since I only had one operation to invert. Here, I was able to make use of Tamarin&rsquo;s Diffie-Hellman primitives. In all the <code>'g' ^ pow</code> operations above, <code>'g'</code> represents the base and the single quotes denote that <code>'g'</code>&rsquo;s public knowledge.</p>
+<p>While writing this theory, I confronted one of the Tamarin beasts I haven&rsquo;t yet mentioned: <a href="https://tamarin-prover.com/manual/master/book/009_precomputation.html">partial deconstructions</a>. These happen because Tamarin starts processing our theory by looking through all the premises (LHSes) of our rules. Then, Tamarin tries to look back to see what could have caused that rule. Partial deconstructions denotes that it couldn&rsquo;t figure out where something came from. This is due to some of Tamarin&rsquo;s typing limitations, but is usually resolvable. The easy way is to pass <a href="https://tamarin-prover.com/manual/master/book/009_precomputation.html#sec:autosources"><code>--auto-sources</code></a> to <code>tamarin-prover</code>, which will try to generate a <code>sources</code> lemma that describes where facts could have come from. The hard way if autosources isn&rsquo;t sufficient is to write a <code>sources</code> lemma yourself, proving for all occurrences of the problematic action, either an attacker knew the value beforehand or it came from the valid happy path source. The hard way is a bit intimidating, but the manual&rsquo;s guide is helpful enough.</p>
+<p>In my case, the prover could not for the life of it understand that it couldn&rsquo;t just learn <code>res ^ ~k</code> in <code>SendResponse</code>. I spent while trying to write my own sources lemma to combat this, but I was limited in where math can be used. I couldn&rsquo;t use exponents in the sources lemma, nor could I define my own <code>inv</code> function and equational theory (which also couldn&rsquo;t be used in the sources lemma anyways). In theory given the hardness of the DLP I could model exponentiation as an extra secret function to prevent the prover from further exploring that path, but that felt counter to the spirit of specifying the OPRF.</p>
+<p>However, as <a href="https://groups.google.com/g/tamarin-prover/c/V2wVmR74OFo">a maintainer then kindly pointed out</a>, if the partial deconstruction is due to some intermediate combination of variables, like <code>res ^ ~k</code>, it doesn&rsquo;t help to prove a sources lemma on either <code>res</code> or <code>~k</code>. In this case, pattern matching was the solution: instead of receiving some generic variable <code>in</code>, I could force it to, say, <code>'g'^exp</code>. I don&rsquo;t think this is a general fix, but in my case this was enough to get Tamarin to understand where the value was coming from. One slight hitch, though, was that this creates an unbounded variable <code>exp</code>. To prevent Tamarin compiler errors, we need to annotate the rule with <a href="https://tamarin-prover.com/manual/master/book/010_modeling-issues.html#message-derivation-errors"><code>no_derivcheck</code></a>. This disables the check that the attacker cannot gain extra capabilities; namely, that it cannot derive <code>exp</code>. Consider this a <a href="https://en.wikipedia.org/wiki/Chekhov%27s_gun">Chekhov&rsquo;s gun</a> for later (a Chekhov&rsquo;s banana?).</p>
+<h2 id="binary-search-debugging">Binary Search Debugging</h2>
+<p>I was able to prove the final lemma that the OPRF secrets indeed remain secret and was feeling more accomplished at this point. Given that this lemma proves the secrecy of <code>k</code>, <code>s</code>, and <code>r</code>, then, surely it&rsquo;d be easy to also extend the lemma to ensure the secrecy of the shared secret <code>rwd = 'g' ^ k ^ s</code>. So I wrote the following lemma:</p>
+<pre tabindex="0"><code>
+lemma oprf_secrecy_rwd:
+&#34;
+All id s r k rwd kp #a #b .
+InitServer(k) @ #a &amp;
+ComputeRwd(id, s, r, rwd, kp) @ #b &amp;
+#a &lt; #b
+==&gt;
+not (Ex #c . K(rwd) @ #c)
+&#34;
+</code></pre><p>Unfortunately, Chekhov&rsquo;s gun comes back: this fails to prove. It&rsquo;s not that it finds a counterexample, just that it keeps running forever.</p>
+<p>Once upon a time a scholarship mentor taught me about binary-search debugging: if a program fails, take out half of it and see if the failure persists. If not, you&rsquo;ve narrowed it down to the other half, and so on. I tried to apply the same philosophy to this OPRF model, varying the levels of computation and number of messages exchanged as my search criteria. I wrote three other variants of the OPRF model, even cutting down the communication to sending just a single message across and unblinding it with a shared key. So far, I&rsquo;ve come to the conclusion that if I have a single message between client and server, with a single exponentiation and <code>no_derivcheck</code>, I can prove a secrecy lemma. If I send a blinded message, apply an exponent, then receive and unblind the response (two messages between client and server), the prover hangs.</p>
+<p>This probably points at a loop somewhere where the <code>no_derivcheck</code> is allowing for some infinite state to be accumulated. I don&rsquo;t know Tamarin well enough to diagnose this directly, and the in-progress diagrams didn&rsquo;t show any clear loops. I&rsquo;ve tried adding extra action restrictions, but model checking still chewed up all my memory. Maybe my machine isn&rsquo;t beefy enough, maybe (probably) my model is off. It&rsquo;s an unsatisfying result, but this is as far as I got at the end of a month on-and-off and my patience.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I came into this experiment with high expectations of what Tamarin would help me prove, but my takeaway is that it&rsquo;s harder to work with than expected.</p>
+<p>I admit this is a bit of a captious take given my lack of Tamarin experience, but I haven&rsquo;t been able to wrap my mental models into Tamarin&rsquo;s view of how things should work. Maybe it&rsquo;d get better if I stuck with it and tried modelling simpler protocols. Up to now, though, the word that keeps coming to mind is <em>unsatisfying</em>, mostly in terms of the abstractions I&rsquo;m able to use. I think it&rsquo;s valid criticism that a beginner user who puts in an earnest effort into learning a prover should feel more empowered than I did. For example, this is the first time model checking state space explosion has been a real issue, but the manual doesn&rsquo;t have much hand-holding to explain how to debug. Tamarin&rsquo;s walls come up pretty fast, and from there it&rsquo;s hard to figure out how to exit the maze. In general, this also demonstrates to me why formal methods adoption is so low, given how intimidating and opaque it can be.</p>
+<p>I think one thing TLA+ does better in comparison is in onboarding folks used to &ldquo;normal&rdquo; imperative development. There&rsquo;s PlusCal, which provides a conceptual stepping stone, and more examples of how common puzzles a user&rsquo;s likely heard of (Tower of Hanoi, Goats and Cabbages) can be expressed in TLA+. This makes it more comfortable to ease into TLA+&rsquo;s model of states and invariants and so on. The examples in Tamarin&rsquo;s manual are quite advanced protocols — I was expecting more toy Alice and Bob situations rather than Naxos and Needham-Schroeder-Lowe, for example.</p>
+<p>Another interesting point is that Tamarin is not very GPT-able, unlike TLA+. This wipes out an easy source of debugging help. ChatGPT tends to get Tamarin syntax wrong, confusing the action rule arrows, and doesn&rsquo;t understand Tamarin&rsquo;s restricted models any better than I do. Of course, this is expected due to the relative lack of Tamarin examples in the training data, but is still a practical consideration. I once brought Tamarin up with a researcher at a large American AI company, but given its relative lack of popularity, I doubt any official fine-tuning will come of it. From a user&rsquo;s perspective, there are still techniques one might try to get better Tamarin results from stock models, like providing a BNF grammar or loading the manual as docs for an agent to explore. I do think agents&rsquo; reasoning capabilities would be sufficient to help with the core security thinking, but the Tamarin abstractions are just not transparent enough for models to intuit the basic semantics.</p>
+<p>I don&rsquo;t mean to dog on Tamarin: it&rsquo;s a really neat tool and research direction. I plan on going through the <a href="https://tamarin-prover.com/book/index.html">new book</a> sometime, which I suspect will be an enormous help. In the meantime, though, I&rsquo;m thinking of retrying this experiment in another theorem prover to see if Kintsugi and my mental models fit better with another paradigm. I&rsquo;m debating between <a href="https://bblanche.gitlabpages.inria.fr/proverif/">ProVerif</a> and <a href="https://squirrel-prover.github.io/">Squirrel</a>. I&rsquo;m leaning towards the latter as it postdates both Tamarin and ProVerif and because of a nice <a href="https://www.youtube.com/watch?v=n-s_lGe44EM">compelling video</a>. Surely keeping up with the mammalian prover trend will get me somewhere.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>The <a href="https://en.wikipedia.org/wiki/File:Tamarin_Prover_Logo.png">Tamarin monkey</a> ate them all.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>Tamarin also has a way to define persistent state that can be consumed infinitely many times by other rules. Dole hasn&rsquo;t quite figured that one out yet.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded>
+    </item>
+    
+    <item>
       <title>The Oulipian Oeuvre</title>
       <link>https://kewbi.sh/blog/posts/251228/</link>
       <pubDate>28 Dec 2025</pubDate>
@@ -1406,143 +1666,6 @@ My supervisor pointed this out in my initial implementation of OPAQUE, and I was
 </li>
 <li id="fn:2">
 <p>When I say &lsquo;hard&rsquo; in this post, I generally mean &lsquo;currently no one thinks it&rsquo;s possible&rsquo;, but that doesn&rsquo;t roll off the tongue quite so well. If it makes you happier, replace &lsquo;hard&rsquo; with &lsquo;requires exponential-time brute-force&rsquo;, and &rsquo;easy&rsquo; with &lsquo;polynomial-time or less&rsquo;.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-]]></content:encoded>
-    </item>
-    
-    <item>
-      <title>Truth or DARE</title>
-      <link>https://kewbi.sh/blog/posts/241006/</link>
-      <pubDate>06 Oct 2024</pubDate>
-      
-      <description>On Darmstadt and distributed systems.</description>
-      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
-<p>I think distributed systems are neat, but I also don&rsquo;t think I understand them well enough to warrant my level of interest in them. I&rsquo;ve never taken a distributed systems course, have only stumbled my way through the <a href="https://fly.io/dist-sys/">Fly.io distributed systems challenges</a>, and have never wrestled with more complicated design constraints while architecting something from the ground up. Whenever folks ask me about what particular subfield I&rsquo;m interested in, I don&rsquo;t have a concrete answer. Sure, I&rsquo;ve read <a href="https://books.google.co.uk/books/about/Designing_Data_Intensive_Applications.html?id=zFheDgAAQBAJ"><em>Designing Data-intensive Applications</em></a> and have covered the concepts behind different consistency models at least three times, but I still tended to butcher their distinctions when explaining them. If distributed systems was a band, I&rsquo;d definitely be labelled as a fake fan. I&rsquo;ve wanted to do something about this for a while — I&rsquo;ve wanted to finally <em>understand</em> distributed systems and be a <em>real</em> distsys engineer. So when a great opportunity cropped up, I shipped myself off to Germany to spend a week among brutalist buildings, looming castles, and most importantly, a cohort of grad students and eminent researchers, to see if I could make some progress.</p>
-<p>The <a href="https://dare-summer.github.io/">Second ACM Europe Summer School on Distributed and Replicated Environments</a> is not only a bit of a mouthful — it&rsquo;s also a summer program that invites grad students interested in distributed systems together to participate in lectures and labs taught by leading professors in the area. Last year, it took place in Brussels, Belgium, and this year, we were hosted in Darmstadt, Germany, at the <a href="https://www.tu-darmstadt.de/index.en.jsp">Technische Universität Darmstadt</a>. Each day of the program consisted of several chunks of either lectures, which were more formal presentations about some new research, or labs, which were structured like a programming assignment and set us free to tackle some extension problem related to the lecture. A list of the speakers is available <a href="https://web.archive.org/web/20240929083858/https://dare-summer.github.io/speakers/">here</a>, and the program for this year is <a href="https://web.archive.org/web/20240929083842/https://dare-summer.github.io/program/">here</a>.</p>
-<p>I&rsquo;m currently an undergrad, so I would normally be ineligible. However, Professor Kleppmann (author of aforementioned <em>Designing Data-intensive Applications</em>) was supervising me for my current research internship and also speaking at DARE, so he encouraged me to apply. I&rsquo;m very grateful that I was invited to apply, and immensely surprised that my prior research experience and quickly-put-together motivation letter sufficed to make up for my lack of a degree.</p>
-<p>My previous experience in distributed systems work was primarily through a <a href="https://www.cs.ubc.ca/students/undergrad/courses/specialty">CPSC448 directed studies</a> that touched on formal verification, though I didn&rsquo;t do any actual proving. As well, my work at Cloudflare and at Stripe were fairly relevant: while I wasn&rsquo;t directly working on quote-unquote distributed systems, I was doing infrastructure work that was appropriately flavoured as such. My motivation letter listed these, as well as name-dropping an <a href="https://kewbi.sh/blog/posts/240526/">unrelated paper</a> I&rsquo;d worked on in the software engineering space. I don&rsquo;t think the applications were particularly selective, since the <a href="https://tuda-dare24.hotcrp.com/">HotCRP</a> listed 32/36 submissions accepted, and I&rsquo;d assume at least a couple of those were test submissions. I was still very nicely surprised when I&rsquo;d heard back about my acceptance, though, and I&rsquo;m again very thankful I was granted the opportunity.</p>
-<p>I&rsquo;d taken notes during each lecture and wanted to revisit them, so this is a post summarizing my main takeaways from the talks and from the program overall. Each of the subsections here could be a blog post in itself — this will be the longest post on my blog to date, but it&rsquo;s also because it&rsquo;s covering a packed week of dense lecture material. I&rsquo;ve written up my notes in the same order as the lectures occurred, so you&rsquo;ll get to relive the learning at DARE as it happened. Professors and other students: I might&rsquo;ve made some mistakes or simplifications in the below — please forgive me!</p>
-<h2 id="martin-kleppmann--bft-decentralized-access-control-lists">Martin Kleppmann — BFT Decentralized Access Control Lists</h2>
-<p>Professor Kleppmann&rsquo;s lecture turned out to be very closely aligned to what I&rsquo;ll be working on this term with him, and it was nice getting the high-level summary lecture at DARE before diving into extension work. His talk revolved around a decentralized access control list protocol, where members can be added and removed from a group chat. This seems simple, but there are tricky edge cases when concurrency gets involved: if two people concurrently remove each other, what happens? What happens if a user who is removed by another user concurrently adds their own guest user? The protocol also needs to be Byzantine-fault tolerant, meaning that the system must continue to provide a consistent access control model despite having nodes that don&rsquo;t correctly follow the protocol. All in all, not as easy as it seems.</p>
-<p>We started by covering some of background — how can you implement a BFT system. One approach is a version vector, where every replica keeps track of its idea of the state of the other replicas. However, they aren&rsquo;t safe in a Byzantine context, since a malicious replica can send different updates to different nodes with a version vector crafted to confuse the two nodes into thinking they&rsquo;re in sync when they&rsquo;ve actually diverged.</p>
-<p>You can solve this, though, by using a hash graph, like in Git. Each &lsquo;commit&rsquo; or operation contains the hash of the previous one, which implicitly will transitively include the hash of the predecessor&rsquo;s predecessor, and so on. If the hashes of the most recently received operation are the same, you can assume that two nodes are in sync, relying on the property that cryptographic hash collisions are hard to find. Otherwise, you can keep moving backwards in the graph until the two nodes converge on a common point, then exchange all updates after that point. This is good for a Byzantine context, but is inefficient in the number of roundtrip exchanges, since both nodes will have to continuously communicate as they &lsquo;move backwards&rsquo; in the hash graph. It&rsquo;d be nice if we could figure out the set of updates to share more efficiently.</p>
-<p>Generally, you can speed up set membership checks by using <a href="https://en.wikipedia.org/wiki/Bloom_filter">Bloom filters</a> to approximate things. <a href="https://martin.kleppmann.com/2020/12/02/bloom-filter-hash-graph-sync.html">A paper</a> he worked on applied that exact idea, which seems like such an obvious idea once you think about it. Both nodes can send a Bloom filter of the operations they currently know about and walks backward to check if operations were in the other side&rsquo;s Bloom filter, and if not, sends them over. This repeats until the nodes are in sync again — no more redundant updates. Someone once told me that the best research is the intuitively obvious stuff, and I think this paper is no different. Applying a relatively basic CS concept to a new problem space in exactly the way the concept should be used makes the work both easier to understand and to defend. I hope that I&rsquo;ll be able to hone my &lsquo;finding obvious directions&rsquo; skills more to take advantage of this.</p>
-<p>Returning to the hash graph, Professor Kleppmann also went a bit into detail about blockchains. They&rsquo;re overall similar to hash graphs, but instead have a total ordering of blocks, which requires Byzantine-fault tolerant consensus. This is needed in blockchain settings to prevent double-spending of currency, but in this decentralized ACL group application we don&rsquo;t need there to be only one ordering of operations — we just need some sort of convergence. This taught me about the difference between consensus and collaboration: in consensus, nodes decide on one alternative; in colaboration, we can keep all alternatives and need to figure out how to put them together.</p>
-<p>With all this background, we then worked through some design decisions around how to handle the ACL group edge cases mentioned above (spoiler alert: handling them is still active research). Some alternative systems were brought up, like Matrix&rsquo;s <a href="https://matrix.org/docs/older/moderation/#:~:text=better%20to%20redact.-,Power%20levels,-The%20next%20line">power levels</a> or some sort of seniority-based system. We ruled out user voting, since that&rsquo;s susceptible to Sybil attacks, where malicious nodes control a coordinated group of users, and social engineering. For our lab, we were given some starter code implementing one such ACL CRDT and were given freedom to explore implementing some of these ideas.</p>
-<h2 id="elisa-gonzalez-boix--crdt-fundamentals-and-ambienttalk">Elisa Gonzalez Boix — CRDT Fundamentals and AmbientTalk</h2>
-<p>Professor Gonzalez Boix presented their work on AmbientTalk, an actor-based programming language that supports communication across peers without any explicit infrastructure. In particular, it supports volatile connections that might drop any time.</p>
-<p>The language is service-based, with events for when services are discovered and when messages are received or sent. You can define custom services in these languages and use the asynchronous messaging and lease primatives to communicate between them. The <a href="https://soft.vub.ac.be/amop/at/introduction">intro page</a> has more examples, but here&rsquo;s an overview of what it looks like:</p>
-<pre tabindex="0"><code>whenever: Service
-discovered: {
-	|ref| // far reference
-	when: message_type@FutureMessage()
-	becomes: {
-		|ref|
-		...rest
-	}
-}
-
-def service := object: {
-    def message() {
-	...
-	return value
-	}
-}
-
-export: service as: Service;
-</code></pre><p>The language has a concept of <a href="https://soft.vub.ac.be/amop/at/tutorial/actors#actors_and_far_references">far references</a>, which as far as I can tell originated in <a href="https://en.wikipedia.org/wiki/E_(programming_language)">E</a>. These far references are like pointers across machine boundaries that work asynchronously. Messages that are sent to far references when connectivity drops are buffered in a queue and will be resent eventually later. Objects are passed between actors as far references, but primitive data is shared via isolates, working in a pass-by-copy fashion.</p>
-<p>Most of the talk was about some CRDT fundamentals, which I won&rsquo;t go into here, as well as AmbientTalk&rsquo;s unique features, but I also wanted to mention the fun lab we had working in it. We were playing around with an interactive shopping list example app based on a CRDT that was handling its network communication via AmbientTalk&rsquo;s runtime. It was nice not having to code any of that and seeing things &lsquo;just work&rsquo;. The idea was that the shopping list app was collaborative, so if you specified the same <code>Service</code> name, you&rsquo;d be able to dynamically discover peers on the same network and listen to their messages. This ran into a slight challenge, because there were thirty of us in a small room all competing for the same messages, but we worked around this by all declaring services with slightly different names. Some of us managed to get collaboration to work across devices, but something to do with my firewall or the eduroam network we were on wasn&rsquo;t letting me try that particular feature out. This was still one of my favourite labs of the program, though.</p>
-<h2 id="antonio-fernandez-anta--amecos">Antonio Fernandez Anta — AMECOS</h2>
-<p>One of Professor Anta&rsquo;s students actually presented a poster about his lecture&rsquo;s research project at our poster session on the first day, so I had seen a bit of the background before the talk, although I&rsquo;ll admit I still didn&rsquo;t fully follow. The work presented was called AMECOS: A Modular Event-based framework for Concurrent Object Specification, In a similar vein to Professor Kaki&rsquo;s talk below, they noted that currently, concurrent objects are generally specified sequentially and assume some way to keep track of the object&rsquo;s state.</p>
-<p>They define events as &lsquo;opex&rsquo;es, or &lsquo;operation executions&rsquo;, then define the various consistency models around the properties that these opexes would hold. For example:</p>
-<ul>
-<li>Linearizability implies a &lsquo;realtime&rsquo; ability to globally read a value written anywhere else immediately after the write finishes, so there can&rsquo;t be simultaneous opexes and any reads will return the latest write opex&rsquo;s value.</li>
-<li>For sequential consistency, the process order must be respected, but the action doesn&rsquo;t necessarily have to take effect instantaneously between its invocation and its response.</li>
-<li>For causal consistency, we also require process order to be respected, but each process can have its own order of the other read/write opexes as long as it respects causal order between order events. This allows opexes to be executed locally without requiring communication or agreement with other processes.</li>
-</ul>
-<p>It&rsquo;d be difficult to specify these consistency models sequentially, so they specify the system modularly as an execution. An execution is correct if there&rsquo;s an opex ordering that satisfies the consistency property required. The advantages of this approach are that they don&rsquo;t assume some omniscient power knowing the total arbitration order, that the object&rsquo;s state doesn&rsquo;t need to be tracked, that the object is described only via its interface, and that the object&rsquo;s specification can then be separated from the consistency definitions it needs.</p>
-<h2 id="gowtham-kaki--novel-consensus-proof-techniques">Gowtham Kaki — Novel Consensus Proof Techniques</h2>
-<p>Professor Kaki&rsquo;s talk centred around novel ideas for proving distributed systems, particularly for modelling consensus via convergence and monotonicity. The current standard approach to modelling distributed systems is via asynchronous message passing, but it&rsquo;s hard to, say, specify a safety invariant for a leader election with message passing. A first attempt might look like checking &lsquo;if A has elected B as its leader and C has elected D as its leader, then B = D&rsquo;, but induction doesn&rsquo;t work for this. This invariant also allows some invalid state transitions.</p>
-<p>The key takeaway I had from his talk was his point that strengthening invariants is a valid proof strategy that can unlock the final proof. Counterintuitively, you now need to prove more properties, but you can also assume more starting points in the inductive step. The final inductive invariant in the leader election might include all of the following properties:</p>
-<ul>
-<li>if a leader has been assigned to a node, a quorum of votes should exist for that leader</li>
-<li>if a leader message exists, a quorum of votes should exist for that node</li>
-<li>a node can only vote for one node</li>
-<li>if a node has voted for some node and a vote message exists, the message and the leader should be the same</li>
-<li>if two voting messages came from the same node, they should be the same</li>
-<li>if a voting message exists, the node should have voted</li>
-</ul>
-<p>We can also avoid using an induction approach for the proof and instead rely on the convergence of leadership — the fact that it doesn&rsquo;t matter in what order the voting messages are processed so long as they vote for the same leader — and monotonicity of leadership — you can either vote for no one or the same leader, which you can model via a lattice. This monotonicity and convergence gives you consensus.</p>
-<p>You can then model consensus with some way of replicating state, and place these two invariants on it. They found that while this replicated state approach required more messages than the async message passing approach, it instead performed better in terms of throughput. They&rsquo;re still working on this, as they&rsquo;ve mentioned they haven&rsquo;t implemented garbage collection or crash recovery in the evaluation system, but I think the gist is that this is a viable alternative to the typical message passing implementations for consensus.</p>
-<p>I had a bit of trouble following these two specification/verification talks, mostly because of the formality of the details introduced, but I&rsquo;ll come back to revisit the material should they come in handy.</p>
-<h2 id="carlos-baquero--state-based-crdt-performance">Carlos Baquero — State-based CRDT Performance</h2>
-<p>One of the other lectures (I don&rsquo;t recall who) cited the <a href="https://inria.hal.science/inria-00609399v1/document">2011 CRDT paper</a> that Marc Shapiro wrote. I&rsquo;ve read the paper for my past research internship around formal verification, and I know the paper&rsquo;s a foundational one. I didn&rsquo;t realize, though, that Professor Baquero was also a co-author on the paper — I only put two and two together when the speaker was listing out the authors and gestured towards him. A very small world.</p>
-<p>Professor Baquero&rsquo;s talk was on CRDTs and an optimization that can be applied to reduce the size of state you need to send back and forth. The general idea is that state-based CRDTs can be inefficient. For example, take an <a href="https://crdt.tech/glossary#:~:text=Add%2Dwins%20set%20(AWSet)%3A">add-wins set</a>: it keeps track of a set of tombstones for removed elements to guard against cases where an element&rsquo;s &lsquo;remove&rsquo; operation is processed before its &lsquo;add&rsquo;. As well, removed elements are typically also kept in the main set, duplicating the storage needed.</p>
-<p>This talk had some background about <a href="https://en.wikipedia.org/wiki/Semilattice">join semi-lattices</a> and partially-ordered logs. A join semi-lattice is a type of structure that defines a join operation that you can apply to two states to get the joint state: the join is a bit like a set union with extra spice. Intuitively, the &rsquo;lattice&rsquo; part of the name connects to the fact that when you draw up all the possible joins and states, you end up with a lattice-like shape, with an empty state at the bottom and a final state at the top. This final state is the result of joining all the possible inputs together — there&rsquo;s some maths calling it the &rsquo;least upper bound&rsquo;, but you can think of it like &rsquo;the state that contains all of these other states joined together&rsquo;. Very frequently, this looks like a union if you squint. These states can be defined by applying this join operation based on the operations in a partially-ordered log, or a polog, for short. If you model state for a <a href="https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type#G-Counter_(Grow-only_Counter)">grow-only counter</a> in the polog like <code>{A(1), B(2)}</code>, for example, then you could define your join operation to take two states and do a member-wise max. If we had <code>{A(1), B(2)}</code> and <code>{A(3), B(1)}</code> to join, we would then get <code>{A(3), B(2)}</code>, then sum across all members to get the final grow-only counter value of of 5. Each replica keeps a local view of this polog to derive its state.</p>
-<p>This state ends up getting pretty big, however, when you consider <a href="https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type#2P-Set_(Two-Phase_Set)">tombstone sets</a> and more complicated CRDTs. Instead of sending over the whole state, the approach presented therefore relies on deltas and mutations. For example, if you get an update from replica A that it&rsquo;s been incremented twice, just send that as a delta mutation instead of sending over all the extra state for replicas B, C, and D. You can fragment your state into so-called <em>irredundant join decompositions of state</em>, turning something like <code>{A(1), B(2)}</code> into <code>{A(1)}, {B(2)}</code> and send the deltas based on these smaller bits instead.</p>
-<p>One of his students&rsquo; PhD thesis builds this out more, explaining how you can decompose a state, hash the members to assign their values to buckets, then calculate what buckets to send over to each replica to limit sending duplicated state. You can also apply bloom filters to efficiently test what needs to be sent over. However, there are some issues with false positives in Bloom filters, so both bucket and bloom filters need to be combined for a robust system. There&rsquo;s a whole four-round system of sending bloom filters, their differences, and buckets across that you can read more about <a href="https://vitorenes.org/publication/enes-efficient-synchronization/enes-efficient-synchronization.pdf">here</a>.</p>
-<p>Aside from the content of the talk, there were two sort of offhand points about communication times that&rsquo;ve instead really stuck. One was that the whole world can be connected at a latency supporting FPS games and other real-time applications just because the Earth&rsquo;s diameter is small. It&rsquo;s neat to think about: if the Earth was larger, there could&rsquo;ve been whole classes of apps that would&rsquo;ve never been invented. The other is that communication round-trips to space colonies (e.g. Mars) will dramatically increase from what we&rsquo;re used to on Earth, and could be up to a 20 minute RTT. It was very thought-provoking to consider space tech as a field where CRDTs will likely become necessary — when you have such long response times and occassional periods where communication isn&rsquo;t possible, you can&rsquo;t really lean too heavily on the classic client-server model. I want to learn more about the state of space tech in the future, especially since a fellow Rise Global Winner has just gotten into YC with their <a href="https://bifrostorbital.com/">satellite startup</a>. I think there&rsquo;s a lot of interesting potential with critical systems that&rsquo;ll need certain consistency and consensus guarantees.</p>
-<h2 id="mira-mezini--algebraic-rdts">Mira Mezini — Algebraic RDTs</h2>
-<p>Professor Mezini talked about replicated data types, particularly the concept of an ARDT, or an Algebraic Replicated Data Type. Her talk presented how ARDTs can be used for decentralized state management, can be used reactively for propagating changes, and can be used for coordination with various consistency and availability guarantees.</p>
-<p>An interesting point she brought up was that Brewer, the inventor of the <a href="https://en.wikipedia.org/wiki/CAP_theorem">CAP theorem</a>, now states that the CAP theorem&rsquo;s application should be relaxed in modern systems to fit with the specific system&rsquo;s requirements. Sometimes, we can relax consistency a little bit to allow for more availability, and vice versa. It doesn&rsquo;t have to be an all-or-nothing choice given today&rsquo;s technologies. I liked this take, particularly because I could see it in the previous internship work I&rsquo;ve done — we used <a href="https://en.wikipedia.org/wiki/Isolation_(database_systems)#Serializable">serializable</a> transactions just for this part for high consistency, but for better performance left everything else in <a href="https://en.wikipedia.org/wiki/Isolation_(database_systems)#Read_uncommitted">read-uncommited transactions</a>.</p>
-<p>ARDTs were presented as a standard library of composable, primitive data-type RDTs that you could really customize but still have working together. They differ from CRDTs because off-the-shelf CRDTs have fixed design decisions baked into them, like assumptions about various network models, and causes a bit of an impedance mismatch when trying to actually program with data. Using ARDTs allows you to decouple the state of data from its dissemination, so that the communication and network becomes irrelevant to the actual application logic. They felt a bit like Jacky&rsquo;s <a href="https://jzhao.xyz/posts/bft-json-crdt">BFT JSON CRDT library</a>, and to be honest I can&rsquo;t quite articulate the difference between ARDTs and &lsquo;customizable CRDTs&rsquo; better than this.</p>
-<p>She presented a subset of ARDTs called reactive ARDTs that would avoid callback hell as well as having to track data dependencies across systems. Right now, it&rsquo;s difficult to model and manage updates in data being propagated correctly to other places given a system with diverse nodes — I think the final chapter of DDIA covers this a little as well. They designed a language, <a href="https://dl.acm.org/doi/10.1145/3191697.3214337">REScala</a>, that operates with these reactive ARDTs and their dependency effect chains as first-class citizens in the runtime. This way, it&rsquo;s easier to understand, since events are modelled as happening instantaneously, but also lets the runtime handle making the effect chains strictly serializable and more consistent.</p>
-<p>There was also some work on coordination ARDTs mentioned along this vein, to enforce application level invariants that are difficult to otherwise manage via consensus. They achieved this via adding a verifying compiler, <a href="https://dl.acm.org/doi/10.1145/3633769">LoRe</a>, to REScala. Their coordination works by making use of locking without requiring offline nodes to agree. The system models interactions between systems as having certain pre/post-conditions and actions, so the compiler can check that the overall invariants hold at each step.</p>
-<p>Fun note about her slides is that I noticed one of the images she used on a slide about decentralized collaborative applications looked really familiar. Halfway through, it hit me that it was actually the title image from the Ink and Switch <a href="https://www.inkandswitch.com/crosscut/">Crosscut</a> article, which ironically is explicitly a &lsquo;personal thinking space&rsquo; and not a collaborative tool. Say you will about me being able to recognize the Ink and Switch blog post images on sight.</p>
-<h2 id="annette-bieniusa--formalizing-broadcast-tla-and-erla">Annette Bieniusa — Formalizing Broadcast, TLA+, and Erla+</h2>
-<p>Professor Bieniusa&rsquo;s talk was listed on the program as something to do with reactive datatypes and Elixir, which I was looking forward to finally learning a bit more about, but she actually spoke on specifying different broadcast models in TLA+! TLA+ is a specification language used in formal verification, and it&rsquo;s been used in the industry to verify and model many critical systems, notably including AWS&rsquo;s S3. I&rsquo;ve worked a little with TLA+ in my previous research internship on an extension to the <a href="https://distcompiler.github.io/">PGo</a> project, a compiler that translated Modular PlusCal (which itself compiles to TLA+) directly into production-ready Go systems.</p>
-<p>So imagine my surprise when the project Professor Bieniusa talks about is about a project, Erla+, that&rsquo;s almost exactly that, just with Go replaced with Erlang! However, their work compiles from a subset of PlusCal directly into TLA+ and Erlang, whereas PGo requires the use of our custom Modular PlusCal extension language first, so they&rsquo;ve cut out the need to learn new syntax. Also, their compiler produces actor-based systems, which I don&rsquo;t know much about but seem to map quite naturally to having multiple distributed nodes that one needs to coordinate. It was neat to see how much the two projects naturally mirrored each other.</p>
-<p>The bulk of her talk was primarily about broadcast, though. We talked through several variations, including best-effort broadcast, reliable broadcast, and uniform reliable broadcast. Best-effort broadcast is just a broadcast where you try your best to deliver messages with no retries or other guarantees. For a reliable broadcast, you force each node to forward its messages, and for a uniform reliable broadcast, you need to ensure all messages are also <em>delivered</em>, or received. Unfortunately, uniform reliable broadcast can&rsquo;t exist if the majority of nodes fail, for obvious reasons. We also defined a few properties that we used in these definitions:</p>
-<ul>
-<li>FIFO property → if you broadcast <code>m</code> from <code>p</code> then <code>m'</code>, then <code>m</code> is delivered before <code>m'</code></li>
-<li>causal property → if you broadcast <code>m</code> from <code>p</code> then <code>m'</code> from <code>q</code>, then <code>m</code> is delivered before <code>m'</code></li>
-<li>total order property → if <code>m</code> is broadcast from <code>p</code> before <code>m'</code>, then <code>m</code> is broadcast from <code>q</code> before <code>m'</code></li>
-</ul>
-<p>We then spent some time learning TLA+ syntax and primitives to formally model these properties. I learned that TLA+ uses something called linear-time logic, which gives you a set of executions that are considered correct. You can then define linear-time properties, like safety and liveness properties. A safety property requires that if any execution is incorrect, then there was a prefix of that execution where the remainder of the execution did not fulfill the property — intuitively, it requires that if something went wrong, there was a particular &rsquo;turning point&rsquo; where things went south. Safety can only be satisfied given infinite time, but can be violated in finite time.</p>
-<p>On the other hand, a liveness property requires that for any prefix of an execution, there is a set of following executions for which the property is also satisfied — intuitively, that the execution &lsquo;keeps running&rsquo;. Liveness can conversely only be violated in infinite time and is satisfied in finite time.</p>
-<p>To model these in TLA+, you need a couple operators: <code>[]F</code> denotes that <code>F</code> is always true, and <code>&lt;&gt;F</code> that <code>F</code> is eventually true. You can also combine these, so <code>[]&lt;&gt;F</code> states that at all times, <code>F</code> is either true or will be true, so intuitively this expresses that some progress will be made towards getting to <code>F</code> eventually. The reverse, <code>&lt;&gt;[]F</code>, expresses that eventually, <code>F</code> will always hold. Intuitively, this denotes stability.</p>
-<p>The final concept I&rsquo;ll cover is how we apply these to express &lsquo;fairness&rsquo;. It&rsquo;s a property that states that if something happens &lsquo;often enough&rsquo;, it should eventually happen. There&rsquo;s variations: weak fairness can be expressed as <code>&lt;&gt;[]F → []&lt;&gt;F</code> and says that a step towards <code>F</code> must eventually occur. The implication reads that if <code>F</code> is eventually continually true, then it must eventually occur. Strong fairness, on the other hand, can be expressed as <code>[]&lt;&gt;F → []&lt;&gt;F</code>, which says that a step must eventually occur even if something is not eventually continually true. For more intuition about the difference between weak and strong fairness, think of a traffic light. If the traffic light is strongly fair, the car will eventually have to go, because it&rsquo;ll eventually be green before switching back to red. However, if the traffic light is weakly fair, then the car might never go, because the traffic light will eventually switch back to red and never has a point where it will continue to always be green. This was really mind-bending to wrap my head around, and I think the concepts of eventual-ness and the timing logic here is fun to dig into.</p>
-<p>Another coincidence: I also learned that Professor Bieniusa will be collaborating with my supervisor for my research internship next term, so we might get to connect again soon!</p>
-<h2 id="german-efficiency">German Efficiency</h2>
-<p>In addition to the cold, hard, technical details, I also learned about the finer details of European education systems (the Belgian and German ones, in particular) and about Darmstadt and Germany as a whole. I speak no German, so I had to rely on the locals speaking English. I was a little self-conscious about being the classic clueless North American tourist who romps about Europe and is generally a nuisance. Granted, I don&rsquo;t think I bothered anyone, but I really felt like I was very uncultured and not well-informed before learning about any of this. I&rsquo;m starting to get why people recommend exchange programs and travelling so much — you learn so much by osmosis and vibes, even from a quick stay where you&rsquo;re not interacting much with the locals.</p>
-<p>Some quick-fire notes:</p>
-<ul>
-<li>The Frankfurt airport seemed very empty, even though I was arriving on a weekend afternoon, when I&rsquo;d have expected it to be bustling. Maybe I was in a quieter terminal.</li>
-<li>On the other hand, the smoking lounges seemed very full. I was mildly shocked to see a smoking lounge right out the gate, especially indoors. It was also odd to see people smoking right outside doors, young people smoking, and other indoor smoking areas. In Vancouver, it tends to be fairly rare and is almost always an older person huddled in an alleyway, not a well-dressed twenty-something strutting by with friends.</li>
-<li>Darmstadt is literally translated as &ldquo;colon/intestines-city&rdquo;. Something about how if Germany was anthropomorphized into a human, Darmstadt would be smack where the bowels were. Apologies if you were enjoying a nice meal at this point in reading.</li>
-<li>Trains seem to be consistently late. We took a train a bit closer to Frankfurt to hike, and our train there was almost ten minutes late, and our train back was closer to fifteen late. I was told that German efficiency only applies to cars.</li>
-<li>Germans are pretty intense about their hiking. We went up a &lsquo;small hike&rsquo; to <a href="https://www.schloesser-hessen.de/en/schloss-auerbach">Auerbach Castle</a>, which was the better part of an hour up a fairly steep hill. I&rsquo;d assumed since they didn&rsquo;t ask about accessibility restrictions that the &lsquo;hike&rsquo; meant a flat walk, but no, this was really a hike. At some point we saw people <em>biking</em> down the very steep, narrow path, and at the top I was told that most Germans would not consider our trek anything near a hike.</li>
-<li>Everything initially seems more expensive than Canada — for example, ramen might run you 14 euros. I was told that this was relatively cheaper than other parts of Europe, but the converted equivalent of ~$21 CAD seemed a little steep. Something closer to $12-15 CAD is what I&rsquo;m used to. However, when you factor in the lack of tip and the already-included tax, it&rsquo;s not far off from Vancouver prices. It was nice that most prices were round numbers too, which helped with sorting out change.</li>
-<li>It rains a lot, and people are used to it. One of the highlights of the program was a walking tour around the city on our first day, during which it started thunderstorming and pouring. The lightning and thunder were just a few seconds apart, and we were huddling, trying to recall the conversion for time between lightning and thunder to how close the storm was to figure out screwed we might be. Our guide, completely unfazed, led us around into the main city centre castle and continued peppering us with facts.</li>
-<li>Darmstadt has their own 9/11 story, albeit in 1944. The city was <a href="https://en.wikipedia.org/wiki/Bombing_of_Darmstadt_in_World_War_II">heavily bombed by the RAF</a> during WWII, destroying half the town&rsquo;s homes overnight. We were actually in town for the 80th anniversary memorial event, and all through Wednesday we heard the bells tolling across town.</li>
-<li>The cafeteria food at TU Darmstadt is quite good. It felt a bit like Ikea standing in the cafeteria line and grabbing lunch, but there was solid variety. I will warn folks that when they translate something as dumplings, though, they mean American/Western-style dumplings — I was not expecting a dense dough ball.
-<ul>
-<li>The group I was with was very interested in having Asian food for our free meals, seeing as we had a German-cuisine dinner already scheduled. The <a href="https://www.moschmosch.com/">two</a> <a href="https://g.co/kgs/qaPbk23">places</a> we tried were great. It was very fun teaching them to use chopsticks and see them tank Szechuan peppercorns for the first time.</li>
-<li>I feel obligated to also especially shout out <a href="https://g.co/kgs/3Fgcghn">this hole-in-the-wall Tibetan dumpling</a> takeaway place, which I tried on my last night. The staff offered me a free sample of mango lassi and were very sweet in explaining everything in English.</li>
-</ul>
-</li>
-</ul>
-<h2 id="conclusion">Conclusion</h2>
-<p>Besides all the distributed systems and multicultural learning, I also met many lovely people (who are probably reading this post — I can still see my blog analytics getting a suspicious number of views from Belgium). It was great making some new friends, since I think I was one of the only people who wasn&rsquo;t with a contingent from their home university and perhaps the only North American. I did my share of cultural exchange too: other than being the de-facto Asian-culture expert, I also taught folks some Canadian and American slang<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> and explained how university works here.</p>
-<p>I&rsquo;m very happy that I was able to attend and feel very fulfilled in the new fields I&rsquo;ve gotten a tour of during DARE. I&rsquo;m proud to say that this was the longest continuous period in my life where I felt like I fully grasped the difference between strict, sequential, and causal consistency, and I can still mostly reason about the details now. Being exposed to different areas of research that I had no real background in was a challenge — once the LaTeX started flowing in a talk, I admit things generally started going over my head — but was also great to be able to build an idea of the different subareas within distributed systems. DARE was a shortcut in getting to the frontier of research in a short week, and I&rsquo;m excited to be able to continue thinking about some of these problems in my current and upcoming research internships.</p>
-<p>The other students who took this program for ECTS credits were required to do another two-week research project following DARE, building on one of these lectures. They&rsquo;ll be doing a presentation soon in a few weeks, and I&rsquo;m really looking forward to seeing what they&rsquo;ve come up with. I didn&rsquo;t have to do one since the transfer credits aren&rsquo;t going to meaningfully affect my courseload next year, but in a way my current internship work is one big extension of Professor Kleppmann&rsquo;s talk and work, so I&rsquo;ll say it counts.</p>
-<p>I&rsquo;d very much recommend the program to anyone even tangentially interested in distributed systems. I believe the talks will be different year-to-year, and I&rsquo;ve heard the next iteration is planned in Porto, Portugal. There&rsquo;s funding available for European students via the Erasmus program and no fee for the program itself otherwise. Stay on the lookout for DARE 2025 — I&rsquo;d strongly encourage other students to go for it!</p>
-
-
-<style>
-ul {
-margin-bottom: 0.5em;
-}
-</style>
-
-
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>I will never forget when we were standing in a circle with someone else from Portugal explaining Skibidi Toilet to the others and chatting about brainrot, when Professor Baquero joined the group and said something along the lines of, &ldquo;ah yes, &lsquo;brainrot&rsquo;, that must be what my daughter has&rdquo; and taking a look at a Skibidi Toilet episode. Oh, how I love the Internet.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
