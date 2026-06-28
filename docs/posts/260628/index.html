@@ -1,0 +1,189 @@
+<!doctypehtml><html lang=en><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>La Dispyrition</title><meta name=description content="On lipogrammatic Python."><meta property=og:title content="La Dispyrition"><meta property=og:description content="On lipogrammatic Python."><meta property=og:url content="https://kewbi.sh/blog/posts/260628/"><meta property=twitter:title content="La Dispyrition"><meta property=twitter:description content="On lipogrammatic Python."><link rel=icon href=https://kewbi.sh/small-logo.png><link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-italic.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/playfair-display-v30-latin-700.woff2"
+/>
+<link
+  rel="preload"
+  as="text/woff2"
+  href="https://kewbi.sh/fonts/source-sans-3-v8-latin-regular.woff2"
+/>
+<link rel=stylesheet href=https://kewbi.sh/css/main.css><link rel=stylesheet href=https://kewbi.sh/blog/css/main.css><body class="page page-padding"><main class="main b-post-main"><p><a href=https://kewbi.sh/blog/posts >‹ go back</a><div class=b-post><h1 class=display-title>La Dispyrition.</h1><p style=text-indent:0>Published 28 June 2026 at <a href='https://kewbi.sh/blog/posts/260628/'>Yours, Kewbish</a>.  2,575 words. Subscribe via <a href='https://kewbi.sh/blog/index.xml'>RSS</a>.<hr><div class=b-writing><p><em>Ça paraît trop ardu.</em> By « ça », I mean « rédiger cet article en français, sans la lettre « e » », <em>morceau de phrase dans lequel j&rsquo;en ai déjà mis une bonne pincée</em><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+<p>Yet if it was daunting to me, the French writer <a href="https://en.wikipedia.org/wiki/Georges_Perec">Georges Perec</a> was happy enough to pick up the slack. He wrote <a href="https://en.wikipedia.org/wiki/A_Void">a whole murder-mystery novel</a> without once deigning to use the letter &ldquo;e&rdquo;. This type of work is called a <a href="https://en.wikipedia.org/wiki/Lipogram">lipogram</a>, constraining writers against the use of certain letters. If this&rsquo;s interesting, I go into similar constraints in Oulipian potential literature in a <a href="https://kewbi.sh/blog/posts/251228/">separate post</a>.</p>
+<p>While outlining that other post, I thought about taking a stab at lipograms myself. Admittedly, finagling synonyms around in French or English seemed too abstruse to be fun. But there&rsquo;s no rule that the language used has to be a spoken one: what if I used a programming language instead, and wrote a program without the letter &ldquo;e&rdquo;? In particular, I had a hunch Python&rsquo;d make it fairly doable, given its builtin and global oddities that&rsquo;d let me <code>exec()</code> without actually using the letter &ldquo;e&rdquo; in the file. This feels like something <a href="https://en.wikipedia.org/wiki/Quine_(computing)">quine</a> enthusiasts or CTF jail specialists might enjoy — indeed, Oulipian constraints quickly reminded me of <a href="https://www.charles.systems/teaching/PyJail_talk.pdf">pyjails</a>. From a cursory search, it doesn&rsquo;t seem like anyone&rsquo;s tried to do this before, but I&rsquo;d be eager to see other examples.</p>
+<p>This post covers two variants of lipogrammatic programming<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> in Python, both avoiding &ldquo;e&rdquo; and using it as the exclusive vowel. I send many apologies to Perec.</p>
+<h2 id="yzont-partis-zux-">Yzont partis, zux ?</h2>
+<p>The first lipogrammatic challenge I tackled was e-free programming, in line with Perec&rsquo;s novel <em>La Disparition (A Void)</em>. My only rule is that the letter &ldquo;e&rdquo; could not appear in the Python file as it is written to disk, but I could still call methods or use expressions that would evaluate to a name including &ldquo;e&rdquo;. In other words, I can&rsquo;t use <code>exec()</code> or <code>True</code> in my program, but I could call the equivalent method or use conditionals as long as I avoid these specific keywords.</p>
+<p>This type of restriction aren&rsquo;t an entirely new concept. Pyjails, Capture-The-Flag challenges that require you to break out of a restricted Python interpreter, also usually filter methods and permitted characters. For example, you might want to access the text flag file stored on the server alongside the script, but not be allowed to call <code>open()</code> (we aren&rsquo;t either, since there&rsquo;s an &ldquo;e&rdquo; in <code>open</code>). <a href="https://jia.je/ctf-writeups/misc/pyjail.html">This writeup</a> features a nice comprehensive list to give you a sense of what typical workarounds are like. However, this guide doesn&rsquo;t completely fit our needs, since many of these alternatives have &ldquo;e&quot;s in them — usually challenge authors blanket-ban words instead of letters.</p>
+<p>My first vague thought was to replace all the &ldquo;e&quot;s with format strings and <code>{chr(ord(&quot;a&quot;) + 5)}</code>s. However, this only works for &ldquo;e&quot;s in plain strings, not for the &ldquo;e&quot;s in method calls or other reserved keywords<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>. In Python, <code>15/35 = 43%</code> of keywords include an &ldquo;e&rdquo;, so this&rsquo;ll be a major obstacle. For instance, take <code>True</code> or <code>False</code>, two basic literals that necessarily have an &ldquo;e&rdquo; in them. Alone, they&rsquo;re fairly easy to replace: <code>1==1</code> also evaluates to <code>True</code>, and <code>1==0</code> does the job for <code>False.</code></p>
+<p>However, if we want to translate them in the context of even a basic snippet like:</p>
+<pre tabindex="0"><code>c = True
+
+if c:
+    print(&#34;Hi&#34;)
+else:
+    print(&#34;Bye&#34;)
+</code></pre><p>We have to be a bit more careful. If <code>c</code> is some static flag, we can replace <code>c = True</code> with <code>c = (1==1)</code>, but what do we do with the <code>else</code> branch? We could replace it with an <code>if not c</code> in this case, though this won&rsquo;t work in general. And obviously, there&rsquo;s an &ldquo;e&rdquo; in &ldquo;Bye&rdquo; to remove. We don&rsquo;t yet have to modify the structure of this program, but you&rsquo;ll see when we get to the e-only section how this ramps up in difficulty.</p>
+<p>Of Python&rsquo;s <a href="https://www.w3schools.com/python/python_ref_keywords.asp">reserved keywords</a>, there are 15 that include an &ldquo;e&rdquo;<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>. There are also 2 soft-reserved keywords (<code>case</code>, <code>type</code>) that have an &ldquo;e&rdquo;. Here are some highlights of things we can&rsquo;t do (or in any case, that I haven&rsquo;t figured out how to circumvent):</p>
+<ul>
+<li><code>def</code> and <code>return</code> are off-limits, so functions are limited to basic lambdas</li>
+<li>Error handling gets much harder because we can&rsquo;t use <code>except</code></li>
+<li><code>else</code> is prohibited, which forces us to rewrite all conditionals or express them as <code>[else_value, if_value][condition]</code></li>
+<li>Generators are out of the question, since we can&rsquo;t use <code>yield</code></li>
+</ul>
+<p>But here are some workarounds for other keywords:</p>
+<ul>
+<li><code>None</code>: <code>&quot;None&quot;</code> is an attribute on <code>__builtins__</code>, which is helpful. Unfortunately, we can&rsquo;t use <code>getattr</code> because of that pesky &ldquo;e&rdquo;, so we&rsquo;ll have to access it another way. What I came up with is <code>__builtins__.__dict__[dir(__builtins__)[40]]</code>. <code>dir</code> sorts the list of attributes on <code>__builtins__</code>, and <code>40</code> is the index of the &ldquo;None&rdquo; attribute (so the subexpression <code>dir(__builtins__)[40] == &quot;None&quot;</code>). Then, we can access the actual value of the key by using <code>__builtins__.__dict__</code>.
+<ul>
+<li>I used this trick often, so a handy shortcut I&rsquo;ve found to get the index of an attribute from its name is <code>dir(__builtins__).index('fnname')</code>. However, keep in mind the value of <code>__builtins__</code> can be either the module itself or the <code>__dict__</code> attribute, <a href="https://docs.python.org/3/library/builtins.html">depending on the implementation</a>. This means the indices can shift, and I ran into a few off-by-one issues switching between the interactive Python interpreter and running the file directly. I think this would go away if one just <code>import builtin</code>&lsquo;ed.</li>
+<li>Because this rewriting is so verbose, I call it builtin soup.</li>
+</ul>
+</li>
+<li><code>assert</code>: We can do something similar by using <code>exec</code> via this builtin soup and manually raising the <code>AssertionError</code>. But of course there are multiple &ldquo;e&quot;s in <code>AssertionError</code>, so we&rsquo;ll have to do <code>__builtins__.__dict__[dir(__builtins__)[108]](&quot;rais\x65 Ass\x65rtion\x45rror&quot;)</code>, perhaps in a conditional <code>if not expression_to_be_asserted</code> (the <code>not</code> reflects the original semantics).</li>
+<li><code>while</code>: List comprehensions with <code>map</code> and <code>filter</code> (via builtin soup, given the &ldquo;e&rdquo;) have been helpful.</li>
+</ul>
+<p>There&rsquo;s an easier way out of all this that takes the whole, original program, escapes it into hex, then <code>exec</code>&rsquo;s it back. This feels like cheating though, so I try to keep the encoded-exec portions of my programs as small as possible.</p>
+<h2 id="the-2e-exertn">The 2e Exert&rsquo;n</h2>
+<p>Let&rsquo;s contrast this with e-only Python before we get into concrete examples. This challenge mirrors <a href="https://en.wikipedia.org/wiki/The_Exeter_Text:_Jewels,_Secrets,_Sex"><em>Les Revenentes (The Exeter Text)</em></a>, which is an lipogrammatic essay excluding all vowels except &ldquo;e&rdquo;. As in the text, we&rsquo;re still allowed to use the letter &ldquo;y&rdquo;, though this only grants us the extra soft-reserved keyword &ldquo;type&rdquo;.</p>
+<p>To revisit the if-else example, we have nearly the opposite problems this time. We still have to rewrite <code>True</code>, but this time we&rsquo;re not allowed to use <code>if</code>. This forces us to express the conditional differently:</p>
+<pre tabindex="0"><code>exec([&#34;pr\x69nt(&#39;Bye&#39;)&#34;, &#34;pr\x69nt(&#39;Hey&#39;)&#34;][1==1])
+</code></pre><p>We can&rsquo;t rely on builtin soup this time, given the &ldquo;u&quot;s and &ldquo;i&quot;s, which is a pity, since we can finally use <code>getattr</code>. However, we <em>can</em> use <code>exec</code>, which is arguably more powerful. We can call globals like so, and leaving the consonants in the string to be <code>exec</code>&lsquo;ed helps with readability.</p>
+<p><code>exec</code> operates in its own context, though. When we need it to impact the larger program state, we can store the results in a mutable list as a container. (Note that we can&rsquo;t just use a flat variable.) For instance, we could cast a variable with <code>c = [0]</code> to define a container, then <code>exec(&quot;c[0] = b\x6f\x6fl(x)&quot;)</code> to fill it. With an extra <code>[y, x][r[0]]</code>, this can express an <code>or</code>.</p>
+<p>There are 30 reserved<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> and 2 soft-reserved keywords (<code>case</code> and <code>match</code>) that are forbidden. There&rsquo;s significant overlap with the first list, since many words use multiple different vowels (i.e. &ldquo;e&rdquo; and another vowel, which excludes the keyword from both e-free and e-only variants). Again, some workarounds:</p>
+<ul>
+<li><code>None</code>: <code>exec(&quot;ver[0] = N\x6fne&quot;)</code> (or just the return value from plain <code>exec()</code>, which should also be <code>None</code>)</li>
+<li><code>assert</code>: <code>exec(&quot;r\x61\x69se \x41ssert\x69\x6fnErr\x6fr&quot;)</code> — the same idea, just without the builtin soup this time, and a different set of escaped characters</li>
+<li><code>and</code>: use multiplication (when <code>x</code> and <code>y</code> are booleans, <code>x and y</code> is equivalent to <code>x * y</code>)</li>
+<li><code>not</code>: instead of <code>not x</code>, we can do the exec container trick above, then take <code>1 - c[0]</code></li>
+<li><code>contains</code>: call <code>getattr(ebject, &quot;c\x6fnt\x61\x69ns&quot;)</code></li>
+<li><code>with</code>: manually call the <code>__enter__</code> and <code>__exec__</code> dunders</li>
+</ul>
+<p>In some cases, the language functionality we&rsquo;re able to use flips. For instance, we can only <code>def</code>ine methods and not use lambdas in e-only Python, whereas e-free Python was the other way around. One upshot here is that list comprehensions are a less attractive option to replace while loops in e-only Python, and you&rsquo;ll see in this next section how I struggled with this.</p>
+<h2 id="locked-in">Locked In</h2>
+<p>I thought a fun idea for a CTF jail challenge would be to force users to submit some lipogrammatic program that would run, solve a problem, then output the flag if the answer matched an oracle. There could be two sister challenges, one with and one without &ldquo;e&quot;s. I later realized the challenge would be quite unreasonable, though, since access to <code>exec</code> gives users more free reign than usual pyjails, and I suspect there wouldn&rsquo;t be any solves using the intended constraint.</p>
+<p>I still thought it would be an interesting exercise, though, so I took a stab at solving the first half of <a href="https://adventofcode.com/2025/day/1">Advent of Code 2025 Day 1</a> lipogrammatically. The first day of AoC is usually an easier warmup, and this year&rsquo;s revolved around a rotating combination lock. The dial started at some known position (50), and the input was a list of instructions to rotate it either left or right. The required output was the number of times the lock&rsquo;s dial pointed to zero at the end of a rotation.</p>
+<p>In normal Python, this is straightforward with some modular arithmetic, but there are still some conditionals and state management that we&rsquo;ll have to be careful with. Here&rsquo;s the unconstrained solution I started with:</p>
+<pre tabindex="0"><code>with open(&#34;input.txt&#34;, &#39;r&#39;) as x:
+    lines = x.readlines()
+
+current = 50
+count = 0
+
+for line in lines:
+    offset = int(line[1:])
+    current = (current + offset if line[0] == &#34;R&#34; else current - offset) % 100
+    if current == 0:
+        count += 1
+
+print(count)
+</code></pre><p>First, let&rsquo;s convert this to e-free Python. With judicious variable naming, we get down from 18 to 5 &ldquo;e&quot;s:</p>
+<pre tabindex="0"><code>with open(&#34;input.txt&#34;, &#39;r&#39;) as x:
+    listings = x.readlines()
+
+ongoing = 50
+count = 0
+
+for listing in listings:
+    gap = int(listing[1:])
+    ongoing = (ongoing + gap if listing[0] == &#34;R&#34; else ongoing - gap) % 100
+    if ongoing == 0:
+        count += 1
+
+print(count)
+</code></pre><p>We eliminate the remaining &ldquo;e&quot;s as follows:</p>
+<ul>
+<li><code>open</code>: builtin soup to call the global</li>
+<li><code>readlines</code>: builtin soup to call <code>getattr</code>, then an escaped string for the method name</li>
+<li><code>else</code>: array-based conditional rewriting — note that we must switch the order of the branches again</li>
+</ul>
+<p>The final result:</p>
+<pre tabindex="0"><code>import builtins
+
+with builtins.__dict__[dir(builtins)[137]](&#34;input.txt&#34;, &#39;r&#39;) as x:
+    listings = builtins.__dict__[dir(builtins)[114]](x, &#34;r\x65adlin\x65s&#34;)()
+
+ongoing = 50
+count = 0
+
+for listing in listings:
+    gap = int(listing[1:])
+    ongoing = [ongoing - gap, ongoing + gap][listing[0] == &#34;R&#34;] % 100
+    if ongoing == 0:
+        count += 1
+
+print(count)
+</code></pre><hr>
+<p>Next, we can look at the e-only variant. After some comedic variable renaming (modelled after the artistic liberties of the Monk <em>Exeter Text</em> translation), we have 11 vowels to worry about:</p>
+<pre tabindex="0"><code>with open(&#34;npt.txt&#34;, &#39;r&#39;) as x:
+    entrees = x.readlines()
+
+present = 50
+nember = 0
+
+for entrees in entrees:
+    defference = int(entrees[1:])
+    present = (present + defference if entrees[0] == &#34;R&#34; else present - defference) % 100
+    if present == 0:
+        nember += 1
+
+print(nember)
+</code></pre><p>Here&rsquo;s how I got rid of them:</p>
+<ul>
+<li><code>open</code>: <code>exec</code> and an escaped string</li>
+<li><code>readlines</code>: idem.</li>
+<li><code>for</code> loop: wrapped this into a function, then used <code>exec</code> to do list comprehension with an escaped <code>list</code> and <code>map</code> — note that the <code>present</code> and <code>nember</code> variables are now lists in order for the function to mutate them as global state</li>
+<li><code>int</code>: same as <code>open</code></li>
+<li>inline <code>present</code> update conditional: same array-based conditional rewriting as with e-less Python</li>
+<li><code>nember</code> increment conditional: another array-based rewriting, this time varying the value being added to <code>nember[0]</code></li>
+<li><code>print</code>: same as <code>open</code></li>
+</ul>
+<p>The final program:</p>
+<pre tabindex="0"><code>entrees = []
+exec(&#34;entrees = \x6fpen(&#39;npt.txt&#39;, &#39;r&#39;).re\x61dl\x69nes()&#34;)
+
+present = [50]
+nember = [0]
+
+def step(entree):
+    defference = [0]
+    exec(&#34;defference[0] = \x69nt(entree[1:])&#34;)
+    present[0] = [present[0] - defference[0], present[0] + defference[0]][entree[0] == &#34;R&#34;] % 100
+    nember[0] += [0, 1][present[0] == 0]
+
+exec(&#34;l\x69st(m\x61p(step, entrees))&#34;)
+exec(&#34;pr\x69nt(nember[0])&#34;)
+</code></pre><p>I tried to limit my use of the <code>exec</code>-escaped-strings combo to just the global functions. I also tried to use <code>exec</code>s to wrap only single lines instead of running whole blocks of code, which made the global lists necessary to capture state. These still feel a little not-in-spirit, though, so I&rsquo;m still looking if I can figure out an alternative.</p>
+<p>Both these variants were quite complicated to translate, even for such a simple original program. The conditional handling especially was quite tricky, and I&rsquo;m not sure how I would handle larger conditionals with multiple variable updates in the indented block in general. Maybe I&rsquo;d use one array-rewritten line per variable update?</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Lipogrammatic programming is quite fun at first. I still think it&rsquo;d be a great CTF challenge if sandboxed appropriately. Like with standard pyjails, there are patterns that repeatedly come up (e.g. builtin soup), and over time one might develop a more exhaustive list of workarounds, since this post only covers some basic keyword manipulation. It might even be feasible to write a general compiler from a generic, unconstrained Python program to an e-free/e-less variant, with enough AST manipulation. I&rsquo;ll admit that I&rsquo;m not keen on trying much more of this constraint manually, though — it gets tedious looking up builtin offsets and translating even simple toy programs.</p>
+<p>I think lipogrammatic programming could work quite well in other dynamic languages. For example, I&rsquo;ve seen a (rare) few Lua jail challenges before, so the same object manipulation should be possible. JavaScript seems like another ideal candidate, with even quirkier evaluation semantics. In a compiled language, I&rsquo;m also sure one could rig up a preprocessing pass to convert special characters back into the appropriate vowels that would make the process much easier. But again, I suspect this hits too close to the exec-large-encoded-string cheating to engage with the spirit of the constraint.<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup></p>
+<p>This was a fun afternoon of exploring Python docs and hacking away. For those who regularly do AoC in niche, esoteric languages, perhaps lipogrammatic Python could be a cute next challenge. If you end up trying it, or find an existing (intentional) example in the wild, please feel free to share! You&rsquo;ll find my (sadly non-lipogrammatic) email on my main site.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Translation: <em>It seems too arduous.</em> By « it », I mean « writing this article in French, without the letter « e » », which is a phrase in which I&rsquo;ve already sprinkled a good pinch of them. (The first bit was as far as I got trying to intentionally write any lipograms.)&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p><em>&ldquo;La liprogrammation&rdquo;, c&rsquo;est un portmanteau juste ?</em>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>And after some more poking, I realized that I could just use <code>\x</code> hex codes, which are a bit more compact.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><code>['False', 'None', 'True', 'assert', 'break', 'continue', 'def', 'del', 'elif', 'else', 'except', 'raise', 'return', 'while', 'yield']</code>&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p><code>['False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break', 'class', 'continue', 'elif', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'while', 'with', 'yield']</code>&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6">
+<p>On the spoken language side of things, I came across <a href="https://arxiv.org/html/2505.20501v1">this recent paper</a> on using LLMs to convert existing texts into lipogrammatic variants. A neat exploration.&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+</div><br></div><p><a href=https://kewbi.sh/blog/posts >‹ go back</a></main><script data-goatcounter="https://yours-kewbish.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
